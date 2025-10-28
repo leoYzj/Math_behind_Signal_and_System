@@ -8,26 +8,26 @@
 \contentsline {section}{\numberline {2.3}傅里叶变换初步}{13}{section.2.3}%
 \contentsline {section}{\numberline {2.4}卷积}{20}{section.2.4}%
 \contentsline {section}{\numberline {2.5}分布及其傅里叶变换}{26}{section.2.5}%
-\contentsline {chapter}{\numberline {第三章\hspace {.3em}}关于傅里叶变换的进一步讨论}{31}{chapter.3}%
-\contentsline {section}{\numberline {3.1}取样和插值}{31}{section.3.1}%
-\contentsline {section}{\numberline {3.2}离散傅里叶变换初步}{31}{section.3.2}%
-\contentsline {section}{\numberline {3.3}多维傅里叶变换}{31}{section.3.3}%
-\contentsline {section}{\numberline {3.4}希尔伯特变换，汉克尔变换}{31}{section.3.4}%
-\contentsline {section}{\numberline {3.5}回到有限区间}{31}{section.3.5}%
-\contentsline {chapter}{\numberline {第四章\hspace {.3em}}连续系统的时频分析}{33}{chapter.4}%
-\contentsline {section}{\numberline {4.1}系统概述}{33}{section.4.1}%
-\contentsline {section}{\numberline {4.2}系统的表示和微分方程}{34}{section.4.2}%
-\contentsline {section}{\numberline {4.3}系统的频率响应特性}{34}{section.4.3}%
-\contentsline {chapter}{\numberline {第五章\hspace {.3em}}拉普拉斯变换与系统的复频域分析}{35}{chapter.5}%
-\contentsline {section}{\numberline {5.1}拉普拉斯变换}{35}{section.5.1}%
-\contentsline {section}{\numberline {5.2}拉普拉斯逆变换}{35}{section.5.2}%
-\contentsline {section}{\numberline {5.3}系统的复频域分析}{35}{section.5.3}%
-\contentsline {chapter}{\numberline {第六章\hspace {.3em}}z变换与离散系统分析}{37}{chapter.6}%
-\contentsline {section}{\numberline {6.1}z变换}{37}{section.6.1}%
-\contentsline {section}{\numberline {6.2}离散系统的z域分析}{37}{section.6.2}%
-\contentsline {section}{\numberline {6.3}离散傅里叶变换}{37}{section.6.3}%
-\contentsline {chapter}{\numberline {第七章\hspace {.3em}}附录：一些补充内容}{39}{chapter.7}%
-\contentsline {section}{\numberline {7.1}傅里叶级数的渐进特性，吉布斯现象}{39}{section.7.1}%
-\contentsline {section}{\numberline {7.2}$\delta $的逼近，傅里叶反演公式}{44}{section.7.2}%
-\contentsline {section}{\numberline {7.3}施瓦兹函数类的好处}{44}{section.7.3}%
-\contentsline {section}{\numberline {7.4}与傅里叶变换有关的其他变换}{44}{section.7.4}%
+\contentsline {chapter}{\numberline {第三章\hspace {.3em}}关于傅里叶变换的进一步讨论}{37}{chapter.3}%
+\contentsline {section}{\numberline {3.1}取样和插值}{37}{section.3.1}%
+\contentsline {section}{\numberline {3.2}离散傅里叶变换初步}{37}{section.3.2}%
+\contentsline {section}{\numberline {3.3}多维傅里叶变换}{37}{section.3.3}%
+\contentsline {section}{\numberline {3.4}希尔伯特变换，汉克尔变换}{37}{section.3.4}%
+\contentsline {section}{\numberline {3.5}回到有限区间}{37}{section.3.5}%
+\contentsline {chapter}{\numberline {第四章\hspace {.3em}}连续系统的时频分析}{39}{chapter.4}%
+\contentsline {section}{\numberline {4.1}系统概述}{39}{section.4.1}%
+\contentsline {section}{\numberline {4.2}系统的表示和微分方程}{40}{section.4.2}%
+\contentsline {section}{\numberline {4.3}系统的频率响应特性}{40}{section.4.3}%
+\contentsline {chapter}{\numberline {第五章\hspace {.3em}}拉普拉斯变换与系统的复频域分析}{41}{chapter.5}%
+\contentsline {section}{\numberline {5.1}拉普拉斯变换}{41}{section.5.1}%
+\contentsline {section}{\numberline {5.2}拉普拉斯逆变换}{41}{section.5.2}%
+\contentsline {section}{\numberline {5.3}系统的复频域分析}{41}{section.5.3}%
+\contentsline {chapter}{\numberline {第六章\hspace {.3em}}z变换与离散系统分析}{43}{chapter.6}%
+\contentsline {section}{\numberline {6.1}z变换}{43}{section.6.1}%
+\contentsline {section}{\numberline {6.2}离散系统的z域分析}{43}{section.6.2}%
+\contentsline {section}{\numberline {6.3}离散傅里叶变换}{43}{section.6.3}%
+\contentsline {chapter}{\numberline {第七章\hspace {.3em}}附录：一些补充内容}{45}{chapter.7}%
+\contentsline {section}{\numberline {7.1}傅里叶级数的渐进特性，吉布斯现象}{45}{section.7.1}%
+\contentsline {section}{\numberline {7.2}$\delta $的逼近，傅里叶反演公式}{50}{section.7.2}%
+\contentsline {section}{\numberline {7.3}施瓦兹函数类的好处}{50}{section.7.3}%
+\contentsline {section}{\numberline {7.4}与傅里叶变换有关的其他变换}{50}{section.7.4}%

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.26)  25 OCT 2025 21:45
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.26)  28 OCT 2025 22:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -969,6 +969,10 @@ File: D:/code/Math_behind_Signal_and_System/Figures/Gauss.jpeg Graphic file (typ
 [18]
 
 [19]
+LaTeX Font Info:    Trying to load font information for U+euf on input line 988.
+ (d:/texlive/2025/texmf-dist/tex/latex/amsfonts/ueuf.fd
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+)
 
 [20]
 File: D:/code/Math_behind_Signal_and_System/Figures/conv.jpeg Graphic file (type bmp)
@@ -993,39 +997,51 @@ File: D:/code/Math_behind_Signal_and_System/Figures/conv.jpeg Graphic file (type
 
 [29]
 
-[30
-
-]
-第三章
-
+[30]
 
 [31]
 
-[32
+[32]
+
+[33]
+
+[34]
+
+[35]
+
+[36]
+第三章
+
+
+[37
+
+]
+
+[38
 
 ]
 第四章
 
 
-[33]
+[39]
 
-[34]
+[40]
 第五章
 
 
-[35
+[41
 
 ]
 
-[36
+[42
 
 ]
 第六章
 
 
-[37]
+[43]
 
-[38
+[44
 
 ]
 第七章
@@ -1033,20 +1049,20 @@ File: D:/code/Math_behind_Signal_and_System/Figures/gibbs.jpeg Graphic file (typ
 <D:/code/Math_behind_Signal_and_System/Figures/gibbs.jpeg>
 
 
-[39]
+[45]
 File: D:/code/Math_behind_Signal_and_System/Figures/Figure_3.jpeg Graphic file (type bmp)
 <D:/code/Math_behind_Signal_and_System/Figures/Figure_3.jpeg>
 
 
-[40]
+[46]
 
-[41]
+[47]
 
-[42]
+[48]
 
-[43]
+[49]
 
-[44] (./Math_behind_Signal_and_System.aux)
+[50] (./Math_behind_Signal_and_System.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/07/14>
@@ -1055,12 +1071,12 @@ Package rerunfilecheck Info: File `Math_behind_Signal_and_System.out' has not ch
 (rerunfilecheck)             Checksum: 2F1F81C33DB56938D0C07AE448303598;3984.
  ) 
 Here is how much of TeX's memory you used:
- 30526 strings out of 475796
- 694030 string characters out of 5774033
+ 30546 strings out of 475796
+ 694384 string characters out of 5774033
  1086263 words of memory out of 5000000
- 52894 multiletter control sequences out of 15000+600000
- 582959 words of font info for 166 fonts, out of 8000000 for 9000
+ 52908 multiletter control sequences out of 15000+600000
+ 584611 words of font info for 173 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  93i,16n,111p,540b,477s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Math_behind_Signal_and_System.pdf (50 pages).
+Output written on Math_behind_Signal_and_System.pdf (56 pages).
