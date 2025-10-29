@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.26)  28 OCT 2025 22:43
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.26)  29 OCT 2025 14:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -956,7 +956,7 @@ File: D:/code/Math_behind_Signal_and_System/Figures/Figure_2.jpeg Graphic file (
 [16]
 
 [17]
-LaTeX Font Info:    Trying to load font information for U+dsrom on input line 827.
+LaTeX Font Info:    Trying to load font information for U+dsrom on input line 839.
  (d:/texlive/2025/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
@@ -969,17 +969,17 @@ File: D:/code/Math_behind_Signal_and_System/Figures/Gauss.jpeg Graphic file (typ
 [18]
 
 [19]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 988.
+
+[20]
+LaTeX Font Info:    Trying to load font information for U+euf on input line 1025.
  (d:/texlive/2025/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 )
 
-[20]
+[21]
 File: D:/code/Math_behind_Signal_and_System/Figures/conv.jpeg Graphic file (type bmp)
 <D:/code/Math_behind_Signal_and_System/Figures/conv.jpeg>
 
-
-[21]
 
 [22]
 
@@ -1068,14 +1068,14 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/07/14>
  ***********
 Package rerunfilecheck Info: File `Math_behind_Signal_and_System.out' has not changed.
-(rerunfilecheck)             Checksum: 2F1F81C33DB56938D0C07AE448303598;3984.
+(rerunfilecheck)             Checksum: 1BB5B434C291E415E0601CF402AF08A5;4008.
  ) 
 Here is how much of TeX's memory you used:
- 30546 strings out of 475796
- 694384 string characters out of 5774033
- 1086263 words of memory out of 5000000
- 52908 multiletter control sequences out of 15000+600000
- 584611 words of font info for 173 fonts, out of 8000000 for 9000
+ 30507 strings out of 475796
+ 693626 string characters out of 5774033
+ 1086287 words of memory out of 5000000
+ 52880 multiletter control sequences out of 15000+600000
+ 578652 words of font info for 145 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  93i,16n,111p,540b,477s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

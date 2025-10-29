@@ -184,7 +184,7 @@ $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
 \ding{175} 尺度变换性质：用函数逼近的观点来理解$\delta $函数，为保证强
 度为1，自然应当要求$\delta (ax)=\frac{1}{|a|}\delta (x)$\\
 这个函数在做卷积运算时有很好的性质，见\ref{sec:convolution}卷积；关于它的逼近方式，见\\
-附录\ref{sec:delta}。我们规定，$\delta_a(x)=\delta (x-a)$，即在$x=a$处取样的狄拉克函数。
+附录\ref{sec:approach}。我们规定，$\delta_a(x)=\delta (x-a)$，即在$x=a$处取样的狄拉克函数。
 
 \noindent 4.\textbf{单位阶跃函数} (the unit step/Heaviside function)$u(x)=
     \begin{cases}
@@ -553,7 +553,7 @@ $2\Rightarrow 3$：由勾股定理，
 \[\|f\|^2=\lim_{N\to\infty}\|\sum_{n=1}^{N}(f,\phi_n)\phi_n\|^2=\lim_{N\to\infty}\sum_{n=1}^{N}|(f,\phi_n)|^2=\sum_{n=1}^{\infty}|(f,\phi_n)|^2\]
 $3\Rightarrow 1$：$(f,\phi_n)=0\Rightarrow\|f\|=0\Rightarrow f\sim 0$.
 
-最后，我们给出\textbf{周期矩形脉冲信号}的傅里叶级数展开和频谱图。
+\noindent 例2.1.\textbf{周期矩形脉冲信号}的傅里叶级数展开和频谱图\\
 脉冲宽度为$\tau$，脉冲幅度为E，周期为$T (\tau<T)$的周期矩形脉冲信号，基波角频率
 $\omega=\frac{2\pi}{T}$，傅里叶级数展开为
 \[f(t)=\sum_{k = 1}^{\infty}  \frac{E\tau}{T}Sa(\frac{k\omega \tau}{2})e^{ik\omega t}\]
@@ -650,7 +650,7 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
 
 我们从傅里叶级数类比得到了傅里叶变换及其逆变换的定义，但还没有严格证
 明逆变换将给出原有的时域函数,即著名的\textbf{傅里叶反演公式} (the Fourier Inversion Thoerem)，
-证明将在\ref{sec:delta}给出，而不会导致循环论证。现在先介绍一些傅里叶变
+证明将在\ref{sec:approach}给出，而不会导致循环论证。现在先介绍一些傅里叶变
 换的性质，在实际计算傅里叶变换时，常常不会带入定义计算，而是通过这样的运算性质
 来计算。
 {\nolinebreak[4]
@@ -668,29 +668,31 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
           如果f还是奇函数，则$\mathcal{F} $是纯虚函数
     \item \textbf{线性性}：$\forall f,g\in L^1(\mathbb{R}),\mathcal{F} (af+bg)=a\mathcal{F} f+b\mathcal{F} g$，即$\mathcal{F} $是线性算子
     \item \textbf{平移定理}：\lr{
-          \mathcal{F} [f(t-b)](\xi)=e^{-2\pi i \xi b}\mathcal{F} f(\xi)\\
-          \mathcal{F} [f(t)e^{2\pi i \xi t}]=\mathcal{F} f(\xi-b)
+          &\mathcal{F} [f(t-b)](\xi)=e^{-2\pi i \xi b}\mathcal{F} f(\xi)\\
+          &\mathcal{F} [f(t)e^{2\pi i \xi t}]=\mathcal{F} f(\xi-b)
           }{
-          \mathcal{F} [f(t-b)](\omega)=e^{-i\omega t}\mathcal{F} f(\omega)\\
-          \mathcal{F} [f(t)e^{ibt}](\omega)=\mathcal{F} f(\omega-b)
+          &\mathcal{F} [f(t-b)](\omega)=e^{-i\omega t}\mathcal{F} f(\omega)\\
+          &\mathcal{F} [f(t)e^{ibt}](\omega)=\mathcal{F} f(\omega-b)
           }
           可见信号时移$|\mathcal{F} f|$，而仅改变$\mathcal{F} f$的相位。
     \item \textbf{伸缩定理}：\lr{
-              \mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f(\frac{\xi}{a})
+              &\mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f(\frac{\xi}{a})\\
+            &\mathcal{F} f(a\xi)=\frac{1}{|a|}\mathcal{F} [f(\frac{t}{a})]
           }{
-              \mathcal{F} [f(at)](\omega)=\frac{1}{|a|}\mathcal{F} f(\frac{\omega}{a})
+              &\mathcal{F} [f(at)](\omega)=\frac{1}{|a|}\mathcal{F} f(\frac{\omega}{a})\\
+              &\mathcal{F} f(a\xi)=\frac{1}{|a|}\mathcal{F} [f(\frac{t}{a})]
           }
           信号反转可看作a=-1的特例。可以认为两种频率下的傅里叶变换是通过伸缩得到的，即
           \[2\pi\xi=\omega,\textcolor{blue}{\mathcal{F}}(2\pi\xi)=\textcolor{red}{\mathcal{F}}(\omega)\]
           a>1，时域收缩，频域舒张、变矮；0<a<1，时域舒张，频域收缩、变高；a<0，时域和频域都额外做一次反转。
     \item \textbf{微分性质}：\lr{
-              \mathcal{F} (f')(\xi)=2\pi i\xi\mathcal{F} f(\xi)\\
-              \mathcal{F}(2\pi itf)(\xi)=-(\mathcal{F} f)'(\xi)\\
-              \text{即}\mathcal{F}(tf)(\xi)=\frac{i}{2\pi}(\mathcal{F} f)'(\xi)
+              &\mathcal{F} (f')(\xi)=2\pi i\xi\mathcal{F} f(\xi)\\
+              &\mathcal{F}(2\pi itf)(\xi)=-(\mathcal{F} f)'(\xi)\\
+              &\text{即}\mathcal{F}(tf)(\xi)=\frac{i}{2\pi}(\mathcal{F} f)'(\xi)
           }{
-              \mathcal{F} (f')(\omega)=i\omega\mathcal{F} f(\omega)\\
-              \mathcal{F} [itf(t)](\omega)=-(\mathcal{F} f)'(\omega)\\
-              \text{即}\mathcal{F}(tf)(\omega)=i(\mathcal{F} f)'(\omega)
+              &\mathcal{F} (f')(\omega)=i\omega\mathcal{F} f(\omega)\\
+              &\mathcal{F} [itf(t)](\omega)=-(\mathcal{F} f)'(\omega)\\
+              &\text{即}\mathcal{F}(tf)(\omega)=i(\mathcal{F} f)'(\omega)
           }
           最后一步使用了线性性；容易将此性质推广至任意阶导数。
 \end{itemize}
@@ -728,11 +730,19 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
 \lr{
 \mathcal{F} [f(t-b)](\xi)&=\int_{-\infty}^{\infty}f(t-b)e^{-2\pi i \xi t}\,dt\\
 &=\int_{-\infty}^{\infty}f(t)e^{-2\pi i \xi (t+b)}\,dt\\
-&=e^{2\pi i \xi b}\int_{-\infty}^{\infty}f(t)e^{-2\pi i \xi t}\,dt=e^{2\pi i \xi b}\mathcal{F} f(\xi)
+&=e^{-2\pi i \xi b}\int_{-\infty}^{\infty}f(t)e^{-2\pi i \xi t}\,dt\\
+&=e^{-2\pi i \xi b}\mathcal{F} f(\xi)\\
+\mathcal{F} f(\xi-b)&=\int_{-\infty}^{\infty}f(t)e^{-2\pi i(\xi-b)t}\,dt\\
+&=\int_{-\infty}^{\infty}\left(f(t)e^{2\pi ibt}\right)e^{-2\pi i\xi t}\,dt\\
+&=\mathcal{F} [f(t)e^{2\pi ibt}](\xi)
 }{
 \mathcal{F} [f(t-b)](\omega)&=\int_{-\infty}^{\infty}f(t-b)e^{-i \omega t}\,dt\\
 &=\int_{-\infty}^{\infty}f(t)e^{-i \omega (t+b)}\,dt\\
-&=e^{i \omega b}\int_{-\infty}^{\infty}f(t)e^{-i \omega t}\,dt=e^{i \omega b}\mathcal{F} f(\omega)
+&=e^{-i \omega b}\int_{-\infty}^{\infty}f(t)e^{-i \omega t}\,dt\\
+&=e^{-i \omega b}\mathcal{F} f(\omega)\\
+\mathcal{F} f(\omega-b)&=\int_{-\infty}^{\infty}f(t)e^{-i(\omega-b)t}\,dt\\
+&=\int_{-\infty}^{\infty}\left(f(t)e^{ibt}\right)e^{-i\omega t}\,dt\\
+&=\mathcal{F} [f(t)e^{ibt}](\xi)
 }
 \noindent 5.伸缩定理\lr{
     \mathcal{F} [f(at)](\xi)&=\int_{-\infty}^{\infty}f(at)e^{2\pi i \xi t}\,dt\\
@@ -743,7 +753,8 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
     &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)e^{\frac{i \omega t}{a}}\,dt\text{（变量代换）}\\
     &=\frac{1}{|a|}\mathcal{F} f(\frac{\omega}{a})
 }
-注意变量代换时，如果a<0，积分上下限也会改变，这正是绝对值的来源。对此有疑惑的读者可以自行分情况验算。\\
+注意变量代换时，如果a<0，积分上下限也会改变，这正是绝对值的来源，对此有疑惑的读者
+可以自行分情况验算。对于频域的伸缩定理，仅仅是时域伸缩定理的直接推论。\\
 6.微分性质
 \lr    {
 \mathcal{F} (f')(\xi)&=\int_{-\infty}^{\infty}f'(t)e^{-2\pi i\xi t}\,dt\\
@@ -779,8 +790,9 @@ $f(t),tf(t)\in L^1(\mathbb(R)),g(t)=tf(t)$.
 $f'=\mathcal{F} g$。
 
 下面介绍一些常用信号的傅里叶变换，并使用傅里叶反演公式和对偶性得到一些难以直接
-计算的常用傅里叶变换。\\
-\textbullet 在\ref{sec:Fourier_Series}中讨论了矩形函数$f(t)=E\cdot\Pi_T(t)$的傅里
+计算的常用傅里叶变换。
+
+\noindent 例3.1.在\ref{sec:Fourier_Series}中讨论了矩形函数$f(t)=E\cdot\Pi_T(t)$的傅里
 叶变换，现在可以验证它的频谱与取样函数相似：
 \lr{
 \mathcal{F} f(\xi)&=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt\\
@@ -804,9 +816,9 @@ $f'=\mathcal{F} g$。
     \mathcal{F} \Pi_T(\omega)&=TSa(\frac{T\omega}{2})\\
     \mathcal{F} Sa(\frac{\omega}{2})&=\frac{1}{2}\Pi_2 (\omega)
 }
-在\ref{sec:signal}中介绍了狄拉克$\delta$函数，实际上它应该作为一个分布来理解，
-见\ref{sec:distributions}，不过我们可以从形式上求出它的傅里叶变换。\\
-\textbullet 狄拉克$\delta$函数（见\ref{sec:signal}）
+
+\noindent 例3.2.在\ref{sec:signal}中介绍了狄拉克$\delta$函数，实际上它应该作为一个分布来理解，
+见\ref{sec:distributions}，不过我们可以从形式上求出它的傅里叶变换。
 \lr{
 \mathcal{F} \delta(\xi)&=\int_{-\infty}^{\infty}\delta(t)e^{-2\pi i\xi t}\,dt\\
 &=\int_{-\infty}^{\infty}\delta(t)\,dt=1
@@ -857,7 +869,8 @@ $f'=\mathcal{F} g$。
 }{
     \mathcal{F} [\frac{1}{t}](\omega)&=-\pi i sgn(\omega)\\
 }
-\textbullet $\Lambda$函数，它在卷积的章节中是一个很好的例子。
+
+\noindent 例3.3. $\Lambda$函数，它在卷积的章节中是一个很好的例子。
 \[\Lambda(t)=\begin{cases}
         1-|t| & \text{if }|t|\leq 1 \\
         0     & \text{if }|t|>1
@@ -877,7 +890,7 @@ $f'=\mathcal{F} g$。
 &=\frac{e^{2\pi i\xi}+e^{-2\pi i\xi}-2}{(2\pi i\xi)^2}=\frac{1}{(\pi\xi)^2}(\frac{e^{\pi\xi}-e^{-\pi\xi}}{2i})^2\\
 &=sinc^2(\xi)
 }{
-&\text{记$e^{2\pi i\xi t}$的原函数为}F(t)=\frac{e^{i\omega t}}{i\omega}\\
+&\text{记$e^{i\omega t}$的原函数为}F(t)=\frac{e^{i\omega t}}{i\omega}\\
 \mathcal{F} \Lambda(\omega)&=\int_{-\infty}^{\infty}\Lambda(t)e^{-i\omega t}\,dt\\
 &=\int_{-1}^{0}(1+t)e^{-i\omega t}\,dt+\int_{0}^{1}(1-t)e^{-i\omega t}\,dt\\
 &=F(1)-F(-1)-\frac{1}{i\omega}\left(\evalat{t e^{-i\omega t}}{-1}{0}\right. \\
@@ -891,7 +904,8 @@ $f'=\mathcal{F} g$。
 }{
     \mathcal{F} Sa^2(\frac{\omega}{2})&=\Lambda(t)
 }
-\textbullet 高斯函数 $G(t)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}$，求它的傅里叶变换的方法较为特殊：
+
+\noindent 例3.4. 高斯函数 $G(t)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}$，求它的傅里叶变换的方法较为特殊：
 \lr{
 \mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}e^{-2\pi i\xi t}\,dt\\
 \frac{d}{d\xi}\mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}(-2\pi it)e^{-2\pi i\xi t}\,dt\\
@@ -920,7 +934,8 @@ $f'=\mathcal{F} g$。
     \includegraphics[width=0.4\textwidth]{Gauss}
     \caption{高斯函数图像}
 \end{figure}
-\textbullet 单边指数函数$f(t)=\begin{cases}
+
+\noindent 例3.5. 单边指数函数$f(t)=\begin{cases}
         e^{-at}, & \text{if }t\geq 0 \\
         0,       & \text{if }t<0
     \end{cases}$和双边指数函数$g(t)=\begin{cases}
@@ -946,6 +961,28 @@ $f'=\mathcal{F} g$。
 \mathcal{F} g(\omega)&=\mathcal{F} f(\omega)+\overline{\mathcal{F} f(\omega)}\\
 &=2Re{\mathcal{F} f(\omega)}=\frac{2a}{a^2 +\omega^2}
 }
+
+最后，我们给出\textbf{帕塞瓦尔恒等式}(Parceval's identity):\lr{
+    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
+}{
+    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
+}
+\textbf{Proof:}设$f,g\in L^1(\mathbb{R})$,\lr{
+    &\quad\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}\,d\xi\\
+    &=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
+    &=\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)e^{-2\pi i\xi x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
+    &=\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\xi)e^{-2\pi i\xi x}\,d\xi\\
+    &=\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
+    &=\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
+}{
+    &\quad\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\overline{\mathcal{F} g(\omega)}\,d\omega\\
+    &=2\pi\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
+    &=2\pi\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
+    &=2\pi\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\omega)e^{-i\omega x}\,d\omega\\
+    &=2\pi\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
+    &=2\pi\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
+}
+取$g=f$即证。注意我们并不要求$g$是实信号，$\overline{\mathcal{F} g}\neq\mathcal{F} ^{-1}g$.
 
 \section{卷积}\label{sec:convolution}
 
@@ -1012,20 +1049,6 @@ f*g&=\mathcal{F} ^{-1}(\mathcal{F} f\mathcal{F} g)\\
 上一节中我们曾花费大量的篇幅寻找$\Lambda$的傅里叶变换，现在可以用卷积定理得到
 它，因为$\Lambda=\Pi_{1/2}*\Pi_{1/2}$（读者可以自行用代数方法验证）。
 
-一些简单的卷积可以通过画图法进行计算。将一个函数翻转、平移，再与另一函数相乘、
-积分，就得到了它们的卷积，下面用$\Lambda=\Pi_{1/2}*\Pi_{1/2}$的例子加以说明。
-$\Pi_{1/2}$是偶函数，$\Pi_{1/2}(-t)=\Pi_{1/2}(t)$.计算
-$(\Pi_{1/2}*\Pi_{1/2})(x)=\int_{-\infty}^{\infty}\Pi_{1/2}(y)\Pi_{1/2}(x-y)\,dy$
-时，如果$|x|>1$，则将$\Pi_{1/2}(-t)$平移的距离过大，乘积为0；
-如果$|x|<1$，则两矩形开始重合，重合部分函数乘积为1，其面积即为此时的积分值，也就是
-$(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，卷积所得函数
-也达到最大值。如图\ref{fig:conv}所示。
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{conv}
-    \caption{图解法求卷积示例}\label{fig:conv}
-\end{figure}
-
 在不引起歧义时，我们也承认$f(t)*g(t)$和$f(t)*e^{t+1}$这样的写法。需要注意，$f(2t)*g(t)$
 对应着两种理解：$\int_{-\infty}^{\infty}f(2t-x)g(x)\,dx$和$\int_{-\infty}^{\infty}f(2(t-x))g(x)\,dx$
 ，第二种才是对的，因为我们认为$f(2t)$作为一个新的函数$F(t)=f(2t)$与$g(t)$进行卷积。
@@ -1048,6 +1071,7 @@ $(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，�
 存在（它有许多种充分条件，不再一一讨论），而取傅里叶变换则要求$f,g,f*g$
 的傅里叶变换存在。
 
+接着讨论卷积是否具有“幺元”，即与任一函数卷积，总得到它本身。
 \lr{
     &\mathcal{F} (f*\delta)(\xi)=\mathcal{F} f(\xi)\mathcal{F} \delta(\xi)=\mathcal{F} f(\xi)\\
     &f(t)=(f*\delta)(t)=\int_{-\infty}^{\infty}f(x)\delta(t-x)\,dx
@@ -1057,6 +1081,20 @@ $(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，�
 }
 因此$\delta$是“卷积幺元”，傅里叶变换构成$\langle L^1(\mathbb{R}),+,\cdot\rangle$
 与$\langle \mathcal{F} (L^1(\mathbb{R})),+,*\rangle$之间的环同态。
+
+一些简单的卷积可以通过画图法进行计算。将一个函数翻转、平移，再与另一函数相乘、
+积分，就得到了它们的卷积，下面用$\Lambda=\Pi_{1/2}*\Pi_{1/2}$的例子加以说明。
+$\Pi_{1/2}$是偶函数，$\Pi_{1/2}(-t)=\Pi_{1/2}(t)$.计算
+$(\Pi_{1/2}*\Pi_{1/2})(x)=\int_{-\infty}^{\infty}\Pi_{1/2}(y)\Pi_{1/2}(x-y)\,dy$
+时，如果$|x|>1$，则将$\Pi_{1/2}(-t)$平移的距离过大，乘积为0；
+如果$|x|<1$，则两矩形开始重合，重合部分函数乘积为1，其面积即为此时的积分值，也就是
+$(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，卷积所得函数
+也达到最大值。如图\ref{fig:conv}所示。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{conv}
+    \caption{图解法求卷积示例}\label{fig:conv}
+\end{figure}
 
 初次接触卷积时，往往会对它的定义感到疑惑，因为在数学分析的课程中我们很少见到这
 种“翻转、平移、相乘、积分”的结构。需要指出，卷积并不只有“时域相乘，频域卷积；
@@ -1069,7 +1107,7 @@ $(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，�
 \noindent 1.卷积是一种起“平均化”作用的运算
 
 给定区间$[a,b]$和权函数$w(x)$，$f(x)$的加权
-均值为\[\frac{\int_{a}^{b}f(x)w(x)\,dx}{\int_{a}^{b}w(x\,dx)}\]给定$x$
+均值为\[\frac{\int_{a}^{b}f(x)w(x)\,dx}{\int_{a}^{b}w(x)\,dx}\]给定$x$
 时，$w(y)=g(x-y)$就是f的加权均值的倍数。进一步，卷积的光滑性高于用来卷积的两
 个函数，并且在f可导时有$(f*g)'=f'*g$,因为
 \[(f*g)'(x)=\frac{d}{dx}\int_{-\infty}^{\infty}f(x-y)g(y)\,dy=\int_{-\infty}^{\infty}f'(x-y)g(y)\,dy=f'*g\]
@@ -1138,7 +1176,7 @@ $supp (f*g)\in [a+c,b+d]$,因为：
 
 4.“面积”关系
 
-我们已经提到，概率论中两个随机变量之和的概率密度函数是它们各自概率密度函数的卷积，这当
+我们已经提到，概率论中两个独立随机变量之和的概率密度函数是它们各自概率密度函数的卷积，这当
 然要求两个概率密度函数在$\mathbb{R}$上的积分值为1时，它们的卷积在$\mathbb{R}$上的积
 分值也为1。更一般地，如果$f,g\in L^1(\mathbb{R})$，则
 \begin{align*}
@@ -1156,7 +1194,7 @@ $supp (f*g)\in [a+c,b+d]$,因为：
 \end{equation}
 其中$\langle f,g\rangle=\int_{-\infty}^{\infty}f(x)\overline{g(x)}dx$是$f$和
 $g$的内积，$\|f\|=\sqrt{\langle f,f\rangle}$是$f$的范数。根据柯西-施瓦茨不等式，
-相关系数的绝对值不超过1，且当且仅当$f$与$g$线性相关时取等，因此我们说，
+相关系数的绝对值不超过1，且当且仅当$f$与$g$几乎处处成比例时取等，因此我们说，
 $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\textbf{线性无关}，
 这相当于两函数正交。
 
@@ -1336,7 +1374,7 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
 \begin{itemize}
     \item 允许$\delta$信号，单位阶跃信号，多项式，正弦、余弦函数等信号（作为分布）做傅里叶变换
     \item 傅里叶变换和其反变换同时有定义傅里叶反演公式成立
-    \item 帕塞瓦尔恒等式成立（表述见后文）
+    \item 帕塞瓦尔恒等式成立
 \end{itemize}
 我们将看到，分布$T$的傅里叶变换$\mathcal{F} T$定义为
 \begin{equation}
@@ -1380,7 +1418,15 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
 \begin{equation}
     \langle\mathcal{F}T,\varphi\rangle=\langle T,\mathcal{F}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation}
-傅里叶逆变换同理。
+
+傅里叶逆变换同理。只要承认函数的傅里叶反演公式，分布的傅里叶反演公式就自然成立：
+\begin{align*}
+    \langle \mathcal{F} ^{-1}\mathcal{F} T,\varphi\rangle&=\langle \mathcal{F} T,\mathcal{F} ^{-1}\varphi\rangle\\
+    &=\langle T,\mathcal{F} \mathcal{F} ^{-1}\varphi\rangle\\
+    &=\langle T,\varphi\rangle\\
+    \langle \mathcal{F} \mathcal{F} ^{-1}T,\varphi\rangle&=\langle T,\mathcal{F} ^{-1}\mathcal{F} \varphi\rangle\\
+    &=\langle T,\varphi\rangle
+\end{align*}
 
 线性性依然成立。尽管没有明确指出，我们也会很自然的想到定义
 \begin{equation}
@@ -1431,7 +1477,7 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
     &=\varphi(0)=\langle \delta,\varphi\rangle\\
     \Rightarrow \mathcal{F} \mathds{1}&=\delta
 }{
-    \langle \mathcal{F} \mathds{1},\varphi&=\langle \mathds{1},\mathcal{F} \varphi\rangle\\
+    \langle \mathcal{F} \mathds{1},\varphi\rangle&=\langle \mathds{1},\mathcal{F} \varphi\rangle\\
     &=\int_{-\infty}^{\infty}\mathcal{F} \varphi(\xi)\,d\xi\\
     &=\mathcal{F} \mathcal{F} \varphi(0)\\
     &=2\pi\varphi(0)=2\pi\langle \delta,\varphi\rangle\\
@@ -1467,7 +1513,23 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
     \langle\mathcal{F}T^-,\varphi\rangle=\langle T,\mathcal{F}\varphi^-\rangle=\langle T,2\pi\mathcal{F} ^{-1}\varphi\rangle=2\pi\langle\mathcal{F}^{-1}T,\varphi\rangle\\
     \Rightarrow\mathcal{F}T^-= 2\pi\mathcal{F}^{-1}T
 }
-这与前文中函数的傅里叶变换对偶性完全一样。\\
+这与前文中函数的傅里叶变换对偶性完全一样。有了对偶性，就可以得到\textbf{帕塞瓦尔恒等式}
+(Parceval's identity)：\lr{
+    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
+}{
+    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
+}
+\textbf{Proof:}设$f,g\in\mathcal{S} $,\lr{
+    \langle \mathcal{F} f,\overline{\mathcal{F} g}\rangle&=\langle \mathcal{F} f,\mathcal{F}^{-1}\overline{g}\rangle\\
+    &=\langle f,\mathcal{F} \mathcal{F} ^{-1}\overline{g}\rangle\\
+    &=\langle f,\overline{g}\rangle
+}{
+    \langle \mathcal{F} f,\overline{\mathcal{F} g}\rangle&=\langle f,2\pi\mathcal{F}^{-1}\overline{g}\rangle\\
+    &=\langle f,2\pi\mathcal{F} \mathcal{F} ^{-1}\overline{g}\rangle\\
+    &=2\pi\langle f,\overline{g}\rangle
+}
+取$g=f$即证，尽管限制了函数的范围，但这个证明比前文中积分换序的证明简洁得多。
+
 例5.14.$\delta$是偶分布：
 \begin{align*}
     \langle \delta^-,\varphi\rangle & =\langle \delta,\varphi^-\rangle=\varphi^-(0)=\varphi(0)=\langle \delta,\varphi\rangle \\
@@ -1541,11 +1603,11 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
 \begin{align*}
     \langle \sigma_a T_f,\varphi\rangle & =\int_{-\infty}^{\infty}f(ax)\varphi(x)\,dx                                  \\
                                         & =\frac{1}{|a|}\int_{-\infty}^{\infty}f(y)\varphi\left(\frac{y}{a}\right)\,dy \\
-                                        & =\frac{1}{|a|}\langle T_f,\varphi\left(\frac{\cdot}{a}\right)\rangle
+                                        & =\frac{1}{|a|}\langle T_f,\sigma_{1/a}\varphi\rangle
 \end{align*}
 因此我们定义分布的伸缩为
 \begin{equation}
-    \langle\sigma_a T,\varphi\rangle=\langle T,\frac{1}{|a|}\sigma_{\frac{1}{a}}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+    \langle\sigma_a T,\varphi\rangle=\langle T,\frac{1}{|a|}\sigma_{1/a}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation}
 
 现在就可以建立分布的傅里叶变换的平移和尺度变换定理：
@@ -1575,7 +1637,6 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
 }
 这与函数的傅里叶变换的微分性质一致，注意将$t$换成$\xi$或$\omega$，只是符号上的改
 变，用以区分所讨论的场景。同样地，
-\newpage
 \lr{
     \langle (\mathcal{F} T)',\varphi\rangle&=\langle T,-\mathcal{F} (\varphi')\rangle\\
     &=\langle T,-2\pi i\xi\mathcal{F} \varphi\rangle\\
@@ -1604,7 +1665,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
                                  & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g^- (y-x)\varphi(x)\,dx                      \\
                                  & =\int_{-\infty}^{\infty}f(y)[(g^-) *\varphi](y)\,dy                                                 \\
                                  & =\langle T_f,(g^-)*\varphi\rangle                                                                   \\
-                                 & \Rightarrow \langle T*g,\varphi\rangle=\langle T,(g^-)*\varphi\rangle\langle T,(g*\varphi)^-\rangle
+                                 & \Rightarrow \langle T*g,\varphi\rangle=\langle T,(g^-)*\varphi\rangle
 \end{align*}
 
 从定义分布与函数的卷积的过程可以看出，应当要求卷积的交换律仍然成立；“结合律”在目前
@@ -1674,12 +1735,12 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
                                     & =\langle f(y),\langle g(u),\varphi(u+y)\rangle\rangle
 \end{align*}
 如果允许给分布标上自变量（对于能用函数表示的分布，即便不属于$\mathcal{S} $，这样做
-的确是有意义的），那么我们可以定义：
+也的确是有意义的），那么我们可以定义：
 \begin{equation}
     \langle S*T,\varphi\rangle=\langle S(y),\langle T(x),\varphi(x+y)\rangle\rangle,S,T\in\mathcal{T} ,\varphi\in\mathcal{S} ,\langle T(x),\varphi(x+y)\rangle\in\mathcal{S}
 \end{equation}
 注意我们必须要求$\langle T(x),\varphi(x+y)\rangle\in\mathcal{S}$，如果不满足这
-个条件，我们就只好说$S*T$无定义。对于分布之间的卷积，交换律和结合律就步总是成立了，
+个条件，我们就只好说$S*T$无定义。对于分布之间的卷积，交换律和结合律就不总是成立了，
 交换律在$\langle S,\varphi\rangle\in\mathcal{S} ,\langle T,\varphi\rangle\notin\mathcal{S}$
 时被破坏，对于结合律，从形式可以两次套用分布与分布卷积的定义，得到
 \begin{equation*}
@@ -2002,9 +2063,9 @@ $\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\i
 请读者思考：我们探究了指数形式傅里叶级数收敛的条件，对于三角函数形式的傅里叶级
 数应该怎么办？
 
-\section{$\delta$的逼近，傅里叶反演公式}\label{sec:delta}
+\section{分布的逼近，傅里叶反演公式}\label{sec:approach}
 
-\section{施瓦兹函数类的好处}\label{sec:Schwartz_Functions}
+\section{施瓦兹函数类及其好处}\label{sec:Schwartz_Functions}
 
 \section{与傅里叶变换有关的其他变换}\label{sec:Other_Transforms}
 %正弦，余弦，拉东（？）
