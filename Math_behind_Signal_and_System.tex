@@ -1923,7 +1923,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
 傅里叶反演公式：\lr{
     f=\mathcal{F} ^{-1}\mathcal{F} f=\mathcal{F} \mathcal{F} ^{-1}f
 }{
-    f=\frac{1}{2\pi}\mathcal{F} ^{-1}\mathcal{F} f=\frac{1}{2\pi}\mathcal{F}\mathcal{F} ^{-1} f
+    f=\mathcal{F} ^{-1}\mathcal{F} f=\mathcal{F}\mathcal{F} ^{-1} f
 }
 
 \noindent 5.\underline{常用信号及其傅里叶变换}
@@ -1960,12 +1960,12 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
         &\delta\overset{\mathcal{F} }{\longleftrightarrow}\mathds{1}\\
         &\mathds{1}\overset{\mathcal{F} }{\longleftrightarrow}\delta\\
         &\delta_a\overset{\mathcal{F} }{\longleftrightarrow}e^{-2\pi ia\xi}\\
-        &e^{2\pi iat}\overset{\mathcal{F} }{\longleftrightarrow}\delta_{-a}
+        &e^{2\pi iat}\overset{\mathcal{F} }{\longleftrightarrow}\delta_{a}
     }{
         &\delta\overset{\mathcal{F} }{\longleftrightarrow}\mathds{1}\\
         &\mathds{1}\overset{\mathcal{F} }{\longleftrightarrow}2\pi\delta\\
         &\delta_a\overset{\mathcal{F} }{\longleftrightarrow}e^{-ia\omega}\\
-        &e^{iat}\overset{\mathcal{F} }{\longleftrightarrow}2\pi\delta_{-a}
+        &e^{iat}\overset{\mathcal{F} }{\longleftrightarrow}2\pi\delta_{a}
     }
     \item 正弦函数和余弦函数
     \lr{
@@ -2417,11 +2417,12 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
     &+2[f(t)u(t)+a\delta]\\
     =&[f''(t)+3f'(t)+2f(t)]u(t)+[f'(0)+3f(0)+2a]\delta+[f(0)+3a]\delta'+a\delta''
 \end{align*}
-对比系数，得到：\begin{align*}
+对比系数，得到：\begin{align*}\begin{cases}
     &f''(t)+3f'(t)+2f(t)=0\\
     &f'(0)+3f'(0)+2a=1\\
     &f(0)+3a=0\\
     &a=0
+\end{cases}
 \end{align*}
 因此问题转化为求解微分方程
 \[f''(t)+3f'(t)+2f(t)=0,f(0)=0,f'(0)=1\]
@@ -2439,7 +2440,7 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 当$r(t)$的最高次导的阶数不小于$\delta$的最高阶导阶数，即$N\geq M$时，解为
 $y_h(t)u(t)$；当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶数，即$N<M$时，
 解为\[y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}\]
-换言之需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现。
+换言之，需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现。
 这个结果可以求出以下形式的系统的脉冲响应：
 \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m e^{(m)}(t)\]
 这同样时微分方程描述的系统，只不过从数学上我们没有必要考虑这种形式的方程，只要把
