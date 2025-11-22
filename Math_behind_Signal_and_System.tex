@@ -89,15 +89,17 @@
 公开课EE261，同样面临着这个问题，所以希望尝试这种新的笔记形式，梳理信号与系
 统课程的理论部分，同时也使本书能够作为同学们学习信号与系统时的参考书。同时，
 我注意到现在的信号与系统教材中对很多数学上的内容的处理过于简单化，以至于同学
-们对一些公式感到不解，我希望结合《信号与系统》教材和一些数学专业的实变函数、
-傅里叶分析教材，对这样的内容做一些简单的补充和深化。
+们对一些公式感到不解，我希望结合《信号与系统》教材和面向数学专业的实变函数、复变函数和
+傅里叶分析教材，对这样的内容做一些补充和深化。
 
 本书将不会涉及信号与系统实践部分，对一些语文性质的概念从简处理，希望了解这些
-内容的读者可以自行查看信号与系统教材；对于两种不同的傅里叶变换，将并排给出两
-种公式，左侧为频率版本，右侧为角频率版本；此外，为了逻辑的完整性和内容的精确
-性，本书会引入一些对工科生较难理解的内容，对于勒贝格积分，读者应当明白其大体
-思想，技术细节则不在我们关注的范围，对于另外一些内容，将用“*”标注或直接用语
-言声明，读者可以自行选择是否阅读这些内容。
+内容的读者可以自行查看信号与系统教材。对于两种不同的傅里叶变换，将并排给出两
+种公式，左侧为频率版本，右侧为角频率版本。为了逻辑的完整性和内容的精确
+性，本书会引入一些远超工科教学范围的内容，力求朴素平和却又不失深度，其中所涉及的
+技术细节不在我们的关注范围，读者也可以自行选择是否阅读这些内容。本书默认读者已经
+学习过一到两学期的数学分析（或高等数学/微积分）以及高等代数（或线性代数）课程，
+不过只要理解一元微积分，阅读前四章及附录就不会有问题；只要掌握复数运算、理解曲线
+积分，阅读后两章就不会有问题。
 
 限于作者水平，书中难免存在不足之处，希望读者可以提出宝贵的意见或建议，可以反
 馈至我的电子邮箱：2024212622@bupt.cn。
@@ -658,7 +660,8 @@ $L^2(\mathbb{R})$之间不存在包含关系。可以验证，$f\in L^1(\mathbb{
     |\mathcal{F} f(\xi+h)-\mathcal{F} f(\xi)| & =\left|\int_{-\infty}^{\infty}f(t)(e^{-2\pi i(\xi+h)t}-e^{-2\pi i\xi t})\,dt\right| \\
                                               & \leq\int_{-\infty}^{\infty}|f(t)||e^{-2\pi iht}-1|\,dt\to 0(h\to 0)
 \end{align*}
-另外，$\mathcal{F} f(x)\to 0(x\to\infty)$，这个结果称为\textbf{黎曼-勒贝格引理} (Riemann-Lebesgue Lemma)。
+另外，$\mathcal{F} f(x)\to 0(x\to\infty)$，这个结果称为\textbf{黎曼-勒贝格引理} (Riemann-Lebesgue Lemma)，
+将在附录\ref{sec:approach}简单介绍。
 
 下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。我们来看上一节\ref{sec:Fourier_Series}
 末尾的例子，为了体现双边频谱与取样函数的相似性，我们取了一个较为特殊的周期矩形
@@ -883,8 +886,8 @@ $f'=\mathcal{F} g$。
 根据傅里叶变换的对偶性，我们当然希望恒为1的函数的傅里叶变换是$\delta$或$2\pi\delta$
 （取决于是用频率做变换还是用角频率做变换），然而，1在无限区间上必定是不可积的，
 在常规意义下它不能够做傅里叶变换。这个问题将在\ref{sec:distributions}中讨论，
-那时就可以对相当大范围内的函数做傅里叶变换，还将看到周期函数的傅里叶变换与傅里
-叶级数的深刻关系。现在我们暂且承认公式\lr{
+那时就可以对相当大范围内的函数做傅里叶变换，还将在\ref{sec:Sampling and Interpolation}
+看到周期函数的傅里叶变换与傅里叶级数的深刻关系。现在我们暂且承认公式\lr{
     &\mathcal{F} \delta(\xi)=1\\
     &\mathcal{F} \mathds{1}=\delta(\xi)
 }{
@@ -906,8 +909,9 @@ $f'=\mathcal{F} g$。
 }
 我们还希望从$u'(t)=\delta(t),sgn'(t)=2\delta(t)$
 得到单位阶跃函数u(t)和符号函数sgn(t)的傅里叶变换，但在考虑$\delta$的不定积分时，必须
-处理“C”，它将导致频域中出现$C\delta$或$2\pi C\delta$项。注意到$sgn(t)$是奇函数，我
-们可以由此确定它和单位阶跃函数的傅里叶变换中C的值，从而得到正确的结果:
+处理“C”，它将导致频域中出现$C\delta$或$2\pi C\delta$项。注意到$sgn(t)$是奇函数，其
+傅里叶变换应为纯虚的奇函数，我们可以由此确定它和单位阶跃函数的傅里叶变换中C的值，从而
+得到正确的结果:
 \lr{
 \mathcal{F} sgn(\xi)&=\frac{1}{\pi i\xi}\\
 \mathcal{F} u(\xi)&=\mathcal{F} [\frac{1}{2}(sgn(t)+1)]\\
@@ -1152,7 +1156,7 @@ $(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，�
 
 初次接触卷积时，往往会对它的定义感到疑惑，因为在数学分析的课程中我们很少见到这
 种“翻转、平移、相乘、积分”的结构。需要指出，卷积并不只有“时域相乘，频域卷积；
-时域卷积，频域相乘”的物理意义，例如概率论中两连续型随机变量X,Y之和作为一种新的
+时域卷积，频域相乘”的物理意义，例如概率论中两独立的连续型随机变量X,Y之和作为一种新的
 随机变量Z，其概率密度函数$f_Z(z)$正是两个独立的随机变量的概率密度函数的卷积$f_X*f_Y(z)$.
 类似于用“求曲线下方的面积”或“已知速度求位移”引入积分，尽管我们用一种较为自然的方
 式引入了卷积，但不应该认为它只有单一的意义。不过，还是可以建立一些卷积的性质来
@@ -1162,9 +1166,11 @@ $(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，�
 
 给定区间$[a,b]$和权函数$w(x)$，$f(x)$的加权
 均值为\[\frac{\int_{a}^{b}f(x)w(x)\,dx}{\int_{a}^{b}w(x)\,dx}\]给定$x$
-时，$w(y)=g(x-y)$就是f的加权均值的倍数。进一步，卷积的光滑性高于用来卷积的两
+时，$w(y)=g(x-y)$就是$f*g$中f的加权均值的倍数。进一步，卷积的光滑性高于用来卷积的两
 个函数，并且在f可导时有$(f*g)'=f'*g$,因为
 \[(f*g)'(x)=\frac{d}{dx}\int_{-\infty}^{\infty}f(x-y)g(y)\,dy=\int_{-\infty}^{\infty}f'(x-y)g(y)\,dy=f'*g\]
+例如，$\Pi_{1/2}*\Pi_{1/2}=\Lambda$，等式左侧是两个不连续的函数，右侧是连续并且分段
+光滑的函数。
 
 \noindent 2.卷积函数的支集
 
@@ -1303,8 +1309,8 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
 一些文献也将互相关函数定义为$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x-y)}\,dy=\int_{-\infty}^{\infty}f(x+y)g(y)\,dy$
 ，功率信号同理，这与上面讨论的互相关没有本质区别。
 
-最后我们给出一个互相关的应用。设雷达发射了一个信号$f(t)$，经过时间T信号接触到以
-物体并发生反射，经过时间T信号回到雷达，雷达接收到的信号$f_r(t)=\alpha (\tau_{2T}f(t))+n(t)$,
+最后我们给出一个互相关的应用。设雷达发射了一个信号$f(t)$，经过时间T信号接触到
+物体并发生反射，再经过时间T信号回到雷达，雷达接收到的信号$f_r(t)=\alpha (\tau_{2T}f(t))+n(t)$,
 其中$\alpha\in(0,1)$，表示信号在传播过程中衰减；$n(t)$为噪声信号。我们
 希望确定时间T，以计算雷达到物体间的距离。对于噪声信号$n(t)$，它满足
 \[(f\star n)(t)=C\]
@@ -1313,7 +1319,7 @@ C为常数，因此可以考虑求发射信号与接收信号的互相关函数�
     &=\alpha\tau_{2T}(f\star f)(t)+\alpha C
 \end{align*}
 根据前面得到的性质4，$(f\star f)(t)$在0处取最大值，因此$(f\star f_r)(t)$在$2T$
-处取最大值，于是我们只需要观察这个话相关函数的最大值点，就可以得到T。
+处取最大值，于是我们只需要观察这个互相关函数的最大值点，就可以得到T。
 
 \section{分布及其傅里叶变换}\label{sec:distributions}
 
@@ -1362,7 +1368,8 @@ $\forall x_1,x_2\in X$,映射$A:X\to Y$满足
 将这样的分布称为\textbf{正则分布}，而将无法用紧支函数描述的分布称为\textbf{奇异分布}。
 例如，尽管我们从形式上给出了$\delta$函数的定义，但它实际上应该采用定义
 \[\langle \delta,\varphi\rangle:=\delta(\varphi):=\varphi(0)\]
-容易验证这与我们一开始给出的$\delta$作为“函数”的性质是相符的：
+由于“狄拉克函数”严格来说并不能算作一种函数，$\delta$是一个奇异分布。容易验证这与我们一
+开始给出的$\delta$作为“函数”的性质是相符的：
 \[\langle \delta,\varphi\rangle=\int_{-\infty}^{\infty}\delta(x)\varphi(x)\,dx=\int_{-\infty}^{\infty}\delta(x)\varphi(0)\,dx=\varphi(0)\]
 
 下面来定义分布与函数的乘法和分布的导数。这一部分中，我们的原则是：\textbf{奇异分布与正
@@ -1439,7 +1446,7 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
 接下来讨论分布理论在傅里叶分析中的应用。我们的目标是，在这个新的理论体系下：
 \begin{itemize}
     \item 允许$\delta$信号，单位阶跃信号，多项式，正弦、余弦函数等信号（作为分布）做傅里叶变换
-    \item 傅里叶变换和其反变换同时有定义傅里叶反演公式成立
+    \item 傅里叶变换和其反变换同时有定义；傅里叶反演公式成立
     \item 帕塞瓦尔恒等式成立
 \end{itemize}
 我们将看到，分布$T$的傅里叶变换$\mathcal{F} T$定义为
@@ -1529,8 +1536,8 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
 &\Rightarrow\mathcal{F}\delta_a =e^{-i a x}
 }
 根据阿贝尔-狄利克雷判别法（A-D判别法，请自行查看数学分析的教材），$\langle e^{-i a x},\varphi\rangle$
-是有意义的。可以看出这与函数的傅里叶变换的平移定理很相似，我们将在后面给出分布的平移、伸缩，并由
-此得到一些分布的傅里叶变换的性质。
+作为一个反常积分是有意义的。可以看出这与函数的傅里叶变换的平移定理很相似，我们将在后面
+给出分布的平移、伸缩，并由此得到一些分布的傅里叶变换的性质。
 
 \noindent 例5.3.分布$\mathds{1}$的傅里叶变换：尽管$\mathds{1}\notin L^1(\mathbb{R})$，但可以
 认为它是缓增分布，因为对于任意的$\varphi\in\mathcal{S} $，都有
@@ -1755,7 +1762,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
                                      & =\langle af*T+bg*T,\varphi\rangle                                                   \\
                                      & \Rightarrow (af+bg)*T=af*T+bg*T,a,b\in\mathbb{C},f,g\in\mathcal{S} ,T\in\mathcal{T} \\
 \end{align*}
-{\parskip=0pt \ding{173} 后续内容}
+{\parskip=0pt \ding{173} 对分布的线性性}
 \begin{align*}
     \langle f*(aS+bT),\varphi\rangle & =\langle aS+bT,(f^-)*\varphi\rangle                                                 \\
                                      & =a\langle S,(f^-)*\varphi\rangle+b\langle T,(f^-)*\varphi\rangle                    \\
@@ -1764,7 +1771,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
                                      & \Rightarrow f*(aS+bT)=af*S+bf*T,a,b\in\mathbb{C},f\in\mathcal{S} ,S,T\in\mathcal{T}
 \end{align*}
 
-下面研究卷积定理是否仍成立：\ding{172}时域卷积
+下面研究卷积定理是否仍成立：\\\ding{172}时域卷积
 \lr{
     \langle \mathcal{F} (g*T),\varphi\rangle&=\langle T,(g^-)*\mathcal{F} \varphi\rangle\\
     &=\langle T,(\mathcal{F} \mathcal{F} g)*\mathcal{F} \varphi\rangle\\
@@ -2006,11 +2013,11 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
           &f(t-b)\overset{\mathcal{F} }{\longleftrightarrow}e^{-2\pi i \xi b}F(\xi)\\
           &f(t)e^{2\pi i \xi t}\overset{\mathcal{F} }{\longleftrightarrow}F(\xi-b)
           }{
-          &f(t-b)\overset{\mathcal{F} }{\longleftrightarrow}e^{-i\omega t}F(\omega)\\
+          &f(t-b)\overset{\mathcal{F} }{\longleftrightarrow}e^{-i\omega b}F(\omega)\\
           &f(t)e^{ibt}\overset{\mathcal{F} }{\longleftrightarrow}F(\omega-b)
           }
     \item \textbf{伸缩定理}：\lr{
-              f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F(\frac{\xi}{a})\\
+              f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F(\frac{\xi}{a})
           }{
               f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F(\frac{\omega}{a})
           }
@@ -2088,15 +2095,185 @@ $\mathcal{F} T^-=\overline{\mathcal{F} T}$，分布与分布的卷积的结合�
 
 \chapter{关于傅里叶变换的进一步讨论}
 
-\section{取样和插值}\label{sec:Sampling and Interpolation}
+\section{狄拉克梳状函数分布与取样}\label{sec:Sampling and Interpolation}
+
+在研究周期现象时，经常会将一个函数周期化(periodize)，例如，给定函数$f(t)$，要将
+它变成周期为T的函数，一种标准的做法是“平移、相加”，即在不涉及收敛性的问题时，令
+\[f_T(t)=\sum_{k=-\infty}^{\infty}f(t-kT)\]
+在\ref{sec:distributions}中，我们曾建立了$\delta_a$的平移性质：$\delta_a*f=\tau_a f$，
+所以我们可以将以上周期化的操作抽象出来：
+\[f_T(t)=\sum_{k=-\infty}^{\infty}f(t-kT)=\sum_{k=-\infty}^{\infty}\delta_{kT}*f(t)=\left(\sum_{k=-\infty}^{\infty}\delta_{kT}\right)*f(t)\]
+将分布$\sum_{k=-\infty}^{\infty}\delta_{kT}$记为$\shah_T$，读作“shah”，在T=1
+时可以将角标略去，直接写作$\shah$。由于其图像是等间距排列的一个个$\delta$，又称
+之为\textbf{狄拉克梳状函数}.容易看出，这个分布具有两条基本性质，其一是前
+面提到的周期化：$\shah_T*f(t)=f_T(t)$，其二是取样性质，它直接得自$\delta_a$的
+取样性质：$\shah_T f(t)=\sum_{k=-\infty}^{\infty}f(kT)\delta_{kT}$。另外，
+作为一个分布，有
+\[\langle \shah_T,\varphi\rangle=\langle \sum_{k=-\infty}^{\infty}\delta_{kT},\varphi\rangle=\sum_{k=-\infty}^{\infty}\varphi(k_T)\]
+对于一个施瓦兹函数，以上的式子中均不会出现收敛性的问题。回顾施瓦兹函数类的定义：
+\[\mathcal{S} =\{\varphi\in C^{\infty}(\mathbb{R} ):\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \}\]
+对任意的t，考察级数$\sum_{k=-\infty}^{\infty}f(t-kT)$的收敛性时，只需要将n取
+为0，m取为不小于2的整数，则在$|k|$充分大时，级数比$C/n^2$更小，从而绝对收敛。注
+意这种估计方式并不依赖于自变量t的选取，因此这个函数项级数一致收敛，其和函数会保留
+$f(t)$的许多分析性质，例如我们可以逐项求导（从而和函数也无限阶可导）、逐项积分，
+还可以交换求和符号与其他极限过程的顺序（见数学分析教材）。
+
+对于时域上紧支（即在$|t|$充分大时函数恒为0）的函数，级数$\sum_{k=-\infty}^{\infty}f(t-kT)$
+实际上是有限和，当然收敛。更为特殊的情况下，函数$f(t)$支于$[-T/2,T/2]$，这时我
+们称$f(t)$是\textbf{时限函数}，相应的，在频域上紧支的函数称为\textbf{带限函数}，
+不论f定义在哪个域上，在相应的域上周期化所得的函数总是存在，并且有恒等式
+\[f(x)=\Pi_{T}(f*\shah_T)(x)\]
+这个看似直白的恒等式在傅里叶变换下能够带来一些新的东西。
+
+在建立分布$\shah$的傅里叶变换之前，我们先来讨论另外一个话题，它揭示了傅里叶级数与
+傅里叶变换的深刻关系。设$suppf\subset [-T/2,T/2]$，
+\lr{
+    \mathcal{F} f(k)&=\int_{-\infty}^{\infty}f(t)e^{-2\pi ikt}\,dt\\
+    &=\int_{-T/2}^{T/2}f(t)e^{-2\pi ikt}\,dt\\
+    &=Tc_k
+}{
+    \mathcal{F} f(k)&=\int_{-\infty}^{\infty}f(t)e^{-ikt}\,dt\\
+    &=\int_{-T/2}^{T/2}f(t)e^{-ikt}\,dt\\
+    &=Tc_k
+}
+其中$c_k$是$f(t)$的周期化函数$f_T(t)$的傅里叶系数，也就是说，时限函数的傅里叶变
+换在k处的值正比于其周期化函数的第k个傅里叶系数，这使得频域函数$\mathcal{F}f$似乎
+在整数处的值蕴含了更多的信息。不仅如此，考虑更一般的函数$f\in\mathcal{S} $，记
+其周期化函数为$\Phi=\shah*\varphi$，并将$\Phi$的傅里叶系数记为$\hat{\Phi}(k)$，
+由$\Phi$的无限阶可导性可知其傅里叶级数绝对一致收敛于它本身（这里只需要逐点收敛性，
+至于更强的收敛性，见\ref{sec:Asymptotic_Behaviour}），即
+\[\Phi(t)=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)e^{2\pi ikt}\]
+其中
+\begin{align*}
+    \hat{\Phi}(k)&=\int_{0}^{1}\Phi(t)e^{-2\pi ikt}\,dt\\
+    &=\int_{0}^{1}\left(\sum_{n=-\infty}^{\infty}\varphi(t-n)\right)e^{-2\pi ikt}\,dt\\
+    &=\sum_{n=-\infty}^{\infty}\left(\int_{0}^{1}\varphi(t-n)e^{-2\pi ikt}\,dt\right)\\
+    &=\sum_{n=-\infty}^{\infty}\left(\int_{n}^{n+1}\varphi(t)e^{-2\pi ik(t+n)}\,dt\right)   &(t\to t+n)\\
+    &=\sum_{n=-\infty}^{\infty}\int_{n}^{n+1}\varphi(t) e^{-2\pi ikt}\,dt\\
+    &=\int_{-\infty}^{\infty}\varphi(t)e^{-2\pi ikt}\,dt
+\end{align*}
+即\lr{
+    \hat{\Phi}(k)=\mathcal{F} \varphi(k)
+}{
+    \hat{\Phi}(k)=\mathcal{F} \varphi(2\pi k)
+}
+其中第二行到第三行的积分、求和换序用到了前文中提到的一致收敛性。这个等式意味着对时
+限函数的关系$\mathcal{F} f(k)=Tc_k$对施瓦兹函数都成立（以上是周期化为$T=1$的情况
+，读者可以自行推广至周期为其他值的情况），进一步，在恒等式
+\lr{
+    \Phi(t)&=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)e^{2\pi ikt}\\
+    &=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)e^{2\pi ikt}
+}{
+    \Phi(t)&=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)e^{2\pi ikt}\\
+    &=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)e^{2\pi ikt}
+}
+中取$t=0$，则得到
+\lr{\Phi(0)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)}{\Phi(0)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)}
+又由\[\Phi=\shah*\varphi,\Phi(0)=\sum_{k=-\infty}^{\infty}\varphi(k)\]
+得到\lr{
+    \sum_{k=-\infty}^{\infty}\varphi(k)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)
+}{
+    \sum_{k=-\infty}^{\infty}\varphi(k)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)
+}
+这个结果称为\textbf{泊松求和公式}(the Poisson summation formula)。
+
+让我们回到一开始的话题，$\shah$分布的傅里叶变换可以借助泊松求和公式得到：
+\lr{
+    \langle \mathcal{F} \shah,\varphi \rangle&=\langle \shah,\mathcal{F} \varphi\rangle\\
+    &=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)\\
+    &=\sum_{k=-\infty}^{\infty}\varphi(k)\\
+    &=\langle \shah,\varphi\rangle
+}{
+    \langle \mathcal{F} \shah_{2\pi},\varphi \rangle&=\langle \shah_{2\pi},\mathcal{F} \varphi\rangle\\
+    &=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)\\
+    &=\sum_{k=-\infty}^{\infty}\varphi(k)\\
+    &=\langle \shah,\varphi\rangle
+}
+即\lr{
+    \mathcal{F} \shah=\shah
+}{
+    \mathcal{F} \shah_{2\pi}=\shah
+}
+可以看到，频率形式下$\shah$分布的傅里叶变换具有自对偶性，即$\shah\overset{\mathcal{F} }{\longleftrightarrow}\shah$，
+而角频率形式下需要对$\shah$分布做伸缩变换，这启发我们讨论$\shah$以及更基本的$\delta$
+在伸缩变换下的关系。可以将$\delta$作为形式上的函数进行推导，但这里采用更直接的分布
+伸缩的定义：
+\begin{align*}
+    \langle \sigma_a\delta,\varphi\rangle&=\langle \delta,\frac{1}{a}\sigma_{1/a}\varphi\rangle\\
+    &=\frac{1}{a}\varphi(0)=\langle \frac{1}{a}\delta,\varphi\rangle\\
+    &\Rightarrow \sigma_a\delta=\frac{1}{a}\delta
+\end{align*}
+$a<0$的情况可直接从$\delta$是偶分布得出。对于$\shah$分布的伸缩，也可同理得到：\begin{align*}
+    \langle \sigma_a\shah,\varphi\rangle&=\langle \shah,\frac{1}{a}\sigma_{1/a}\varphi\rangle\\
+    &=\frac{1}{a}\sum_{k=-\infty}^{\infty}\varphi(ax-k)\\
+    &=\frac{1}{a}\langle \shah_{1/a},\varphi\rangle\\
+    &\Rightarrow \sigma_a\shah=\frac{1}{a}\shah_{1/a},\shah_T=\frac{1}{T}\sigma_{1/T}\shah
+\end{align*}
+
+值得注意的是，不论从直观上还是从形式计算上，$\shah$分布似乎有另一个傅里叶变换：
+\lr{
+    \mathcal{F} \shah&=\sum_{k=-\infty}^{\infty}\mathcal{F} \delta_k\\
+    &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikt}
+}{
+    \mathcal{F} \shah_{2\pi}&=\sum_{k=-\infty}^{\infty}\mathcal{F} \delta_{2k\pi}\\
+    &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikt}
+}
+实际上，这个结果是正确的，并且可以由此得到$\shah$分布作为形式上的函数的另一种定义：
+\begin{equation}
+    \shah(x)=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}
+\end{equation}
+右边正是附录\ref{sec:Asymptotic_Behaviour}中提到的狄利克雷核在$N\to\infty$时的
+式子，换言之函数项级数$\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}$逐点地趋于$\shah$，
+我们不仅发现了它在多数区间上都趋于0，还发现在$x=n(n\in\mathbb{Z})$处全为1的“级数”
+似乎以$\delta$的速度趋于无穷。这个结果从分析学的角度是必不可能得到的，根据黎曼重
+排定理，一个发散的级数可以通过重排求和顺序发散到任意值，而交换1的顺序得到的还是级数
+本身，因此我们无法从数学分析的角度估计这个“级数”趋于无穷的阶。实际上我们也只能得到
+$\mathbb{R}-\mathbb{Z}$上的收敛性，整数处的分布只能在\ref{sec:distributions}
+中提到的弱收敛的意义下定义，即将函数项级数$\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}$的
+每一项视为分布，它们作用在任意测试函数$\varphi$上的结果在求和项数充分大时相当于$\delta$
+分布作用于$\varphi$的结果。
+
+根据角频率形式下的$\shah$分布的傅里叶变换，可以想到$\shah$的伸缩的傅里叶变换仍具有
+$\shah$的形式，下面就来找出具体的公式：\lr{
+    \mathcal{F} \shah_T&=\mathcal{F} [\frac{1}{T}\sigma_{1/T}\shah]\\
+    &=\frac{1}{T}\cdot T\sigma_T\mathcal{F} \shah\\
+    &=\sigma_T\shah=\frac{1}{T}\shah_{1/T}
+}{
+    \mathcal{F} \shah_T&=\mathcal{F} [\frac{2\pi}{T}\sigma_{2\pi/T}\shah_{2\pi}]\\
+    &=\frac{2\pi}{T}\cdot \frac{T}{2\pi}\sigma_{T/2\pi}\mathcal{F} \shah_{2\pi}\\
+    &=\sigma_{T/2\pi}\shah=\frac{2\pi}{T}\shah_{2\pi/T}
+}
+即\lr{
+    \mathcal{F} \shah_T=\frac{1}{T}\shah_{1/T}
+}{
+    \mathcal{F} \shah_T=\frac{2\pi}{T}\shah_{2\pi/T}
+}
+可以看到，傅里叶变换前后$\delta$的位置具有倒数关系，以频率为自变量的傅里叶变换，
+$T\cdot\frac{1}{T}=1$，以角频率为自变量做傅里叶变换，$T\cdot\frac{2\pi}{T}=2\pi$，
+其联系还是在于$\omega=2\pi\xi$。事实上，在多维傅里叶变换的理论中，我们还将看到更为
+深刻的关系：$\shah$分布的$\delta$的位置称为“格”，而其傅里叶变换的$\delta$的位置为
+其“对偶格”，特别地，一维的“对偶格”就是以上所述的“倒数”关系。直观上，我们曾提出对函
+数和分布的一维傅里叶变换的伸缩定理：
+\[f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F(\frac{\xi}{a}),\sigma_a T\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}\sigma_{1/a}\mathcal{F} T\]
+它同样揭示了时域伸而频域缩，时域缩而频域伸的关系，而$\shah_T$为我们提供了一种新的
+视角。对多维的$\shah$分布的讨论，见\ref{sec:Multi_Fourier}。二维$\shah$分布在
+$\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$分布称为\textbf{钉床函数}(bed of nails)。
+
+下面讨论\textbf{取样}(sample)。
+
+\section{插值问题}\label{sec:Interpolation}
 
 \section{离散傅里叶变换初步}\label{sec:simple_DFT}
 
-\section{多维傅里叶变换}\label{sec:Multi_Fourier}
+\section{多维傅里叶变换与汉克尔变换}\label{sec:Multi_Fourier}
 
-\section{希尔伯特变换，汉克尔变换}\label{sec:Hilbert_Hankel}
+\section{希尔伯特变换}\label{sec:Hilbert}
 
 \section{回到有限区间}\label{sec:Finite_Interval}
+
+%PS3.6卷积的周期化
+%PS4.3
+%加窗傅里叶变换，小波变换
 
 \chapter{连续系统的时频分析}%第三章
 
@@ -2214,7 +2391,7 @@ $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对�
 成的新系统仍构成线性系统：\begin{align*}
     LK[ae_1+be_2]=L[aK[e_1]+bK[e_2]]=aLK[e_1]+bLK[e_2]
 \end{align*}
-如果对于周期离散信号，两个系统都是矩阵乘法，则级联系统的矩阵是两矩阵的乘积，这
+对于周期离散信号，两个系统都是矩阵乘法，则级联系统的矩阵是两矩阵的乘积，这
 正是定义矩阵乘法的原因之一；类似地，对于连续信号，如果两个系统都是对核积分系统：
 \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{a}^{b}l(x,y)e(y)\,dy\]
 则级联系统$H=LK$也是对核积分系统，并且核函数为\begin{equation}
@@ -2356,8 +2533,8 @@ $u_C(0_-)=u_C(0_+)=u_C(0)$，而其电流可以不连续。电感电流、电容
 物理中的受迫振动，以及电路分析中的二阶电路，都是用二阶常系数线性微分方程描述的系
 统的例子，从直观上看，如果使激励（施加于系统的力，或者电源提供的电压、电流）经过
 一段时间后变为0，则响应一定也会随时间的增大而趋于0。因此，又将响应分为
-\textbf{稳态响应}(steady state response)$y_ss(t)$和
-\textbf{暂态响应}(transient state)$y_t(t)$，完全解中，$t\to\infty$时保留下来
+\textbf{稳态响应}(steady state response)$y_{ss}(t)$\\
+和\textbf{暂态响应}(transient state)$y_t(t)$，完全解中，$t\to\infty$时保留下来
 的分量称为稳态响应，例如一个常数，趋于0的分量为稳态响应，例如$e^{-\lambda t}$。
 
 由常系数线性齐次微分方程描述的系统，如果初始状态为0向量，验证其时不变性是十分简
@@ -2455,7 +2632,10 @@ $y_h(t)u(t)$；当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶
 
 \chapter{拉普拉斯变换与系统的复频域分析}
 
+\section{复变函数}\label{sec:Complex}
+
 \section{拉普拉斯变换}\label{sec:Laplace_Transform}
+
 %紧支函数的傅里叶变换不紧支（见deepseek)
 
 \section{拉普拉斯逆变换}\label{sec:Laplace_Inverse}
@@ -2646,9 +2826,15 @@ $\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\i
 
 \section{分布的逼近，傅里叶反演公式}\label{sec:approach}
 
+%需要先有黎曼-勒贝格引理（见folland），再出傅里叶反演，有傅里叶反演才能构建出帕塞瓦尔恒等式，否则循环论证。
+
 \section{施瓦兹函数类及其好处}\label{sec:Schwartz_Functions}
 
+%紧支函数的傅里叶变换不再是紧支函数
+%时域频域不同时紧支（见ee261）
+
 \section{与傅里叶变换有关的其他变换}\label{sec:Other_Transforms}
+
 %正弦，余弦，拉东（？）
 
 \end{document}
