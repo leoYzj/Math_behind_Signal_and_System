@@ -4,7 +4,7 @@
 \usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{graphicx}
 \usepackage{grffile}
-\graphicspath{{D:/code/Math_behind_Signal_and_System/Figures}}
+\graphicspath{{D:/code_clone/Math_behind_Signal_and_System/Figures}}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{multicol}
 \usepackage{varwidth}
@@ -2095,7 +2095,7 @@ $\mathcal{F} T^-=\overline{\mathcal{F} T}$，分布与分布的卷积的结合�
 
 \chapter{关于傅里叶变换的进一步讨论}
 
-\section{狄拉克梳状分布与取样}\label{sec:Sampling and Interpolation}
+\section{狄拉克梳状分布，取样与插值}\label{sec:Sampling and Interpolation}
 
 在研究周期现象时，经常会将一个函数周期化(periodize)，例如，给定函数$f(t)$，要将
 它变成周期为T的函数，一种标准的做法是“平移、相加”，即在不涉及收敛性的问题时，令
@@ -2110,6 +2110,10 @@ $\mathcal{F} T^-=\overline{\mathcal{F} T}$，分布与分布的卷积的结合�
 取样性质：$\shah_T f(t)=\sum_{k=-\infty}^{\infty}f(kT)\delta_{kT}$。另外，
 作为一个分布，有
 \[\langle \shah_T,\varphi\rangle=\langle \sum_{k=-\infty}^{\infty}\delta_{kT},\varphi\rangle=\sum_{k=-\infty}^{\infty}\varphi(kT)\]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{shah.jpeg}
+\end{figure}
 对于一个施瓦兹函数，以上的式子中均不会出现收敛性的问题。回顾施瓦兹函数类的定义：
 \[\mathcal{S} =\{\varphi\in C^{\infty}(\mathbb{R} ):\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \}\]
 对任意的t，考察级数$\sum_{k=-\infty}^{\infty}f(t-kT)$的收敛性时，只需要将n取
@@ -2123,7 +2127,20 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
 支的函数称为\textbf{带限函数}。更为特殊的情况下，函数$f(t)$支于$[-T/2,T/2]$，
 不论f定义在哪个域上，在相应的域上周期化所得的函数总是存在，并且有恒等式
 \[f(x)=\Pi_{T}(f*\shah_T)(x)\]
-这个看似直白的恒等式在傅里叶变换下能够带来一些新的东西，见\ref{sec:Interpolation}。
+这个看似直白的恒等式在傅里叶变换下能够带来一些新的东西，见本节后续内容。这里我们先建立
+一个不需要$\shah$的傅里叶变换的结果。设带限函数$f(t)$满足$supp\mathcal{F} f\subset [-T/2,T/2]$，
+则有恒等式$\mathcal{F} f=\Pi_T\mathcal{F} f$，对两边同时取傅里叶逆变换：\lr{
+    f(t)&=\mathcal{F} ^{-1}\mathcal{F} f(t)\\
+    &=\mathcal{F} ^{-1}(\Pi_T\mathcal{F} f)(t)\\
+    &=\left(\mathcal{F} ^{-1}\Pi_T\right)*f(t)\\
+    &=Tsinc(Tt)*f(t)
+}{
+    f(t)&=\mathcal{F} ^{-1}\mathcal{F} f(t)\\
+    &=\mathcal{F} ^{-1}(\Pi_T\mathcal{F} f)(t)\\
+    &=\frac{1}{2\pi}\left(\mathcal{F} ^{-1}\Pi_T\right)*f(t)\\
+    &=\frac{T}{2\pi}Sa(Tt)*f(t)
+}
+我们发现对于带限函数，抽样信号能够起到类似$\delta$的卷积幺元的性质。
 
 在建立分布$\shah$的傅里叶变换之前，我们先来讨论另外一个话题，它揭示了傅里叶级数与
 傅里叶变换的深刻关系。设$suppf\subset [-T/2,T/2]$，
@@ -2175,9 +2192,11 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
 }{
     \sum_{k=-\infty}^{\infty}\varphi(k)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)
 }
-这个结果称为\textbf{泊松求和公式}(the Poisson summation formula)。
+这个结果称为\textbf{泊松求和公式}(the Poisson summation formula)。我们当然也可以
+对$\shah_T*\varphi$做类似的推导，但其结论远不如以上两式简洁，这实际上是整数集$\mathbb{Z}$
+的自对偶性的体现。对偶性的概念，见\ref{sec:Multi_Fourier}。
 
-让我们回到一开始的话题，$\shah$分布的傅里叶变换可以借助泊松求和公式得到：
+让我们回到$\shah$分布的傅里叶变换的话题，可以借助泊松求和公式得到：
 \lr{
     \langle \mathcal{F} \shah,\varphi \rangle&=\langle \shah,\mathcal{F} \varphi\rangle\\
     &=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)\\
@@ -2257,9 +2276,128 @@ $T\cdot\frac{1}{T}=1$，以角频率为自变量做傅里叶变换，$T\cdot\fra
 视角。对多维的$\shah$分布的讨论，见\ref{sec:Multi_Fourier}。二维$\shah$分布在
 $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$分布称为\textbf{钉床函数}(bed of nails)。
 
-下面讨论\textbf{取样}(sample)。
+讨论完$\shah$的傅里叶变换，就可以回到一开始的话题：对于时限函数$f(t),suppf\subset[-T/2,T/2]$，研究恒等式
+\[f(x)=\Pi_{T}(f*\shah_T)(x)\]
+通过傅里叶变换告诉我们的内容。对$f*\shah_T$做傅里叶变换，有
+\lr{
+    \mathcal{F} (f*\shah_T)(\xi)&=\mathcal{F} f(\xi)\cdot\mathcal{F} \shah_T(\xi)\\
+    &=\mathcal{F} f(\xi)\cdot\frac{1}{T}\shah_{1/T}(\xi)\\
+    &=\frac{1}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)\delta_{k/T}(\xi)
+}{
+    \mathcal{F} (f*\shah_T)(\omega)&=\mathcal{F} f(\omega)\cdot\mathcal{F} \shah_T(\omega)\\
+    &=\mathcal{F} f(\omega)\cdot\frac{2\pi}{T}\shah_{2\pi/T}(\omega)\\
+    &=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(2\pi k/T)\delta_{2\pi k/T}(\omega)
+}
+其物理意义是，将f以周期T进行周期化时，其频谱会剩下频率为$k/T$处，也即角频率为$2\pi k/T$
+处的值，并且在这些频率处以$\delta$分布的形式“趋于无穷”。
 
-\section{插值问题}\label{sec:Interpolation}
+对恒等式两边同时做傅里叶变换，有\lr{
+    \mathcal{F} f(\xi)&=\mathcal{F} [\Pi_T(f*\shah_T)](\xi)\\
+    &=\mathcal{F} [\Pi_T](\xi)\mathcal{F} (f*\shah_T)(\xi)\\
+    &=Tsinc(T\xi)*\left(\frac{1}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)\delta_{k/T}(\xi)\right)\\
+    &=\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)sinc\left(T(\xi-\frac{k}{T})\right)\\
+    &=\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)sinc(T\xi-k)
+}{
+    \mathcal{F} f(\omega)&=\mathcal{F} [\Pi_T(f*\shah_T)](\omega)\\
+    &=\mathcal{F} [\Pi_T](\omega)\mathcal{F} (f*\shah_T)(\omega)\\
+    &=2\pi TSa(T\omega)*\left(\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(2\pi k/T)\delta_{2\pi k/T}(\omega)\right)\\
+    &=4\pi^2\sum_{k=-\infty}^{\infty}\mathcal{F} f(2\pi k/T)Sa\left(T(\omega-\frac{2\pi k}{T})\right)\\
+    &=4\pi^2\sum_{k=-\infty}^{\infty}\mathcal{F} f(2\pi k/T)Sa(T\omega-2\pi k)
+}
+可以看到，我们用$\mathcal{F} f(k/T)sinc(T\xi-k)$或$\mathcal{F} f(2\pi k/T)Sa(T\omega-2\pi k)$
+表示出了函数$\mathcal{F} f$，而表达式中的抽样函数完全依赖于所进行的周期化的周期T，也
+就是说我们只需要用$\mathcal{F} f(k/T)$或$\mathcal{F} f(2\pi k/T)$处的值，就能还原
+处完整的$\mathcal{F} f$，进一步，对于带限函数$f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，可以提出
+完全类似的恒等式，其中$T=1/2\nu_m$，对应频率$f_N=1/T$被称为\textbf{奈奎斯特频率}(Nyquist frequency)：
+\[\mathcal{F} f(x)=\Pi_T(\mathcal{F} f*\shah_T)(x)\]
+这个式子称为\textbf{抽样定理}(the sampling thoerem)。对其做傅里叶反变换，有\lr{
+    f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
+    &=T sinc(Tt)*\left(\frac{1}{T}\sum_{k=-\infty}^{\infty}f(k)\delta_k(t)\right)\\
+    &=\sum_{k=-\infty}^{\infty}f(k/T)sinc\left(T(t-\frac{k}{T})\right)\\
+    &=\sum_{k=-\infty}^{\infty}f(k)sinc(Tt-k)
+}{
+    f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
+    &=2\pi TSa(Tt)*\left(\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}f(k)\delta_{2\pi k}(t)\right)\\
+    &=4\pi^2\sum_{k=-\infty}^{\infty}f(2\pi k/T)Sa\left(T(t-\frac{2\pi k}{T})\right)\\
+    &=4\pi^2\sum_{k=-\infty}^{\infty}f(k)Sa(Tt-2\pi k)
+}
+这正是\textbf{理想抽样}下，由抽样函数恢复出原函数的方法。至此可以看到使用角频率做傅里
+叶变换将使理论推导极不方便、容易出错，因此在讨论取样与插值问题的\ref{sec:Sampling and Interpolation}
+和\ref{sec:advanced_Interpolation}中将一直使用频率做傅里叶变换。利用$\shah$分布的
+抽样性质进行抽样，就好比将函数转化为一组无穷基底$\delta_k(k\in\mathbb{Z})$上的向量：
+\[f(t)\shah(t)=\sum_{k=-\infty}^{\infty}f(k)\delta_k\text{相当于}x[k]=f[k]\text{或}\left(\cdots,f(-2),f(-1),f(0),f(1),f(2),\cdots\right)^T\]
+这一过程称为理想抽样。实际问题中我们不可能获得$\delta$分布和$\shah$分布，也不可能进
+行无限多次抽样，解决这个问题的一种方式是做近似，另一种方式是有限采样，将在下一节讨论。
+
+我们来明确一下取样与插值要讨论的问题：\begin{itemize}
+    \item 设有确定信号$f(t)$，通过取样的方式找出它在若干点处的\textbf{样值}$f(t_0),f(t_1),f(t_2),\cdots$，在怎样的情况下可以借助这组值还原出$f(t)$，即在离散的数据点之间应如何“插入”新的数据点使之成为一条连续的曲线（这也是名称“插值”的由来）
+\end{itemize}
+一般地，相邻取样点的间隔一定，记为$T_s$，称为\textbf{抽样间隔}，将$f_s=1/T_s$称为
+\textbf{抽样频率},将$\omega_s=2\pi f_s=2\pi/T_s$称为\textbf{抽样角频率}。类似于用
+像素表示图片，利用抽样所得的离散信号$f_d[n]=f(nT_s)$表示信息，相当于用离散信号表示连
+续信号，能够大大降低传输和存储的成本。一个数字处理系统或数字传输系统的第一个环节就是对
+信号进行抽样，随后进行量化编码、数字传输或处理，到信号接收方或需要使用信号时再进行信号
+恢复，这是取样与插值问题的一种引出方式。
+
+我们刚才由抽样信号恢复出原信号的过程，实际上蕴含着\textbf{香农采样定理}(Shannon sampling theorem)
+的思想。香农采样定理的内容是，如果已知信号的频谱支于$[-\nu_m,\nu_m]$，则采样频率
+必须大于$2\nu_m$，即奈奎斯特频率$f_N$，才能还原出原信号。可以看出，奈奎斯特频率正是信
+号的\textbf{带宽}(bandwidth)。
+
+直观上，采样频率越高，所需要的成本就越高，提供的信息就越多，而如果采样频率低于$f_N$，
+将发生\textbf{混叠}(alias)现象，还原所得的信号将产生失真。例如一个余弦信号，较低的采
+样频率可能使我们的样本点全部位于余弦信号的零点，此时显然无法还原余弦信号。即便样本点不
+在零点，也可能还原出其他的信号：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{cos.jpeg}
+\end{figure}
+这正是混叠现象。从频域上不难理解它，在建立抽样定理时我们曾要求
+$f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，利用由此得到的公式
+\lr{
+    f(t)=\sum_{k=-\infty}^{\infty}f(k)sinc(Tt-k)
+}{
+    f(t)=4\pi^2\sum_{k=-\infty}^{\infty}f(k)Sa(Tt-2\pi k)
+}
+还原函数当然是有误差的，因为在将频域函数周期化时，两个平移后的频域函数会有一部分混在一
+起，再使用$\Pi$函数进行加窗时，会丢掉一部分原有频谱，并叠加一部分平移后的频谱，如图所示。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{alias.jpeg}
+\end{figure}
+
+\section{取样与插值进阶}\label{sec:advanced_Interpolation}
+
+插值的雏形来自于古代天文学，最简单的插值就是通过观察星体在几个时刻的位置推测中间时刻的
+位置。历史上，最早对插值问题进行系统研究的是牛顿和拉格朗日。牛顿提出的牛顿插值公式是组
+合数学讨论的话题，他通过引入离散信号的差商的概念，提出了一种使用三角形差商表构造过若干
+指定数据点的多项式的方法；相比之下拉格朗日的拉格朗日插值法要简单得多，其想法的关键在于
+构造在特定数据点处非0，而在另外所有数据点处均为0的多项式：对于一组互异的数据点
+ \[(x_0,y_0),(x_1,y_1),\dots,(x_n,y_n)\]其拉格朗日插值多项式为
+\[
+L(x) = \sum_{i=0}^{n} y_i \ell_i(x)
+\]
+其中 $\ell_i(x)$ 是拉格朗日基函数，满足$\ell_i(x_i)=1,\ell_i(x_j)=0(j\neq i)$：
+\[
+\ell_i(x) = \prod_{\substack{j=0 \\ j \neq i}}^{n} \frac{x - x_j}{x_i - x_j}
+\]
+该多项式满足 $L(x_i) = y_i，i=0,1,\dots,n$。这个方法后来被埃尔米特改进，
+不仅能保证函数值相等，还能保证若干阶导数的值相等。
+
+然而，利用多项式进行插值对原信号的逼近效果十分有限，一些数学家们开始转向研究如何重建整
+个信号。1948年，克劳德·香农发表了他的巨著《通信的数学原理》，明确提出了他的香农采样定
+理，并给出了上一节中还原带限信号的公式。这个定理在我们上一节中所进行的插值流程下是正确
+的，但要还原大带宽信号需要很高的抽样频率，会对硬件设备提出很高的要求。我们可以通过另外
+的插值流程还原信号，例如对于一些信号可以利用其稀疏性和相关性，用远低于$f_N$的采样频率
+还原信号。这一节就来讨论真实系统中的插值方法，包括自然采样、零阶抽样保持、一阶抽样保持
+以及降低采样率的一些办法。最后，还将给出有限采样公式，它从数学上给出了用有限的采样点还
+原带限周期信号的方法。
+
+%自然采样PS6.2(4也有点意思)
+%降低采样率的想法
+%final2006.2，或许跟一阶抽样保持相通？
+%零阶抽样保持，一阶抽样保持
+%有限采样公式
 
 \section{离散傅里叶变换初步}\label{sec:simple_DFT}
 
