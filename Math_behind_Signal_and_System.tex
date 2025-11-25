@@ -864,14 +864,14 @@ $f'=\mathcal{F} g$。
 &=E\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-i\omega t}\,dt\\
 &=-\frac{E}{i\omega}\evalat{e^{-i\omega t}}{-\frac{T}{2}}{\frac{T}{2}}\\
 &=\frac{e^{\frac{i\omega T}{2}}-e^{-\frac{i\omega T}{2}}}{2i}\frac{2E}{\pi\omega}\\
-&=\frac{2E}{\omega}\sin(\frac{T\omega}{2})=ETSa(\frac{T\omega}{2})
+&=\frac{2E}{\omega}\sin(\frac{T\omega}{2})=ETSa\left(\frac{T\omega}{2}\right)
 }
 因此\lr{
     \mathcal{F} \Pi_T(\xi)&=Tsinc(T\xi)\\
-    \mathcal{F} sinc(\xi)&=\Pi(\xi)
+    \mathcal{F} [sinc(Tt)](\xi)&=\frac{1}{T}\Pi\left(\frac{\xi}{T}\right)
 }{
-    \mathcal{F} \Pi_T(\omega)&=TSa(\frac{T\omega}{2})\\
-    \mathcal{F} Sa(\omega)&=\Pi(\omega)
+    \mathcal{F} \Pi_T(\omega)&=TSa\left(\frac{T\omega}{2}\right)\\
+    \mathcal{F}[Sa(Tt)](\omega)&=\frac{\pi}{T}\Pi_{2T}(\omega)
 }
 
 \noindent 例3.2.在\ref{sec:signal}中介绍了狄拉克$\delta$函数，实际上它应该作为一个分布来理解，
@@ -1935,13 +1935,13 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
 
 \noindent 5.\underline{常用信号及其傅里叶变换}
 \begin{itemize}
-    \item 矩形函数$f(t)=E\cdot\Pi_T(t)$及取样函数：
+    \item 矩形函数及取样函数：
     \lr{
-        &f\overset{\mathcal{F} }{\longleftrightarrow}ETsinc(T\xi)\\
-        &sinc(t)\overset{\mathcal{F} }{\longleftrightarrow}\Pi(\xi)
+        &\Pi_T(t)\overset{\mathcal{F} }{\longleftrightarrow}Tsinc(T\xi)\\
+        &sinc(Tt)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{T}\Pi_T(\xi)
     }{
-        &f\overset{\mathcal{F} }{\longleftrightarrow}ETSa(\frac{T\omega}{2})\\
-        &Sa(t)\overset{\mathcal{F} }{\longleftrightarrow} \Pi(\omega)
+        &\Pi_T(t)\overset{\mathcal{F} }{\longleftrightarrow}TSa\left(\frac{T\omega}{2}\right)\\
+        &Sa(Tt)\overset{\mathcal{F} }{\longleftrightarrow} \frac{\pi}{T}\Pi_{2T}(\omega)
     }
     \item 高斯函数 $G(t)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}$
     \lr{
@@ -2140,10 +2140,10 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
     &=\frac{1}{2\pi}\left(\mathcal{F} ^{-1}\Pi_T\right)*f(t)\\
     &=\frac{T}{2\pi}Sa(Tt)*f(t)
 }
-我们发现对于带限函数，抽样信号能够起到类似$\delta$的卷积幺元的性质。
+我们发现对于带限函数，抽样信号能够起到类似$\delta$的卷积幺元的作用。
 
 在建立分布$\shah$的傅里叶变换之前，我们先来讨论另外一个话题，它揭示了傅里叶级数与
-傅里叶变换的深刻关系。设$suppf\subset [-T/2,T/2]$，
+傅里叶变换的深刻关系。设$suppf\subset [-1/2,1/2]$，
 \lr{
     \mathcal{F} f(k)&=\int_{-\infty}^{\infty}f(t)e^{-2\pi ikt}\,dt\\
     &=\int_{-T/2}^{T/2}f(t)e^{-2\pi ikt}\,dt\\
@@ -2224,9 +2224,9 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
 \end{align*}
 $a<0$的情况可直接从$\delta$是偶分布得出。对于$\shah$分布的伸缩，也可同理得到：\begin{align*}
     \langle \sigma_a\shah,\varphi\rangle&=\langle \shah,\frac{1}{a}\sigma_{1/a}\varphi\rangle\\
-    &=\frac{1}{a}\sum_{k=-\infty}^{\infty}\varphi(ax-k)\\
+    &=\frac{1}{a}\sum_{k=-\infty}^{\infty}\varphi\left(x-\frac{k}{a}\right)\\
     &=\frac{1}{a}\langle \shah_{1/a},\varphi\rangle\\
-    &\Rightarrow \sigma_a\shah=\frac{1}{a}\shah_{1/a},\shah_T=\frac{1}{T}\sigma_{1/T}\shah
+    &\Rightarrow \sigma_a\shah=\frac{1}{a}\shah_{1/a},\shah_T=\frac{1}{T}\sigma_{1/T}\shah  &(a\to\frac{1}{T})
 \end{align*}
 
 值得注意的是，不论从直观上还是从形式计算上，$\shah$分布似乎有另一个傅里叶变换：
@@ -2237,7 +2237,8 @@ $a<0$的情况可直接从$\delta$是偶分布得出。对于$\shah$分布的伸
     \mathcal{F} \shah_{2\pi}&=\sum_{k=-\infty}^{\infty}\mathcal{F} \delta_{2k\pi}\\
     &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikt}
 }
-实际上，这个结果是正确的，并且可以由此得到$\shah$分布作为形式上的函数的另一种定义：
+由于涉及分布级数及其换序问题，很难直接严格证明以上结果，但它的确是对的。结合$\shah$的
+傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义：
 \begin{equation}
     \shah(x)=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}
 \end{equation}
@@ -2293,37 +2294,38 @@ $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$�
 
 对恒等式两边同时做傅里叶变换，有\lr{
     \mathcal{F} f(\xi)&=\mathcal{F} [\Pi_T(f*\shah_T)](\xi)\\
-    &=\mathcal{F} [\Pi_T](\xi)\mathcal{F} (f*\shah_T)(\xi)\\
+    &=\mathcal{F} [\Pi_T](\xi)*\mathcal{F} (f*\shah_T)(\xi)\\
     &=Tsinc(T\xi)*\left(\frac{1}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)\delta_{k/T}(\xi)\right)\\
-    &=\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)sinc\left(T(\xi-\frac{k}{T})\right)\\
-    &=\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)sinc(T\xi-k)
+    &=\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\frac{k}{T}\right)sinc\left(T(\xi-\frac{k}{T})\right)\\
+    &=\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\frac{k}{T}\right)sinc(T\xi-k)
 }{
     \mathcal{F} f(\omega)&=\mathcal{F} [\Pi_T(f*\shah_T)](\omega)\\
-    &=\mathcal{F} [\Pi_T](\omega)\mathcal{F} (f*\shah_T)(\omega)\\
-    &=2\pi TSa(T\omega)*\left(\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(2\pi k/T)\delta_{2\pi k/T}(\omega)\right)\\
-    &=4\pi^2\sum_{k=-\infty}^{\infty}\mathcal{F} f(2\pi k/T)Sa\left(T(\omega-\frac{2\pi k}{T})\right)\\
-    &=4\pi^2\sum_{k=-\infty}^{\infty}\mathcal{F} f(2\pi k/T)Sa(T\omega-2\pi k)
+    &=\mathcal{F} [\Pi_T](\omega)*\mathcal{F} (f*\shah_T)(\omega)\\
+    &=TSa\left(\frac{T\omega}{2}\right)*\left(\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\frac{2\pi k}{T}\right)\delta_{2\pi k/T}(\omega)\right)\\
+    &=2\pi\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\frac{2\pi k}{T}\right)Sa\left(T\left(\omega-\frac{2\pi k}{T}\right)\right)\\
+    &=2\pi\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\frac{2\pi k}{T}\right)Sa(T\omega-2\pi k)
 }
 可以看到，我们用$\mathcal{F} f(k/T)sinc(T\xi-k)$或$\mathcal{F} f(2\pi k/T)Sa(T\omega-2\pi k)$
 表示出了函数$\mathcal{F} f$，而表达式中的抽样函数完全依赖于所进行的周期化的周期T，也
 就是说我们只需要用$\mathcal{F} f(k/T)$或$\mathcal{F} f(2\pi k/T)$处的值，就能还原
 处完整的$\mathcal{F} f$，进一步，对于带限函数$f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，可以提出
-完全类似的恒等式，其中$T=1/2\nu_m$，对应频率$f_N=1/T$被称为\textbf{奈奎斯特频率}(Nyquist frequency)：
+完全类似的恒等式：
 \[\mathcal{F} f(x)=\Pi_T(\mathcal{F} f*\shah_T)(x)\]
-这个式子称为\textbf{抽样定理}(the sampling thoerem)。对其做傅里叶反变换，有\lr{
+其中$T=1/2\nu_m$，对应频率$f_N=1/T$被称为\textbf{奈奎斯特频率}(Nyquist frequency)
+。这个式子称为\textbf{抽样定理}(the sampling thoerem)。对其做傅里叶反变换，有\lr{
     f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
-    &=T sinc(Tt)*\left(\frac{1}{T}\sum_{k=-\infty}^{\infty}f(k)\delta_k(t)\right)\\
-    &=\sum_{k=-\infty}^{\infty}f(k/T)sinc\left(T(t-\frac{k}{T})\right)\\
-    &=\sum_{k=-\infty}^{\infty}f(k)sinc(Tt-k)
+    &=Tsinc(Tt)*\mathcal{F} ^{-1} \left(\mathcal{F} f*\shah_T\right)\\
+    &=T sinc(Tt)*\left(\frac{1}{T}\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\delta_{k/T}(t)\right)\\
+    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc\left(T(t-\frac{k}{T})\right)\\
+    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
 }{
     f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
-    &=2\pi TSa(Tt)*\left(\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}f(k)\delta_{2\pi k}(t)\right)\\
-    &=4\pi^2\sum_{k=-\infty}^{\infty}f(2\pi k/T)Sa\left(T(t-\frac{2\pi k}{T})\right)\\
-    &=4\pi^2\sum_{k=-\infty}^{\infty}f(k)Sa(Tt-2\pi k)
+    &=\frac{T}{2\pi}Sa\left(\frac{Tt}{2}\right)*\mathcal{F} ^{-1} \left(\mathcal{F} f*\shah_T\right)\\
+    &=\frac{T}{2\pi}Sa\left(\frac{Tt}{2}\right)*\left(\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}f\left(\frac{2\pi k}{T}\right)\delta_{2\pi k/T}(t)\right)\\
+    &=\sum_{k=-\infty}^{\infty}f\left(\frac{2\pi k}{T}\right)Sa\left(\frac{T}{2}\left(t-\frac{2\pi k}{T}\right)\right)\\
+    &=\sum_{k=-\infty}^{\infty}f\left(\frac{2\pi k}{T}\right)Sa\left(\frac{Tt}{2}-\pi k\right)
 }
-这正是\textbf{理想抽样}下，由抽样函数恢复出原函数的方法。至此可以看到使用角频率做傅里
-叶变换将使理论推导极不方便、容易出错，因此在讨论取样与插值问题的\ref{sec:Sampling and Interpolation}
-和\ref{sec:advanced_Interpolation}中将一直使用频率做傅里叶变换。利用$\shah$分布的
+这正是\textbf{理想抽样}下，由抽样函数恢复出原函数的方法。利用$\shah$分布的
 抽样性质进行抽样，就好比将函数转化为一组无穷基底$\delta_k(k\in\mathbb{Z})$上的向量：
 \[f(t)\shah(t)=\sum_{k=-\infty}^{\infty}f(k)\delta_k\text{相当于}x[k]=f[k]\text{或}\left(\cdots,f(-2),f(-1),f(0),f(1),f(2),\cdots\right)^T\]
 这一过程称为理想抽样。实际问题中我们不可能获得$\delta$分布和$\shah$分布，也不可能进
@@ -2339,10 +2341,10 @@ $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$�
 信号进行抽样，随后进行量化编码、数字传输或处理，到信号接收方或需要使用信号时再进行信号
 恢复，这是取样与插值问题的一种引出方式。
 
-我们刚才由抽样信号恢复出原信号的过程，实际上蕴含着\textbf{香农采样定理}(Shannon sampling theorem)
-的思想。香农采样定理的内容是，如果已知信号的频谱支于$[-\nu_m,\nu_m]$，则采样频率
-必须大于$2\nu_m$，即奈奎斯特频率$f_N$，才能还原出原信号。可以看出，奈奎斯特频率正是信
-号的\textbf{带宽}(bandwidth)。
+我们刚才由抽样信号恢复出原信号的过程，正是\textbf{香农采样定理}(Shannon sampling theorem)
+中采样率取奈奎斯特频率时的极限情况。香农采样定理的内容是，如果已知信号的频谱支于
+$[-\nu_m,\nu_m]$，则采样频率必须大于$2\nu_m$，即奈奎斯特频率$f_N$，才能还原出
+原信号。奈奎斯特频率同时也是信号的\textbf{带宽}(bandwidth)。
 
 直观上，采样频率越高，所需要的成本就越高，提供的信息就越多，而如果采样频率低于$f_N$，
 将发生\textbf{混叠}(alias)现象，还原所得的信号将产生失真。例如一个余弦信号，较低的采
@@ -2355,9 +2357,9 @@ $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$�
 这正是混叠现象。从频域上不难理解它，在建立抽样定理时我们曾要求
 $f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，利用由此得到的公式
 \lr{
-    f(t)=\sum_{k=-\infty}^{\infty}f(k)sinc(Tt-k)
+    f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
 }{
-    f(t)=4\pi^2\sum_{k=-\infty}^{\infty}f(k)Sa(Tt-2\pi k)
+    \sum_{k=-\infty}^{\infty}f\left(\frac{2\pi k}{T}\right)Sa\left(\frac{Tt}{2}-\pi k\right)
 }
 还原函数当然是有误差的，因为在将频域函数周期化时，两个平移后的频域函数会有一部分混在一
 起，再使用$\Pi$函数进行加窗时，会丢掉一部分原有频谱，并叠加一部分平移后的频谱，如图所示。
@@ -2381,7 +2383,7 @@ L(x) = \sum_{i=0}^{n} y_i \ell_i(x)
 \[
 \ell_i(x) = \prod_{\substack{j=0 \\ j \neq i}}^{n} \frac{x - x_j}{x_i - x_j}
 \]
-该多项式满足 $L(x_i) = y_i，i=0,1,\dots,n$。这个方法后来被埃尔米特改进，
+该多项式满足 $L(x_i) = y_i,i=0,1,\dots,n$。这个方法后来被埃尔米特改进，
 不仅能保证函数值相等，还能保证若干阶导数的值相等。
 
 然而，利用多项式进行插值对原信号的逼近效果十分有限，一些数学家们开始转向研究如何重建整
