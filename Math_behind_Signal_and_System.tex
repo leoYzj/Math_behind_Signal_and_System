@@ -22,6 +22,8 @@
 \usepackage{hyperref}
 \usetikzlibrary{shapes,arrows,positioning,calc}
 \usepackage{silence}
+\usepackage{circuitikz}
+\usepackage{standalone}
 \usetikzlibrary{calc}
 \ActivateWarningFilters
 \WarningFilter{latex}{Font shape}
@@ -2386,6 +2388,16 @@ L(x) = \sum_{i=0}^{n} y_i \ell_i(x)
 该多项式满足 $L(x_i) = y_i,i=0,1,\dots,n$。这个方法后来被埃尔米特改进，
 不仅能保证函数值相等，还能保证若干阶导数的值相等。
 
+上一节中的理想插值技术，跟拉格朗日插值法有一定的相通之处。$sinc$函数在非零整数
+点处的值为0，在0处的值为1，于是可以直接利用每个数据点处的值限定所还原出信号在这
+一点的值，换言之，在以下这种公式所代表的插值方式下，数据点处的值时不会产生偏移
+的，$Sa$函数同理。
+\[f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc\left(T(t-\frac{k}{T})\right)\]
+不同的是，拉格朗日插值法在数据点以外的位置往往会有误差，而以上插值方法在没有产生
+混叠现象时是精确的；另一种拟合的方向是允许数据点的测量有误差，以这种视角进行最优
+线性拟合就是最小二乘法做的工作，在测量误差可能比较大时，这一类拟合方法的表现会更
+好。
+
 然而，利用多项式进行插值对原信号的逼近效果十分有限，一些数学家们开始转向研究如何重建整
 个信号。1948年，克劳德·香农发表了他的巨著《通信的数学原理》，明确提出了他的香农采样定
 理，并给出了上一节中还原带限信号的公式。这个定理在我们上一节中所进行的插值流程下是正确
@@ -2400,8 +2412,6 @@ L(x) = \sum_{i=0}^{n} y_i \ell_i(x)
 %final2006.2，或许跟一阶抽样保持相通？
 %零阶抽样保持，一阶抽样保持
 %有限采样公式
-
-\section{离散傅里叶变换初步}\label{sec:simple_DFT}
 
 \section{多维傅里叶变换与汉克尔变换}\label{sec:Multi_Fourier}
 
@@ -2479,12 +2489,12 @@ $\delta=0\ for\ t<0$可以推出$h(t)=0\ for\ t<0$；如果$h(t)=0,e(t)=0\ for\ 
 
 以下列举一些常见的线性系统。
 
-\noindent 例1.1.时域乘积：\begin{equation}
+\noindent 例1.时域乘积：\begin{equation}
     r(t)=f(t)e(t)
 \end{equation}
 例如描述开关开闭的系统，$f(t)=\Pi_T(t)$或$u(t)$，描述取样的系统，$f(t)=\shah(t)$.
 
-\noindent 例1.2.矩阵乘法：对于n维的离散激励信号$\mathbf{v}$，\begin{equation}
+\noindent 例2.矩阵乘法：对于n维的离散激励信号$\mathbf{v}$，\begin{equation}
     \mathbf{w}=A\mathbf{v},A\in M_{n\times n}(\mathbb{C})
 \end{equation}
 例如，线性动力系统中，初值问题$\mathbf{\dot{x}}(t)=A\mathbf{x}(t)$的解
@@ -2496,7 +2506,7 @@ $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对�
 (self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义
 \textbf{对称系统、自伴系统}。
 
-\noindent 例1.3.积分：\begin{equation}
+\noindent 例3.积分：\begin{equation}
     r(t)=\int_{a}^{b}k(x,y)e(y)\,dy
 \end{equation}
 其中，$k(x,y)$称为核函数(kernel)，$\int_{a}^{b}k(x,y)e(y)\,dy$称为对核积分
@@ -2507,7 +2517,7 @@ $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对�
     \item 如果$k(x,y)=\overline{k(y,x)}$，称k是埃尔米特的并将系统称为\textbf{自伴系统}。
 \end{itemize}
 
-\noindent 例1.4.卷积
+\noindent 例4.卷积
 
 取定连续信号$g,r(t)=g*e(t)$;取定周期离散信号$\mathbf{h},r[n]=\mathbf{h*e}[n]$.
 在标准正交基底下，卷积系统的矩阵是一个循环矩阵(circulant matrix)或托普利兹矩
@@ -2518,9 +2528,9 @@ $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对�
     h[N-1] & h[N-2] & \cdots & h[0]
 \end{pmatrix}\]
 
-\noindent 例1.5.信号平移：取定时延b，$r(t)=e(t-b)$;取定整数m，$r[n]=e[n-m]$.
+\noindent 例5.信号平移：取定时延b，$r(t)=e(t-b)$;取定整数m，$r[n]=e[n-m]$.
 
-\noindent 例1.6.傅里叶变换：$r(t)=\mathcal{F} e(t)$.在一些光学仪器中可以实
+\noindent 例6.傅里叶变换：$r(t)=\mathcal{F} e(t)$.在一些光学仪器中可以实
 现空间上的傅里叶变换，这是变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作
 为径向对称函数的傅里叶变换的特例，零阶汉克尔变换可以用圆孔夫琅禾费衍射装置实现。
 对于这两个变换，见\ref{sec:Multi_Fourier}和\ref{sec:Hilbert}.
@@ -2631,7 +2641,7 @@ $f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。不难看�
 零状态响应、零输入响应，后者对于一般的系统都有定义，对于用微分方程描述的系统，齐
 次解和特解、零输入响应和零状态响应也是不同的分类方式。
 
-\noindent 例2.1.由微分方程及初始条件
+\noindent 例7.由微分方程及初始条件
 \[y'+2y=10,y(0)=1\]
 描述的系统，采用数学的解法，可以求出其特征方程$\lambda+2=0$的解$\lambda=-2$，
 从而有齐次解$y_h(t)=Ce^{-2t}$，C为常数，特解$y_p(t)=5$，完全解
@@ -2656,7 +2666,7 @@ $y(t)=5-4e^{-2t}$。
 \[y_{(k)}(0_+)=[y(0_+),y'(0+),\cdots,y^{(n-1)}(0_+)]\]
 注意此时我们是允许一些条件发生突变的。
 
-\noindent 例2.2.RLC振荡电路中，对于电感，
+\noindent 例8.RLC振荡电路中，对于电感，
 $u_L=Ldi_L/dt$，施加于电感两侧的电压不会无穷大，其电流$i_L(t)$总是连续的，即
 $i_L(0_-)=i_L(0_+)=i_L(0)$，而其电压则可以不连续；对于电容，$i_C=Cdu_C/dt$，
 通过电容的电流不会无穷大，其电压$u_C(t)$总是连续的，即
@@ -2716,7 +2726,7 @@ $\delta$的微分方程，可以通过待定系数法求出各个系数，并得
 方程。很明显，我们不总是需要$\delta$及其高阶导数项，为此需要研究取到$u(t)$的几阶
 导数就足以完成基于待定系数法的求解，我们通过一个简单的例子来说明这个问题。
 
-\noindent 例2.3.求微分方程
+\noindent 例9.求微分方程
 \[r''(t)+3r'(t)+2r(t)=e(t)\]
 的单位脉冲响应。令$r''(t)+3r'(t)+2r(t)=\delta$，如果$r(t)$中含有$\delta'$，则
 其各阶导数会因此含有$\delta$的更高阶导数，这不是我们所需要的，因此，令
@@ -2765,8 +2775,213 @@ $y_h(t)u(t)$；当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶
 基本解与方程右侧做卷积，不过实际上记忆$\delta$的各阶导数的卷积特性并不是很有必要
 ，通过待定系数法求解往往更快。
 
-
 \section{系统的频率响应特性}\label{sec:freq_response}
+
+由于这两个小节中，绝大部分文献和教材都采用角频率进行讨论，并且涉及大量的三角函数
+运算时，角频率也更加方便，本章的这两个小节将直接使用角频率形式的傅里叶变换。
+
+在上一节中我们得到了$r(t)=(h*e)(t)$，看到卷积的结构，自然会想到对其做傅里叶变
+换，即\[R(\omega)=H(\omega)E(\omega)\]
+其中，$H$称为\textbf{系统函数}。一个物理可实现的系统，容易理解它必须满足因果性
+，即$h(t)=0,t<0$。实际上，这样的系统还必须满足\textbf{佩利-维纳准则}(Paley-Wiener criterion)，
+即系统函数$H(\omega)$必须满足以下两个条件：
+\begin{align*}
+    &\int_{-\infty}^{\infty}|H(\omega)|^2\,d\omega<\infty\\
+    &\int_{-\infty}^{\infty}\frac{|\ln|H(\omega)||}{1+\omega^2}\,d\omega<\infty
+\end{align*}
+
+在分析电路时
+曾见过它的另一种定义方式：$H(\omega)=Y(\omega)/X(\omega)$，其中$Y(\omega)$
+是输出端口信号的频域形式，$X(\omega)$是输入端口信号的频域形式，它与我们用傅里叶
+变换的理论给出的定义没有区别，但是展示了另一种求系统函数的视角。在学习电路分析时
+，我们知道线性的电感、电容可以在相量法下与线性电阻等同处理，统一地用\textbf{阻抗}来
+描述其电压电流关系。感值为L的电感，阻抗为$i\omega L$，容值为C的电容，阻抗为
+$1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实际上正是基于傅里变
+换（或拉普拉斯变换）的，例如，描述电容的方程为：
+\[i(t)=C\frac{d}{dt}v(t)\]
+对其做傅里叶变换，得到
+\[I(\omega)=i\omega C V(\omega)\]
+因此电容的阻抗为
+\[Z_C(\omega)=\frac{V(\omega)}{I(\omega)}=\frac{1}{i\omega C}\]
+\noindent 例10.考虑RC电路：
+\begin{center}\begin{circuitikz}[american] % 美式电路风格
+    % 输入端口
+    \draw (0,2) to [short, o-] (1,2) % 输入接线端到电阻
+          to [R, l=$R$] (4,2);       % 电阻R
+    
+    % 电容C与接地
+    \draw (4,2) to [C, l_=$C$] (4,0) % 电容C（下标注）
+          to [short] (4,-0.5);   % 接地符号延伸
+    \draw (4,0) node[ground]{};      % 接地符号
+    
+    % 输出端口（从电阻与电容连接点引出）
+    \draw (4,2) to [short, -o] (6,2);
+    
+    % 标注输入输出电压
+    \draw (0,2) node[left]{$V_{\text{in}}(\omega)$};  % 输入电压
+    \draw (6,2) node[right]{$V_{\text{out}}(\omega)$}; % 输出电压
+\end{circuitikz}\end{center}
+我们直接使用相量法得到其输入输出方程的频域形式，与电阻分压同理：
+\[V_{out}(\omega)=\frac{1/(i\omega C)}{R+1/(i\omega C)}V_{in}(\omega)\]
+因此系统函数为
+\[
+    H(\omega)=\frac{V_{out}(\omega)}{V_{in}(\omega)}=\frac{1}{1+i\omega RC}
+\]
+可见相量法可以省去列写微分方程和求傅里叶变换的过程，直接得到系统函数，这也是前文
+中强调定义式$H(\omega)=Y(\omega)/X(\omega)$的原因。
+
+我们还可以对给定的$\omega$，将$H(\omega)$看作一个复数，即$H(\omega)=|H(\omega)|e^{i\varphi(\omega)}$，
+因为我们总是可以用傅里叶变换的理论分析信号中各种（角）频率的成分。在电子信息领域，
+将$|H(\omega)|-\omega$称为系统的\textbf{幅频特性}，将$\varphi(\omega)-\omega$
+称为系统的\textbf{相频特性}，它们分别反映了系统对于给定频率成分的放大系数和相位
+旋转角度。这里$\varphi(\omega)$通常取主值，即$(-\pi,\pi]$内的值。
+
+\noindent 例11.将激励信号$V_{in}(t)=\cos(\omega_0 t)$施加于例10中的RC电路，求输出
+信号$V_{out}(t)$\\
+解：激励信号的傅里叶变换为
+    \[V_{in}(\omega)=\pi(\delta_{\omega_0}+\delta_{-\omega_0})\]
+因此输出信号的傅里叶变换为
+\begin{align*}
+    V_{out}(\omega)&=H(\omega)V_{in}(\omega)\\
+    &=\frac{\pi}{1+i\omega RC}(\delta_{\omega_0}+\delta_{-\omega_0})\\
+    &=\frac{\pi}{1+i\omega_0 RC}\delta_{\omega_0}+\frac{\pi}{1+i(-\omega_0) RC}\delta_{-\omega_0}
+\end{align*}
+反变换得到输出信号为
+\begin{align*}
+    r(t)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}V_{out}(\omega)e^{i\omega t}\,d\omega\\
+    &=\frac{1}{2\pi}\int_{-\infty}^{\infty}\left(\frac{\pi}{1+i\omega_0 RC}\delta_{\omega_0}+\frac{\pi}{1-i\omega_0 RC}\delta_{-\omega_0}\right)e^{i\omega t}\,d\omega\\
+    &=\frac{1}{2}\left(\frac{1}{1+i\omega_0 RC}e^{i\omega_0 t}+\frac{1}{1-i\omega_0 RC}e^{-i\omega_0 t}\right)\\
+    &=Re[\frac{1}{1+i\omega_0 RC}e^{i\omega_0 t}]\\
+    &=\frac{1}{\sqrt{1+(\omega_0 RC)^2}}\cos(\omega_0 t-\varphi(\omega_0))
+\end{align*}
+
+考虑$\omega_0$处$H(\omega)$的幅度和相位：
+\begin{align*}
+    |H(\omega_0)|&=\frac{1}{\sqrt{1+(\omega_0 RC)^2}}\\
+    \varphi(\omega_0)&=-\arctan(\omega_0 RC)
+\end{align*}
+前者恰为输出信号幅值1的放大倍数，后者为相位延迟，输出信号$V_{out}(t)$只用到了
+频域中的两个点$\pm\omega_0$，且由于系统函数偶对称，输出信号只显含$H(\omega_0)$
+的幅值的相位。这是因为$\cos(\omega_0 t)$在频域中只含有两个对称的频率成分。
+
+将以上过程进一步抽象:
+\begin{align*}
+    \mathcal{F} H[e^{i\omega_0 t}]&=\mathcal{F} h(\omega)\mathcal{F} [e^{i\omega t}]\\
+    &=H(\omega)\delta_{\omega_0}\\
+    &=H(\omega_0)\delta_{\omega_0}
+\end{align*}
+因此
+\[r(t)=H[e^{i\omega_0 t}]=H(\omega_0)e^{i\omega_0 t}\]
+将$H[e^{i\omega t}]$称为系统的\textbf{频率响应特性}，其中$e^{i\omega t}$
+（给定$\omega$，作为t的函数输入系统）称为系统H的以$H(\omega)$为\textbf{特征值}(eigenvalue)
+的\textbf{特征函数}(eigenfunction)。我们将在\ref{sec:DFT}中看到，系统函数的
+想法能够将表示离散线性时不变系统的循环矩阵对角化，其过渡矩阵是一种特殊的范德蒙德
+矩阵，要直接在高等代数中获得这个结论是比较困难的。
+
+在信号传输的过程中，有时希望信号经过一个系统，只有幅值发生变化，而波形不改变，
+例如小信号放大电路。波形改变的这种现象，称之为\textbf{失真}(distortion)。根据
+输出信号是否产生新的频率分量，将失真分为\textbf{线性失真}(linear distortion)
+和\textbf{非线性失真}(nonlinear distortion)；线性失真中，根据引起失真的方式，
+又分为\textbf{幅度失真}(amplitude distortion)和\textbf{相位失真}(phase distortion)。
+幅度失真是指系统的幅频特性不是常数，即不同频率成分的放大倍数不同；相位失真是指
+系统的相频特性不是线性的，即不同频率成分的相位延迟不同。
+
+对于一个理想的\textbf{无失真传输系统}，它只能对输入信号进行幅值的统一改变或相位
+的统一延迟，即\[r(t)=Ke(t-t_0)\]
+其中K为常数，$t_0$为常数延迟。由傅里叶变换的时移性质可知，这样的系统函数为
+\[H(\omega) = Ke^{-i\omega t_0}\]
+可以看到，$|H(\omega)|=K,t_0=-\varphi(\omega)/\omega$，其幅频特性是常数，图
+像为一水平线；相频特性是线性函数，图像为过原点的直线。
+
+更一般地，\[\tau_p(\omega)=-\frac{\varphi(\omega)}{\omega}\]
+描述了系统对不同频率成分造成时延的情况，称之为\textbf{相时延}(phase delay)；将
+\[\tau_g(\omega)=-\frac{d\varphi(\omega)}{d\omega}\]
+称为\textbf{群时延}(group delay)或\textbf{包络延时}(envelope delay)，它描述
+了系统对各频率分量造成延时的变化率。对于无失真传输系统，$\tau_p(\omega)=\tau_g(\omega)=t_0$。
+根据电路分析的经验，看到$\tau_p(\omega)=-\varphi(\omega)/\omega$而定义$\tau_g(\omega)=-d\varphi(\omega)/d\omega$
+是自然的，在处理非线性电阻的伏安特性曲线时也曾类似地定义动态电阻和静态电阻，但其
+物理意义并不十分明显，在信号与系统的框架下，我们可以通过分析调幅信号的传输来理解
+相时延和群时延的意义。
+
+\noindent 例12.设输入信号为单频复指数信号$e^{i\omega_0 t}$，求系统函数为$H(\omega)$
+的线性时不变系统的输出信号$r(t)$。\\
+解：输入信号的傅里叶变换为
+\[E(\omega)=2\pi \delta_{\omega_0}\]
+因此输出信号的傅里叶变换为
+\begin{align*}
+    R(\omega)&=H(\omega)E(\omega)\\
+    &=2\pi H(\omega_0)\delta_{\omega_0}
+\end{align*}
+反变换得到输出信号为
+\begin{align*}
+    r(t)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}R(\omega)e^{i\omega t}\,d\omega\\
+    &=\frac{1}{2\pi}\int_{-\infty}^{\infty}2\pi H(\omega_0)\delta_{\omega_0}e^{i\omega t}\,d\omega\\
+    &=H(\omega_0)e^{i\omega_0 t}\\
+    &=|H(\omega_0)|e^{i(\omega_0 t-\varphi(\omega_0))}
+\end{align*}
+可以看到，输出信号仍然是单频复指数信号，其幅值被放大了$|H(\omega_0)|$倍，相位
+延迟了$\varphi(\omega_0)$，折合到时间上，就得到相时延为$\tau_p(\omega_0)=-\varphi(\omega_0)/\omega_0$。
+可以想象，能够分解成不同频率成分的信号，其各频率成分一般会产生不同的相时延，
+从而使得输出信号的波形发生变化。
+
+\noindent 例13.设输入信号为调幅信号（关于调幅信号，见\ref{sec:modulation}）：
+\[e(t)=\cos(\omega_m t)\cos(\omega_c t)\]
+其中$\omega_c$为载波角频率，$\omega_m$为调制信号的角频率，且
+$\omega_c\gg \omega_m$。求系统函数为$H(\omega)$的线性时不变系统的输出信号$r(t)$。\\
+解：将输入信号展开为
+\begin{align*}
+    e(t)&=\frac{1}{2}[\cos((\omega_c+\omega_m)t)+\cos((\omega_c-\omega_m)t)]
+\end{align*}
+可以看到该信号是一个被低频信号$\pm\cos(\omega_m t)$包络的高频载波信号$\cos(\omega_c t)$:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{AM.jpeg}
+\end{figure}
+其傅里叶变换为
+\begin{align*}
+    E(\omega)&=\frac{\pi}{2}[\delta_{\omega_c+\omega_m}+\delta_{-(\omega_c+\omega_m)}+\delta_{\omega_c-\omega_m}+\delta_{-(\omega_c-\omega_m)}]
+\end{align*}
+因此输出信号的傅里叶变换为
+\begin{align*}
+    R(\omega)=&H(\omega)E(\omega)\\
+    =&\frac{\pi}{2} [H(\omega_c+\omega_m)\delta_{\omega_c+\omega_m}+H(-(\omega_c+\omega_m))\delta_{-(\omega_c+\omega_m)}\\
+    &+H(\omega_c-\omega_m)\delta_{\omega_c-\omega_m}+H(-(\omega_c-\omega_m))\delta_{-(\omega_c-\omega_m)}]
+\end{align*}
+反变换得到输出信号为
+\begin{align*}
+    r(t)=&\frac{1}{2\pi}\int_{-\infty}^{\infty}R(\omega)e^{i\omega t}\,d\omega\\
+    =&\frac{1}{4}[H(\omega_c+\omega_m)e^{i(\omega_c+\omega_m)t}+H(-(\omega_c+\omega_m))e^{-i(\omega_c+\omega_m)t}\\
+    &+H(\omega_c-\omega_m)e^{i(\omega_c-\omega_m)t}+H(-(\omega_c-\omega_m))e^{-i(\omega_c-\omega_m)t}]
+\end{align*}
+由于$H(\omega)$是偶函数，上式化简为
+\begin{align*}
+    r(t)=&\frac{1}{2}|H(\omega_c+\omega_m)|\cos((\omega_c+\omega_m)t-\varphi(\omega_c+\omega_m))\\
+    &+\frac{1}{2}|H(\omega_c-\omega_m)|\cos((\omega_c-\omega_m)t-\varphi(\omega_c-\omega_m))
+\end{align*}
+由于$\omega_c\gg \omega_m$，可以对$|H(\omega)|$和$\varphi(\omega)$在$\omega_c$处做泰勒展开：
+\begin{align*}
+    |H(\omega_c\pm \omega_m)|&\approx |H(\omega_c)|\pm \left.\frac{d|H(\omega)|}{d\omega}\right|_{\omega=\omega_c}\omega_m\\
+    \varphi(\omega_c\pm \omega_m)&\approx \varphi(\omega_c)\pm \left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m
+\end{align*}
+将其带入$r(t)$中，得到
+\begin{align*}
+    r(t)=&\frac{1}{2}\left[|H(\omega_c)|+\left.\frac{d|H(\omega)|}{d\omega}\right|_{\omega=\omega_c}\omega_m\right]\cos\left((\omega_c+\omega_m)t-\varphi(\omega_c)-\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\\
+    &+\frac{1}{2}\left[|H(\omega_c)|-\left.\frac{d|H(\omega)|}{d\omega}\right|_{\omega=\omega_c}\omega_m\right]\cos\left((\omega_c-\omega_m)t-\varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\\
+    \approx&|H(\omega_c)|\cos(\omega_c t-\varphi(\omega_c))\cos\left(\omega_m\left[t+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\right]\right)
+\end{align*}
+对比输入信号\[e(t)=\cos(\omega_m t)\cos(\omega_c t)\]
+可以看到，输出信号的幅度大约变为$|H(\omega_c)|$倍，载波信号的相位延迟了$\varphi(\omega_c)$，
+调制信号的相位延迟了$\omega_m\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$，
+折合到时间上，就是群时延$\tau_g(\omega_c)=-\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$。
+因此，群时延描述了系统对调制信号的包络造成的延时。从信号的图像上来看，高频的载波
+信号的延时是不会造成很明显的变化的，而低频的调制信号的时延则会明显地反映在图像上
+，就像一个“信号群”在传播过程中整体产生了一段时延，群时延的名称就由此而来。
+
+\section{调制与解调}\label{sec:modulation}
+
+%三种调制方式
+%升余弦滤波器，升余弦信号和升余弦包络线
+%时分复用，频分复用（现代的其他复用技术？）
 
 \chapter{拉普拉斯变换与系统的复频域分析}
 
@@ -2786,9 +3001,11 @@ $y_h(t)u(t)$；当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶
 
 \section{离散系统的z域分析}\label{sec:Discrete_System_z_Analysis}
 
-\section{离散傅里叶变换}\label{sec:DFT}
+\section{离散傅里叶变换初步}\label{sec:simple_DFT}
 
-\chapter{附录：一些补充内容}%附录
+\section{离散傅里叶变换进阶}\label{sec:DFT}
+
+\chapter{附录}%附录
 
 收录一些脱离信号与系统主线，却又对本书的理论体系的完整性十分重要的内容；收录一些
 未来可能会用到的数学工具。
