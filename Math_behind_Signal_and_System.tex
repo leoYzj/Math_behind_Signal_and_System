@@ -1,5 +1,4 @@
 \documentclass{ctexbook}
-
 \usepackage{silence}
 \usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{graphicx}
@@ -35,7 +34,6 @@
 \overfullrule=0pt  % 不标记过满行
 \allowdisplaybreaks
 \raggedbottom
-
 \newcommand{\shah}{\operatorname{III}}
 % 便捷命令：在文中书写原函数在上下限的取值，例如 \evalat{F(x)}{a}{b} 输出为 \left.F(x)\right|_{a}^{b}
 \newcommand{\evalat}[3]{\left.#1\right|_{#2}^{#3}}
@@ -67,48 +65,16 @@
 \end{center}
 }
 \newlist{circlist}{enumerate}{1}
-\setlist[circlist]{
-    label=\protect\ding{\numexpr171+\arabic*\relax},
-    left=0pt
+\setlist[circlist]{ label=\protect\ding{\numexpr171+\arabic*\relax}, left=0pt
 }
-
-
 \title{信号与系统的数学基础}
 \author{Math behind Siganal and system}
 \date{\today}
 \begin{document}
-
 \maketitle{}%封面
 \frontmatter%前言
-信号与系统是电子信息等相关专业本科生的重要基础课，是后续课程“数字信号处
-理”“通信原理”“自动控制”“随机信号处理”“数字图像处理”“现代信号处理”等课程的基
-础，以确定信号通过线性时不变系统的过程为核心，综合运用多门数学课程的知识，尤
-其是傅里叶分析。
-
-然而，国内外的信号与系统课程对于傅里叶级数、傅里叶变换和拉普拉斯变换的定
-义有所不同，国内的课程中所谓“频域分析”实际上指的是角频率域，而这种定义上的不
-同会导致诸多公式的内核相同但形式不同，使学习者感到困惑。我自学过斯坦福大学
-公开课EE261，同样面临着这个问题，所以希望尝试这种新的笔记形式，梳理信号与系
-统课程的理论部分，同时也使本书能够作为同学们学习信号与系统时的参考书。同时，
-我注意到现在的信号与系统教材中对很多数学上的内容的处理过于简单化，以至于同学
-们对一些公式感到不解，我希望结合《信号与系统》教材和面向数学专业的实变函数、复变函数和
-傅里叶分析教材，对这样的内容做一些补充和深化。
-
-本书将不会涉及信号与系统实践部分，对一些语文性质的概念从简处理，希望了解这些
-内容的读者可以自行查看信号与系统教材。对于两种不同的傅里叶变换，将并排给出两
-种公式，左侧为频率版本，右侧为角频率版本。为了逻辑的完整性和内容的精确
-性，本书会引入一些远超工科教学范围的内容，力求朴素平和却又不失深度，其中所涉及的
-技术细节不在我们的关注范围，读者也可以自行选择是否阅读这些内容。本书默认读者已经
-学习过一到两学期的数学分析（或高等数学/微积分）以及高等代数（或线性代数）课程，
-不过只要理解一元微积分，阅读前四章及附录就不会有问题；只要掌握复数运算、理解曲线
-积分，阅读后两章就不会有问题。
-
-限于作者水平，书中难免存在不足之处，希望读者可以提出宝贵的意见或建议，可以反
-馈至我的电子邮箱：2024212622@bupt.cn。
-
-{
-\raggedleft{}
-北京市十一学校2024届毕业生\\
+信号与系统是电子信息等相关专业本科生的重要基础课，是后续课程“数字信号处 理”“通信原理”“自动控制”“随机信号处理”“数字图像处理”“现代信号处理”等课程的基 础，以确定信号通过线性时不变系统的过程为核心，综合运用多门数学课程的知识，尤 其是傅里叶分析。然而，国内外的信号与系统课程对于傅里叶级数、傅里叶变换和拉普拉斯变换的定 义有所不同，国内的课程中所谓“频域分析”实际上指的是角频率域，而这种定义上的不 同会导致诸多公式的内核相同但形式不同，使学习者感到困惑。我自学过斯坦福大学 公开课EE261，同样面临着这个问题，所以希望尝试这种新的笔记形式，梳理信号与系 统课程的理论部分，同时也使本书能够作为同学们学习信号与系统时的参考书。同时， 我注意到现在的信号与系统教材中对很多数学上的内容的处理过于简单化，以至于同学 们对一些公式感到不解，我希望结合《信号与系统》教材和面向数学专业的实变函数、复变函数和 傅里叶分析教材，对这样的内容做一些补充和深化。本书将不会涉及信号与系统实践部分，对一些语文性质的概念从简处理，希望了解这些 内容的读者可以自行查看信号与系统教材。对于两种不同的傅里叶变换，将并排给出两 种公式，左侧为频率版本，右侧为角频率版本。为了逻辑的完整性和内容的精确 性，本书会引入一些远超工科教学范围的内容，力求朴素平和却又不失深度，其中所涉及的 技术细节不在我们的关注范围，读者也可以自行选择是否阅读这些内容。本书默认读者已经 学习过一到两学期的数学分析（或高等数学/微积分）以及高等代数（或线性代数）课程， 不过只要理解一元微积分，阅读前四章及附录就不会有问题；只要掌握复数运算、理解曲线 积分，阅读后两章就不会有问题。限于作者水平，书中难免存在不足之处，希望读者可以提出宝贵的意见或建议，可以反 馈至我的电子邮箱：2024212622@bupt.cn。{
+\raggedleft{} 北京市十一学校2024届毕业生\\
 严子竣\\
 2025年秋\\
 }
@@ -116,115 +82,59 @@
 \mainmatter%正文
 \chapter{信号与系统概述}%第一章
 \section{信号与系统的基本概念}
-信号 (signal)是信息 (information)的表现形式与传送载体，信息是蕴含在信
-号中的具体内容。
-
-在电学领域中，通过电压或电流对真是信号进行连续的记录，模拟其变化过程得到
-的信号称为模拟信号 (analog signal)或连续信号 (continuous signal)，但由于
-计算机中信号只能以有限位数的形式储存，往往需要将模拟信号转化为数字信号
-(digital siganal)。这个过程往往需要利用模数转换器 (analog-to-digital converter,ADC)
-，使用时再利用数模转换器 (digital-to-analog converter,DAC)将数字信号转化
-为模拟信号。
-
-在信息科学与技术领域，系统指对信号产生影响的装置或算法，例如滤波系统、调制系
-统、发射系统，将这些系统组合起来就组成了无线电广播系统；例如通信系统由信源、
-发射机、信道、接收机和信宿五个部分组成。
-
+信号 (signal)是信息 (information)的表现形式与传送载体，信息是蕴含在信 号中的具体内容。在电学领域中，通过电压或电流对真是信号进行连续的记录，模拟其变化过程得到 的信号称为模拟信号 (analog signal)或连续信号 (continuous signal)，但由于 计算机中信号只能以有限位数的形式储存，往往需要将模拟信号转化为数字信号 (digital siganal)。这个过程往往需要利用模数转换器 (analog-to-digital converter,ADC) ，使用时再利用数模转换器 (digital-to-analog converter,DAC)将数字信号转化 为模拟信号。在信息科学与技术领域，系统指对信号产生影响的装置或算法，例如滤波系统、调制系 统、发射系统，将这些系统组合起来就组成了无线电广播系统；例如通信系统由信源、 发射机、信道、接收机和信宿五个部分组成。
 \section{连续信号与离散信号}\label{sec:signal}
-信号的本质是函数，\textbf{连续信号}就是定义域“连续”的函数，例如一个时间的函数$f(t)$，
-一般要求定义域具有连续统的势。相应的，\textbf{离散信号}的定义域往往是至多可数集，于是
-我们常认为其定义域是整数集，并记离散信号为$x[n]$，用研究数列的方法研究离散信
-号。
-
-从电学的经验来看，电压、电流信号的功率总为其幅值的平方乘以某个常数，于是对于
-一般的信号我们也采取此定义。真实的物理世界中的信号的能量总是有限的，但是，为
-了更好地研究它们，很多时候使用真实信号的一部分做适当延拓作为研究对象，因此课
-程中将遇到一些不满足“方均可积”性质$\int_{-\infty}^{\infty}| f(x)| ^2\,dx
-    <\infty$的信号，我们将这种信号称为\textbf{功率信号}，因其能量无限而功率有限，
-而能量有限的信号就称为\textbf{能量信号}。为了区分某段时间内和全时域上的能量和功率，
-又将$(-T/2,T/2)$内的能量
+信号的本质是函数，\textbf{连续信号}就是定义域“连续”的函数，例如一个时间的函数$f(t)$， 一般要求定义域具有连续统的势。相应的，\textbf{离散信号}的定义域往往是至多可数集，于是 我们常认为其定义域是整数集，并记离散信号为$x[n]$，用研究数列的方法研究离散信 号。从电学的经验来看，电压、电流信号的功率总为其幅值的平方乘以某个常数，于是对于 一般的信号我们也采取此定义。真实的物理世界中的信号的能量总是有限的，但是，为 了更好地研究它们，很多时候使用真实信号的一部分做适当延拓作为研究对象，因此课 程中将遇到一些不满足“方均可积”性质$\int_{-\infty}^{\infty}| f(x)| ^2\,dx <\infty$的信号，我们将这种信号称为\textbf{功率信号}，因其能量无限而功率有限， 而能量有限的信号就称为\textbf{能量信号}。为了区分某段时间内和全时域上的能量和功率， 又将$(-T/2,T/2)$内的能量
 \[E_T=\int_{-T/2}^{T/2}| f(x)| ^2\,dx\]
 称为\textbf{归一化能量}，功率
 \[P_T=\frac{1}{T}\int_{-T/2}^{T/2}| f(x)| ^2\,dx\]
 称为\textbf{归一化功率}；
 \[E=\int_{-\infty}^{\infty}| f(x)| ^2\,dx\]称为\textbf{全时域能量}，
 \[P=\lim_{T \to \infty}  \frac{1}{T}\int_{-T/2}^{T/2}| f(x)| ^2\,dx\]
-称为\textbf{全时域功率}。
-
-类似地，对于离散信号，定义\textbf{归一化能量}为\[E_k=\sum_{n = -k}^{k}  |x[n]|^2\]
-\textbf{归一化功率}为\[P_k=\frac{1}{2k+1}\sum_{n = -k}^{k}  |x[n]|^2\]\textbf{全时域能
-    量}为\[\sum_{n = -\infty}^{\infty}  |x[n]|^2\]\textbf{全时域功率}为
+称为\textbf{全时域功率}。类似地，对于离散信号，定义\textbf{归一化能量}为\[E_k=\sum_{n = -k}^{k}  |x[n]|^2\]
+\textbf{归一化功率}为\[P_k=\frac{1}{2k+1}\sum_{n = -k}^{k}  |x[n]|^2\]\textbf{全时域能 量}为\[\sum_{n = -\infty}^{\infty}  |x[n]|^2\]\textbf{全时域功率}为
 \[\lim_{k \to \infty}  \frac{1}{2k+1}\sum_{n = -k}^{k}  |x[n]|^2\]
-
-读者可能已经注意到，并不是所有的函数都是可积的，例如$e^x$即使视为功率信号，其
-能量和功率也不具有意义，因此它既不属于能量信号，也不属于功率信号；哪怕这个积分
-不是反常积分，如狄利克雷函数
+读者可能已经注意到，并不是所有的函数都是可积的，例如$e^x$即使视为功率信号，其 能量和功率也不具有意义，因此它既不属于能量信号，也不属于功率信号；哪怕这个积分 不是反常积分，如狄利克雷函数
 \[D(x)=
     \begin{cases}
         1 & x \in \mathbb{Q}    \\
         0 & x \in \mathbb{Q} ^C
     \end{cases}\]
-（其中$\mathbb{Q}$ 表示有理数集，上标C在不引起歧义的前提下用来表示取补集）在
-黎曼积分（也就是数学分析或高等数学课程，以及多数工科课程中用的积分）的意义下
-是不可积的，因为它在所有点不连续，但是这样的函数在\textbf{勒贝格积分}的意义下可积，读
-者可以这样理解：勒贝格积分考察函数在某个值处的“区间长度”（严格来讲应为测度）
-，狄利克雷函数在一个有限区间上取值1的长度为0，因为有理数是可数集，取值0的长度
-就是区间长度，所以其积分值为0。勒贝格积分是黎曼积分的推广，对于非反常积分，黎曼可积的函数一定
-是勒贝格可积的，并且在同样的区间上积分值相等。对于勒贝格不可积的函数，一般不
-在本课程的讨论范围。尽管我们很少接触只在勒贝格意义下才可积的函数，但后面我们将
-逐步认识到勒贝格积分在傅里叶分析中的重要地位，读者应当对其有一个初步的认识。
-
+（其中$\mathbb{Q}$ 表示有理数集，上标C在不引起歧义的前提下用来表示取补集）在 黎曼积分（也就是数学分析或高等数学课程，以及多数工科课程中用的积分）的意义下 是不可积的，因为它在所有点不连续，但是这样的函数在\textbf{勒贝格积分}的意义下可积，读 者可以这样理解：勒贝格积分考察函数在某个值处的“区间长度”（严格来讲应为测度） ，狄利克雷函数在一个有限区间上取值1的长度为0，因为有理数是可数集，取值0的长度 就是区间长度，所以其积分值为0。勒贝格积分是黎曼积分的推广，对于非反常积分，黎曼可积的函数一定 是勒贝格可积的，并且在同样的区间上积分值相等。对于勒贝格不可积的函数，一般不 在本课程的讨论范围。尽管我们很少接触只在勒贝格意义下才可积的函数，但后面我们将 逐步认识到勒贝格积分在傅里叶分析中的重要地位，读者应当对其有一个初步的认识。
 \section{典型的连续与离散信号}
 \noindent 1.\textbf{取样信号}\[Sa(t)=\frac{\sin(t)}{t}\]
-它在0处连续延拓为1，在$\pi$的整数倍处为0，是偶函数，在正半轴上的积分值为$\pi /2$（这个结果称为狄利克雷积分）。
-国外教材中取样信号一般为一个类似的信号\[sinc(t)=\frac{\sin(\pi t)}{\pi t}=Sa(\pi t)\]
-它们的参数不同但性质类似、本质相同，其作用在后续学习采样和插值时将体现出来。需
-要注意的是，在绘图时python和MATLAB中只有sinc信号，而且实际上指的是Sa信号。
-
+它在0处连续延拓为1，在$\pi$的整数倍处为0，是偶函数，在正半轴上的积分值为$\pi /2$（这个结果称为狄利克雷积分）。 国外教材中取样信号一般为一个类似的信号\[sinc(t)=\frac{\sin(\pi t)}{\pi t}=Sa(\pi t)\] 它们的参数不同但性质类似、本质相同，其作用在后续学习采样和插值时将体现出来。需 要注意的是，在绘图时python和MATLAB中只有sinc信号，而且实际上指的是Sa信号。
 \noindent 2.\textbf{钟形信号（高斯函数}）\[f(t)=Ee^{-{\left(\frac{t}{\tau }\right)}^2}\]
 $\tau$为衰减速率或时间常数，$\tau$越大，函数值衰减越慢。
-
 \noindent 3.\textbf{单位脉冲函数/狄拉克函数} (dirac function)
 $\delta (x)=\begin{cases}
         0      & x\neq 0 \\
         \infty & x=0
     \end{cases}$可视为一些性质较好的函数如高斯函数、取样函数集中到x=0附近时
-的极限情况，从而具备很多优美的性质，见\ref{sec:convolution}。实际上，它还是无限
-阶可导的，我们将在\ref{sec:distributions}
-中详细讨论这一点。一些简单的性质列举如下。\\
+的极限情况，从而具备很多优美的性质，见\ref{sec:convolution}。实际上，它还是无限 阶可导的，我们将在\ref{sec:distributions} 中详细讨论这一点。一些简单的性质列举如下。\\
 \ding{172} 取样性质：$f(x)\delta (x)=f(0)\delta (x)$\\
-\ding{173} 积分性质：$\int_{-\infty}^{\infty}\delta (x)\,dx=1$ （由此我们
-说这个函数的强度为1 ），从而
-$\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
+\ding{173} 积分性质：$\int_{-\infty}^{\infty}\delta (x)\,dx=1$ （由此我们 说这个函数的强度为1 ），从而 $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
 \ding{174} $\delta$ 函数是偶函数：$\delta (-x)=\delta (x)$
-\ding{175} 尺度变换性质：用函数逼近的观点来理解$\delta $函数，为保证强
-度为1，自然应当要求$\delta (ax)=\frac{1}{|a|}\delta (x)$\\
+\ding{175} 尺度变换性质：用函数逼近的观点来理解$\delta $函数，为保证强 度为1，自然应当要求$\delta (ax)=\frac{1}{|a|}\delta (x)$\\
 这个函数在做卷积运算时有很好的性质，见\ref{sec:convolution}卷积；关于它的逼近方式，见\\
 附录\ref{sec:approach}。我们规定，$\delta_a(x)=\delta (x-a)$，即在$x=a$处取样的狄拉克函数。
-
 \noindent 4.\textbf{单位阶跃函数} (the unit step/Heaviside function)$u(x)=
     \begin{cases}
         0 & x<0 \\
         1 & x>0
     \end{cases}$\\
-在0处的值可以任意定义，一般取0、1或1/2，不会有影响，所以一般也不会讨论。由单
-位阶跃函数衍生出许多其他函数：\\
+在0处的值可以任意定义，一般取0、1或1/2，不会有影响，所以一般也不会讨论。由单 位阶跃函数衍生出许多其他函数：\\
 \textbf{符号函数}\[sgn(x)=\begin{cases}
         -1 & x<0 \\
         1  & x>0
     \end{cases}=u(t)-u(-t)\]
 \textbf{矩形脉冲}\[R_T(t)=u(t)-u(t-T)\]
-\textbf{门函数（矩形函数、$\Pi $函数）}\[G_T(t)=\Pi_T(t)=u(t+T/2)-u(t-T/2)\]
-这里T为脉冲宽度，不加角标时，默认为1。
-
-单位阶跃函数的积分为单位斜变信号 (the unit ramp)，导数为狄拉克函数，从直观上
-这不难理解，将在\ref{sec:distributions}中讨论。
+\textbf{门函数（矩形函数、$\Pi $函数）}\[G_T(t)=\Pi_T(t)=u(t+T/2)-u(t-T/2)\] 这里T为脉冲宽度，不加角标时，默认为1。单位阶跃函数的积分为单位斜变信号 (the unit ramp)，导数为狄拉克函数，从直观上 这不难理解，将在\ref{sec:distributions}中讨论。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{Figure_1}
     \caption{取样函数、高斯函数、狄拉克函数、单位阶跃函数}
 \end{figure}
-
 下面介绍离散信号。\\
 1.单位脉冲序列/克罗内克(Kroneker)$\delta$函数
 \[\delta[n]=\begin{cases}
@@ -236,7 +146,6 @@ $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
         0, & \text{if }n\neq 0
     \end{cases}\]
 它与狄拉克$\delta$函数一样，都具有取样性质：$x[n]\delta_k[n]=x[k]\delta_k[n],\forall n$.
-
 \noindent 2.单位阶跃序列\[u[n]=\begin{cases}
         1, & \text{if }n\geq 0 \\
         0, & \text{if }n< 0
@@ -246,7 +155,6 @@ $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
         1, & \text{if }0\leq n\leq N-1 \\
         0, & \text{otherwise}
     \end{cases}\]
-
 \noindent 3.正弦序列$x[n]=\sin(\Omega_0n)$,其中$\Omega_0$称为数字角频率。
 其特点放在以后介绍。
 \begin{figure}[htbp]
@@ -254,55 +162,35 @@ $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
     \includegraphics[width=0.5\textwidth]{disct_sin}
     \caption{正弦序列}
 \end{figure}
-
 \chapter{连续信号的频域分析}%第二章
-在数学分析课程中，我们都学习过傅里叶级数的计算，所以本书将直接回顾几种情况下的
-傅里叶级数展开公式，然后从正交函数系的观点出发构建傅里叶级数的理论，再从傅里
-叶级数过渡到傅里叶变换，从对周期现象的研究转向对非周期现象的研究，介绍其运算性
-质、卷积性质，最后介绍分布（也即广义函数）理论，从而研究常函数、狄拉克函数、正
-余弦函数等在常规意义下无法进行傅里叶变换，却又十分重要的函数。
-
+在数学分析课程中，我们都学习过傅里叶级数的计算，所以本书将直接回顾几种情况下的 傅里叶级数展开公式，然后从正交函数系的观点出发构建傅里叶级数的理论，再从傅里 叶级数过渡到傅里叶变换，从对周期现象的研究转向对非周期现象的研究，介绍其运算性 质、卷积性质，最后介绍分布（也即广义函数）理论，从而研究常函数、狄拉克函数、正 余弦函数等在常规意义下无法进行傅里叶变换，却又十分重要的函数。
 \section{线性空间，正交基}\label{sec:Linear_Space}
-首先介绍一些本章需可能用到的概念：度量公理、范数公理、内积公理、正交基、无穷维线
-性空间和$L^p$空间，对其不感兴趣的读者，可以等需要时再阅读此小节的内
-容，只要知道函数空间上的正交基是怎么回事即可。
-
-在$\mathbb{C}$ -线性空间V中，如果定义了运算
-$d(\cdot,\cdot):V\times V\rightarrow \mathbb{C}  $，满足\textbf{度量公理}：
+首先介绍一些本章需可能用到的概念：度量公理、范数公理、内积公理、正交基、无穷维线 性空间和$L^p$空间，对其不感兴趣的读者，可以等需要时再阅读此小节的内 容，只要知道函数空间上的正交基是怎么回事即可。在集合$V$中，如果定义了运算 $d(\cdot,\cdot):V\times V\rightarrow \mathbb{R}  $，满足\textbf{度量公理}：
 \begin{enumerate}
     \item \textbf{非负性}：$d(x, y) \geq 0$
     \item \textbf{同一性}：$d(x, y) = 0$ 当且仅当 $x = y$
     \item \textbf{对称性}：$d(x, y) = d(y, x)$
     \item \textbf{三角不等式}：$d(x, z) \leq d(x, y) + d(y, z)$
 \end{enumerate}
-则称在V上定义了一种度量（事实上只要在拓扑空间中就能够定义度量）。
-
-如果定义了运算
-$\|\cdot \| :V\rightarrow \mathbb{C} $，满足\textbf{范数公理}
+则称在$V$上定义了一种度量。特别地，可以在$\mathbb{C}$ -线性空间$V$上定义度量。如果定义了运算 $\|\cdot \| :V\rightarrow \mathbb{R} $，满足\textbf{范数公理}
 \begin{enumerate}
     \item \textbf{非负性}：$\|\mathbf{x}\| \geq 0$
     \item \textbf{同一性}：$\|\mathbf{x}\| = 0$ 当且仅当 $\mathbf{x} = \mathbf{0}$
     \item \textbf{齐次性}：$\|\alpha \mathbf{x}\| = |\alpha| \, \|\mathbf{x}\|$
     \item \textbf{三角不等式/次可加性}：$\|\mathbf{x} + \mathbf{y}\| \leq \|\mathbf{x}\| + \|\mathbf{y}\|$
 \end{enumerate}
-则称在V上定义了一种范数，称V为线性赋范空间，在线性赋范空间上可以定义极限：
-\[\lim_{x \to x_0} f(x)=A:=\forall \epsilon>0\exists \delta>0(|x-x_0|<\delta\Rightarrow |f(x)-f(x_0)|<\epsilon) \]
-这就是数学分析中的极限定义，只是将绝对值改成了范数，其余类似的极限定义不再赘述。
-如果线性赋范空间中所有柯西列都有极限，那么这个空间称为完备的线性赋范空间，或称
-为巴拿赫空间（有限维）、希尔伯特空间（无限维）。
-
+则称在$V$上定义了一种范数，称$V$为线性赋范空间。特别地，在$\mathbb{C}$ -线性空间$V$上定义范数后，可以自然地诱导出一种度量： $$d(\mathbf x,\mathbf y)=||\mathbf x-\mathbf y||$$ 在线性赋范空间上可以定义极限：
+\[\lim_{x \to x_0} f(x)=A:=\forall \epsilon>0\exists \delta>0(||x-x_0||<\delta\Rightarrow ||f(x)-f(x_0)||<\epsilon) \]
+这就是数学分析中的极限定义，只是将绝对值改成了范数，其余类似的极限定义不再赘述。 如果线性赋范空间中所有柯西列都有极限，那么这个空间称为完备的线性赋范空间，或称 为巴拿赫空间（有限维）、希尔伯特空间（无限维）。
 \noindent 例1.1.连续函数空间$C[a,b]$是不完备的线性赋范空间：在1-范数
-$\|f\|_1 =\int_{a}^{b}f(t)\,dt$下，其中的柯西列\begin{align*}
+$\|f\|_1 =\int_{a}^{b}|f(t)|\,\text dt$下，其中的柯西列\begin{align*}
     f_n(t)=\begin{cases}
         0,&\text{if }-1\leq t <0\\
         nt,&\text{if }0\leq t <\frac{1}{n}\\
         1,&\text{if }\frac{1}{n}\leq t \leq 1
     \end{cases}
 \end{align*}
-的极限为单位阶跃函数$u(t)$（在0处取值为0），不属于$C[-1,1]$.
-
-如果定义了运算
-$\langle \cdot,\cdot\rangle:V\times V\rightarrow \mathbb{C} $，满足\textbf{内积公理}
+的极限为单位阶跃函数$u(t)$（在0处取值为0），不属于$C[-1,1]$.如果定义了运算 $\langle \cdot,\cdot\rangle:V\times V\rightarrow \mathbb{C} $，满足\textbf{内积公理}
 \begin{enumerate}
     \item \textbf{正定性}：$\langle \mathbf{v}, \mathbf{v} \rangle \geq 0$ 且 $\langle \mathbf{v}, \mathbf{v} \rangle = 0$ 当且仅当 $\mathbf{v} = \mathbf{0}$
     \item \textbf{共轭对称性}：$\langle \mathbf{v}, \mathbf{w} \rangle = \overline{\langle \mathbf{w}, \mathbf{v} \rangle}$
@@ -312,34 +200,24 @@ $\langle \cdot,\cdot\rangle:V\times V\rightarrow \mathbb{C} $，满足\textbf{�
               \item \textbf{可加性}：$\langle \mathbf{v} + \mathbf{w}, \mathbf{u} \rangle = \langle \mathbf{v}, \mathbf{u} \rangle + \langle \mathbf{w}, \mathbf{u} \rangle$
           \end{itemize}
 \end{enumerate}
-则称在V上定义了一种内积 (inner product)，称V为内积空间。在内积空间上有著名的
-柯西-施瓦兹不等式 (Cauchy-Shwartz inequality)：
+则称在V上定义了一种内积 (inner product)，称V为内积空间。在内积空间上有著名的 柯西-施瓦兹不等式 (Cauchy-Shwartz inequality)：
 \[|\langle \mathbf{a,b}\rangle| \leq \| \mathbf{a}\| \| \mathbf{b}\| \]
 它有一个经典的证明方法：不妨设$\mathbf{b}$不是零向量，任取$t\in \mathbb{R}$，有
 \[0\leq \|\mathbf{a}+t\mathbf{b}\|^2=\|\mathbf{a}\|^2+2t\langle\mathbf{a,b}\rangle +t^2\|\mathbf{b}\|^2\]
 令$t=-\frac{\langle\mathbf{a,b}\rangle}{\|\mathbf{b}\|^2}$，即得
 \[0\leq \|\mathbf{a}\|^2-2\frac{\langle\mathbf{a,b}\rangle^2}{\|\mathbf{b}\|^2} +\frac{\langle\mathbf{a,b}\rangle^2}{\|\mathbf{b}\|^4}\|\mathbf{b}\|^2=\|\mathbf{a}\|^2-\frac{\langle\mathbf{a,b}\rangle^2}{\|\mathbf{b}\|^2}\]
-这与要证明的不等式是等价的。有了柯西-施瓦兹不等式，三角不等式就是显然的了，这里
-仅给出其表述，读者可以自行证明：
+这与要证明的不等式是等价的。有了柯西-施瓦兹不等式，三角不等式就是显然的了，这里 仅给出其表述，读者可以自行证明：
 \[\forall \mathbf{a,b}\in V,\|\mathbf{a+b}\|\leq\|\mathbf{a}\|+\|\mathbf{b}\|\]
-
-不难发现，只要取
-$\|\mathbf{v}\|^2=\langle \mathbf{v}, \mathbf{v} \rangle$，
-就由内积导出了一种范数，并且这种范数具有比一般的范数更强的性质；
-只要取$d(\mathbf{x},\mathbf{y})=\|\mathbf{x-y}\|$，就由范数导出了一种度量，
-并且这种度量具有比一般的度量更强的性质。
-
-\textbf{正交基} (othorgnal bases)指的是内积空间V的一组基$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$
-，满足$\langle \mathbf{v_i},\mathbf{v_j}\rangle =0,i \neq j$ ，对V中任一向量$\mathbf{w}$，
+不难发现，只要取 $\|\mathbf{v}\|^2=\langle \mathbf{v}, \mathbf{v} \rangle$， 就由内积导出了一种范数，并且这种范数具有比一般的范数更强的性质； 只要取$d(\mathbf{x},\mathbf{y})=\|\mathbf{x-y}\|$，就由范数导出了一种度量， 并且这种度量具有比一般的度量更强的性质。
+\textbf{正交基} (othorgnal bases)指的是内积空间$V$的一组基$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$ ，满足$\langle \mathbf{v_i},\mathbf{v_j}\rangle =0,i \neq j$ ，对$V$中任一向量$\mathbf{w}$，
 \[\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v_i}\]
 等式两边同时对$\mathbf{v_j}$做内积，得到
 \begin{align}
-    \langle \mathbf{w},\mathbf{v_j} \rangle=\langle \mathbf{v_j},\sum_{i = 1}^{n}  c_i \mathbf{v_i} \rangle =c_j\langle \mathbf{v_j},\mathbf{v_j} \rangle \\
+    \langle \mathbf{w},\mathbf{v_j} \rangle=\langle \sum_{i = 1}^{n}  c_i \mathbf{v_i},\mathbf{v_j} \rangle =c_j\langle \mathbf{v_j},\mathbf{v_j} \rangle \\
     c_j=\frac{\langle \mathbf{w},\mathbf{v_j} \rangle}{\langle \mathbf{v_j},\mathbf{v_j} \rangle},
     \mathbf{w}=\sum_{j = 1}^{n}  \frac{\langle \mathbf{w},\mathbf{v_j} \rangle}{\langle \mathbf{v_j},\mathbf{v_j} \rangle} \mathbf{v_j}\label{eq:2.2}
 \end{align}
-如果$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$还满足
-$\langle \mathbf{v_i},\mathbf{v_i}\rangle =1,i \in \{1,2,\dots ,n\}$，称这组基是
+如果$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$还满足 $\langle \mathbf{v_i},\mathbf{v_i}\rangle =1,i \in \{1,2,\dots ,n\}$，称这组基是
 \textbf{标准正交基} (othornormal bases)，此时空间中任意向量均有分解式
 \begin{align}\label{eq:2.3}
     \mathbf{w}=\sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v_i}\rangle \mathbf{v_i}
@@ -350,107 +228,50 @@ $\langle \mathbf{v_i},\mathbf{v_i}\rangle =1,i \in \{1,2,\dots ,n\}$，称这组
                    & =\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2\langle\mathbf{v_i,v_i}\rangle+\sum_{1\leq i<j\leq n}\langle \mathbf{w,v_i}\rangle\langle \mathbf{w,v_j}\rangle\langle \mathbf{v_i,v_j}\rangle \\
                    & =\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2|\mathbf{v_i}|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2\label{eq:2.6}
 \end{align}
-这正是高维情况下的勾股定理（毕达哥拉斯恒等式）。可见做正交基分解能够极大地简化
-对线性赋范空间的研究。
-
-对于\textbf{无限维线性空间}V，我们称向量列
-$\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
+这正是高维情况下的勾股定理（毕达哥拉斯恒等式）。可见做正交基分解能够极大地简化对线性赋范空间的研究。对于\textbf{无限维线性空间}V，我们称向量列 $\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
 \begin{itemize}
     \item \raggedright{} 线性无关性：任取基中的有限个向量，它们是线性无关的\\
     \item 有限生成性：任取向量$\mathbf{w} \in V$，存在有限个向量
           $V'=\lbrace\mathbf{v_1,v_2,\dots,v_r}\rbrace\subset V $，$\mathbf{w}$可以用$V'$线性表出
 \end{itemize}
-这里要求“有限”是为了避免敛散性的问题：例如收敛的级数构成线性空间，如果我们声
-称取定了一组基（当然是无限的），并考察其中无限个基张成的空间，那么对于构成级数
-的每一项，均需要考察其敛散性。然而，级数的敛散性自然可以对前有限项不做要求，它
-们求和很可能不会收敛；从另一个角度来讲，一些更加抽象的线性空间中，也说不清楚基
-的无限和是否收敛，甚至在没有范数的线性空间中无法定义收敛。
-
-函数空间是一种典型的无限维线性空间（因为多项式空间已经是无限维的），根据学习线
-性代数的经验，我们希望能找到一组单位正交基，使得函数在这组正交基下的分解能够体
-现函数的某些性质并便于后续的运算，然而，
-若只考虑有限和，这种想法所能研究的函数十分有限，例如我们马上就会见到的三角函数
-系和指数函数系，它们作为无限阶可微函数，有限和也是无限阶可微的。所以，我们应考
-虑将函数$f(t)$分解为一组相互正交的函数系$\{f_i(t)\}_{i=1}^{\infty}$组成的函
-数项级数。
-
-我们面临的另一个问题是如何在函数空间上定义内积，从而定义正交性。一种比较自然的
-想法是利用（勒贝格）积分，积分区间有限，对于周期函数，自然地取为一个周期。换言
-之，我们考虑在空间
-\[L^2([0,T]):=\{f:[0,T]\rightarrow \mathbb{C} \mid \int_{T}|f(t)|^2\,dt<\infty\}\]
+这里要求“有限”是为了避免敛散性的问题：例如收敛的级数构成线性空间，如果我们声称取定了一组基（当然是无限的），并考察其中无限个基张成的空间，那么对于构成级数的每一项，均需要考察其敛散性。然而，级数的敛散性自然可以对前有限项不做要求，它们求和很可能不会收敛；从另一个角度来讲，一些更加抽象的线性空间中，也说不清楚基的无限和是否收敛。函数空间是一种典型的无限维线性空间（因为多项式空间已经是无限维的），根据学习线性代数的经验，我们希望能找到一组单位正交基，使得函数在这组正交基下的分解能够体现函数的某些性质并便于后续的运算，然而，若只考虑有限和，这种想法所能研究的函数十分有限，例如我们马上就会见到的三角函数系和指数函数系，它们作为无限阶可微函数，有限和也是无限阶可微的。所以，我们应考虑将函数$f(t)$分解为一组相互正交的函数系$\{f_i(t)\}_{i=1}^{\infty}$组成的函数项级数。我们面临的另一个问题是如何在函数空间上定义内积，从而定义正交性。一种比较自然的想法是利用（勒贝格）积分，积分区间有限，对于周期函数，自然地取为一个周期。换言之，我们考虑在空间
+\[L^2([0,T]):=\{f:[0,T]\rightarrow \mathbb{C} \big| \int_{T}|f(t)|^2\,\text dt<\infty\}\]
 上定义内积（为了区别于分布的符号，这里内积用圆括号表示，$^*$表示取共轭）：
 \[(f,g):=\int_{T}f(t)g^*(t)\,dt \]
-我们对这个定义做一些说明,但不给出证明，因为证明需要首先建立勒贝格积分的体系，
-读者可借助黎曼积分直观地理解它们：\\
-1.$L^p([0,T])(0<p\leq \infty)$空间表示在区间[0,T]上p次勒贝格可积的函数组成的函数空间，即
-\[L^p([0,T]):=\{f:[0,T]\rightarrow \mathbb{C} \mid \int_{T}f^p(t)\,dt<\infty\}\]
+我们对这个定义做一些说明,但不给出证明，因为证明需要首先建立勒贝格积分的体系， 读者可借助黎曼积分直观地理解它们：\\
+1.$L^p([0,T])(0<p\leq \infty)$空间表示在区间$[0,T]$上$p$次勒贝格可积的函数组成的函数空间，即
+\[L^p([0,T]):=\{f:[0,T]\rightarrow \mathbb{C} \big| \int_{T}f^p(t)\,dt<\infty\}\]
 $L^p([0,T])$具有性质：
 \begin{itemize}
     \item \raggedright{} $L^p([0,T])$是线性空间\\
     \item 当$1\leq p \leq \infty$时，$L^p([0,T])$是线性赋范空间，
-          $\| f \|_{p} := \bigl( \int_{T} |f(t)|^p \, dt \bigr)^{1/p}$，
-          称之为$L^p$范数,次可加性由闵可夫斯基不等式保证
+          $\| f \|_{p} := \bigl( \int_{T} |f(t)|^p \, dt \bigr)^{1/p}$， 称之为$L^p$范数,次可加性由闵可夫斯基不等式保证
 \end{itemize}
-2.要求$f(t)$平方可积是为了保证$(f,f)=\int_{T}|f(t)|^2\,dt<\infty$，$f(t)$平
-方可积能够推出$f(t)$是绝对可积的，从而是可积的（有限区间I上有$L^p(I)\supset  L^q(I),p<q$，无限区间上它们互不包含）\\
-3.尽管对函数空间做了一些限制，我们研究的范围依旧是足够大的，闭区间上的平方可积
-是一个比较弱的条件\\
-4.柯西-施瓦兹不等式和三角不等式（它是闵可夫斯基不等式的特例）自然成立，它们证
-明的过程不涉及空间的维数是否有限。
-
-有了内积就可以定义范数，从而可以给出$L^2([0,T])$空间上的函数项级数的（依范数）
-收敛的定义：如果
+2.要求$f(t)$平方可积是为了保证$(f,f)=\int_{T}|f(t)|^2\,dt<\infty$，$f(t)$平 方可积能够推出$f(t)$是绝对可积的，从而是可积的（有限区间I上有$L^p(I)\supset  L^q(I),p<q$，无限区间上它们互不包含）\\
+3.尽管对函数空间做了一些限制，我们研究的范围依旧是足够大的，闭区间上的平方可积 是一个比较弱的条件\\
+4.柯西-施瓦兹不等式和三角不等式（它是闵可夫斯基不等式的特例）自然成立，它们证 明的过程不涉及空间的维数是否有限。有了内积就可以定义范数，从而可以给出$L^2([0,T])$空间上的函数项级数的（依范数） 收敛的定义：如果
 \[\lim_{n \to \infty} \| f(t)-\sum_{i = 1}^{n}  a_i f_i(t)\|=0\]
-就认为级数$\sum_{i = 1}^{n}  a_i f_i(t)$是$f(t)$在这个正交函数系下的分解，
-此时记\[f\sim\sum_{n=1}^{\infty}a_n f_n\]
-它并不意味着等式右侧的函数项级数在某一点收敛于f.在$L^2([0,T])$空间中，我们不
-区分仅在零测集（“区间长度”的总和总能取到任意小正数，例如至多可数集）上不相等的
-函数，换言之，$L^2([0,T])$空间不是常规意义下的函数的集合，而是\textbf{几乎处处}
-(almost every,a.e.)相等的函数构成的等价类，这里的等号表示的是两侧的函数同属一
-个等价类，至于逐点收敛、一致收敛性，需要另作讨论。
-
-可以想象，依范数收敛要求极限内的函数相当接近于0，但如果在一个点处产生了误差，不论
-误差多大，都不会影响积分的值。事实上，只要存在误差的点构成零测集，就不会影响积分的值，这时我们称
-$\sum_{i = 1}^{n}  a_i f_i(t)$几乎处处收敛
-于$f(t)$，只是这样弱的要求有时会导致积分在黎曼积分的意义下不存在，但勒贝格积分
-可以处理这种情况，读者可以参考\ref{sec:signal}连续信号与离散信号中对勒贝格积分
-的讨论。
-
-如果不存在非零的函数$g(t)\notin\{f_i(t)\}_{i=1}^{\infty}$使得$g(t)$与
-$\{f_i(t)\}_{i=1}^{\infty}$中的所有函数正交，我们称$\{f_i(t)\}_{i=1}^{\infty}$
-为\textbf{完备正交函数系}，这意味着$L^2([0,T])$空间中的任一函数$f(t)$均可分
-解为这个函数系的函数项级数$\sum_{i = 1}^{\infty}  a_i f_i(t)$，由公式 (\ref{eq:2.2})，
-\[a_i=\frac{(f,f_i)}{(f_i,f_i)}=\frac{\int_{T}f(t)f_i^*(t)\,dt}{\int_{T}|f_i(t)|^2\,dt}\]
-细心的读者可能已经发现，这里得到的公式用到了有限维线性空间中的结论，但要推广到
-无限维线性空间并不是显然的。我们将在下一节给出帕塞瓦尔定理之后一并讨论这个问题。
-
-典型的标准完备正交函数集有贝塞尔 (Bessel)函数、勒让德 (Legendre)多项式、小
-波 (wavelet)变换基函数等，下面仅讨论三角函数系和指数函数系。
-
+就认为级数$\sum_{i = 1}^{n}  a_i f_i(t)$是$f(t)$在这个正交函数系下的分解， 此时记\[f\sim\sum_{n=1}^{\infty}a_n f_n\] 它并不意味着等式右侧的函数项级数在某一点收敛于$f$.在$L^2([0,T])$空间中，我们不 区分仅在零测集（“区间长度”的总和总能取到任意小正数，例如至多可数集）上不相等的 函数，换言之，$L^2([0,T])$空间不是常规意义下的函数的集合，而是\textbf{几乎处处} (almost every,a.e.)相等的函数构成的等价类，这里的等号表示的是两侧的函数同属一 个等价类，至于逐点收敛、一致收敛性，需要另作讨论。可以想象，依范数收敛要求极限内的函数相当接近于0，但如果在一个点处产生了误差，不论 误差多大，都不会影响积分的值。事实上，只要存在误差的点构成零测集，就不会影响积分的值，这时我们称 $\sum_{i = 1}^{n}  a_i f_i(t)$几乎处处收敛 于$f(t)$，只是这样弱的要求有时会导致积分在黎曼积分的意义下不存在，但勒贝格积分 可以处理这种情况，读者可以参考\ref{sec:signal}连续信号与离散信号中对勒贝格积分 的讨论。如果不存在非零的函数$g(t)\notin\{f_i(t)\}_{i=1}^{\infty}$使得$g(t)$与 $\{f_i(t)\}_{i=1}^{\infty}$中的所有函数正交，我们称$\{f_i(t)\}_{i=1}^{\infty}$ 为\textbf{完备正交函数系}，这意味着$L^2([0,T])$空间中的任一函数$f(t)$均可分 解为这个函数系的函数项级数$\sum_{i = 1}^{\infty}  a_i f_i(t)$，由公式 (\ref{eq:2.2})，
+\[a_i=\frac{(g,f_i)}{(f_i,f_i)}=\frac{\int_{T}g(t)f_i^*(t)\,dt}{\int_{T}|f_i(t)|^2\,dt}\]
+细心的读者可能已经发现，这里得到的公式用到了有限维线性空间中的结论，但要推广到 无限维线性空间并不是显然的。我们将在下一节给出帕塞瓦尔定理之后一并讨论这个问题。典型的标准完备正交函数集有贝塞尔 (Bessel)函数、勒让德 (Legendre)多项式、小 波 (wavelet)变换基函数等，下面仅讨论三角函数系和指数函数系。
 \section{傅里叶级数}\label{sec:Fourier_Series}
 首先回顾数学分析中几个计算傅里叶级数的公式。考虑将周期为T的函数f展开为
 \begin{align*}
     f(t) & =\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k \cos(k\omega t)+b_k\sin(k\omega t) \\
          & =\frac{c_0}{2}+\sum_{k = 1}^{\infty} c_k\cos(k\omega t+\varphi _k)
 \end{align*}
-（其中$\omega =\frac{2\pi }{T}$为\textbf{基波角频率}，$k\omega (k>1,k\in \mathbb{Z} )$
-为k次\textbf{谐波角频率}）则
+（其中$\omega =\frac{2\pi }{T}$为\textbf{基波角频率}，$k\omega (k>1,k\in \mathbb{Z} )$ 为k次\textbf{谐波角频率}）则
 \[a_k=\frac{2}{T}\int_T f(t)\cos(k\omega t)\,dt\]
 \[b_k=\frac{2}{T}\int_T f(t)\sin(k\omega t)\,dt\]
 \[c_k=\sqrt{a_k^2+b_k^2}\]
-
-下面用完备标准正交函数系的观点来得到以上公式。在学习数学分析时，我们已经看到三
-角函数系$1,\sin(\omega t),\cos(\omega t),\sin(2\omega t),\cos(2\omega t),\dots(\omega =\frac{2\pi}{T})$
-是正交的（读者可以自行验证），但不是单位正交的，因为
+下面用完备标准正交函数系的观点来得到以上公式。在学习数学分析时，我们已经看到三 角函数系$1,\sin(\omega t),\cos(\omega t),\sin(2\omega t),\cos(2\omega t),\dots(\omega =\frac{2\pi}{T})$ 是正交的（读者可以自行验证），但不是单位正交的，因为
 \[(\sin(k\omega t),\sin(k\omega t))=\int_{T}\sin^2(k\omega t)\,dt=\int_{T}\frac{1-\cos(2k\omega t)}{2}=\frac{T}{2}\]
 \[(\cos(k\omega t),\cos(k\omega t))=\int_{T}\cos^2(k\omega t)\,dt=\int_{T}\frac{1+\cos(2k\omega t)}{2}=\frac{T}{2}\]
 可以将它们单位化，也可以直接采用公式 (\ref{eq:2.2})，
 \[a_k=\frac{(f(t),\cos(k\omega t))}{(\cos(k\omega t),\cos(k\omega t))}=\frac{\int_{T}f(t)\cos(k\omega t)^*(t)\,dt}{\int_{T}|\cos(k\omega t)|^2\,dt}
     =\frac{2}{T}\int_{T}f(t)\cos(k\omega t)(t)\,dt\]
 \[b_k=\frac{(f(t),\sin(k\omega t))}{(\sin(k\omega t),\sin(k\omega t))}=\frac{\int_{T}f(t)\sin(k\omega t)^*(t)\,dt}{\int_{T}|\sin(k\omega t)|^2\,dt}
-    =\frac{2}{T}\int_{T}f(t)\sin(k\omega t)(t)\,dt\]
-
-当$f(t)$为偶函数，或者由$f(t)$做偶延拓时,展开式为
+    =\frac{2}{T}\int_{T}f(t)\sin(k\omega t)(t)\,dt\]当$f(t)$为偶函数，或者由$f(t)$做偶延拓时,展开式为
 \[f(t)=\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k\cos(k\omega t)\]
 其中
 \[a_k=\frac{4}{T}\int_{0}^{\frac{T}{2}} f(t)\cos(k\omega t)\,dt\]
@@ -458,20 +279,16 @@ $\{f_i(t)\}_{i=1}^{\infty}$中的所有函数正交，我们称$\{f_i(t)\}_{i=1}
 当$f(t)$为奇函数，或者由$f(t)$做奇延拓时,展开式为
 \[a_k=0\]
 \[b_k=\frac{4}{T}\int_{0}^{\frac{T}{2}} f(t)\sin(k\omega t)\,dt\]
-容易利用对称性得到这些公式。如果将傅里叶级数展开
-式$f(t) =\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k \cos(k\omega t)+b_k\sin(k\omega t)$
-写为
+容易利用对称性得到这些公式。如果将傅里叶级数展开 式$f(t) =\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k \cos(k\omega t)+b_k\sin(k\omega t)$ 写为
 \begin{align*}
     f(t) = & \frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k \cos(k\omega t) \\
            & +\sum_{k = 1}^{\infty} b_k \sin(k\omega t)
 \end{align*}
-则前半部分为偶函数，称之为$f(t)$的\textbf{偶分量}$f_e(t)$;后半部分为奇函数，称之为
-$f(t)$的\textbf{奇分量}$f_o(t)$。高中数学中我们知道，函数的偶分量和奇分量都是唯一的，
+则前半部分为偶函数，称之为$f(t)$的\textbf{偶分量}$f_e(t)$;后半部分为奇函数，称之为 $f(t)$的\textbf{奇分量}$f_o(t)$。高中数学中我们知道，函数的偶分量和奇分量都是唯一的，
 并且\begin{align*}
     f_e(t)=\frac{f(t)+f(-t)}{2} \\
     f_o(t)=\frac{f(t)-f(-t)}{2}
 \end{align*}
-
 除了奇偶性，还可以从奇次谐波、偶次谐波的角度来理解函数。函数$f(t)$称为
 \textbf{奇谐函数}，如果后半个周期的函数是前半个周期的负镜像，即\begin{equation}
     f\left(t+\frac{T}{2}\right)=-f(t)
@@ -493,13 +310,9 @@ $f(t)$的\textbf{奇分量}$f_o(t)$。高中数学中我们知道，函数的偶
         \frac{4}{T}\int_{0}^{T/2}f(t)\sin(k\omega t)\,dt,&\text{if }k\text{为奇数}
     \end{cases}
 \end{align*}
-有了奇谐函数自然也能够定义偶谐函数：$f\left(t+\frac{T}{2}\right)=f(t)$，容
-易验证它只有偶次谐波分量，但从定义式可以看出这只是周期减半的函数。
-
-由欧拉公式$e^{ik\omega t}=\cos(k\omega t)+i\sin(k\omega t)$，得到
+有了奇谐函数自然也能够定义偶谐函数：$f\left(t+\frac{T}{2}\right)=f(t)$，容 易验证它只有偶次谐波分量，但从定义式可以看出这只是周期减半的函数。由欧拉公式$e^{ik\omega t}=\cos(k\omega t)+i\sin(k\omega t)$，得到
 \[\cos(k\omega t)=\frac{e^{ik\omega t}+e^{-ik\omega t}}{2},\sin(k\omega t)=\frac{e^{ik\omega t}-e^{-ik\omega t}}{2i}\]
-（特别地，$c_0=c_0^*\Rightarrow c_0\in\mathbb{R} $）
-故函数$f(t)$也可在指数函数系下展开：
+（特别地，$c_0=c_0^*\Rightarrow c_0\in\mathbb{R} $） 故函数$f(t)$也可在指数函数系下展开：
 \[f(t)=\sum_{k = 0}^{\infty}  c_k e^{ik\omega t} ,c_k=\frac{a_k-ib_k}{2},c_{-k}=\frac{a_k+ib_k}{2}=c_k^*,k\in \mathbb{N}\]
 $\{e^{ik\omega t}\}_{k=0}^{\infty}$是完备正交函数系，
 \begin{align*}
@@ -516,44 +329,21 @@ $\{e^{ik\omega t}\}_{k=0}^{\infty}$是完备正交函数系，
         & =\frac{1}{T}\int_{T}f(t)(e^{ik\omega t})^*\,dt                 \\
         & =\frac{1}{T}\int_{T}f(t)e^{-ik\omega t}\,dt
 \end{align*}
-有时也将$c_k$记作$\hat{f}(k\omega)$或$\hat{F}(k)$，表示f在频域中的点$k\omega$处的值。一般而
-言，我们只将最小正周期称为一个函数的周期，但周期为T的函数可以有多个频率
-$k\omega(k \in \mathbb{Z})$，绘制频谱时，由于难以画出复数，常用\textbf{幅度谱}
-$|\hat{f}(k\omega)|-\omega$和\textbf{相位谱}$\phi_k-\omega$来表征函数，其
-中$\phi_k=\arg\hat{f}(k\omega)$。对于实信号，
+有时也将$c_k$记作$\hat{f}(k\omega)$或$\hat{F}(k)$，表示f在频域中的点$k\omega$处的值。一般而 言，我们只将最小正周期称为一个函数的周期，但周期为T的函数可以有多个频率 $k\omega(k \in \mathbb{Z})$，绘制频谱时，由于难以画出复数，常用\textbf{幅度谱} $|\hat{f}(k\omega)|-\omega$和\textbf{相位谱}$\phi_k-\omega$来表征函数，其 中$\phi_k=\arg\hat{f}(k\omega)$。对于实信号，
 \[c_k=(c_{-k})^*,|\hat{f}(k\omega)|=|\hat{f}(-k\omega)|,\phi_{-k}=-\phi_k\]
 即幅度谱为偶函数，相位谱为奇函数，所以实信号的频谱中有一半是冗余的，按照展开式
 \[\frac{c_0}{2}+\sum_{k = 1}^{\infty} c_k\cos(k\omega t+\varphi _k)\]绘制
-的频谱$c_k-\omega$（注意不是指数函数形式的傅里叶系数）和$\phi_k-\omega$称为\textbf{单边频谱}
-，而完整的频谱称为\textbf{双边频谱}，从
+的频谱$c_k-\omega$（注意不是指数函数形式的傅里叶系数）和$\phi_k-\omega$称为\textbf{单边频谱} ，而完整的频谱称为\textbf{双边频谱}，从
 \[\cos(k\omega t+\varphi _k)=\frac{e^{i(k\omega t+\varphi_k)}+e^{-i(k\omega t+\varphi_k)}}{2}\]
-可知单边频谱相比双边频谱，在给定正频率处的幅值加倍，相位不变。这里的频率实际上是角频率$\omega$，用频率
-f画频谱只涉及图像的横向伸缩，此处不再赘述。
-
-需要指出的是，本小节中研究的函数均在$L^2([0,T])$空间中，但这并不能保证傅里叶
-级数存在且收敛，保证这一点需要\textbf{狄利克雷条件}：
+可知单边频谱相比双边频谱，在给定正频率处的幅值加倍，相位不变。这里的频率实际上是角频率$\omega$，用频率 f画频谱只涉及图像的横向伸缩，此处不再赘述。需要指出的是，本小节中研究的函数均在$L^2([0,T])$空间中，但这并不能保证傅里叶 级数存在且收敛，保证这一点需要\textbf{狄利克雷条件}：
 \begin{itemize}[nosep, left=0pt]
     \item $\int_{T}|f(t)|\,dt<\infty$
     \item 在一个周期内f连续或有有限个第一类间断点，即\textbf{分段连续} (piecewise continuous)
     \item 在一个周期内，f的极值点个数有限
 \end{itemize}
-满足此条件时，f的傅里叶级数展开在在任意点
-收敛到其左右极限的平均值，这个结果称为\textbf{狄利克雷定理}。前两个条件是容易
-理解的，对于最后一个条件，它实际上相当于要求f是有界变差函数 (Bounded Variatioin Function)，
-感兴趣的读者可以在实变函数的教材中了解这种函数。在附录\ref{sec:Asymptotic_Behaviour}中
-我们将讨论另外的更易理解的条件。
-
-下面考虑函数空间中的“勾股定理”。由公式 (\ref{eq:2.6})，
+满足此条件时，f的傅里叶级数展开在在任意点 收敛到其左右极限的平均值，这个结果称为\textbf{狄利克雷定理}。前两个条件是容易 理解的，对于最后一个条件，它实际上相当于要求f是有界变差函数 (Bounded Variatioin Function)， 感兴趣的读者可以在实变函数的教材中了解这种函数。在附录\ref{sec:Asymptotic_Behaviour}中 我们将讨论另外的更易理解的条件。下面考虑函数空间中的“勾股定理”。由公式 (\ref{eq:2.6})，
 \[|f|^2=\sum_{k=1}^{\infty}c_k^2|e^{ik\omega t}|^2=T\sum_{k=1}^{\infty}c_k^2\]
-即\[P=\frac{1}{T}\int_{T}|f(t)|^2\,dt=\sum_{k=1}^{\infty}c_k^2\]
-这个公式称为\textbf{帕塞瓦尔定理} (Parseval's Thoerem)或\textbf{瑞利恒等式} (Rayleigh's Identity)，
-P为平均功率。
-
-至此，我们得到了傅里叶系数的公式和帕塞瓦尔定理，但其实证明用到的结论是基于有限
-维线性空间的，现在就来填补这个逻辑漏洞，对此不感兴趣的读者可以忽略这部分内容。
-以下设$\{\phi_n\}_{n=1}^{\infty}$是$L^2(a,b)$的标准正交基,$f\in L^2(a,b)$
-（注意这里已经不局限于讨论傅里叶级数，并且与前文未标准化的正交基略有形式上的差别）。
-
+即\[P=\frac{1}{T}\int_{T}|f(t)|^2\,dt=\sum_{k=1}^{\infty}c_k^2\] 这个公式称为\textbf{帕塞瓦尔定理} (Parseval's Thoerem)或\textbf{瑞利恒等式} (Rayleigh's Identity)， P为平均功率。至此，我们得到了傅里叶系数的公式和帕塞瓦尔定理，但其实证明用到的结论是基于有限 维线性空间的，现在就来填补这个逻辑漏洞，对此不感兴趣的读者可以忽略这部分内容。 以下设$\{\phi_n\}_{n=1}^{\infty}$是$L^2(a,b)$的标准正交基,$f\in L^2(a,b)$ （注意这里已经不局限于讨论傅里叶级数，并且与前文未标准化的正交基略有形式上的差别）。
 \textbf{引理2.1}：贝塞尔不等式 (Bessel's Inequality)\begin{align*}
     \sum_{n=1}^{\infty}|(f,\phi_n)|^2\leq\|f\|^2
 \end{align*}
@@ -565,10 +355,7 @@ P为平均功率。
      & \hspace{4cm}=                                                    \|f\|^2-2\sum_{n=1}^{N}|(f,\phi_n)|^2+\sum_{n=1}^{N}|(f,\phi_n)|^2=\|f\|^2-\sum_{n=1}^{N}|(f,\phi_n)|^2
 \end{flalign*}
 令$N\to\infty$即证。\\
-从第二行到第三行用到了恒等式$\|\mathbf{a+b}\|^2=\|\mathbf{a}\|^2+2Re\langle\mathbf{a,b}\rangle+\|\mathbf{b}\|^2$,
-Re表示取实部，这个结论十分简单，留予读者自证。在最终的结论帕塞瓦尔定理中这个不
-等号将变成等号，但它是不可或缺的，并且我们还将在附录\ref{sec:Asymptotic_Behaviour}中见到它。
-
+从第二行到第三行用到了恒等式$\|\mathbf{a+b}\|^2=\|\mathbf{a}\|^2+2Re\langle\mathbf{a,b}\rangle+\|\mathbf{b}\|^2$, Re表示取实部，这个结论十分简单，留予读者自证。在最终的结论帕塞瓦尔定理中这个不 等号将变成等号，但它是不可或缺的，并且我们还将在附录\ref{sec:Asymptotic_Behaviour}中见到它。
 \textbf{引理2.2}：级数$\sum_{n=1}^{N}(f,\phi_n)\phi_n$依范数收敛，并且$\|\sum_{n=1}^{\infty}(f,\phi_n)\phi_n\|\leq\|f\|$\\
 \textbf{Proof:}
 \begin{flalign*}
@@ -577,19 +364,14 @@ Re表示取实部，这个结论十分简单，留予读者自证。在最终的
      & \text{因此}\sum_{n=1}^{\infty}(f,\phi_n)\phi_n\text{构成柯西列.}                                                                                          \\
      & \text{令}m_1=1,m_2\to\infty,\|\sum_{n=1}^{\infty}(f,\phi_n)\phi_n\| =\sum_{n=1}^{\infty}|(f,\phi_n)\phi_n|^2\leq\|f\|
 \end{flalign*}
-柯西列能够推出收敛是因为$L^2(a,b)$是无限维的完备度量空间，即\textbf{希尔伯特空间} (Hilbert space)
-，见\ref{sec:Linear_Space}。构建这个引理是为了使用希尔伯特空间中内积的连续性，其表述
-见下一个命题。
-
-\textbf{命题2.3}：希尔伯特空间H中的内积具有连续性，即如果级数$\sum_{n=1}^{\infty}\phi_n$
-的部分和$S_N$依范数收敛到S，则任给$y\in H$，总有
+柯西列能够推出收敛是因为$L^2(a,b)$是无限维的完备度量空间，即\textbf{希尔伯特空间} (Hilbert space) ，见\ref{sec:Linear_Space}。构建这个引理是为了使用希尔伯特空间中内积的连续性，其表述 见下一个命题。
+\textbf{命题2.3}：希尔伯特空间H中的内积具有连续性，即如果级数$\sum_{n=1}^{\infty}\phi_n$ 的部分和$S_N$依范数收敛到S，则任给$y\in H$，总有
 \[\lim_{N\to\infty}\langle S_n,y\rangle=\langle S,y\rangle\]
 \textbf{Proof:}\begin{align*}
      & \langle S,y\rangle-\lim_{N\to\infty}\langle S_n,y\rangle=\lim_{N\to\infty}\langle S-S_n,y\rangle                                     \\
      & \lim_{N\to\infty}\|S-S_N\|=0\Rightarrow \lim_{N\to\infty}|\langle S-S_n,y\rangle|\leq\lim_{N\to\infty}\|S-S_N\|\|y\|=0               \\
      & \hspace{3cm}\Rightarrow \lim_{N\to\infty}\langle S-S_n,y\rangle=0\Rightarrow\lim_{N\to\infty}\langle S_n,y\rangle=\langle S,y\rangle
 \end{align*}
-
 \textbf{定理2.4}:以下三个命题是等价的：（对于符号$\sim$，参考\ref{sec:Linear_Space}）
 \begin{enumerate}
     \item $\forall n,(f,\phi_n)=0\Rightarrow f\sim 0$，即$\{\phi_n\}_{n=1}^{\infty}$是完备的标准正交基
@@ -597,8 +379,7 @@ Re表示取实部，这个结论十分简单，留予读者自证。在最终的
     \item $\forall f\in L^2(a,b)$，有\textbf{帕塞瓦尔恒等式}：
           \[\|f\|^2=\sum_{n=1}^{\infty}|(f,\phi_n)|^2\]
 \end{enumerate}
-\textbf{Proof:}
-我们将证明$1\Rightarrow 2\Rightarrow 3\Rightarrow 1$.\\
+\textbf{Proof:} 我们将证明$1\Rightarrow 2\Rightarrow 3\Rightarrow 1$.\\
 $1\Rightarrow 2$：\begin{align*}
      & \text{令}g\sim f-\sum_{n=1}^{\infty}(f,\phi_n)\phi_n.                                                              \\
      & \forall m\in\mathbb{N},(g,\phi_m)=(f,\phi_m)-\sum_{n=1}^{\infty}(f,\phi_n)(\phi_n,\phi_m)=(f,\phi_m)-(f,\phi_m)=0 \\
@@ -613,48 +394,20 @@ $3\Rightarrow 1$：$(f,\phi_n)=0\Rightarrow\|f\|=0\Rightarrow f\sim 0$.
     \caption{周期矩形脉冲信号及其频谱}
 \end{figure}
 \noindent 例2.1.\textbf{周期矩形脉冲信号}的傅里叶级数展开和频谱图\\
-脉冲宽度为$\tau$，脉冲幅度为E，周期为$T (\tau<T)$的周期矩形脉冲信号，基波角频率
-$\omega=\frac{2\pi}{T}$，傅里叶级数展开为
+脉冲宽度为$\tau$，脉冲幅度为E，周期为$T (\tau<T)$的周期矩形脉冲信号，基波角频率 $\omega=\frac{2\pi}{T}$，傅里叶级数展开为
 \[f(t)=\sum_{k = 1}^{\infty}  \frac{E\tau}{T}Sa(\frac{k\omega \tau}{2})e^{ik\omega t}\]
-
-如图\ref{fig:2.1}，可以看到，这个频谱与取样函数$Sa(\omega)$非常相似（为了体现这一点，绘制频谱时将
-基波角频率大幅减小，并不是第一张图直接做傅里叶级数展开的结果），原因将在\ref{sec:Fourier}
-中给出。
-
-\textbf{带宽} (bandwidth)指最高频率与最低频率之差，表征信号频率的集中程度。对
-于实信号，有时仅考虑正频率，带宽减半。周期矩形脉冲信号的频谱是无限的，但能量基
-本集中在最靠近y轴的两个零点之间，此时可以将带宽定义为\textbf{第一过零点带宽}
-$B=\frac{2\pi}{\tau}$（仅考虑正频率）。
-
+如图\ref{fig:2.1}，可以看到，这个频谱与取样函数$Sa(\omega)$非常相似（为了体现这一点，绘制频谱时将 基波角频率大幅减小，并不是第一张图直接做傅里叶级数展开的结果），原因将在\ref{sec:Fourier} 中给出。
+\textbf{带宽} (bandwidth)指最高频率与最低频率之差，表征信号频率的集中程度。对 于实信号，有时仅考虑正频率，带宽减半。周期矩形脉冲信号的频谱是无限的，但能量基 本集中在最靠近y轴的两个零点之间，此时可以将带宽定义为\textbf{第一过零点带宽} $B=\frac{2\pi}{\tau}$（仅考虑正频率）。
 \section{傅里叶变换初步}\label{sec:Fourier}
-在构建傅里叶级数时，使用频率和角频率只涉及书写问题，因为傅里叶级数不会涉及尺度
-变换、逆变换和卷积，但在傅里叶变换的理论中，这将导致许多公式在形式上有一些差别。
-这时，将同时给出两种傅里叶变换的公式，左侧为频率版本，用蓝色标注，右侧为角频率
-版本，用红色标注。对于频率的符号，物理上一般使用f或$\nu $，而一些傅里叶分析的
-书上则使用s或$\xi$，但鉴于f常常用来表示信号或函数，s用于表示复频率，我们将使用$\xi$
-作为频率的符号。
-
-定义傅里叶变换的一种动机是从傅里叶级数出发。要从傅里叶级数研究的周期现象转向傅
-里叶变换研究的非周期现象，自然能够想到在傅里叶级数相关的理论中，令T趋于无穷；
-另一方面，复指数函数比三角函数更适合作为描述振荡（周期）行为的基本函数，在附录
-\ref{sec:Other_Transforms}中将讨论傅里叶正弦变换和傅里叶余弦变换。
-
-我们做一个简单的尝试，令$f\in L^2(\mathbb{R})$（关于$L^2$空间的讨论，见\ref{sec:Linear_Space}）,$T\to \infty$
-，则\[c_n=\frac{1}{T}\int_{T}f(t)e^{-ik\omega t}\,dt=\frac{1}{T}\int_{T}f(t)e^{-2\pi ik\xi t}\,dt\to 0\]
-这样做变换将丢失f的所有信息，不是我们希望看到的，但很明显，只要给以上公式乘上T，并认为$k\omega$
-或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)：
+在构建傅里叶级数时，使用频率和角频率只涉及书写问题，因为傅里叶级数不会涉及尺度 变换、逆变换和卷积，但在傅里叶变换的理论中，这将导致许多公式在形式上有一些差别。 这时，将同时给出两种傅里叶变换的公式，左侧为频率版本，用蓝色标注，右侧为角频率 版本，用红色标注。对于频率的符号，物理上一般使用f或$\nu $，而一些傅里叶分析的 书上则使用s或$\xi$，但鉴于f常常用来表示信号或函数，s用于表示复频率，我们将使用$\xi$ 作为频率的符号。定义傅里叶变换的一种动机是从傅里叶级数出发。要从傅里叶级数研究的周期现象转向傅 里叶变换研究的非周期现象，自然能够想到在傅里叶级数相关的理论中，令T趋于无穷； 另一方面，复指数函数比三角函数更适合作为描述振荡（周期）行为的基本函数，在附录
+\ref{sec:Other_Transforms}中将讨论傅里叶正弦变换和傅里叶余弦变换。我们做一个简单的尝试，令$f\in L^2(\mathbb{R})$（关于$L^2$空间的讨论，见\ref{sec:Linear_Space}）,$T\to \infty$ ，则\[c_n=\frac{1}{T}\int_{T}f(t)e^{-ik\omega t}\,dt=\frac{1}{T}\int_{T}f(t)e^{-2\pi ik\xi t}\,dt\to 0\] 这样做变换将丢失f的所有信息，不是我们希望看到的，但很明显，只要给以上公式乘上T，并认为$k\omega$ 或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)：
 \lr{
     \mathcal{F} f(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt
 }{
     \mathcal{F} f(\omega)=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt
-}
-
-有时也用$\hat{f}$或F表示f的傅里叶变换，记作
+}有时也用$\hat{f}$或F表示f的傅里叶变换，记作
 \[f\overset{\mathcal{F} }{\longleftrightarrow}F\]
-并称之为\textbf{傅里叶变换对}。傅里叶变换没有最好的符号，在不引起歧义时采用最
-简洁和便于理解的即可。其实，在傅里叶变换的理论中，要求$f\in L^1(\mathbb{R})$
-而不是$L^2(\mathbb{R})$，$\mathbb{R}$是无穷区间，$L^1(\mathbb{R})$与
-$L^2(\mathbb{R})$之间不存在包含关系。可以验证，$f\in L^1(\mathbb{R})$时，它的
+并称之为\textbf{傅里叶变换对}。傅里叶变换没有最好的符号，在不引起歧义时采用最 简洁和便于理解的即可。其实，在傅里叶变换的理论中，要求$f\in L^1(\mathbb{R})$ 而不是$L^2(\mathbb{R})$，$\mathbb{R}$是无穷区间，$L^1(\mathbb{R})$与 $L^2(\mathbb{R})$之间不存在包含关系。可以验证，$f\in L^1(\mathbb{R})$时，它的
 傅里叶变换存在并且是连续的：\begin{align*}
     |\mathcal{F} f(\xi)|                      & =\left|\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt\right|                       \\
                                               & \leq\int_{-\infty}^{\infty}|f(t)||e^{-2\pi i\xi t}|\,dt\\
@@ -662,54 +415,19 @@ $L^2(\mathbb{R})$之间不存在包含关系。可以验证，$f\in L^1(\mathbb{
     |\mathcal{F} f(\xi+h)-\mathcal{F} f(\xi)| & =\left|\int_{-\infty}^{\infty}f(t)(e^{-2\pi i(\xi+h)t}-e^{-2\pi i\xi t})\,dt\right| \\
                                               & \leq\int_{-\infty}^{\infty}|f(t)||e^{-2\pi iht}-1|\,dt\to 0(h\to 0)
 \end{align*}
-另外，$\mathcal{F} f(x)\to 0(x\to\infty)$，这个结果称为\textbf{黎曼-勒贝格引理} (Riemann-Lebesgue Lemma)，
-将在附录\ref{sec:approach}简单介绍。
-
-下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。我们来看上一节\ref{sec:Fourier_Series}
-末尾的例子，为了体现双边频谱与取样函数的相似性，我们取了一个较为特殊的周期矩形
-脉冲信号，它的基波角频率应为图\ref{fig:2.1}中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极
-小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，
-令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非
-    周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作
-用是“除以$\frac{1}{T}$”，$\frac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼
-积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\frac{n}{T}=n\xi$处的小矩形面积，
-$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频
-率$\omega$为横坐标，$c_n$是$\frac{2\pi n}{T}=n\omega$处的小矩形面积，
-$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为频谱密度函
-数。
-
-实际上，从这个角度出发，可以立即得到\textbf{傅里叶逆变换} (Inverse Fourier Tansform,IFT)
-的公式，因为我们已经将f展开为傅里叶级数，这对应着由f的傅里叶变换$\mathcal{F} f$
-还原出f。我们知道
-\lr{
-f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{2\pi i\xi t}\\
+另外，$\mathcal{F} f(x)\to 0(x\to\infty)$，这个结果称为\textbf{黎曼-勒贝格引理} (Riemann-Lebesgue Lemma)， 将在附录\ref{sec:approach}简单介绍。下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。我们来看上一节\ref{sec:Fourier_Series} 末尾的例子，为了体现双边频谱与取样函数的相似性，我们取了一个较为特殊的周期矩形 脉冲信号，它的基波角频率应为图\ref{fig:2.1}中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极 小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之， 令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非 周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作 用是“除以$\frac{1}{T}$”，$\frac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼 积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\frac{n}{T}=n\xi$处的小矩形面积， $Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频 率$\omega$为横坐标，$c_n$是$\frac{2\pi n}{T}=n\omega$处的小矩形面积， $Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为频谱密度函 数。实际上，从这个角度出发，可以立即得到\textbf{傅里叶逆变换} (Inverse Fourier Tansform,IFT) 的公式，因为我们已经将f展开为傅里叶级数，这对应着由f的傅里叶变换$\mathcal{F} f$ 还原出f。我们知道
+\lr{ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{2\pi i\xi t}\\
 &=\frac{1}{T}\sum_{n=-\infty}^{\infty}(\int_{T}f(t)e^{-2\pi i\xi t}\,dt)e^{2\pi i\xi t}
-}{
-f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
+}{ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
 &=\frac{1}{T}\sum_{n=-\infty}^{\infty}(\int_{T}f(t)e^{-i\omega t}\,dt)e^{i\omega t}
-}
-根据前文所述的对应关系，做以下替换（注意$T\to\infty$）：
+} 根据前文所述的对应关系，做以下替换（注意$T\to\infty$）：
 \lr{
     &\frac{1}{T}\rightarrow d\xi,\int_{T}f(t)e^{-2\pi i\xi t}\,dt\rightarrow \mathcal{F} f(\xi)\\
     &f(t)=\mathcal{F} ^{-1}\mathcal{F} (t)=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)e^{2\pi i\xi t}\,d\xi
 }{
     &\frac{2\pi}{T}\rightarrow d\omega,\int_{T}f(t)e^{i\omega t}\,dt\rightarrow \mathcal{F} f(\omega)\\
     &f(t)=\mathcal{F} ^{-1}\mathcal{F} (t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega
-}
-这里$\mathcal{F} ^{-1}$表示取IFT，和$\mathcal{F} $一样，是一种从函数空间到函
-数空间的映射（具体是什么函数空间，我们将在\ref{sec:distributions}中讨论，目前
-可以理解为$L^1(\mathbb{R})$），$\mathcal{F} $
-是从时域函数到频域（角频域）函数的映射，$\mathcal{F} ^{-1}$是从频域（角频域）
-到时域函数的映射。因此，严格来说我们总应该写上自变量，但在不引起歧义的情况
-下允许略去，例如我们同时承认$F(\xi)=\mathcal{F} [f(t)](\xi)$和
-$F(\xi)=\mathcal{F} [f(t)]$的写法。
-
-我们从傅里叶级数类比得到了傅里叶变换及其逆变换的定义，但还没有严格证
-明逆变换将给出原有的时域函数,即著名的\textbf{傅里叶反演公式} (the Fourier Inversion Thoerem)，
-证明将在\ref{sec:approach}给出，而不会导致循环论证。现在先介绍一些傅里叶变
-换的性质，在实际计算傅里叶变换时，常常不会带入定义计算，而是通过这样的运算性质
-来计算。
-{\nolinebreak[4]
+} 这里$\mathcal{F} ^{-1}$表示取IFT，和$\mathcal{F} $一样，是一种从函数空间到函 数空间的映射（具体是什么函数空间，我们将在\ref{sec:distributions}中讨论，目前 可以理解为$L^1(\mathbb{R})$），$\mathcal{F} $ 是从时域函数到频域（角频域）函数的映射，$\mathcal{F} ^{-1}$是从频域（角频域） 到时域函数的映射。因此，严格来说我们总应该写上自变量，但在不引起歧义的情况 下允许略去，例如我们同时承认$F(\xi)=\mathcal{F} [f(t)](\xi)$和 $F(\xi)=\mathcal{F} [f(t)]$的写法。我们从傅里叶级数类比得到了傅里叶变换及其逆变换的定义，但还没有严格证 明逆变换将给出原有的时域函数,即著名的\textbf{傅里叶反演公式} (the Fourier Inversion Thoerem)， 证明将在\ref{sec:approach}给出，而不会导致循环论证。现在先介绍一些傅里叶变 换的性质，在实际计算傅里叶变换时，常常不会带入定义计算，而是通过这样的运算性质 来计算。 {\nolinebreak[4]
 \begin{itemize}
     \item \textbf{对偶性}：记反转信号 (the reversed siganl)为$f^-(t)=f(-t)$，则
           \lr{(\mathcal{F}f)^-=\mathcal{F} (f^-)=\mathcal{F} ^{-1}f\\
@@ -717,8 +435,7 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
               f\text{是实信号}\Rightarrow \mathcal{F} f^-=\overline{\mathcal{F} f}
           }{(\mathcal{F}f)^-=\mathcal{F} (f^-)=2\pi\mathcal{F} ^{-1}f\\
               \mathcal{F} \mathcal{F} f=2\pi f^-\\
-              f\text{是实信号}\Rightarrow \mathcal{F} f^-=\overline{\mathcal{F} f}}
-          时域反转，频域也反转，因此我们可以不区分$(\mathcal{F}f)^-=\mathcal{F} (f^-)$，将它们全部写作$\mathcal{F} f^-$.\\
+              f\text{是实信号}\Rightarrow \mathcal{F} f^-=\overline{\mathcal{F} f}} 时域反转，频域也反转，因此我们可以不区分$(\mathcal{F}f)^-=\mathcal{F} (f^-)$，将它们全部写作$\mathcal{F} f^-$.\\
           不涉及收敛性的问题时，的确可以做多次傅里叶变换，只是此时不再具有明显的物理意义，因而也不纠结所选用的符号。
     \item \textbf{对称性}：$\mathcal{F} f$与f奇偶性相同；f是实函数时，如果f还是偶函数，则$\mathcal{F} f$也是实函数，
           如果f还是奇函数，则$\mathcal{F} $是纯虚函数
@@ -729,16 +446,14 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
           }{
           &\mathcal{F} [f(t-b)](\omega)=e^{-i\omega t}\mathcal{F} f(\omega)\\
           &\mathcal{F} [f(t)e^{ibt}](\omega)=\mathcal{F} f(\omega-b)
-          }
-          可见信号时移$|\mathcal{F} f|$，而仅改变$\mathcal{F} f$的相位。
+          } 可见信号时移$|\mathcal{F} f|$，而仅改变$\mathcal{F} f$的相位。
     \item \textbf{伸缩定理}：\lr{
               &\mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f(\frac{\xi}{a})\\
               &\mathcal{F} f(a\xi)=\frac{1}{|a|}\mathcal{F} [f(\frac{t}{a})]
           }{
               &\mathcal{F} [f(at)](\omega)=\frac{1}{|a|}\mathcal{F} f(\frac{\omega}{a})\\
               &\mathcal{F} f(a\xi)=\frac{1}{|a|}\mathcal{F} [f(\frac{t}{a})]
-          }
-          信号反转可看作a=-1的特例。可以认为两种频率下的傅里叶变换是通过伸缩得到的，即
+          } 信号反转可看作a=-1的特例。可以认为两种频率下的傅里叶变换是通过伸缩得到的，即
           \[2\pi\xi=\omega,\textcolor{blue}{\mathcal{F}}(2\pi\xi)=\textcolor{red}{\mathcal{F}}(\omega)\]
           a>1，时域收缩，频域舒张、变矮；0<a<1，时域舒张，频域收缩、变高；a<0，时域和频域都额外做一次反转。
     \item \textbf{微分性质}：\lr{
@@ -749,24 +464,19 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
               &\mathcal{F} (f')(\omega)=i\omega\mathcal{F} f(\omega)\\
               &\mathcal{F} [itf(t)](\omega)=-(\mathcal{F} f)'(\omega)\\
               &\text{即}\mathcal{F}(tf)(\omega)=i(\mathcal{F} f)'(\omega)
-          }
-          最后一步使用了线性性；容易将此性质推广至任意阶导数。
+          } 最后一步使用了线性性；容易将此性质推广至任意阶导数。
 \end{itemize}
 \textbf{Proof:}\\
 1.对偶性
-\lr{
-    (\mathcal{F} f)^-(\xi)&=\int_{-\infty}^{\infty}f(t)e^{2\pi i \xi t}\,dt\\
+\lr{ (\mathcal{F} f)^-(\xi)&=\int_{-\infty}^{\infty}f(t)e^{2\pi i \xi t}\,dt\\
     \mathcal{F} (f^-)(\xi)&=\int_{-\infty}^{\infty}f(-t)e^{-2\pi i \xi t}\,dt\\
     &=\int_{-\infty}^{\infty}f(t)e^{2\pi i \xi t}\,dt\\
     \mathcal{F} ^{-1}f(x)&=\int_{-\infty}^{\infty}f(t)e^{2\pi ixt}\,dt
-}{
-    (\mathcal{F} f)^-(\omega)&=\int_{-\infty}^{\infty}f(t)e^{i \omega t}\,dt\\
+}{ (\mathcal{F} f)^-(\omega)&=\int_{-\infty}^{\infty}f(t)e^{i \omega t}\,dt\\
     \mathcal{F} (f^-)(\omega)&=\int_{-\infty}^{\infty}f(-t)e^{-i \omega t}\,dt\\
     &=\int_{-\infty}^{\infty}f(t)e^{i \omega t}\,dt\\
     \mathcal{F} ^{-1}f(x)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}f(t)e^{i\omega t}\,dt
-}
-因此\lr{(\mathcal{F}f)^-=\mathcal{F} (f^-)=\mathcal{F} ^{-1}f}{(\mathcal{F}f)^-=\mathcal{F} (f^-)=2\pi\mathcal{F} ^{-1}f}
-同时取傅里叶变换，即得
+} 因此\lr{(\mathcal{F}f)^-=\mathcal{F} (f^-)=\mathcal{F} ^{-1}f}{(\mathcal{F}f)^-=\mathcal{F} (f^-)=2\pi\mathcal{F} ^{-1}f} 同时取傅里叶变换，即得
 \lr{
     &\mathcal{F} \mathcal{F} f=f^-\\
     &\text{f是实信号时，}f=\overline{f},\\
@@ -808,9 +518,7 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
     \mathcal{F} [f(at)](\omega)&=\int_{-\infty}^{\infty}f(at)e^{i \omega t}\,dt\\
     &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)e^{\frac{i \omega t}{a}}\,dt&(at\to t)\\
     &=\frac{1}{|a|}\mathcal{F} f(\frac{\omega}{a})
-}
-注意变量代换时，如果a<0，积分上下限也会改变，这正是绝对值的来源，对此有疑惑的读者
-可以自行分情况验算。对于频域的伸缩定理，仅仅是时域伸缩定理的直接推论。\\
+} 注意变量代换时，如果a<0，积分上下限也会改变，这正是绝对值的来源，对此有疑惑的读者 可以自行分情况验算。对于频域的伸缩定理，仅仅是时域伸缩定理的直接推论。\\
 6.微分性质
 \lr    {
 \mathcal{F} (f')(\xi)&=\int_{-\infty}^{\infty}f'(t)e^{-2\pi i\xi t}\,dt\\
@@ -823,34 +531,21 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
 &=\evalat{e^{-i\omega t}f(t)}{-\infty}{\infty}+i\omega\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt\\
 &=i\omega\mathcal{F} f(\omega)
 }
-\lr{
-    (\mathcal{F} f)'(\xi)&=\frac{d}{d\xi}\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt\\
+\lr{ (\mathcal{F} f)'(\xi)&=\frac{d}{d\xi}\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt\\
 &=\int_{-\infty}^{\infty}f(t)\frac{\partial e^{-2\pi i\xi t}}{\partial \xi}\,dt\\
 &=-\int_{-\infty}^{\infty}2\pi itf(t)e^{-2\pi i\xi t}\,dt\\
 &=-\mathcal{F} (2\pi itf)(\xi)
-}{
-    (\mathcal{F} f)'(\omega)&=\frac{d}{d\omega}\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt\\
+}{ (\mathcal{F} f)'(\omega)&=\frac{d}{d\omega}\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt\\
 &=\int_{-\infty}^{\infty}f(t)\frac{\partial e^{-i\omega t}}{\partial \omega}\,dt\\
 &=-\int_{-\infty}^{\infty}itf(t)e^{-i\omega t}\,dt\\
 &=-\mathcal{F} (itf)(\omega)
-}
-$\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty},\evalat{e^{-i\omega t}f(t)}{-\infty}{\infty}=0$
-是因为$f\in L^1(\mathbb{R})$要求反常积分$\int_{\mathbb{R}}|f(t)|\,dt<\infty$
-,其必要条件为$f(t)\to 0,t\to\infty$，而复指数函数部分模值恒为1。对于后一等式
-中将求导与积分交换的操作，实际上是\textbf{莱布尼兹积分法则}，也即含参变量积分
+} $\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty},\evalat{e^{-i\omega t}f(t)}{-\infty}{\infty}=0$ 是因为$f\in L^1(\mathbb{R})$要求反常积分$\int_{\mathbb{R}}|f(t)|\,dt<\infty$ ,其必要条件为$f(t)\to 0,t\to\infty$，而复指数函数部分模值恒为1。对于后一等式 中将求导与积分交换的操作，实际上是\textbf{莱布尼兹积分法则}，也即含参变量积分
 的求导，通常需要条件（以角频率形式为例）\begin{circlist}
     \item $\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt$对每个$\omega$可积
     \item $\frac{\partial f(t)e^{-i\omega t}}{\partial \omega}=-itf(t)e^{-i\omega t}$存在
     \item 存在可积函数$g(t)$使得$|-itf(t)e^{-i\omega t}|\leq g(t)$
 \end{circlist}
-\ding{174}成立是因为定理假设$f(t),tf(t)$能够进行傅里叶变换，从而
-$f(t),tf(t)\in L^1(\mathbb(R)),g(t)=tf(t)$.
-工程上一般不涉及这些，仅作形式计算。也可以由第一个微分性质取傅里叶逆变换，再令
-$f'=\mathcal{F} g$。
-
-下面介绍一些常用信号的傅里叶变换，并使用傅里叶反演公式和对偶性得到一些难以直接
-计算的常用傅里叶变换。
-
+\ding{174}成立是因为定理假设$f(t),tf(t)$能够进行傅里叶变换，从而 $f(t),tf(t)\in L^1(\mathbb(R)),g(t)=tf(t)$. 工程上一般不涉及这些，仅作形式计算。也可以由第一个微分性质取傅里叶逆变换，再令 $f'=\mathcal{F} g$。下面介绍一些常用信号的傅里叶变换，并使用傅里叶反演公式和对偶性得到一些难以直接 计算的常用傅里叶变换。
 \noindent 例3.1.在\ref{sec:Fourier_Series}中讨论了矩形函数$f(t)=E\cdot\Pi_T(t)$的傅里
 叶变换，现在可以验证它的频谱与取样函数相似：
 \lr{
@@ -867,15 +562,13 @@ $f'=\mathcal{F} g$。
 &=-\frac{E}{i\omega}\evalat{e^{-i\omega t}}{-\frac{T}{2}}{\frac{T}{2}}\\
 &=\frac{e^{\frac{i\omega T}{2}}-e^{-\frac{i\omega T}{2}}}{2i}\frac{2E}{\pi\omega}\\
 &=\frac{2E}{\omega}\sin(\frac{T\omega}{2})=ETSa\left(\frac{T\omega}{2}\right)
-}
-因此\lr{
+} 因此\lr{
     \mathcal{F} \Pi_T(\xi)&=Tsinc(T\xi)\\
     \mathcal{F} [sinc(Tt)](\xi)&=\frac{1}{T}\Pi\left(\frac{\xi}{T}\right)
 }{
     \mathcal{F} \Pi_T(\omega)&=TSa\left(\frac{T\omega}{2}\right)\\
     \mathcal{F}[Sa(Tt)](\omega)&=\frac{\pi}{T}\Pi_{2T}(\omega)
 }
-
 \noindent 例3.2.在\ref{sec:signal}中介绍了狄拉克$\delta$函数，实际上它应该作为一个分布来理解，
 见\ref{sec:distributions}，不过我们可以从形式上求出它的傅里叶变换。
 \lr{
@@ -884,36 +577,24 @@ $f'=\mathcal{F} g$。
 }{
 \mathcal{F} \delta(\omega)&=\int_{-\infty}^{\infty}\delta(t)e^{-i\omega t}\,dt\\
 &=\int_{-\infty}^{\infty}\delta(t)\,dt=1
-}
-根据傅里叶变换的对偶性，我们当然希望恒为1的函数的傅里叶变换是$\delta$或$2\pi\delta$
-（取决于是用频率做变换还是用角频率做变换），然而，1在无限区间上必定是不可积的，
-在常规意义下它不能够做傅里叶变换。这个问题将在\ref{sec:distributions}中讨论，
-那时就可以对相当大范围内的函数做傅里叶变换，还将在\ref{sec:Sampling and Interpolation}
-看到周期函数的傅里叶变换与傅里叶级数的深刻关系。现在我们暂且承认公式\lr{
+} 根据傅里叶变换的对偶性，我们当然希望恒为1的函数的傅里叶变换是$\delta$或$2\pi\delta$ （取决于是用频率做变换还是用角频率做变换），然而，1在无限区间上必定是不可积的， 在常规意义下它不能够做傅里叶变换。这个问题将在\ref{sec:distributions}中讨论， 那时就可以对相当大范围内的函数做傅里叶变换，还将在\ref{sec:Sampling and Interpolation} 看到周期函数的傅里叶变换与傅里叶级数的深刻关系。现在我们暂且承认公式\lr{
     &\mathcal{F} \delta(\xi)=1\\
     &\mathcal{F} \mathds{1}=\delta(\xi)
 }{
     &\mathcal{F} \delta(\omega)=1\\
     &\mathcal{F} \mathds{1}=2\pi\delta(\omega)
-}
-其中$\mathds{1}$表示恒为1的函数。根据傅里叶变换的平移定理，立即得到：
+} 其中$\mathds{1}$表示恒为1的函数。根据傅里叶变换的平移定理，立即得到：
 \lr{
 \mathcal{F} [\delta_a](\xi)&=e^{-2\pi i\xi a}\\
 \mathcal{F} [e^{2\pi ia t}]&=\delta_a
 }{
 \mathcal{F} [\delta_a](\omega)&=e^{-i\omega a}\\
 \mathcal{F} [e^{ia t}]&=2\pi\delta_a
-}
-根据傅里叶变换的微分性质得到：\lr{
+} 根据傅里叶变换的微分性质得到：\lr{
     \mathcal{F} [t^n](\xi)&=(\frac{i}{2\pi})^n \delta^{(n)}(\xi)\\
 }{
     \mathcal{F} [t^n](\omega)&=2\pi i^n\delta^{(n)}(\omega)\\
-}
-我们还希望从$u'(t)=\delta(t),sgn'(t)=2\delta(t)$
-得到单位阶跃函数u(t)和符号函数sgn(t)的傅里叶变换，但在考虑$\delta$的不定积分时，必须
-处理“C”，它将导致频域中出现$C\delta$或$2\pi C\delta$项。注意到$sgn(t)$是奇函数，其
-傅里叶变换应为纯虚的奇函数，我们可以由此确定它和单位阶跃函数的傅里叶变换中C的值，从而
-得到正确的结果:
+} 我们还希望从$u'(t)=\delta(t),sgn'(t)=2\delta(t)$ 得到单位阶跃函数u(t)和符号函数sgn(t)的傅里叶变换，但在考虑$\delta$的不定积分时，必须 处理“C”，它将导致频域中出现$C\delta$或$2\pi C\delta$项。注意到$sgn(t)$是奇函数，其 傅里叶变换应为纯虚的奇函数，我们可以由此确定它和单位阶跃函数的傅里叶变换中C的值，从而 得到正确的结果:
 \lr{
 \mathcal{F} sgn(\xi)&=\frac{1}{\pi i\xi}\\
 \mathcal{F} u(\xi)&=\mathcal{F} [\frac{1}{2}(sgn(t)+1)]\\
@@ -922,14 +603,12 @@ $f'=\mathcal{F} g$。
 \mathcal{F} sgn(\omega)&=\frac{2}{i\omega}\\
 \mathcal{F} u(\omega)&=\mathcal{F} [\frac{1}{2}(sgn(t)+1)]\\
 &=\pi\delta+\frac{1}{i\omega}\\
-}
-用傅里叶反演公式，
+} 用傅里叶反演公式，
 \lr{
     \mathcal{F} [\frac{1}{t}](\xi)&=-\pi i sgn(\xi)\\
 }{
     \mathcal{F} [\frac{1}{t}](\omega)&=-\pi i sgn(\omega)\\
 }
-
 \noindent 例3.3. $\Lambda$函数，它在卷积的章节中是一个很好的例子。
 \[\Lambda(t)=\begin{cases}
         1-|t| & \text{if }|t|\leq 1 \\
@@ -958,13 +637,11 @@ $f'=\mathcal{F} g$。
 &=\frac{F(1)-2F(0)+F(-1)}{i\omega}\\
 &=\frac{e^{i\omega}+e^{-i\omega}-2}{(i\omega)^2}=\frac{4}{(\omega)^2}(\frac{e^{\frac{\omega}{2}}-e^{-\frac{\omega}{2}}}{2i})^2\\
 &=Sa^2(\frac{\omega}{2})
-}
-因此\lr{
+} 因此\lr{
     \mathcal{F} sinc^2(\xi)&=\Lambda(t)\\
 }{
     \mathcal{F} Sa^2(\frac{\omega}{2})&=\Lambda(t)
 }
-
 \noindent 例3.4. 高斯函数 $G(t)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}$，求它的傅里叶变换的方法较为特殊：
 \lr{
 \mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}e^{-2\pi i\xi t}\,dt\\
@@ -978,8 +655,7 @@ $f'=\mathcal{F} g$。
 &=i\sigma^2\int_{-\infty}^{\infty}e^{-i\omega t}\,d\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}\\
 &=-\sigma^2\omega\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}e^{-i\omega t}\,dt\\
 &=-\sigma^2\omega\mathcal{F} G
-}
-这是一个可分离变量的微分方程，
+} 这是一个可分离变量的微分方程，
 \lr{
 \mathcal{F} G(\xi)&=\mathcal{F} G(0)e^{-2\pi^2\sigma^2\xi^2}\\
 \mathcal{F} G(0)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}\,dt=1\\
@@ -994,7 +670,6 @@ $f'=\mathcal{F} g$。
     \includegraphics[width=0.4\textwidth]{Gauss}
     \caption{高斯函数图像}
 \end{figure}
-
 \noindent 例3.5. 单边指数函数$f(t)=\begin{cases}
         e^{-at}, & \text{if }t\geq 0 \\
         0,       & \text{if }t<0
@@ -1012,17 +687,14 @@ $f'=\mathcal{F} g$。
 &=\int_{0}^{\infty}e^{-at}e^{-i\omega t}\,dt\\
 &=-\frac{1}{a+i\omega}\left.e^{-(a+i\omega)t}\right|_{0}^{\infty}\\
 &=\frac{1}{a+i\omega}
-}
-运用对偶性，立即得到
+} 运用对偶性，立即得到
 \lr{
 \mathcal{F} g(\xi)&=\mathcal{F} f(\xi)+\overline{\mathcal{F} f(\xi)}\\
 &=2Re{\mathcal{F} f(\xi)}=\frac{2a}{a^2 + 4\pi^2 \xi^2}
 }{
 \mathcal{F} g(\omega)&=\mathcal{F} f(\omega)+\overline{\mathcal{F} f(\omega)}\\
 &=2Re{\mathcal{F} f(\omega)}=\frac{2a}{a^2 +\omega^2}
-}
-
-最后，我们给出\textbf{帕塞瓦尔恒等式}(Parseval's identity):\lr{
+}最后，我们给出\textbf{帕塞瓦尔恒等式}(Parseval's identity):\lr{
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
 }{
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
@@ -1041,80 +713,47 @@ $f'=\mathcal{F} g$。
 &=2\pi\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\omega)e^{-i\omega x}\,d\omega\\
 &=2\pi\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
 &=2\pi\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
-}
-取$g=f$即证。注意我们并不要求$g$是实信号，$\overline{\mathcal{F} g}\neq\mathcal{F} ^{-1}g$.
-
+} 取$g=f$即证。注意我们并不要求$g$是实信号，$\overline{\mathcal{F} g}\neq\mathcal{F} ^{-1}g$.
 \section{卷积}\label{sec:convolution}
-
-信号处理讨论的一个基本问题是\textbf{滤波}，即希望把一个信号输入滤波系统后，输
-出的信号的一些频率成分被剔除或大幅减少，以低通滤波器为例，从数学上讲，就是把信
-号的频域形式乘以一个矩形函数或一个在给定的频率值之外快速下降到接近于0的函数，
-这就引出了一个问题：在频域乘一个函数，在时域上的表现是什么？我们知道，一般而言
-没有$\mathcal{F} (fg)=\mathcal{F} f\mathcal{F} g$。一个自然的想法是，看能
-否定义一种运算，使得在频域乘一个函数，相当于在时域与这个函数的时域形式做该种运
-算。实际上，这种运算是存在的，它正是\textbf{卷积}(convolution)
-
-下面就来找出这个运算。设$f\overset{\mathcal{F} }{\longleftrightarrow}F,g\overset{\mathcal{F} }{\longleftrightarrow}G$,
-\lr{
-    F(\xi)G(\xi)=&\int_{-\infty}^{\infty}f(x)e^{-2\pi i\xi x}\,dx\int_{-\infty}^{\infty}g(y)e^{-2\pi i\xi y}\,dy\\
+信号处理讨论的一个基本问题是\textbf{滤波}，即希望把一个信号输入滤波系统后，输 出的信号的一些频率成分被剔除或大幅减少，以低通滤波器为例，从数学上讲，就是把信 号的频域形式乘以一个矩形函数或一个在给定的频率值之外快速下降到接近于0的函数， 这就引出了一个问题：在频域乘一个函数，在时域上的表现是什么？我们知道，一般而言 没有$\mathcal{F} (fg)=\mathcal{F} f\mathcal{F} g$。一个自然的想法是，看能 否定义一种运算，使得在频域乘一个函数，相当于在时域与这个函数的时域形式做该种运 算。实际上，这种运算是存在的，它正是\textbf{卷积}(convolution)下面就来找出这个运算。设$f\overset{\mathcal{F} }{\longleftrightarrow}F,g\overset{\mathcal{F} }{\longleftrightarrow}G$,
+\lr{ F(\xi)G(\xi)=&\int_{-\infty}^{\infty}f(x)e^{-2\pi i\xi x}\,dx\int_{-\infty}^{\infty}g(y)e^{-2\pi i\xi y}\,dy\\
     &=\iint\limits_{\mathbb{R}^2}f(x)g(y)e^{-2\pi i\xi(x+y)}\,dx\,dy
-}{
-    F(\omega)G(\omega)=&\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx\int_{-\infty}^{\infty}g(y)e^{-i\omega y}\,dy\\
+}{ F(\omega)G(\omega)=&\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx\int_{-\infty}^{\infty}g(y)e^{-i\omega y}\,dy\\
     &=\iint\limits_{\mathbb{R}^2}f(x)g(y)e^{-i\omega(x+y)}\,dx\,dy
-}
-令$z=x+y$，则积分区域仍为$\mathbb{R}^2$，
+} 令$z=x+y$，则积分区域仍为$\mathbb{R}^2$，
 \[dxdz=\left|\frac{\partial(x,z)}{\partial(x,y)}\right|dxdy=\left|\begin{vmatrix}
         1 & 0 \\
         1 & 1
     \end{vmatrix}\right| dxdy=dxdy\]
-\lr{
-F(\xi)G(\xi)=&\iint\limits_{\mathbb{R}^2}f(x)g(z-x)e^{-2\pi i\xi z}\,dx\,dz\\
+\lr{ F(\xi)G(\xi)=&\iint\limits_{\mathbb{R}^2}f(x)g(z-x)e^{-2\pi i\xi z}\,dx\,dz\\
 &=\int_{-\infty}^{\infty}e^{-2\pi i\xi z}\,dz\int_{-\infty}^{\infty}f(x)g(z-x)dx\\
 &=\mathcal{F} [\int_{-\infty}^{\infty}f(x)g(z-x)dx](\xi)
-}{
-F(\omega)G(\omega)=&\iint\limits_{\mathbb{R}^2}f(x)g(z-x)e^{-i\omega z}\,dx\,dz\\
+}{ F(\omega)G(\omega)=&\iint\limits_{\mathbb{R}^2}f(x)g(z-x)e^{-i\omega z}\,dx\,dz\\
 &=\int_{-\infty}^{\infty}e^{-i\omega z}\,dz\int_{-\infty}^{\infty}f(x)g(z-x)dx\\
 &=\mathcal{F} [\int_{-\infty}^{\infty}f(x)g(z-x)dx](\omega)
-}
-
-因此我们定义函数f,g的\textbf{卷积}为
+}因此我们定义函数f,g的\textbf{卷积}为
 \begin{equation}
     (f*g)(x)=\int_{-\infty}^{\infty}f(y)g(x-y)\,dy
 \end{equation}
-并且有$\mathcal{F} (f*g)=\mathcal{F} f\mathcal{F} g$.以上是时域卷积的性质，由
-傅里叶反演公式，不难想到频域卷积也有类似的性质。令$f=\mathcal{F} \mathfrak{f},g=\mathcal{F} \mathfrak{g}$
-,对以上公式两边同时取傅里叶逆变换：
-\lr{
-f*g&=\mathcal{F} ^{-1}(\mathcal{F} f\mathcal{F} g)\\
+并且有$\mathcal{F} (f*g)=\mathcal{F} f\mathcal{F} g$.以上是时域卷积的性质，由 傅里叶反演公式，不难想到频域卷积也有类似的性质。令$f=\mathcal{F} \mathfrak{f},g=\mathcal{F} \mathfrak{g}$ ,对以上公式两边同时取傅里叶逆变换：
+\lr{ f*g&=\mathcal{F} ^{-1}(\mathcal{F} f\mathcal{F} g)\\
 \Leftrightarrow\mathcal{F} \mathfrak{f}*\mathcal{F} \mathfrak{g}&=\mathcal{F} ^{-1}[\mathcal{F}\mathcal{F} \mathfrak{f}\mathcal{F} \mathcal{F} \mathfrak{g}]\\
 &=\mathcal{F} ^{-1}(\mathfrak{f}^- \mathfrak{g}^- )\\
 &=\mathcal{F} (\mathfrak{fg})\\
 \Leftrightarrow\mathcal{F} (fg)(\xi)&=\mathcal{F} f*\mathcal{F} g(\xi)
-}{
-f*g&=\mathcal{F} ^{-1}(\mathcal{F} f\mathcal{F} g)\\
+}{ f*g&=\mathcal{F} ^{-1}(\mathcal{F} f\mathcal{F} g)\\
 \Leftrightarrow\mathcal{F} \mathfrak{f}*\mathcal{F} \mathfrak{g}&=\mathcal{F} ^{-1}[\mathcal{F}\mathcal{F} \mathfrak{f} \mathcal{F} \mathcal{F} \mathfrak{g}]\\
 &=\mathcal{F} ^{-1}(4\pi^2 \mathfrak{f}^- \mathfrak{g}^- )\\
 &= 2\pi\mathcal{F} (\mathfrak{fg})\\
 \Leftrightarrow\mathcal{F} (fg)(\omega )&=\frac{1}{2\pi}\mathcal{F} f*\mathcal{F} g(\omega)
-}
-综上得到\textbf{卷积定理}(the convolution thoerem)：
+} 综上得到\textbf{卷积定理}(the convolution thoerem)：
 \lr{
     \mathcal{F} (f*g)(\xi)=\mathcal{F} f(\xi)\mathcal{F} g(\xi)\\
     \mathcal{F} (fg)(\xi)=(\mathcal{F} f*\mathcal{F} g)(\xi)
 }{
     \mathcal{F} (f*g)(\omega)=\mathcal{F} f(\omega)\mathcal{F} g(\omega)\\
     \mathcal{F} (fg)(\omega)=\frac{1}{2\pi}(\mathcal{F} f*\mathcal{F} g)(\omega)
-}
-
-上一节中我们曾花费大量的篇幅寻找$\Lambda$的傅里叶变换，现在可以用卷积定理得到
-它，因为$\Lambda=\Pi_{1/2}*\Pi_{1/2}$（读者可以自行用代数方法验证）。
-
-在不引起歧义时，我们也承认$f(t)*g(t)$和$f(t)*e^{t+1}$这样的写法。需要注意，$f(2t)*g(t)$
-对应着两种理解：$\int_{-\infty}^{\infty}f(2t-x)g(x)\,dx$和$\int_{-\infty}^{\infty}f(2(t-x))g(x)\,dx$
-，第二种才是对的，因为我们认为$f(2t)$作为一个新的函数$F(t)=f(2t)$与$g(t)$进行卷积。
-
-作为一种新的函数空间上的运算，我们自然要讨论它是否满足线性性、结合律、
-交换律。事实上，它们都是成立的：
+}上一节中我们曾花费大量的篇幅寻找$\Lambda$的傅里叶变换，现在可以用卷积定理得到 它，因为$\Lambda=\Pi_{1/2}*\Pi_{1/2}$（读者可以自行用代数方法验证）。在不引起歧义时，我们也承认$f(t)*g(t)$和$f(t)*e^{t+1}$这样的写法。需要注意，$f(2t)*g(t)$ 对应着两种理解：$\int_{-\infty}^{\infty}f(2t-x)g(x)\,dx$和$\int_{-\infty}^{\infty}f(2(t-x))g(x)\,dx$ ，第二种才是对的，因为我们认为$f(2t)$作为一个新的函数$F(t)=f(2t)$与$g(t)$进行卷积。作为一种新的函数空间上的运算，我们自然要讨论它是否满足线性性、结合律、 交换律。事实上，它们都是成立的：
 \begin{align}
     f*(ag_1+bg_2) & =af*g_1+bf*g_2 \\
     (f*g)*h       & =f*(g*h)       \\
@@ -1126,74 +765,30 @@ f*g&=\mathcal{F} ^{-1}(\mathcal{F} f\mathcal{F} g)\\
     (f*g)*h(x) & =\int_{-\infty}^{\infty}(f*g)(x-y)h(y)\,dy=\int_{-\infty}^{\infty}h(y)\,dy\int_{-\infty}^{\infty}f(z)g(x-y-z)\,dz \\
                & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(z)g(x-y-z)h(y)\,dy\,dz=\int_{-\infty}^{\infty}f(z)(g*h)(x-z)\,dz
 \end{align*}
-也可以通过取傅里叶变换的方式证明它们，但这样会缩减证明有效的范围，因为
-卷积存在只要求积分$(f*g)(x)=\int_{-\infty}^{\infty}f(y)g(x-y)\,dy$
-存在（它有许多种充分条件，不再一一讨论），而取傅里叶变换则要求$f,g,f*g$
-的傅里叶变换存在。
-
-接着讨论卷积是否具有“幺元”，即与任一函数卷积，总得到它本身。
+也可以通过取傅里叶变换的方式证明它们，但这样会缩减证明有效的范围，因为 卷积存在只要求积分$(f*g)(x)=\int_{-\infty}^{\infty}f(y)g(x-y)\,dy$ 存在（它有许多种充分条件，不再一一讨论），而取傅里叶变换则要求$f,g,f*g$ 的傅里叶变换存在。接着讨论卷积是否具有“幺元”，即与任一函数卷积，总得到它本身。
 \lr{
     &\mathcal{F} (f*\delta)(\xi)=\mathcal{F} f(\xi)\mathcal{F} \delta(\xi)=\mathcal{F} f(\xi)\\
     &f(t)=(f*\delta)(t)=\int_{-\infty}^{\infty}f(x)\delta(t-x)\,dx
 }{
     &\mathcal{F} (f*\delta)(\omega)=\mathcal{F} f(\omega)\mathcal{F} \delta(\omega)=\mathcal{F} f(\omega)\\
     &f(t)=(f*\delta)(t)=\int_{-\infty}^{\infty}f(x)\delta(t-x)\,dx
-}
-因此$\delta$是“卷积幺元”，傅里叶变换构成$\langle L^1(\mathbb{R}),+,\cdot\rangle$
-与$\langle \mathcal{F} (L^1(\mathbb{R})),+,*\rangle$之间的环同态。
-
-一些简单的卷积可以通过画图法进行计算。将一个函数翻转、平移，再与另一函数相乘、
-积分，就得到了它们的卷积，下面用$\Lambda=\Pi_{1/2}*\Pi_{1/2}$的例子加以说明。
-$\Pi_{1/2}$是偶函数，$\Pi_{1/2}(-t)=\Pi_{1/2}(t)$.计算
-$(\Pi_{1/2}*\Pi_{1/2})(x)=\int_{-\infty}^{\infty}\Pi_{1/2}(y)\Pi_{1/2}(x-y)\,dy$
-时，如果$|x|>1$，则将$\Pi_{1/2}(-t)$平移的距离过大，乘积为0；
-如果$|x|<1$，则两矩形开始重合，重合部分函数乘积为1，其面积即为此时的积分值，也就是
-$(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，卷积所得函数
-也达到最大值。如图\ref{fig:conv}所示。
+} 因此$\delta$是“卷积幺元”，傅里叶变换构成$\langle L^1(\mathbb{R}),+,\cdot\rangle$ 与$\langle \mathcal{F} (L^1(\mathbb{R})),+,*\rangle$之间的环同态。一些简单的卷积可以通过画图法进行计算。将一个函数翻转、平移，再与另一函数相乘、 积分，就得到了它们的卷积，下面用$\Lambda=\Pi_{1/2}*\Pi_{1/2}$的例子加以说明。 $\Pi_{1/2}$是偶函数，$\Pi_{1/2}(-t)=\Pi_{1/2}(t)$.计算 $(\Pi_{1/2}*\Pi_{1/2})(x)=\int_{-\infty}^{\infty}\Pi_{1/2}(y)\Pi_{1/2}(x-y)\,dy$ 时，如果$|x|>1$，则将$\Pi_{1/2}(-t)$平移的距离过大，乘积为0； 如果$|x|<1$，则两矩形开始重合，重合部分函数乘积为1，其面积即为此时的积分值，也就是 $(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，卷积所得函数 也达到最大值。如图\ref{fig:conv}所示。
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{conv}
     \caption{图解法求卷积示例}\label{fig:conv}
 \end{figure}
-
-初次接触卷积时，往往会对它的定义感到疑惑，因为在数学分析的课程中我们很少见到这
-种“翻转、平移、相乘、积分”的结构。需要指出，卷积并不只有“时域相乘，频域卷积；
-时域卷积，频域相乘”的物理意义，例如概率论中两独立的连续型随机变量X,Y之和作为一种新的
-随机变量Z，其概率密度函数$f_Z(z)$正是两个独立的随机变量的概率密度函数的卷积$f_X*f_Y(z)$.
-类似于用“求曲线下方的面积”或“已知速度求位移”引入积分，尽管我们用一种较为自然的方
-式引入了卷积，但不应该认为它只有单一的意义。不过，还是可以建立一些卷积的性质来
-辅助我们理解卷积。
-
+初次接触卷积时，往往会对它的定义感到疑惑，因为在数学分析的课程中我们很少见到这 种“翻转、平移、相乘、积分”的结构。需要指出，卷积并不只有“时域相乘，频域卷积； 时域卷积，频域相乘”的物理意义，例如概率论中两独立的连续型随机变量X,Y之和作为一种新的 随机变量Z，其概率密度函数$f_Z(z)$正是两个独立的随机变量的概率密度函数的卷积$f_X*f_Y(z)$. 类似于用“求曲线下方的面积”或“已知速度求位移”引入积分，尽管我们用一种较为自然的方 式引入了卷积，但不应该认为它只有单一的意义。不过，还是可以建立一些卷积的性质来 辅助我们理解卷积。
 \noindent 1.卷积是一种起“平均化”作用的运算
-
-给定区间$[a,b]$和权函数$w(x)$，$f(x)$的加权
-均值为\[\frac{\int_{a}^{b}f(x)w(x)\,dx}{\int_{a}^{b}w(x)\,dx}\]给定$x$
-时，$w(y)=g(x-y)$就是$f*g$中f的加权均值的倍数。进一步，卷积的光滑性高于用来卷积的两
-个函数，并且在f可导时有$(f*g)'=f'*g$,因为
+给定区间$[a,b]$和权函数$w(x)$，$f(x)$的加权 均值为\[\frac{\int_{a}^{b}f(x)w(x)\,dx}{\int_{a}^{b}w(x)\,dx}\]给定$x$ 时，$w(y)=g(x-y)$就是$f*g$中f的加权均值的倍数。进一步，卷积的光滑性高于用来卷积的两 个函数，并且在f可导时有$(f*g)'=f'*g$,因为
 \[(f*g)'(x)=\frac{d}{dx}\int_{-\infty}^{\infty}f(x-y)g(y)\,dy=\int_{-\infty}^{\infty}f'(x-y)g(y)\,dy=f'*g\]
-例如，$\Pi_{1/2}*\Pi_{1/2}=\Lambda$，等式左侧是两个不连续的函数，右侧是连续并且分段
-光滑的函数。
-
+例如，$\Pi_{1/2}*\Pi_{1/2}=\Lambda$，等式左侧是两个不连续的函数，右侧是连续并且分段 光滑的函数。
 \noindent 2.卷积函数的支集
-
-我们首先引入\textbf{支集}(support)的概念，读者只需理解其直观，真正理解它需要一些拓扑学的基础。设
-$f:\mathbb{R}\to \mathbb{R}$\footnote{这里不对多元函数、复变函数等进行讨论，但读者容易自行推广这个定义。}，f的\textbf{支集}
-$supp\ f=\overline{\{x\in\mathbb{R}:f(x)\neq 0\}}$，这里上划线不是取共轭，
-而是对集合取闭包，闭包包括集合本身的和它的极限点，$\mathbb{R}$中集合的闭包
-是闭集，例如，$(a,b)$的闭包是$[a,b]$.集合$\{x\in\mathbb{R}:f(x)\neq 0\}$的提
-出是自然的，取闭包则不那么容易理解。实际上，在度量空间（采用度量导出的拓扑）中，
-一个集合是紧集（任给一个开区间组成的覆盖，总能从中取出有限覆盖）就等价于它是有
-界闭集，描述有界区间的一种方式是说它是闭包紧的。因此，我们可以说在无穷远处为0的
-函数有\textbf{紧支集}(compact support)，对于p次连续可导的函数$f\in C^p(\mathbb{R})$，我们记
-其中具有紧支集的函数空间为$C_0^p(\mathbb{R})$。至于引入这种术语的好处，则不属于本书的讨论范围。
-
-卷积能够将两个函数的支集“相加”。设$supp f\in [a,b],supp g\in [c,d]$，则
-$supp (f*g)\in [a+c,b+d]$,因为：
+我们首先引入\textbf{支集}(support)的概念，读者只需理解其直观，真正理解它需要一些拓扑学的基础。设 $f:\mathbb{R}\to \mathbb{R}$\footnote{这里不对多元函数、复变函数等进行讨论，但读者容易自行推广这个定义。}，f的\textbf{支集} $supp\ f=\overline{\{x\in\mathbb{R}:f(x)\neq 0\}}$，这里上划线不是取共轭， 而是对集合取闭包，闭包包括集合本身的和它的极限点，$\mathbb{R}$中集合的闭包 是闭集，例如，$(a,b)$的闭包是$[a,b]$.集合$\{x\in\mathbb{R}:f(x)\neq 0\}$的提 出是自然的，取闭包则不那么容易理解。实际上，在度量空间（采用度量导出的拓扑）中， 一个集合是紧集（任给一个开区间组成的覆盖，总能从中取出有限覆盖）就等价于它是有 界闭集，描述有界区间的一种方式是说它是闭包紧的。因此，我们可以说在无穷远处为0的 函数有\textbf{紧支集}(compact support)，对于p次连续可导的函数$f\in C^p(\mathbb{R})$，我们记 其中具有紧支集的函数空间为$C_0^p(\mathbb{R})$。至于引入这种术语的好处，则不属于本书的讨论范围。卷积能够将两个函数的支集“相加”。设$supp f\in [a,b],supp g\in [c,d]$，则 $supp (f*g)\in [a+c,b+d]$,因为：
 \begin{align*}
      & (f*g)(x) =\int_{-\infty}^{\infty}f(y)g(x-y)\,dy                               \\
      & \text{积分值非0}\Rightarrow y\in [a,b],x-y\in [c,d]\Leftrightarrow x\in [a+c,b+d]
 \end{align*}
-
 \noindent 3.函数变换下的卷积\\
 (1)信号反转时的卷积：
 \[(f^-)*(g^-)=(f*g)^-\]
@@ -1205,16 +800,9 @@ $supp (f*g)\in [a+c,b+d]$,因为：
                    & =\int_{-\infty}^{\infty}f(z)g(-x-z)\,dz             \\
                    & =(f*g)^-(x)
 \end{align*}
-如果只有一个信号反转，则结果不再是卷积，而是f与g的互相关（在f,g都是实信号时），下面很
-快将讨论它。
-
+如果只有一个信号反转，则结果不再是卷积，而是f与g的互相关（在f,g都是实信号时），下面很 快将讨论它。
 \noindent (2)信号时延、伸缩时的卷积
-
-为了避免符号带来的误解，以后将
-用$\tau$表示时延$\tau_b f(t)=f(t-b)$，用$\sigma$表示伸缩$\sigma_a f(t)=f(at)$
-，并避免使用$\tau,\sigma$作为变量的符号。这样的做法在研究分布的性质时是必要的，
-因为严格来讲不能给出分布的“自变量”，但例如$\delta$函数这样的分布又具有明显的
-尺度变换的性质，见\ref{sec:distributions}.
+为了避免符号带来的误解，以后将 用$\tau$表示时延$\tau_b f(t)=f(t-b)$，用$\sigma$表示伸缩$\sigma_a f(t)=f(at)$ ，并避免使用$\tau,\sigma$作为变量的符号。这样的做法在研究分布的性质时是必要的， 因为严格来讲不能给出分布的“自变量”，但例如$\delta$函数这样的分布又具有明显的 尺度变换的性质，见\ref{sec:distributions}.
 \begin{align*}
     (\tau_b f)*g=\tau_b (f*g)=f*(\tau_b g) \\
     (\sigma_a f)*(\sigma_a g)=\frac{1}{|a|}\sigma_a(f*g)
@@ -1234,34 +822,18 @@ $supp (f*g)\in [a+c,b+d]$,因为：
                                  & =\frac{1}{|a|}\int_{-\infty}^{\infty}f(z)g(a x - z)\,dz  & (z=ay,dy=\frac{dz}{a}) \\
                                  & =\frac{1}{|a|}(f*g)(a x)=\frac{1}{|a|}\sigma_a(f*g)(x)
 \end{align*}
-和傅里叶变换的伸缩定理类似，这里也需要讨论a的正负，但不再赘述。
-
-4.“面积”关系
-
-我们已经提到，概率论中两个独立随机变量之和的概率密度函数是它们各自概率密度函数的卷积，这当
-然要求两个概率密度函数在$\mathbb{R}$上的积分值为1时，它们的卷积在$\mathbb{R}$上的积
-分值也为1。更一般地，如果$f,g\in L^1(\mathbb{R})$，则
+和傅里叶变换的伸缩定理类似，这里也需要讨论a的正负，但不再赘述。4.“面积”关系我们已经提到，概率论中两个独立随机变量之和的概率密度函数是它们各自概率密度函数的卷积，这当 然要求两个概率密度函数在$\mathbb{R}$上的积分值为1时，它们的卷积在$\mathbb{R}$上的积 分值也为1。更一般地，如果$f,g\in L^1(\mathbb{R})$，则
 \begin{align*}
     \int_{-\infty}^{\infty}(f*g)(x)\,dx & =\int_{-\infty}^{\infty}\,dx\int_{-\infty}^{\infty}f(y)g(x-y)\,dy                                   \\
                                         & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(x-y)\,dx                                   \\
                                         & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(u)\,du                           & (u=x-y) \\
                                         & =\left(\int_{-\infty}^{\infty}f(x)\,dx\right)\left(\int_{-\infty}^{\infty}g(x)\,dx\right)
 \end{align*}
-
-在统计学中，我们引入相关系数来描述两个随机变量之间的相关程度，类似地，在信号
-处理中，我们引入\textbf{相关系数}(correlation coefficient)来描述两个信号之间的相关
-程度。设$f,g\in L^2(\mathbb{R})$，它们的相关系数定义为
+在统计学中，我们引入相关系数来描述两个随机变量之间的相关程度，类似地，在信号 处理中，我们引入\textbf{相关系数}(correlation coefficient)来描述两个信号之间的相关 程度。设$f,g\in L^2(\mathbb{R})$，它们的相关系数定义为
 \begin{equation}
     \rho(f,g)=\frac{\langle f,g\rangle}{\|f\|\cdot\|g\|}
 \end{equation}
-其中$\langle f,g\rangle=\int_{-\infty}^{\infty}f(x)\overline{g(x)}dx$是$f$和
-$g$的内积，$\|f\|=\sqrt{\langle f,f\rangle}$是$f$的范数。根据柯西-施瓦茨不等式，
-相关系数的绝对值不超过1，且当且仅当$f$与$g$几乎处处成比例时取等，因此我们说，
-$\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\textbf{线性无关}，
-这相当于两函数正交。
-
-有时信号之间存在时延差，这时我们可以定义\textbf{互相关}(cross-correlation)来描述它
-们之间的相关程度。设$f,g\in L^2(\mathbb{R})$，它们的互相关定义为
+其中$\langle f,g\rangle=\int_{-\infty}^{\infty}f(x)\overline{g(x)}dx$是$f$和 $g$的内积，$\|f\|=\sqrt{\langle f,f\rangle}$是$f$的范数。根据柯西-施瓦茨不等式， 相关系数的绝对值不超过1，且当且仅当$f$与$g$几乎处处成比例时取等，因此我们说， $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\textbf{线性无关}， 这相当于两函数正交。有时信号之间存在时延差，这时我们可以定义\textbf{互相关}(cross-correlation)来描述它 们之间的相关程度。设$f,g\in L^2(\mathbb{R})$，它们的互相关定义为
 \begin{equation}
     (f\star g)(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy
 \end{equation}
@@ -1301,98 +873,45 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
                               & \leq \sqrt{\int_{-\infty}^{\infty}|f(y)|^2\,dy\int_{-\infty}^{\infty}|\overline{g(x+y)}|^2\,dy  }           \\
                               & =\sqrt{\|f\|^2\|g\|^2}=\|f\|\cdot\|g\|                                                                      \\
 \end{align*}
-
 对于功率信号$f,g$，定义互相关函数为
 \begin{equation}
     (f\star g)(x)=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}f(y)\overline{g(x+y)}\,dy
 \end{equation}
-其性质不再单独讨论。
-
-一些文献也将互相关函数定义为$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x-y)}\,dy=\int_{-\infty}^{\infty}f(x+y)g(y)\,dy$
-，功率信号同理，这与上面讨论的互相关没有本质区别。
-
-最后我们给出一个互相关的应用。设雷达发射了一个信号$f(t)$，经过时间T信号接触到
-物体并发生反射，再经过时间T信号回到雷达，雷达接收到的信号$f_r(t)=\alpha (\tau_{2T}f(t))+n(t)$,
-其中$\alpha\in(0,1)$，表示信号在传播过程中衰减；$n(t)$为噪声信号。我们
-希望确定时间T，以计算雷达到物体间的距离。对于噪声信号$n(t)$，它满足
+其性质不再单独讨论。一些文献也将互相关函数定义为$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x-y)}\,dy=\int_{-\infty}^{\infty}f(x+y)g(y)\,dy$ ，功率信号同理，这与上面讨论的互相关没有本质区别。最后我们给出一个互相关的应用。设雷达发射了一个信号$f(t)$，经过时间T信号接触到 物体并发生反射，再经过时间T信号回到雷达，雷达接收到的信号$f_r(t)=\alpha (\tau_{2T}f(t))+n(t)$, 其中$\alpha\in(0,1)$，表示信号在传播过程中衰减；$n(t)$为噪声信号。我们 希望确定时间T，以计算雷达到物体间的距离。对于噪声信号$n(t)$，它满足
 \[(f\star n)(t)=C\]
 C为常数，因此可以考虑求发射信号与接收信号的互相关函数：\begin{align*}
     (f\star f_r)(t)&=\alpha(f\star \tau_{2T}f)(t)+(f\star n)(t)\\
     &=\alpha\tau_{2T}(f\star f)(t)+\alpha C
 \end{align*}
-根据前面得到的性质4，$(f\star f)(t)$在0处取最大值，因此$(f\star f_r)(t)$在$2T$
-处取最大值，于是我们只需要观察这个互相关函数的最大值点，就可以得到T。
-
+根据前面得到的性质4，$(f\star f)(t)$在0处取最大值，因此$(f\star f_r)(t)$在$2T$ 处取最大值，于是我们只需要观察这个互相关函数的最大值点，就可以得到T。
 \section{分布及其傅里叶变换}\label{sec:distributions}
-
-经典的数学分析理论难以处理单位阶跃函数的导数，也无法对一些比较比基本的函数如正弦
-、余弦函数做傅里叶变换，甚至因此傅里叶反演公式不总是成立（注意我们之前仅在形式上
-使用傅里叶反演公式），要扩充这个理论，标准的做法是引入\textbf{广义函数}(gerneralized function)
-，又称\textbf{分布}(distribution)\footnote{事实上这个名称更泛用一些。}。分布
-这个名称一开始是由物理学家引入的，例如在描述点电荷的分布时，经典函数是失效的，于
-是在20世纪20年代末到30年代初，狄拉克及一众物理学家开始用分布进行运算，到30年代
-中，索伯列夫首先明确提出了广义函数的思想，后于40年代末由施瓦兹发展，他因这一工作
-获得1950年的菲尔兹奖。因此，下面将提到的广义函数空间$\mathcal{D} $也称为
-\textbf{索伯列夫-施瓦兹广义函数空间}。
-
-下面首先对一般的分布理论做一些讨论，再转回傅里叶分析中对于分布的应用，这时不对
-严谨性做过多要求，希望了解它们的读者可以参考泛函分析或傅里叶分析的教材。我们先介
-绍\textbf{泛函} (functional)和\textbf{对偶空间}(dual space)的概念。
-
-设X和Y是同一数域上的线性空间（这里不妨设为$\mathbb{R}$）如果
-$\forall x_1,x_2\in X$,映射$A:X\to Y$满足
+经典的数学分析理论难以处理单位阶跃函数的导数，也无法对一些比较比基本的函数如正弦 、余弦函数做傅里叶变换，甚至因此傅里叶反演公式不总是成立（注意我们之前仅在形式上 使用傅里叶反演公式），要扩充这个理论，标准的做法是引入\textbf{广义函数}(gerneralized function) ，又称\textbf{分布}(distribution)\footnote{事实上这个名称更泛用一些。}。分布 这个名称一开始是由物理学家引入的，例如在描述点电荷的分布时，经典函数是失效的，于 是在20世纪20年代末到30年代初，狄拉克及一众物理学家开始用分布进行运算，到30年代 中，索伯列夫首先明确提出了广义函数的思想，后于40年代末由施瓦兹发展，他因这一工作 获得1950年的菲尔兹奖。因此，下面将提到的广义函数空间$\mathcal{D} $也称为
+\textbf{索伯列夫-施瓦兹广义函数空间}。下面首先对一般的分布理论做一些讨论，再转回傅里叶分析中对于分布的应用，这时不对 严谨性做过多要求，希望了解它们的读者可以参考泛函分析或傅里叶分析的教材。我们先介 绍\textbf{泛函} (functional)和\textbf{对偶空间}(dual space)的概念。设X和Y是同一数域上的线性空间（这里不妨设为$\mathbb{R}$）如果 $\forall x_1,x_2\in X$,映射$A:X\to Y$满足
 \begin{align*}
     A(x_1)+A(x_2) & =A(x_1+x_2)                        \\
     A(\lambda x)  & =\lambda A(x),\lambda\in\mathbb{R}
 \end{align*}
-则称A是\textbf{线性映射}。特别地，如果Y是一个数域（例如$\mathbb{R,C}$），则
-将A称为\textbf{线性函数}；如果X还是某种函数空间，则将A称为\textbf{线性泛函}。
-例如，$A:C([a,b],\mathbb{R})\to\mathbb{R},A(f):=f(x_0)$和$A:C([a,b],\mathbb{R})\to\mathbb{R},A(f):=\int_{a}^{b}f(x)\,dx$
-都是线性泛函。有时，我们不区分X究竟是不是函数空间，而统一地把线性函数称为线性泛
-函。
-
-给定一个实线性空间V，它的\textbf{对偶空间}是V上所有线性函数$A:V\to\mathbb{R}$
-构成的线性空间（读者可以自行定义线性函数的加法和数乘，并验证它是线性空间），记
-为$\mathcal{L} (V;\mathbb{R})$或$V^*$。对有限维线性空间，它的对偶空间与它本身的维数
-相同，因为定义V上的线性函数就等价于对V的一组基定义线性函数；对于无限维线性空间
-，它的对偶空间也是无限维的。
-
-我们已经看到，分布（例如狄拉克$\delta$）难以用经典的“函数”来描述，这时我们可以
-考察它们与一系列\textbf{检验函数}(test function)$\varphi$的作用，具体来说，记$\mathbb{R}$
-上的复值光滑紧支函数集为$\mathcal{C} $，如果将检验函数集取为$\mathcal{C}$,我们
-将其对偶空间$\mathcal{D} $中的元素称为分布，并规定函数$f\in \mathcal{C} $
-\footnote{实际上这里不需要要求$f\in\mathcal{C} $，只需要f在$\mathbb{R}$上局部可积（在任
-    意闭区间上可积）即可，但为了简化讨论，我们仅考虑光滑紧支函数。}所产生的分布$T_f$
-为作用在$\mathcal{C}$上的以下\textbf{泛函}：
+则称A是\textbf{线性映射}。特别地，如果Y是一个数域（例如$\mathbb{R,C}$），则 将A称为\textbf{线性函数}；如果X还是某种函数空间，则将A称为\textbf{线性泛函}。 例如，$A:C([a,b],\mathbb{R})\to\mathbb{R},A(f):=f(x_0)$和$A:C([a,b],\mathbb{R})\to\mathbb{R},A(f):=\int_{a}^{b}f(x)\,dx$ 都是线性泛函。有时，我们不区分X究竟是不是函数空间，而统一地把线性函数称为线性泛 函。给定一个实线性空间V，它的\textbf{对偶空间}是V上所有线性函数$A:V\to\mathbb{R}$ 构成的线性空间（读者可以自行定义线性函数的加法和数乘，并验证它是线性空间），记 为$\mathcal{L} (V;\mathbb{R})$或$V^*$。对有限维线性空间，它的对偶空间与它本身的维数 相同，因为定义V上的线性函数就等价于对V的一组基定义线性函数；对于无限维线性空间 ，它的对偶空间也是无限维的。我们已经看到，分布（例如狄拉克$\delta$）难以用经典的“函数”来描述，这时我们可以 考察它们与一系列\textbf{检验函数}(test function)$\varphi$的作用，具体来说，记$\mathbb{R}$ 上的复值光滑紧支函数集为$\mathcal{C} $，如果将检验函数集取为$\mathcal{C}$,我们 将其对偶空间$\mathcal{D} $中的元素称为分布，并规定函数$f\in \mathcal{C} $
+\footnote{实际上这里不需要要求$f\in\mathcal{C} $，只需要f在$\mathbb{R}$上局部可积（在任 意闭区间上可积）即可，但为了简化讨论，我们仅考虑光滑紧支函数。}所产生的分布$T_f$ 为作用在$\mathcal{C}$上的以下\textbf{泛函}：
 \begin{equation}
     \langle T_f,\varphi\rangle:=\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{C}
 \end{equation}
-将这样的分布称为\textbf{正则分布}，而将无法用紧支函数描述的分布称为\textbf{奇异分布}。
-例如，尽管我们从形式上给出了$\delta$函数的定义，但它实际上应该采用定义
+将这样的分布称为\textbf{正则分布}，而将无法用紧支函数描述的分布称为\textbf{奇异分布}。 例如，尽管我们从形式上给出了$\delta$函数的定义，但它实际上应该采用定义
 \[\langle \delta,\varphi\rangle:=\delta(\varphi):=\varphi(0)\]
-由于“狄拉克函数”严格来说并不能算作一种函数，$\delta$是一个奇异分布。容易验证这与我们一
-开始给出的$\delta$作为“函数”的性质是相符的：
+由于“狄拉克函数”严格来说并不能算作一种函数，$\delta$是一个奇异分布。容易验证这与我们一 开始给出的$\delta$作为“函数”的性质是相符的：
 \[\langle \delta,\varphi\rangle=\int_{-\infty}^{\infty}\delta(x)\varphi(x)\,dx=\int_{-\infty}^{\infty}\delta(x)\varphi(0)\,dx=\varphi(0)\]
-
-下面来定义分布与函数的乘法和分布的导数。这一部分中，我们的原则是：\textbf{奇异分布与正
-    则分布具有相同的性质}，换言之，只要能够对正则分布定义的算子，就能够对奇异分布
-做相同的定义。在讨论分布的傅里叶变换时，还将定义更多的算子，例如分布卷积、尺度变换等。
-
-设$f,g,\varphi\in\mathcal{C} $,有
+下面来定义分布与函数的乘法和分布的导数。这一部分中，我们的原则是：\textbf{奇异分布与正 则分布具有相同的性质}，换言之，只要能够对正则分布定义的算子，就能够对奇异分布 做相同的定义。在讨论分布的傅里叶变换时，还将定义更多的算子，例如分布卷积、尺度变换等。设$f,g,\varphi\in\mathcal{C} $,有
 \begin{align*}
     \langle (f\cdot g),\varphi\rangle=\int_{-\infty}^{\infty}(f\cdot g)(x)\varphi(x)\,dx=\int_{-\infty}^{\infty}f(x)(g\cdot\varphi)(x)\,dx=\langle f,(g\cdot\varphi)\rangle
 \end{align*}
-因此对于任意的分布$T\in\mathcal{D} $，定义它与$g\in\mathcal{C} $的乘积$gT$
-由以下等式给出：
+因此对于任意的分布$T\in\mathcal{D} $，定义它与$g\in\mathcal{C} $的乘积$gT$ 由以下等式给出：
 \begin{equation}
     \langle gT,\varphi\rangle=\langle T,g\varphi\rangle
 \end{equation}
-$g\varphi$就是普通的函数乘法。现在就可以说，分布集$\mathcal{D} $构成函数环
-$\mathcal{C} $上的模(module)，并且可以验证$\delta$的取样性质：
+$g\varphi$就是普通的函数乘法。现在就可以说，分布集$\mathcal{D} $构成函数环 $\mathcal{C} $上的模(module)，并且可以验证$\delta$的取样性质：
 \begin{align*}
      & \langle g\delta,\varphi\rangle=\langle \delta,g\varphi\rangle=g(0)\varphi(0)=g(0)\langle\delta,\varphi\rangle \Rightarrow  g\delta=g(0)\delta
 \end{align*}
-
 用同样的思路定义分布的微分：设$f,g,\varphi\in\mathcal{C} $,有
 \begin{align*}
     \langle f',\varphi\rangle=\int_{-\infty}^{\infty}f'(x)\varphi(x)\,dx=-\int_{-\infty}^{\infty}f(x)\varphi'(x)\,dx=\langle f,\varphi'\rangle
@@ -1401,17 +920,13 @@ $\mathcal{C} $上的模(module)，并且可以验证$\delta$的取样性质：
 \begin{equation}
     \langle T',\varphi\rangle=-\langle T,\varphi'\rangle
 \end{equation}
-注意$\varphi\in\mathcal{C} $是无限阶可导的，我们可以由此定义分布的任意阶导数，
-例如\ref{sec:signal}中提到的单位阶跃函数$u(t)$和$\delta$，现在就可以将它们
-视为分布并求各阶导数：
+注意$\varphi\in\mathcal{C} $是无限阶可导的，我们可以由此定义分布的任意阶导数， 例如\ref{sec:signal}中提到的单位阶跃函数$u(t)$和$\delta$，现在就可以将它们 视为分布并求各阶导数：
 \begin{align*}
      & \langle u,\varphi\rangle:=\int_{0}^{\infty}\varphi(x)\,dx                                                                      \\
      & \langle u',\varphi\rangle=-\langle u,\varphi'\rangle=-\int_{0}^{\infty}\varphi'(x)\,dx=\varphi(0)=\langle\delta,\varphi\rangle \\
      & \langle \delta',\varphi\rangle=-\langle \delta,\varphi'\rangle=-\varphi'(0)
 \end{align*}
-$\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x)$的“函数”描述，但
-可以看到$\delta^{(n)}$作为一个泛函（分布）作用是取测试函数的$(-1)^n$倍的n阶导。
-现在也就不难理解$\delta^{(n)}$与函数相乘的公式，例如，
+$\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x)$的“函数”描述，但 可以看到$\delta^{(n)}$作为一个泛函（分布）作用是取测试函数的$(-1)^n$倍的n阶导。 现在也就不难理解$\delta^{(n)}$与函数相乘的公式，例如，
 \begin{align*}
     \langle g\delta',\varphi\rangle & =\langle \delta',g\varphi\rangle                \\
                                     & =-\langle\delta,(g\varphi)'\rangle              \\
@@ -1420,7 +935,6 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
                                     & =\langle g(0)\delta'-g'(0)\delta,\varphi\rangle
     \Rightarrow g\delta'=g(0)\delta'-g'(0)\delta
 \end{align*}
-
 现在指出分布的微分运算的某些性质。
 \begin{enumerate}
     \item 任何分布$T\in\mathcal{D} $都是无穷次可微的
@@ -1441,11 +955,8 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
     \item 设当$m\to\infty$时，$T_m\to T$，即$\forall\varphi\in\mathcal{C} ,\langle T_m,\varphi\rangle\to\langle T,\varphi\rangle$，
           则\[\langle T_m',\varphi\rangle=-\langle T_m,\varphi'\rangle\to-\langle T,\varphi'\rangle=\langle T',\varphi\rangle\]
 \end{enumerate}
-可以看到，分布理论中极限的概念是通过测试函数来定义的，如果分布序列$\{T_m\}_{m=1}^{\infty}$
-作用在任何测试函数上都是趋于某个分布T作用于这个测试函数的值，就说序列$\{T_m\}$
-\textbf{弱收敛}(converge weakly)于T，并记为$T_m\to T$。
-
-接下来讨论分布理论在傅里叶分析中的应用。我们的目标是，在这个新的理论体系下：
+可以看到，分布理论中极限的概念是通过测试函数来定义的，如果分布序列$\{T_m\}_{m=1}^{\infty}$ 作用在任何测试函数上都是趋于某个分布T作用于这个测试函数的值，就说序列$\{T_m\}$
+\textbf{弱收敛}(converge weakly)于T，并记为$T_m\to T$。接下来讨论分布理论在傅里叶分析中的应用。我们的目标是，在这个新的理论体系下：
 \begin{itemize}
     \item 允许$\delta$信号，单位阶跃信号，多项式，正弦、余弦函数等信号（作为分布）做傅里叶变换
     \item 傅里叶变换和其反变换同时有定义；傅里叶反演公式成立
@@ -1455,33 +966,19 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
 \begin{equation}
     \langle\mathcal{F}T,\varphi\rangle=\langle T,\mathcal{F}\varphi\rangle
 \end{equation}
-然而，测试函数$\varphi\in\mathcal{C} $的傅里叶变换$\mathcal{F}\varphi$并不属于
-$\mathcal{C} $
-（关于这一点的说明，以及施瓦兹函数类的引出，见附录\ref{sec:Schwartz_Functions}）
-，这说明测试函数集$\mathcal{C} $在傅里叶分析中的表现不够好，我们需要引入新的测试函数空间，以保证
-$\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textbf{施瓦兹空间}(Schwartz space)$\mathcal{S} $
-，它是$\mathbb{R}$上所有无限可微函数的集合，这些函数及其各阶导数都以比任何负幂更快的速度趋于0，即
+然而，测试函数$\varphi\in\mathcal{C} $的傅里叶变换$\mathcal{F}\varphi$并不属于 $\mathcal{C} $ （关于这一点的说明，以及施瓦兹函数类的引出，见附录\ref{sec:Schwartz_Functions}） ，这说明测试函数集$\mathcal{C} $在傅里叶分析中的表现不够好，我们需要引入新的测试函数空间，以保证 $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textbf{施瓦兹空间}(Schwartz space)$\mathcal{S} $ ，它是$\mathbb{R}$上所有无限可微函数的集合，这些函数及其各阶导数都以比任何负幂更快的速度趋于0，即
 \[\mathcal{S} =\{\varphi\in C^{\infty}(\mathbb{R} ):\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \}\]
-施瓦兹空间中的函数称为\textbf{施瓦兹函数}(Schwartz function)，它们是非常光滑且
-衰减很快的函数，因此又称为\textbf{速降函数}(rapidly decreasing function)，例
-如高斯函数$e^{-x^2}$及其各阶导数都属于施瓦兹空间。施瓦兹空间的对偶空间
-$\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz distribution)
-或\textbf{缓增分布}(tempered distribution)。我们仍定义
+施瓦兹空间中的函数称为\textbf{施瓦兹函数}(Schwartz function)，它们是非常光滑且 衰减很快的函数，因此又称为\textbf{速降函数}(rapidly decreasing function)，例 如高斯函数$e^{-x^2}$及其各阶导数都属于施瓦兹空间。施瓦兹空间的对偶空间 $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz distribution) 或\textbf{缓增分布}(tempered distribution)。我们仍定义
 \begin{align}
     T(\varphi)                 & =\langle T,\varphi\rangle                                        \\
     \langle T_f,\varphi\rangle & =\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{S}
 \end{align}
-易见$\mathcal{C} \subset \mathcal{S} ,\mathcal{T} \subset\mathcal{D}. $
-
-有了施瓦兹函数类$\mathcal{S} $和缓增分布$\mathcal{T} $，我们就可以定义分布的傅里
-叶变换，还可以定义有关分布的一系列算子。前文中曾定义分布与函数的乘法和分布的导数，
+易见$\mathcal{C} \subset \mathcal{S} ,\mathcal{T} \subset\mathcal{D}. $有了施瓦兹函数类$\mathcal{S} $和缓增分布$\mathcal{T} $，我们就可以定义分布的傅里 叶变换，还可以定义有关分布的一系列算子。前文中曾定义分布与函数的乘法和分布的导数，
 现在认为正则分布是由施瓦兹函数导出的，则显然能够推广到缓增分布，即\begin{align}
     \langle gT,\varphi\rangle=\langle T,g\varphi\rangle,\langle T',\varphi\rangle=\langle T,\varphi'\rangle,g\in\mathcal{S} ,T\in\mathcal{T}
 \end{align}
 用同样的方式，我们依次讨论作用于缓增分布的各种算子。
-
 \noindent 1.傅里叶变换
-
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，则
 \begin{align*}
     \langle\mathcal{F}T_f,\varphi\rangle & =\int_{-\infty}^{\infty}\mathcal{F}f(x)\varphi(x)\,dx                                       \\
@@ -1493,7 +990,6 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
 \begin{equation}
     \langle\mathcal{F}T,\varphi\rangle=\langle T,\mathcal{F}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation}
-
 傅里叶逆变换同理。只要承认函数的傅里叶反演公式，分布的傅里叶反演公式就自然成立：
 \begin{align*}
     \langle \mathcal{F} ^{-1}\mathcal{F} T,\varphi\rangle & =\langle \mathcal{F} T,\mathcal{F} ^{-1}\varphi\rangle \\
@@ -1502,7 +998,6 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
     \langle \mathcal{F} \mathcal{F} ^{-1}T,\varphi\rangle & =\langle T,\mathcal{F} ^{-1}\mathcal{F} \varphi\rangle \\
                                                           & =\langle T,\varphi\rangle
 \end{align*}
-
 线性性依然成立。尽管没有明确指出，我们也会很自然的想到定义
 \begin{equation}
     \langle aT+bS,\varphi\rangle=a\langle T,\varphi\rangle+b\langle S,\varphi\rangle
@@ -1513,7 +1008,6 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
                                                & =\langle a\mathcal{F} T+b\mathcal{F} S,\varphi\rangle                                            \\
                                                & \Rightarrow \mathcal{F} (aT+bS)=a\mathcal{F} T+b\mathcal{F} S,a,b\in\mathbb{C},S,T\in\mathcal{T}
 \end{align*}
-
 \noindent 例5.1.现在可以严谨地求出$\delta$的傅里叶变换：
 \begin{align*}
     \langle\mathcal{F}\delta,\varphi\rangle=\langle \delta,\mathcal{F}\varphi\rangle=\mathcal{F}\varphi(0)=\int_{-\infty}^{\infty}\varphi(x)\,dx=\langle \mathds{1},\varphi\rangle \\
@@ -1536,11 +1030,7 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
 &=\int_{-\infty}^{\infty}\varphi(x)e^{-i a x}\,dx\\
 &=\langle e^{-i a x},\varphi\rangle \\
 &\Rightarrow\mathcal{F}\delta_a =e^{-i a x}
-}
-根据阿贝尔-狄利克雷判别法（A-D判别法，请自行查看数学分析的教材），$\langle e^{-i a x},\varphi\rangle$
-作为一个反常积分是有意义的。可以看出这与函数的傅里叶变换的平移定理很相似，我们将在后面
-给出分布的平移、伸缩，并由此得到一些分布的傅里叶变换的性质。
-
+} 根据阿贝尔-狄利克雷判别法（A-D判别法，请自行查看数学分析的教材），$\langle e^{-i a x},\varphi\rangle$ 作为一个反常积分是有意义的。可以看出这与函数的傅里叶变换的平移定理很相似，我们将在后面 给出分布的平移、伸缩，并由此得到一些分布的傅里叶变换的性质。
 \noindent 例5.3.分布$\mathds{1}$的傅里叶变换：尽管$\mathds{1}\notin L^1(\mathbb{R})$，但可以
 认为它是缓增分布，因为对于任意的$\varphi\in\mathcal{S} $，都有
 \[\langle \mathds{1},\varphi\rangle=\int_{-\infty}^{\infty}\varphi(x)\,dx<\infty\]
@@ -1558,9 +1048,7 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
     &=2\pi\varphi(0)=2\pi\langle \delta,\varphi\rangle\\
     \Rightarrow \mathcal{F} \mathds{1}&=2\pi\delta
 }
-
 \noindent 2.分布的反转
-
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，自然可以定义$T_f^-=T_{f^-}$,
 \begin{align*}
     \langle T_f^-,\varphi\rangle & =\int_{-\infty}^{\infty}f(-x)\varphi(x)\,dx \\
@@ -1571,25 +1059,19 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
 \begin{equation}
     \langle T^-,\varphi\rangle=\langle T,\varphi^-\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation}
-有了反转就可以定义分布的奇偶性：如果$T^-=T$，则称T为\textbf{偶分布}；如果$T^-=-T$
-，则称T为\textbf{奇分布}。
-
-从施瓦兹函数的傅里叶变换的对偶性，就能得到缓增分布的傅里叶变换的对偶性：
+有了反转就可以定义分布的奇偶性：如果$T^-=T$，则称T为\textbf{偶分布}；如果$T^-=-T$ ，则称T为\textbf{奇分布}。从施瓦兹函数的傅里叶变换的对偶性，就能得到缓增分布的傅里叶变换的对偶性：
 \begin{align*}
     \langle\mathcal{F}(T^-),\varphi\rangle=\langle T^-,\mathcal{F}\varphi\rangle=\langle T,\mathcal{F} \varphi^-\rangle=\langle\mathcal{F}T,\varphi^-\rangle=\langle(\mathcal{F}T)^-,\varphi\rangle \\
     \Rightarrow\mathcal{F}(T^-)= (\mathcal{F}T)^-
 \end{align*}
-和常规的函数一样，现在也可以不区分反转与傅里叶变换的先后，而统一地记作$\mathcal{F} T^-$.
-考察反转与傅里叶逆变换的关系：
+和常规的函数一样，现在也可以不区分反转与傅里叶变换的先后，而统一地记作$\mathcal{F} T^-$. 考察反转与傅里叶逆变换的关系：
 \lr{
     \langle\mathcal{F}T^-,\varphi\rangle=\langle T,\mathcal{F}\varphi^-\rangle=\langle T,\mathcal{F} ^{-1}\varphi\rangle=\langle\mathcal{F}^{-1}T,\varphi\rangle\\
     \Rightarrow\mathcal{F}T^-= \mathcal{F}^{-1}T
 }{
     \langle\mathcal{F}T^-,\varphi\rangle=\langle T,\mathcal{F}\varphi^-\rangle=\langle T,2\pi\mathcal{F} ^{-1}\varphi\rangle=2\pi\langle\mathcal{F}^{-1}T,\varphi\rangle\\
     \Rightarrow\mathcal{F}T^-= 2\pi\mathcal{F}^{-1}T
-}
-这与前文中函数的傅里叶变换对偶性完全一样。有了对偶性，就可以得到\textbf{帕塞瓦尔恒等式}
-(Parseval's identity)：\lr{
+} 这与前文中函数的傅里叶变换对偶性完全一样。有了对偶性，就可以得到\textbf{帕塞瓦尔恒等式} (Parseval's identity)：\lr{
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
 }{
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
@@ -1602,9 +1084,7 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
     \langle \mathcal{F} f,\overline{\mathcal{F} g}\rangle&=\langle f,2\pi\mathcal{F}^{-1}\overline{g}\rangle\\
     &=\langle f,2\pi\mathcal{F} \mathcal{F} ^{-1}\overline{g}\rangle\\
     &=2\pi\langle f,\overline{g}\rangle
-}
-取$g=f$即证，尽管限制了函数的范围，但这个证明比前文中积分换序的证明简洁得多。
-
+} 取$g=f$即证，尽管限制了函数的范围，但这个证明比前文中积分换序的证明简洁得多。
 \noindent 例5.4.$\delta$是偶分布：
 \begin{align*}
     \langle \delta^-,\varphi\rangle & =\langle \delta,\varphi^-\rangle=\varphi^-(0)=\varphi(0)=\langle \delta,\varphi\rangle \\
@@ -1617,16 +1097,12 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
     \mathcal{F} \mathds{1}=2\pi\mathcal{F} ^{-1}\mathds{1}^- =2\pi\delta^- =2\pi\delta
 }
 \noindent 例5.6.复指数函数$e^{iat}$的傅里叶变换：作为函数当然不能求$e^{iat}$的傅里叶变换，
-我们甚至无法确定它在0处的傅里叶变换：$\int_{-\infty}^{\infty}e^{iat}\,dt$不存在。
-但它可以视为一个缓增分布，前文中已经提到$\langle e^{iat},\varphi\rangle$是收敛
-的。下面应用对偶性求它的傅里叶变换：
+我们甚至无法确定它在0处的傅里叶变换：$\int_{-\infty}^{\infty}e^{iat}\,dt$不存在。 但它可以视为一个缓增分布，前文中已经提到$\langle e^{iat},\varphi\rangle$是收敛 的。下面应用对偶性求它的傅里叶变换：
 \lr{
 \mathcal{F} [e^{2\pi iat}]=\mathcal{F}^{-1}[e^{2\pi iat}]^-=\delta_{a}^-=\delta_{-a}
 }{
 \mathcal{F} [e^{iat}]=2\pi\mathcal{F}^{-1}[e^{iat}]^- =2\pi\delta_{a}^- =2\pi\delta_{-a}
-}
-请读者自行验证$\delta_{a}^-= \delta_{-a}$.
-
+} 请读者自行验证$\delta_{a}^-= \delta_{-a}$.
 \noindent 例5.7.正弦、余弦函数的傅里叶变换：根据欧拉公式$e^{ix}=\cos(x)+i\sin(x)$，
 有\[\cos(x)=\frac{e^{ix}+e^{-ix}}{2},\sin(x)=\frac{e^{ix}-e^{-ix}}{2i}\]因此
 \lr{
@@ -1640,9 +1116,7 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
     \mathcal{F} [\sin(ax)]&=\frac{1}{2i}(\mathcal{F} [e^{iax}]-\mathcal{F} [e^{-iax}])\\
     &=-i\pi(\delta_{-a}-\delta_{a})
 }
-
 \noindent 3.分布的共轭
-
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，则
 \begin{align*}
     \langle \overline{T_f},\varphi\rangle & =\overline{\langle T_f,\overline{\varphi}\rangle}=\overline{\int_{-\infty}^{\infty}f(x)\overline{\varphi(x)}\,dx}=\overline{\langle T_f,\overline{\varphi}\rangle} \\
@@ -1651,23 +1125,17 @@ $\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz
 \begin{equation}
     \langle \overline{T},\varphi\rangle=\overline{\langle T,\overline{\varphi}\rangle},T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation}
-有了共轭就可以定义实分布和虚分布：如果$\overline{T}=T$，则称T为\textbf{实分布}；如果
-$\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后一条对偶性：
+有了共轭就可以定义实分布和虚分布：如果$\overline{T}=T$，则称T为\textbf{实分布}；如果 $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后一条对偶性：
 \begin{align*}
     \langle\mathcal{F}T^-,\varphi\rangle =\langle T,\mathcal{F}\varphi^-\rangle
 \end{align*}
-我们并不能保证$\varphi$是实值函数\footnote{尽管在原始定义中没有提到这一点，但和前
-    面引入施瓦兹函数类一样，要保证施瓦兹函数的傅里叶变换仍然是施瓦兹函数，而实值函数的
-    傅里叶变换往往是复值函数。}，因此并不能推出实分布的最后一条对偶性。不过，我们还是可
-以得到分布的傅里叶变换的对称性：
+我们并不能保证$\varphi$是实值函数\footnote{尽管在原始定义中没有提到这一点，但和前 面引入施瓦兹函数类一样，要保证施瓦兹函数的傅里叶变换仍然是施瓦兹函数，而实值函数的 傅里叶变换往往是复值函数。}，因此并不能推出实分布的最后一条对偶性。不过，我们还是可 以得到分布的傅里叶变换的对称性：
 \begin{align*}
     T^-=T\Rightarrow\mathcal{F} T^-=\mathcal{F} T \\
     T^-=-T\Rightarrow\mathcal{F} T^-=-\mathcal{F} T
 \end{align*}
 因此分布的傅里叶变换的奇偶性与分布本身相同。
-
 \noindent 4.分布的平移和伸缩
-
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，自然可以定义$\tau_b T_f=T_{\tau_b f}$，
 \begin{align*}
     \langle \tau_b T_f,\varphi\rangle & =\int_{-\infty}^{\infty}f(x-b)\varphi(x)\,dx \\
@@ -1688,7 +1156,6 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
 \begin{equation}
     \langle\sigma_a T,\varphi\rangle=\langle T,\frac{1}{|a|}\sigma_{1/a}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation}
-
 现在就可以建立分布的傅里叶变换的平移和尺度变换定理：
 \begin{align*}
     \langle\mathcal{F}(\tau_b T),\varphi\rangle =\langle \tau_b T,\mathcal{F}\varphi\rangle=\langle T,\tau_{-b}\mathcal{F}\varphi\rangle=\langle T,e^{2\pi ibx}\mathcal{F}\varphi\rangle=\langle \mathcal{F}(e^{2\pi ibx}T),\varphi\rangle \\
@@ -1698,11 +1165,8 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
     \langle\mathcal{F}(\sigma_a T),\varphi\rangle =\langle \sigma_a T,\mathcal{F}\varphi\rangle=\langle T,\frac{1}{|a|}\sigma_{\frac{1}{a}}\mathcal{F}\varphi\rangle=\langle T,\frac{1}{|a|}\mathcal{F}\sigma_a \varphi\rangle=\langle \frac{1}{|a|}\mathcal{F}(\sigma_a T),\varphi\rangle \\
     \Rightarrow\mathcal{F}(\sigma_a T)           =\frac{1}{|a|}\mathcal{F}(\sigma_a T)
 \end{align*}
-
 \noindent 5.分布的傅里叶变换的微分性质
-
-我们已经得到$\langle T',\varphi\rangle=-\langle T,\varphi'\rangle$，现在结合
-分布与函数的乘法，仿照函数的情形得到分布的傅里叶变换的微分性质：
+我们已经得到$\langle T',\varphi\rangle=-\langle T,\varphi'\rangle$，现在结合 分布与函数的乘法，仿照函数的情形得到分布的傅里叶变换的微分性质：
 \lr{
     \langle\mathcal{F} (T'),\varphi\rangle&=-\langle T,(\mathcal{F} \varphi)'\rangle\\
     &=\langle T,\mathcal{F} (2\pi i t\varphi)\rangle\\
@@ -1713,9 +1177,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
     &=\langle T,\mathcal{F} (i t\varphi)\rangle\\
     &=\langle i\omega\mathcal{F}T,\varphi\rangle\\
     &\Rightarrow\mathcal{F} (T')=i\omega\mathcal{F}T
-}
-这与函数的傅里叶变换的微分性质一致，注意将$t$换成$\xi$或$\omega$，只是符号上的改
-变，用以区分所讨论的场景。同样地，
+} 这与函数的傅里叶变换的微分性质一致，注意将$t$换成$\xi$或$\omega$，只是符号上的改 变，用以区分所讨论的场景。同样地，
 \lr{
     \langle (\mathcal{F} T)',\varphi\rangle&=\langle T,-\mathcal{F} (\varphi')\rangle\\
     &=\langle T,-2\pi i\xi\mathcal{F} \varphi\rangle\\
@@ -1726,16 +1188,13 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
     &=\langle T,-i\omega\mathcal{F} \varphi\rangle\\
     &=\langle -\mathcal{F} (itT),\varphi\rangle\\
     &\Rightarrow (\mathcal{F} T)'=-\mathcal{F} (itT)
-}
-也即
+} 也即
 \lr{
     \mathcal{F} (tT)=\frac{i}{2\pi}(\mathcal{F} T)'
 }{
     \mathcal{F} (tT)=i(\mathcal{F} T)'
 }
-
 \noindent 6.分布的卷积
-
 设$f,g,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，自然可以定义$(T_f)*g=T_{(f*g)}$，
 \begin{align*}
     \langle T_f*g,\varphi\rangle & =\int_{-\infty}^{\infty}(f*g)(x)\varphi(x)\,dx                                           \\
@@ -1746,9 +1205,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
                                  & =\langle T_f,(g^-)*\varphi\rangle                                                        \\
                                  & \Rightarrow \langle T*g,\varphi\rangle=\langle T,(g^-)*\varphi\rangle
 \end{align*}
-
-从定义分布与函数的卷积的过程可以看出，应当要求卷积的交换律仍然成立；“结合律”在目前
-只限于讨论$(f*g)*T$是否等于$f*(g*T)$，我们来验证这一性质：
+从定义分布与函数的卷积的过程可以看出，应当要求卷积的交换律仍然成立；“结合律”在目前 只限于讨论$(f*g)*T$是否等于$f*(g*T)$，我们来验证这一性质：
 \begin{align*}
     \langle (f*g)*T,\varphi\rangle & =\langle T,(f*g)^- *\varphi\rangle                             \\
                                    & =\langle T,(f^-)*(g^-)*\varphi\rangle                          \\
@@ -1772,7 +1229,6 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
                                      & =\langle af*S+bf*T,\varphi\rangle                                                   \\
                                      & \Rightarrow f*(aS+bT)=af*S+bf*T,a,b\in\mathbb{C},f\in\mathcal{S} ,S,T\in\mathcal{T}
 \end{align*}
-
 下面研究卷积定理是否仍成立：\\\ding{172}时域卷积
 \lr{
     \langle \mathcal{F} (g*T),\varphi\rangle&=\langle T,(g^-)*\mathcal{F} \varphi\rangle\\
@@ -1802,33 +1258,22 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
     &=\langle T,\frac{1}{2\pi}\mathcal{F} [\mathcal{F} g^- *\varphi]\rangle\\
     &=\frac{1}{2\pi}\langle\mathcal{F} T*\mathcal{F} g,\varphi\rangle\\
     &\Rightarrow \mathcal{F} (gT)=\frac{1}{2\pi}\mathcal{F} g*\mathcal{F} T
-}
-可以看到，对于分布与函数的卷积，卷积定理的形式与函数的卷积定理一致。
-
-实际上，我们同样可以定义分布与分布的卷积，只是这时事情会麻烦的多。首先还是研究正则
-分布的卷积，如果想将前文中定义分布与函数卷积时的g也换成分布，则需要另一种方式来处理
-这个积分。设$f,g,\varphi\in\mathcal{S} ,S_f,T_g\in\mathcal{T} $，根据前面已经
-得到的结果，
+} 可以看到，对于分布与函数的卷积，卷积定理的形式与函数的卷积定理一致。实际上，我们同样可以定义分布与分布的卷积，只是这时事情会麻烦的多。首先还是研究正则 分布的卷积，如果想将前文中定义分布与函数卷积时的g也换成分布，则需要另一种方式来处理 这个积分。设$f,g,\varphi\in\mathcal{S} ,S_f,T_g\in\mathcal{T} $，根据前面已经 得到的结果，
 \begin{align*}
     \langle S_f *T_g,\varphi\rangle & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(y)g(x-y)\varphi(x)\,dx\,dy           \\
                                     & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(y)g(u)\varphi(u+y)\,du\,dy & (x-y=u) \\
                                     & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(u)\varphi(u+y)\,du           \\
                                     & =\langle f(y),\langle g(u),\varphi(u+y)\rangle\rangle
 \end{align*}
-如果允许给分布标上自变量（对于能用函数表示的分布，即便不属于$\mathcal{S} $，这样做
-也的确是有意义的），那么我们可以定义：
+如果允许给分布标上自变量（对于能用函数表示的分布，即便不属于$\mathcal{S} $，这样做 也的确是有意义的），那么我们可以定义：
 \begin{equation}
     \langle S*T,\varphi\rangle=\langle S(y),\langle T(x),\varphi(x+y)\rangle\rangle,S,T\in\mathcal{T} ,\varphi\in\mathcal{S} ,\langle T(x),\varphi(x+y)\rangle\in\mathcal{S}
 \end{equation}
-注意我们必须要求$\langle T(x),\varphi(x+y)\rangle\in\mathcal{S}$，如果不满足这
-个条件，我们就只好说$S*T$无定义。对于分布之间的卷积，交换律和结合律就不总是成立了，
-交换律在$\langle S,\varphi\rangle\in\mathcal{S} ,\langle T,\varphi\rangle\notin\mathcal{S}$
-时被破坏，对于结合律，从形式上可以两次套用分布与分布卷积的定义，得到
+注意我们必须要求$\langle T(x),\varphi(x+y)\rangle\in\mathcal{S}$，如果不满足这 个条件，我们就只好说$S*T$无定义。对于分布之间的卷积，交换律和结合律就不总是成立了， 交换律在$\langle S,\varphi\rangle\in\mathcal{S} ,\langle T,\varphi\rangle\notin\mathcal{S}$ 时被破坏，对于结合律，从形式上可以两次套用分布与分布卷积的定义，得到
 \begin{equation*}
     \langle R*(S*T),\varphi\rangle=\langle T(x),\langle S(y),\langle R(z),\varphi(x+y+z)\rangle\rangle\rangle=\langle (R*S)*T,\varphi\rangle
 \end{equation*}
 然而当证明过程中任何一步遇到卷积无定义的情况，这个证明就会失效。
-
 \noindent 例5.8.结合律的失效：\begin{align*}
     \langle\mathds{1}*\delta',\varphi\rangle     & =\langle \mathds{1}(y),\langle \delta'(x),\varphi(x+y)\rangle\rangle                                                                   \\
                                                  & =\langle \mathds{1},-\varphi'\rangle                                                                                                   \\
@@ -1845,13 +1290,11 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
 可见\begin{equation}
     (\mathds{1}*\delta')*u                       \neq\mathds{1}*(\delta'*u)
 \end{equation}
-
 \noindent  例5.9.分布$T*\delta$必然有定义，并且$T*\delta=T$.
 \begin{align*}
     \langle T*\delta,\varphi\rangle & =\langle T(y),\langle \delta(x),\varphi(x+y)\rangle\rangle \\
                                     & =\langle T,\varphi\rangle
 \end{align*}
-
 \noindent 例5.10.$\delta_a$的平移作用：
 \begin{align*}
     \langle \delta_a*\delta_b,\varphi\rangle & =\langle \delta_a(y),\langle\delta_b(x),\varphi(x+y)\rangle \\
@@ -1868,16 +1311,10 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
                                       & =\langle \tau_a f,\varphi\rangle                        \\
                                       & \Rightarrow f*\delta_a=\tau_a f
 \end{align*}
-
-在\ref{sec:Fourier}中，我们已经从形式上得到了$sgn,u,1/t$，的傅里叶变换，现在有了
-分布的工具，就可以借助分布的傅里叶变换的对偶性说明之前的结论是严谨的。
-
+在\ref{sec:Fourier}中，我们已经从形式上得到了$sgn,u,1/t$，的傅里叶变换，现在有了 分布的工具，就可以借助分布的傅里叶变换的对偶性说明之前的结论是严谨的。
 \section{小结}\label{sec:sammary}
-本章所涉及的公式及性质汇总如下。鉴于我们已经获得了很多对于傅里叶分析的认识，本
-小节将以不同的顺序或方式来表述它们。
-
+本章所涉及的公式及性质汇总如下。鉴于我们已经获得了很多对于傅里叶分析的认识，本 小节将以不同的顺序或方式来表述它们。
 \noindent 1.\underline{傅里叶级数}
-
 周期为T的函数f，三角函数形式的展开式为
 \begin{align*}
     f(t) & =\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k \cos(k\omega t)+b_k\sin(k\omega t) \\
@@ -1887,12 +1324,9 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
 \[a_k=\frac{2}{T}\int_T f(t)\cos(k\omega t)\,dt\]
 \[b_k=\frac{2}{T}\int_T f(t)\sin(k\omega t)\,dt\]
 \[c_k=\sqrt{a_k^2+b_k^2}\]
-
 指数函数形式的展开式为
 \[f(t)=\sum_{k = 0}^{\infty}  c_k e^{ik\omega t} ,c_k=\frac{a_k-ib_k}{2},c_{-k}=\frac{a_k+ib_k}{2}=c_k^*,k\in \mathbb{N}\]
-
 \noindent 2.\underline{特殊情况下的傅里叶级数}
-
 对于偶函数，
 \[f(t)=\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k\cos(k\omega t)\]
 其中
@@ -1914,27 +1348,18 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
         \frac{4}{T}\int_{0}^{T/2}f(t)\sin(k\omega t)\,dt,&\text{if }k\text{为奇数}
     \end{cases}
 \end{align*}
-
 \noindent 3.\underline{帕塞瓦尔定理/瑞利恒等式}
 \[P=\frac{1}{T}\int_{T}|f(t)|^2\,dt=\sum_{k=1}^{\infty}c_k^2=a_0^2+\frac{1}{2}\sum_{k=1}^{\infty}(a_k^2+b_k^2)\]
-
 \noindent 4. \underline{傅里叶变换}：
 \lr{
     \mathcal{F} f(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt
 }{
     \mathcal{F} f(\omega)=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt
+} 傅里叶逆变换：\lr{ f(t)=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)e^{2\pi i\xi t}\,d\xi
+}{ f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega
+} 傅里叶反演公式：\lr{ f=\mathcal{F} ^{-1}\mathcal{F} f=\mathcal{F} \mathcal{F} ^{-1}f
+}{ f=\mathcal{F} ^{-1}\mathcal{F} f=\mathcal{F}\mathcal{F} ^{-1} f
 }
-傅里叶逆变换：\lr{
-    f(t)=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)e^{2\pi i\xi t}\,d\xi
-}{
-    f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega
-}
-傅里叶反演公式：\lr{
-    f=\mathcal{F} ^{-1}\mathcal{F} f=\mathcal{F} \mathcal{F} ^{-1}f
-}{
-    f=\mathcal{F} ^{-1}\mathcal{F} f=\mathcal{F}\mathcal{F} ^{-1} f
-}
-
 \noindent 5.\underline{常用信号及其傅里叶变换}
 \begin{itemize}
     \item 矩形函数及取样函数：
@@ -1946,10 +1371,8 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
         &Sa(Tt)\overset{\mathcal{F} }{\longleftrightarrow} \frac{\pi}{T}\Pi_{2T}(\omega)
     }
     \item 高斯函数 $G(t)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}$
-    \lr{
-        G(t)\overset{\mathcal{F} }{\longleftrightarrow}e^{-2\pi\sigma^2\xi^2}
-    }{
-        G(t)\overset{\mathcal{F} }{\longleftrightarrow}e^{-\frac{\sigma^2\omega^2}{2}}
+    \lr{ G(t)\overset{\mathcal{F} }{\longleftrightarrow}e^{-2\pi\sigma^2\xi^2}
+    }{ G(t)\overset{\mathcal{F} }{\longleftrightarrow}e^{-\frac{\sigma^2\omega^2}{2}}
     }
     \item 单边指数函数$f(t)=e^{-at}u(t)$和双边指数函数$g(t)=f(t)+f(-t)$
     \lr{
@@ -1959,9 +1382,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
         &f(t)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{a+i\omega}\\
         &g(t)\overset{\mathcal{F} }{\longleftrightarrow}\frac{2a}{a^2+\omega^2}
     }
-    
 \end{itemize}
-
 \noindent 6.\underline{常用分布及其傅里叶变换}
 \begin{itemize}
     \item $\delta$分布和$\mathds{1}$分布
@@ -1997,7 +1418,6 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
         &t^n\overset{\mathcal{F} }{\longleftrightarrow}2\pi i^n\delta^{(n)}
     }
 \end{itemize}
-
 \noindent 7.\underline{傅里叶变换的性质}：设\[f\overset{\mathcal{F} }{\longleftrightarrow}F\]
 \begin{itemize}
     \item \textbf{对偶性}：\lr{
@@ -2020,8 +1440,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
           }
     \item \textbf{伸缩定理}：\lr{
               f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F(\frac{\xi}{a})
-          }{
-              f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F(\frac{\omega}{a})
+          }{ f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F(\frac{\omega}{a})
           }
     \item \textbf{微分性质}：\lr{
               &f'\overset{\mathcal{F} }{\longleftrightarrow}2\pi i\xi F(\xi)\\
@@ -2038,9 +1457,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
 }
 \end{itemize}
-
 \noindent 8.\underline{卷积}
-
 函数f,g的卷积为
 \begin{equation*}
     (f*g)(x)=\int_{-\infty}^{\infty}f(y)g(x-y)\,dy
@@ -2053,8 +1470,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。现在就来考察最后�
 }{
     \mathcal{F} (f*g)(\omega)=F(\omega)G(\omega)\\
     \mathcal{F} (fg)(\omega)=\frac{1}{2\pi}(F*G)(\omega)
-}
-$\delta$的卷积性质：\lr{
+} $\delta$的卷积性质：\lr{
     &\mathcal{F} (f*\delta)(\xi)=F(\xi)\\
     &f(t)=(f*\delta)(t)=\int_{-\infty}^{\infty}f(x)\delta(t-x)\,dx\\
     &f*\delta_a=\tau_a f
@@ -2070,9 +1486,7 @@ $\delta$的卷积性质：\lr{
     &(\sigma_a f)*(\sigma_a g)=\frac{1}{|a|}\sigma_a(f*g)\\
     &\int_{\mathbb{R}}f*g=\int_{\mathbb{R}}f\cdot\int_{\mathbb{R}}g
 \end{align*}
-
 \noindent 9.\underline{相关函数}
-
 $f,g\in L^2(\mathbb{R})$的\textbf{互相关}定义为
 \[(f\star g)(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy\]
 互相关的性质：\begin{itemize}
@@ -2082,7 +1496,6 @@ $f,g\in L^2(\mathbb{R})$的\textbf{互相关}定义为
     \item $f\star (\tau_b g)=\tau_{b} (f\star g)=(\tau_{-b}f)\star g$
     \item $(f\star g)\leq\|f\|\|g\|$，特别地，$(f\star f)(x)\leq (f\star f)(0)=\|f\|^2$
 \end{itemize}
-
 \noindent 10.\underline{作用于分布的算子及其性质}
 \begin{align*}
     &\langle \mathcal{F} T,\varphi\rangle=\langle T,\mathcal{F} \varphi\rangle,\langle \mathcal{F} ^{-1}T,\varphi\rangle=\langle T,\mathcal{F} ^{-1}\varphi\rangle\\
@@ -2091,26 +1504,14 @@ $f,g\in L^2(\mathbb{R})$的\textbf{互相关}定义为
     &\langle \tau_b T,\varphi\rangle=\langle T,\tau_{-b}\varphi\rangle,\langle \sigma_a T,\varphi\rangle=\langle T,\frac{1}{|a|}\sigma_{1/a}\varphi\rangle\\
     &\langle g*T,\varphi\rangle=\langle T,g^- *\varphi\rangle,\langle S*T,\varphi\rangle=\langle S(y),\langle T(x),\varphi(x+y)\rangle\rangle
 \end{align*}
-分布的傅里叶变换与经典情况的区别与联系：T是实分布\textbf{不能}推出
-$\mathcal{F} T^-=\overline{\mathcal{F} T}$，分布与分布的卷积的结合律未必成
-立，此外的性质都与经典情况一致。
-
+分布的傅里叶变换与经典情况的区别与联系：T是实分布\textbf{不能}推出 $\mathcal{F} T^-=\overline{\mathcal{F} T}$，分布与分布的卷积的结合律未必成 立，此外的性质都与经典情况一致。
 \chapter{关于傅里叶变换的进一步讨论}
-
 \section{狄拉克梳状分布，取样与插值}\label{sec:Sampling and Interpolation}
-
-在研究周期现象时，经常会将一个函数周期化(periodize)，例如，给定函数$f(t)$，要将
-它变成周期为T的函数，一种标准的做法是“平移、相加”，即在不涉及收敛性的问题时，令
+在研究周期现象时，经常会将一个函数周期化(periodize)，例如，给定函数$f(t)$，要将 它变成周期为T的函数，一种标准的做法是“平移、相加”，即在不涉及收敛性的问题时，令
 \[f_T(t)=\sum_{k=-\infty}^{\infty}f(t-kT)\]
-在\ref{sec:distributions}中，我们曾建立了$\delta_a$的平移性质：$\delta_a*f=\tau_a f$，
-所以我们可以将以上周期化的操作抽象出来：
+在\ref{sec:distributions}中，我们曾建立了$\delta_a$的平移性质：$\delta_a*f=\tau_a f$， 所以我们可以将以上周期化的操作抽象出来：
 \[f_T(t)=\sum_{k=-\infty}^{\infty}f(t-kT)=\sum_{k=-\infty}^{\infty}\delta_{kT}*f(t)=\left(\sum_{k=-\infty}^{\infty}\delta_{kT}\right)*f(t)\]
-将分布$\sum_{k=-\infty}^{\infty}\delta_{kT}$记为$\shah_T$，读作“shah”，在T=1
-时可以将角标略去，直接写作$\shah$。由于其图像是等间距排列的一个个$\delta$，又称
-之为\textbf{狄拉克梳状分布}(dirac comb).容易看出，这个分布具有两条基本性质，其一是前
-面提到的周期化：$\shah_T*f(t)=f_T(t)$，其二是取样性质，它直接得自$\delta_a$的
-取样性质：$\shah_T f(t)=\sum_{k=-\infty}^{\infty}f(kT)\delta_{kT}$。另外，
-作为一个分布，有
+将分布$\sum_{k=-\infty}^{\infty}\delta_{kT}$记为$\shah_T$，读作“shah”，在T=1 时可以将角标略去，直接写作$\shah$。由于其图像是等间距排列的一个个$\delta$，又称 之为\textbf{狄拉克梳状分布}(dirac comb).容易看出，这个分布具有两条基本性质，其一是前 面提到的周期化：$\shah_T*f(t)=f_T(t)$，其二是取样性质，它直接得自$\delta_a$的 取样性质：$\shah_T f(t)=\sum_{k=-\infty}^{\infty}f(kT)\delta_{kT}$。另外， 作为一个分布，有
 \[\langle \shah_T,\varphi\rangle=\langle \sum_{k=-\infty}^{\infty}\delta_{kT},\varphi\rangle=\sum_{k=-\infty}^{\infty}\varphi(kT)\]
 \begin{figure}[H]
     \centering
@@ -2118,34 +1519,17 @@ $\mathcal{F} T^-=\overline{\mathcal{F} T}$，分布与分布的卷积的结合�
 \end{figure}
 对于一个施瓦兹函数，以上的式子中均不会出现收敛性的问题。回顾施瓦兹函数类的定义：
 \[\mathcal{S} =\{\varphi\in C^{\infty}(\mathbb{R} ):\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \}\]
-对任意的t，考察级数$\sum_{k=-\infty}^{\infty}f(t-kT)$的收敛性时，只需要将n取
-为0，m取为不小于2的整数，则在$|k|$充分大时，级数比$C/n^2$更小，从而绝对收敛。注
-意这种估计方式并不依赖于自变量t的选取，因此这个函数项级数一致收敛，其和函数会保留
-$f(t)$的许多分析性质，例如我们可以逐项求导（从而和函数也无限阶可导）、逐项积分，
-还可以交换求和符号与其他极限过程的顺序（见数学分析教材）。
-
-时域上紧支（即在$|t|$充分大时函数恒为0）的函数称之为\textbf{时限函数}，此时级数
-$\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应的，在频域上紧
-支的函数称为\textbf{带限函数}。更为特殊的情况下，函数$f(t)$支于$[-T/2,T/2]$，
-不论f定义在哪个域上，在相应的域上周期化所得的函数总是存在，并且有恒等式
+对任意的t，考察级数$\sum_{k=-\infty}^{\infty}f(t-kT)$的收敛性时，只需要将n取 为0，m取为不小于2的整数，则在$|k|$充分大时，级数比$C/n^2$更小，从而绝对收敛。注 意这种估计方式并不依赖于自变量t的选取，因此这个函数项级数一致收敛，其和函数会保留 $f(t)$的许多分析性质，例如我们可以逐项求导（从而和函数也无限阶可导）、逐项积分， 还可以交换求和符号与其他极限过程的顺序（见数学分析教材）。时域上紧支（即在$|t|$充分大时函数恒为0）的函数称之为\textbf{时限函数}，此时级数 $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应的，在频域上紧 支的函数称为\textbf{带限函数}。更为特殊的情况下，函数$f(t)$支于$[-T/2,T/2]$， 不论f定义在哪个域上，在相应的域上周期化所得的函数总是存在，并且有恒等式
 \[f(x)=\Pi_{T}(f*\shah_T)(x)\]
-这个看似直白的恒等式在傅里叶变换下能够带来一些新的东西，见本节后续内容。这里我们先建立
-一个不需要$\shah$的傅里叶变换的结果。设带限函数$f(t)$满足$supp\mathcal{F} f\subset [-T/2,T/2]$，
-则有恒等式$\mathcal{F} f=\Pi_T\mathcal{F} f$，对两边同时取傅里叶逆变换：\lr{
-    f(t)&=\mathcal{F} ^{-1}\mathcal{F} f(t)\\
+这个看似直白的恒等式在傅里叶变换下能够带来一些新的东西，见本节后续内容。这里我们先建立 一个不需要$\shah$的傅里叶变换的结果。设带限函数$f(t)$满足$supp\mathcal{F} f\subset [-T/2,T/2]$， 则有恒等式$\mathcal{F} f=\Pi_T\mathcal{F} f$，对两边同时取傅里叶逆变换：\lr{ f(t)&=\mathcal{F} ^{-1}\mathcal{F} f(t)\\
     &=\mathcal{F} ^{-1}(\Pi_T\mathcal{F} f)(t)\\
     &=\left(\mathcal{F} ^{-1}\Pi_T\right)*f(t)\\
     &=Tsinc(Tt)*f(t)
-}{
-    f(t)&=\mathcal{F} ^{-1}\mathcal{F} f(t)\\
+}{ f(t)&=\mathcal{F} ^{-1}\mathcal{F} f(t)\\
     &=\mathcal{F} ^{-1}(\Pi_T\mathcal{F} f)(t)\\
     &=\frac{1}{2\pi}\left(\mathcal{F} ^{-1}\Pi_T\right)*f(t)\\
     &=\frac{T}{2\pi}Sa(Tt)*f(t)
-}
-我们发现对于带限函数，抽样信号能够起到类似$\delta$的卷积幺元的作用。
-
-在建立分布$\shah$的傅里叶变换之前，我们先来讨论另外一个话题，它揭示了傅里叶级数与
-傅里叶变换的深刻关系。设$suppf\subset [-1/2,1/2]$，
+} 我们发现对于带限函数，抽样信号能够起到类似$\delta$的卷积幺元的作用。在建立分布$\shah$的傅里叶变换之前，我们先来讨论另外一个话题，它揭示了傅里叶级数与 傅里叶变换的深刻关系。设$suppf\subset [-1/2,1/2]$，
 \lr{
     \mathcal{F} f(k)&=\int_{-\infty}^{\infty}f(t)e^{-2\pi ikt}\,dt\\
     &=\int_{-T/2}^{T/2}f(t)e^{-2\pi ikt}\,dt\\
@@ -2154,13 +1538,7 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
     \mathcal{F} f(2\pi k)&=\int_{-\infty}^{\infty}f(t)e^{-2\pi ikt}\,dt\\
     &=\int_{-T/2}^{T/2}f(t)e^{-2\pi ikt}\,dt\\
     &=Tc_k
-}
-其中$c_k$是$f(t)$的周期化函数$f_T(t)$的傅里叶系数，也就是说，时限函数的傅里叶变
-换在k（或$2\pi k$）处的值正比于其周期化函数的第k个傅里叶系数，这使得频域函数$\mathcal{F}f$
-在整数处的值似乎蕴含了更多的信息。不仅如此，考虑更一般的函数$f\in\mathcal{S} $，记
-其周期化函数为$\Phi=\shah*\varphi$，并将$\Phi$的傅里叶系数记为$\hat{\Phi}(k)$，
-由$\Phi$的无限阶可导性可知其傅里叶级数绝对一致收敛于它本身（这里只需要逐点收敛性，
-至于更强的收敛性，见\ref{sec:Asymptotic_Behaviour}），即
+} 其中$c_k$是$f(t)$的周期化函数$f_T(t)$的傅里叶系数，也就是说，时限函数的傅里叶变 换在k（或$2\pi k$）处的值正比于其周期化函数的第k个傅里叶系数，这使得频域函数$\mathcal{F}f$ 在整数处的值似乎蕴含了更多的信息。不仅如此，考虑更一般的函数$f\in\mathcal{S} $，记 其周期化函数为$\Phi=\shah*\varphi$，并将$\Phi$的傅里叶系数记为$\hat{\Phi}(k)$， 由$\Phi$的无限阶可导性可知其傅里叶级数绝对一致收敛于它本身（这里只需要逐点收敛性， 至于更强的收敛性，见\ref{sec:Asymptotic_Behaviour}），即
 \[\Phi(t)=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)e^{2\pi ikt}\]
 其中
 \begin{align*}
@@ -2175,30 +1553,19 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
     \hat{\Phi}(k)=\mathcal{F} \varphi(k)
 }{
     \hat{\Phi}(k)=\mathcal{F} \varphi(2\pi k)
-}
-其中第二行到第三行的积分、求和换序用到了周期化函数作为函数项级数的一致收敛性。这个等式意味着对时
-限函数的关系$\mathcal{F} f(k)=Tc_k$对施瓦兹函数都成立（以上是周期化为$T=1$的情况
-，读者可以自行推广至周期为其他值的情况），进一步，在恒等式
+} 其中第二行到第三行的积分、求和换序用到了周期化函数作为函数项级数的一致收敛性。这个等式意味着对时 限函数的关系$\mathcal{F} f(k)=Tc_k$对施瓦兹函数都成立（以上是周期化为$T=1$的情况 ，读者可以自行推广至周期为其他值的情况），进一步，在恒等式
 \lr{
     \Phi(t)&=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)e^{2\pi ikt}\\
     &=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)e^{2\pi ikt}
 }{
     \Phi(t)&=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)e^{2\pi ikt}\\
     &=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)e^{2\pi ikt}
-}
-中取$t=0$，则得到
-\lr{\Phi(0)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)}{\Phi(0)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)}
-又由\[\Phi=\shah*\varphi,\Phi(0)=\sum_{k=-\infty}^{\infty}\varphi(k)\]
-得到\lr{
+} 中取$t=0$，则得到
+\lr{\Phi(0)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)}{\Phi(0)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)} 又由\[\Phi=\shah*\varphi,\Phi(0)=\sum_{k=-\infty}^{\infty}\varphi(k)\] 得到\lr{
     \sum_{k=-\infty}^{\infty}\varphi(k)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)
 }{
     \sum_{k=-\infty}^{\infty}\varphi(k)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)
-}
-这个结果称为\textbf{泊松求和公式}(the Poisson summation formula)。我们当然也可以
-对$\shah_T*\varphi$做类似的推导，但其结论远不如以上两式简洁，这实际上是整数集$\mathbb{Z}$
-的自对偶性的体现。对偶性的概念，见\ref{sec:Multi_Fourier}。
-
-让我们回到$\shah$分布的傅里叶变换的话题，可以借助泊松求和公式得到：
+} 这个结果称为\textbf{泊松求和公式}(the Poisson summation formula)。我们当然也可以 对$\shah_T*\varphi$做类似的推导，但其结论远不如以上两式简洁，这实际上是整数集$\mathbb{Z}$ 的自对偶性的体现。对偶性的概念，见\ref{sec:Multi_Fourier}。让我们回到$\shah$分布的傅里叶变换的话题，可以借助泊松求和公式得到：
 \lr{
     \langle \mathcal{F} \shah,\varphi \rangle&=\langle \shah,\mathcal{F} \varphi\rangle\\
     &=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)\\
@@ -2209,16 +1576,11 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
     &=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)\\
     &=\sum_{k=-\infty}^{\infty}\varphi(k)\\
     &=\langle \shah,\varphi\rangle
-}
-即\lr{
+} 即\lr{
     \mathcal{F} \shah=\shah
 }{
     \mathcal{F} \shah_{2\pi}=\shah
-}
-可以看到，频率形式下$\shah$分布的傅里叶变换具有自对偶性，即$\shah\overset{\mathcal{F} }{\longleftrightarrow}\shah$，
-而角频率形式下需要对$\shah$分布做伸缩变换，这启发我们讨论$\shah$以及更基本的$\delta$
-在伸缩变换下的关系。可以将$\delta$作为形式上的函数进行推导，但这里采用更直接的分布
-伸缩的定义：（$a>0$）
+} 可以看到，频率形式下$\shah$分布的傅里叶变换具有自对偶性，即$\shah\overset{\mathcal{F} }{\longleftrightarrow}\shah$， 而角频率形式下需要对$\shah$分布做伸缩变换，这启发我们讨论$\shah$以及更基本的$\delta$ 在伸缩变换下的关系。可以将$\delta$作为形式上的函数进行推导，但这里采用更直接的分布 伸缩的定义：（$a>0$）
 \begin{align*}
     \langle \sigma_a\delta,\varphi\rangle&=\langle \delta,\frac{1}{a}\sigma_{1/a}\varphi\rangle\\
     &=\frac{1}{a}\varphi(0)=\langle \frac{1}{a}\delta,\varphi\rangle\\
@@ -2230,7 +1592,6 @@ $a<0$的情况可直接从$\delta$是偶分布得出。对于$\shah$分布的伸
     &=\frac{1}{a}\langle \shah_{1/a},\varphi\rangle\\
     &\Rightarrow \sigma_a\shah=\frac{1}{a}\shah_{1/a},\shah_T=\frac{1}{T}\sigma_{1/T}\shah  &(a\to\frac{1}{T})
 \end{align*}
-
 值得注意的是，不论从直观上还是从形式计算上，$\shah$分布似乎有另一个傅里叶变换：
 \lr{
     \mathcal{F} \shah&=\sum_{k=-\infty}^{\infty}\mathcal{F} \delta_k\\
@@ -2238,23 +1599,11 @@ $a<0$的情况可直接从$\delta$是偶分布得出。对于$\shah$分布的伸
 }{
     \mathcal{F} \shah_{2\pi}&=\sum_{k=-\infty}^{\infty}\mathcal{F} \delta_{2k\pi}\\
     &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikt}
-}
-由于涉及分布级数及其换序问题，很难直接严格证明以上结果，但它的确是对的。结合$\shah$的
-傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义：
+} 由于涉及分布级数及其换序问题，很难直接严格证明以上结果，但它的确是对的。结合$\shah$的 傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义：
 \begin{equation}
     \shah(x)=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}
 \end{equation}
-右边正是附录\ref{sec:Asymptotic_Behaviour}中提到的狄利克雷核在$N\to\infty$时的
-式子，换言之函数项级数$\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}$逐点地趋于$\shah$，
-我们不仅发现了它在多数区间上都趋于0，还发现在$x=n(n\in\mathbb{Z})$处全为1的“级数”
-似乎以$\delta$的速度趋于无穷。实际上我们只能得到$\mathbb{R}-\mathbb{Z}$上的收敛
-性，整数处的分布只能在\ref{sec:distributions}中提到的弱收敛的意义下定义，即将函数
-项级数$\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}$的每一项视为分布，它们作用在任意
-测试函数$\varphi$上的结果在求和项数充分大时相当于$\delta$分布作用于$\varphi$的结
-果。
-
-根据角频率形式下的$\shah$分布的傅里叶变换，可以想到$\shah$的伸缩的傅里叶变换仍具有
-$\shah$的形式，下面就来找出具体的公式：\lr{
+右边正是附录\ref{sec:Asymptotic_Behaviour}中提到的狄利克雷核在$N\to\infty$时的 式子，换言之函数项级数$\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}$逐点地趋于$\shah$， 我们不仅发现了它在多数区间上都趋于0，还发现在$x=n(n\in\mathbb{Z})$处全为1的“级数” 似乎以$\delta$的速度趋于无穷。实际上我们只能得到$\mathbb{R}-\mathbb{Z}$上的收敛 性，整数处的分布只能在\ref{sec:distributions}中提到的弱收敛的意义下定义，即将函数 项级数$\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}$的每一项视为分布，它们作用在任意 测试函数$\varphi$上的结果在求和项数充分大时相当于$\delta$分布作用于$\varphi$的结 果。根据角频率形式下的$\shah$分布的傅里叶变换，可以想到$\shah$的伸缩的傅里叶变换仍具有 $\shah$的形式，下面就来找出具体的公式：\lr{
     \mathcal{F} \shah_T&=\mathcal{F} [\frac{1}{T}\sigma_{1/T}\shah]\\
     &=\frac{1}{T}\cdot T\sigma_T\mathcal{F} \shah\\
     &=\sigma_T\shah=\frac{1}{T}\shah_{1/T}
@@ -2262,24 +1611,13 @@ $\shah$的形式，下面就来找出具体的公式：\lr{
     \mathcal{F} \shah_T&=\mathcal{F} [\frac{2\pi}{T}\sigma_{2\pi/T}\shah_{2\pi}]\\
     &=\frac{2\pi}{T}\cdot \frac{T}{2\pi}\sigma_{T/2\pi}\mathcal{F} \shah_{2\pi}\\
     &=\sigma_{T/2\pi}\shah=\frac{2\pi}{T}\shah_{2\pi/T}
-}
-即\lr{
+} 即\lr{
     \mathcal{F} \shah_T=\frac{1}{T}\shah_{1/T}
 }{
     \mathcal{F} \shah_T=\frac{2\pi}{T}\shah_{2\pi/T}
-}
-可以看到，傅里叶变换前后$\delta$的位置具有倒数关系，以频率为自变量的傅里叶变换，
-$T\cdot\frac{1}{T}=1$，以角频率为自变量做傅里叶变换，$T\cdot\frac{2\pi}{T}=2\pi$，
-其联系还是在于$\omega=2\pi\xi$。事实上，在多维傅里叶变换的理论中，我们还将看到更为
-深刻的关系：$\shah$分布的$\delta$的位置称为“格”，而其傅里叶变换的$\delta$的位置为
-其“对偶格”，特别地，一维的“对偶格”就是以上所述的“倒数”关系。直观上，我们曾提出对函
-数和分布的一维傅里叶变换的伸缩定理：
+} 可以看到，傅里叶变换前后$\delta$的位置具有倒数关系，以频率为自变量的傅里叶变换， $T\cdot\frac{1}{T}=1$，以角频率为自变量做傅里叶变换，$T\cdot\frac{2\pi}{T}=2\pi$， 其联系还是在于$\omega=2\pi\xi$。事实上，在多维傅里叶变换的理论中，我们还将看到更为 深刻的关系：$\shah$分布的$\delta$的位置称为“格”，而其傅里叶变换的$\delta$的位置为 其“对偶格”，特别地，一维的“对偶格”就是以上所述的“倒数”关系。直观上，我们曾提出对函 数和分布的一维傅里叶变换的伸缩定理：
 \[f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F(\frac{\xi}{a}),\sigma_a T\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}\sigma_{1/a}\mathcal{F} T\]
-它同样揭示了时域伸而频域缩，时域缩而频域伸的关系，而$\shah_T$为我们提供了一种新的
-视角。对多维的$\shah$分布的讨论，见\ref{sec:Multi_Fourier}。二维$\shah$分布在
-$\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$分布称为\textbf{钉床函数}(bed of nails)。
-
-讨论完$\shah$的傅里叶变换，就可以回到一开始的话题：对于时限函数$f(t),suppf\subset[-T/2,T/2]$，研究恒等式
+它同样揭示了时域伸而频域缩，时域缩而频域伸的关系，而$\shah_T$为我们提供了一种新的 视角。对多维的$\shah$分布的讨论，见\ref{sec:Multi_Fourier}。二维$\shah$分布在 $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$分布称为\textbf{钉床函数}(bed of nails)。讨论完$\shah$的傅里叶变换，就可以回到一开始的话题：对于时限函数$f(t),suppf\subset[-T/2,T/2]$，研究恒等式
 \[f(x)=\Pi_{T}(f*\shah_T)(x)\]
 通过傅里叶变换告诉我们的内容。对$f*\shah_T$做傅里叶变换，有
 \lr{
@@ -2290,11 +1628,7 @@ $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$�
     \mathcal{F} (f*\shah_T)(\omega)&=\mathcal{F} f(\omega)\cdot\mathcal{F} \shah_T(\omega)\\
     &=\mathcal{F} f(\omega)\cdot\frac{2\pi}{T}\shah_{2\pi/T}(\omega)\\
     &=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(2\pi k/T)\delta_{2\pi k/T}(\omega)
-}
-其物理意义是，将f以周期T进行周期化时，其频谱会剩下频率为$k/T$处，也即角频率为$2\pi k/T$
-处的值，并且在这些频率处以$\delta$分布的形式“趋于无穷”。
-
-对恒等式两边同时做傅里叶变换，有\lr{
+} 其物理意义是，将f以周期T进行周期化时，其频谱会剩下频率为$k/T$处，也即角频率为$2\pi k/T$ 处的值，并且在这些频率处以$\delta$分布的形式“趋于无穷”。对恒等式两边同时做傅里叶变换，有\lr{
     \mathcal{F} f(\xi)&=\mathcal{F} [\Pi_T(f*\shah_T)](\xi)\\
     &=\mathcal{F} [\Pi_T](\xi)*\mathcal{F} (f*\shah_T)(\xi)\\
     &=Tsinc(T\xi)*\left(\frac{1}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)\delta_{k/T}(\xi)\right)\\
@@ -2306,77 +1640,41 @@ $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$�
     &=TSa\left(\frac{T\omega}{2}\right)*\left(\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\frac{2\pi k}{T}\right)\delta_{2\pi k/T}(\omega)\right)\\
     &=2\pi\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\frac{2\pi k}{T}\right)Sa\left(T\left(\omega-\frac{2\pi k}{T}\right)\right)\\
     &=2\pi\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\frac{2\pi k}{T}\right)Sa(T\omega-2\pi k)
-}
-可以看到，我们用$\mathcal{F} f(k/T)sinc(T\xi-k)$或$\mathcal{F} f(2\pi k/T)Sa(T\omega-2\pi k)$
-表示出了函数$\mathcal{F} f$，而表达式中的抽样函数完全依赖于所进行的周期化的周期T，也
-就是说我们只需要用$\mathcal{F} f(k/T)$或$\mathcal{F} f(2\pi k/T)$处的值，就能还原
-处完整的$\mathcal{F} f$，进一步，对于带限函数$f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，可以提出
-完全类似的恒等式：
+} 可以看到，我们用$\mathcal{F} f(k/T)sinc(T\xi-k)$或$\mathcal{F} f(2\pi k/T)Sa(T\omega-2\pi k)$ 表示出了函数$\mathcal{F} f$，而表达式中的抽样函数完全依赖于所进行的周期化的周期T，也 就是说我们只需要用$\mathcal{F} f(k/T)$或$\mathcal{F} f(2\pi k/T)$处的值，就能还原 处完整的$\mathcal{F} f$，进一步，对于带限函数$f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，可以提出 完全类似的恒等式：
 \[\mathcal{F} f(x)=\Pi_T(\mathcal{F} f*\shah_T)(x)\]
-其中$T=1/2\nu_m$，对应频率$f_N=1/T$被称为\textbf{奈奎斯特频率}(Nyquist frequency)
-。这个式子称为\textbf{抽样定理}(the sampling thoerem)。对其做傅里叶反变换，有\lr{
-    f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
+其中$T=1/2\nu_m$，对应频率$f_N=1/T$被称为\textbf{奈奎斯特频率}(Nyquist frequency) 。这个式子称为\textbf{抽样定理}(the sampling thoerem)。对其做傅里叶反变换，有\lr{ f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
     &=Tsinc(Tt)*\mathcal{F} ^{-1} \left(\mathcal{F} f*\shah_T\right)\\
     &=T sinc(Tt)*\left(\frac{1}{T}\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\delta_{k/T}(t)\right)\\
     &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc\left(T(t-\frac{k}{T})\right)\\
     &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
-}{
-    f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
+}{ f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
     &=\frac{T}{2\pi}Sa\left(\frac{Tt}{2}\right)*\mathcal{F} ^{-1} \left(\mathcal{F} f*\shah_T\right)\\
     &=\frac{T}{2\pi}Sa\left(\frac{Tt}{2}\right)*\left(\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}f\left(\frac{2\pi k}{T}\right)\delta_{2\pi k/T}(t)\right)\\
     &=\sum_{k=-\infty}^{\infty}f\left(\frac{2\pi k}{T}\right)Sa\left(\frac{T}{2}\left(t-\frac{2\pi k}{T}\right)\right)\\
     &=\sum_{k=-\infty}^{\infty}f\left(\frac{2\pi k}{T}\right)Sa\left(\frac{Tt}{2}-\pi k\right)
-}
-这正是\textbf{理想抽样}下，由抽样函数恢复出原函数的方法。利用$\shah$分布的
-抽样性质进行抽样，就好比将函数转化为一组无穷基底$\delta_k(k\in\mathbb{Z})$上的向量：
+} 这正是\textbf{理想抽样}下，由抽样函数恢复出原函数的方法。利用$\shah$分布的 抽样性质进行抽样，就好比将函数转化为一组无穷基底$\delta_k(k\in\mathbb{Z})$上的向量：
 \[f(t)\shah(t)=\sum_{k=-\infty}^{\infty}f(k)\delta_k\text{相当于}x[k]=f[k]\text{或}\left(\cdots,f(-2),f(-1),f(0),f(1),f(2),\cdots\right)^T\]
-这一过程称为理想抽样。实际问题中我们不可能获得$\delta$分布和$\shah$分布，也不可能进
-行无限多次抽样，解决这个问题的一种方式是做近似，另一种方式是有限采样，将在下一节讨论。
-
+这一过程称为理想抽样。实际问题中我们不可能获得$\delta$分布和$\shah$分布，也不可能进 行无限多次抽样，解决这个问题的一种方式是做近似，另一种方式是有限采样，将在下一节讨论。
 我们来明确一下取样与插值要讨论的问题：\begin{itemize}
     \item 设有确定信号$f(t)$，通过取样的方式找出它在若干点处的\textbf{样值}$f(t_0),f(t_1),f(t_2),\cdots$，在怎样的情况下可以借助这组值还原出$f(t)$，即在离散的数据点之间应如何“插入”新的数据点使之成为一条连续的曲线（这也是名称“插值”的由来）
 \end{itemize}
 一般地，相邻取样点的间隔一定，记为$T_s$，称为\textbf{抽样间隔}，将$f_s=1/T_s$称为
-\textbf{抽样频率},将$\omega_s=2\pi f_s=2\pi/T_s$称为\textbf{抽样角频率}。类似于用
-像素表示图片，利用抽样所得的离散信号$f_d[n]=f(nT_s)$表示信息，相当于用离散信号表示连
-续信号，能够大大降低传输和存储的成本。一个数字处理系统或数字传输系统的第一个环节就是对
-信号进行抽样，随后进行量化编码、数字传输或处理，到信号接收方或需要使用信号时再进行信号
-恢复，这是取样与插值问题的一种引出方式。
-
-我们刚才由抽样信号恢复出原信号的过程，正是\textbf{香农采样定理}(Shannon sampling theorem)
-中采样率取奈奎斯特频率时的极限情况。香农采样定理的内容是，如果已知信号的频谱支于
-$[-\nu_m,\nu_m]$，则采样频率必须大于$2\nu_m$，即奈奎斯特频率$f_N$，才能还原出
-原信号。奈奎斯特频率同时也是信号的\textbf{带宽}(bandwidth)。
-
-直观上，采样频率越高，所需要的成本就越高，提供的信息就越多，而如果采样频率低于$f_N$，
-将发生\textbf{混叠}(alias)现象，还原所得的信号将产生失真。例如一个余弦信号，较低的采
-样频率可能使我们的样本点全部位于余弦信号的零点，此时显然无法还原余弦信号。即便样本点不
-在零点，也可能还原出其他的信号：
+\textbf{抽样频率},将$\omega_s=2\pi f_s=2\pi/T_s$称为\textbf{抽样角频率}。类似于用 像素表示图片，利用抽样所得的离散信号$f_d[n]=f(nT_s)$表示信息，相当于用离散信号表示连 续信号，能够大大降低传输和存储的成本。一个数字处理系统或数字传输系统的第一个环节就是对 信号进行抽样，随后进行量化编码、数字传输或处理，到信号接收方或需要使用信号时再进行信号 恢复，这是取样与插值问题的一种引出方式。我们刚才由抽样信号恢复出原信号的过程，正是\textbf{香农采样定理}(Shannon sampling theorem) 中采样率取奈奎斯特频率时的极限情况。香农采样定理的内容是，如果已知信号的频谱支于 $[-\nu_m,\nu_m]$，则采样频率必须大于$2\nu_m$，即奈奎斯特频率$f_N$，才能还原出 原信号。奈奎斯特频率同时也是信号的\textbf{带宽}(bandwidth)。直观上，采样频率越高，所需要的成本就越高，提供的信息就越多，而如果采样频率低于$f_N$， 将发生\textbf{混叠}(alias)现象，还原所得的信号将产生失真。例如一个余弦信号，较低的采 样频率可能使我们的样本点全部位于余弦信号的零点，此时显然无法还原余弦信号。即便样本点不 在零点，也可能还原出其他的信号：
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\textwidth]{cos.jpeg}
 \end{figure}
-这正是混叠现象。从频域上不难理解它，在建立抽样定理时我们曾要求
-$f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，利用由此得到的公式
-\lr{
-    f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
+这正是混叠现象。从频域上不难理解它，在建立抽样定理时我们曾要求 $f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，利用由此得到的公式
+\lr{ f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
 }{
     \sum_{k=-\infty}^{\infty}f\left(\frac{2\pi k}{T}\right)Sa\left(\frac{Tt}{2}-\pi k\right)
-}
-还原函数当然是有误差的，因为在将频域函数周期化时，两个平移后的频域函数会有一部分混在一
-起，再使用$\Pi$函数进行加窗时，会丢掉一部分原有频谱，并叠加一部分平移后的频谱，如图所示。
+} 还原函数当然是有误差的，因为在将频域函数周期化时，两个平移后的频域函数会有一部分混在一 起，再使用$\Pi$函数进行加窗时，会丢掉一部分原有频谱，并叠加一部分平移后的频谱，如图所示。
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{alias.jpeg}
 \end{figure}
-
 \section{取样与插值进阶}\label{sec:advanced_Interpolation}
-
-插值的雏形来自于古代天文学，最简单的插值就是通过观察星体在几个时刻的位置推测中间时刻的
-位置。历史上，最早对插值问题进行系统研究的是牛顿和拉格朗日。牛顿提出的牛顿插值公式是组
-合数学讨论的话题，他通过引入离散信号的差商的概念，提出了一种使用三角形差商表构造过若干
-指定数据点的多项式的方法；相比之下拉格朗日的拉格朗日插值法要简单得多，其想法的关键在于
-构造在特定数据点处非0，而在另外所有数据点处均为0的多项式：对于一组互异的数据点
+插值的雏形来自于古代天文学，最简单的插值就是通过观察星体在几个时刻的位置推测中间时刻的 位置。历史上，最早对插值问题进行系统研究的是牛顿和拉格朗日。牛顿提出的牛顿插值公式是组 合数学讨论的话题，他通过引入离散信号的差商的概念，提出了一种使用三角形差商表构造过若干 指定数据点的多项式的方法；相比之下拉格朗日的拉格朗日插值法要简单得多，其想法的关键在于 构造在特定数据点处非0，而在另外所有数据点处均为0的多项式：对于一组互异的数据点
  \[(x_0,y_0),(x_1,y_1),\dots,(x_n,y_n)\]其拉格朗日插值多项式为
 \[
 L(x) = \sum_{i=0}^{n} y_i \ell_i(x)
@@ -2385,81 +1683,35 @@ L(x) = \sum_{i=0}^{n} y_i \ell_i(x)
 \[
 \ell_i(x) = \prod_{\substack{j=0 \\ j \neq i}}^{n} \frac{x - x_j}{x_i - x_j}
 \]
-该多项式满足 $L(x_i) = y_i,i=0,1,\dots,n$。这个方法后来被埃尔米特改进，
-不仅能保证函数值相等，还能保证若干阶导数的值相等。
-
-上一节中的理想插值技术，跟拉格朗日插值法有一定的相通之处。$sinc$函数在非零整数
-点处的值为0，在0处的值为1，于是可以直接利用每个数据点处的值限定所还原出信号在这
-一点的值，换言之，在以下这种公式所代表的插值方式下，数据点处的值时不会产生偏移
-的，$Sa$函数同理。
+该多项式满足 $L(x_i) = y_i,i=0,1,\dots,n$。这个方法后来被埃尔米特改进， 不仅能保证函数值相等，还能保证若干阶导数的值相等。上一节中的理想插值技术，跟拉格朗日插值法有一定的相通之处。$sinc$函数在非零整数 点处的值为0，在0处的值为1，于是可以直接利用每个数据点处的值限定所还原出信号在这 一点的值，换言之，在以下这种公式所代表的插值方式下，数据点处的值时不会产生偏移 的，$Sa$函数同理。
 \[f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc\left(T(t-\frac{k}{T})\right)\]
-不同的是，拉格朗日插值法在数据点以外的位置往往会有误差，而以上插值方法在没有产生
-混叠现象时是精确的；另一种拟合的方向是允许数据点的测量有误差，以这种视角进行最优
-线性拟合就是最小二乘法做的工作，在测量误差可能比较大时，这一类拟合方法的表现会更
-好。
-
-然而，利用多项式进行插值对原信号的逼近效果十分有限，一些数学家们开始转向研究如何重建整
-个信号。1948年，克劳德·香农发表了他的巨著《通信的数学原理》，明确提出了他的香农采样定
-理，并给出了上一节中还原带限信号的公式。这个定理在我们上一节中所进行的插值流程下是正确
-的，但要还原大带宽信号需要很高的抽样频率，会对硬件设备提出很高的要求。我们可以通过另外
-的插值流程还原信号，例如对于一些信号可以利用其稀疏性和相关性，用远低于$f_N$的采样频率
-还原信号。这一节就来讨论真实系统中的插值方法，包括自然采样、零阶抽样保持、一阶抽样保持
-以及降低采样率的一些办法。最后，还将给出有限采样公式，它从数学上给出了用有限的采样点还
-原带限周期信号的方法。
-
+不同的是，拉格朗日插值法在数据点以外的位置往往会有误差，而以上插值方法在没有产生 混叠现象时是精确的；另一种拟合的方向是允许数据点的测量有误差，以这种视角进行最优 线性拟合就是最小二乘法做的工作，在测量误差可能比较大时，这一类拟合方法的表现会更 好。然而，利用多项式进行插值对原信号的逼近效果十分有限，一些数学家们开始转向研究如何重建整 个信号。1948年，克劳德·香农发表了他的巨著《通信的数学原理》，明确提出了他的香农采样定 理，并给出了上一节中还原带限信号的公式。这个定理在我们上一节中所进行的插值流程下是正确 的，但要还原大带宽信号需要很高的抽样频率，会对硬件设备提出很高的要求。我们可以通过另外 的插值流程还原信号，例如对于一些信号可以利用其稀疏性和相关性，用远低于$f_N$的采样频率 还原信号。这一节就来讨论真实系统中的插值方法，包括自然采样、零阶抽样保持、一阶抽样保持 以及降低采样率的一些办法。最后，还将给出有限采样公式，它从数学上给出了用有限的采样点还 原带限周期信号的方法。
 %自然采样PS6.2(4也有点意思)
 %降低采样率的想法
 %final2006.2，或许跟一阶抽样保持相通？
 %零阶抽样保持，一阶抽样保持
 %有限采样公式
-
 \section{多维傅里叶变换与汉克尔变换}\label{sec:Multi_Fourier}
-
 \section{希尔伯特变换}\label{sec:Hilbert}
-
 \section{回到有限区间}\label{sec:Finite_Interval}
-
 %PS3.6卷积的周期化
 %PS4.3
 %加窗傅里叶变换，小波变换
-
 \chapter{连续系统的时频分析}
-
 \section{系统概述}\label{sec:System}
-对于单输入单输出系统，将输入信号称为激励 (excitation)，输出信号称为响应 (response)
-，并将时域信号分别用$e(t),r(t)$表示，如果系统用字母H表示，可以记$r(t)=H[e(t)]$
-，或更简洁地，$r(t)=He(t)$.H是函数空间上的映射。如果H是线性的，即
+对于单输入单输出系统，将输入信号称为激励 (excitation)，输出信号称为响应 (response) ，并将时域信号分别用$e(t),r(t)$表示，如果系统用字母H表示，可以记$r(t)=H[e(t)]$ ，或更简洁地，$r(t)=He(t)$.H是函数空间上的映射。如果H是线性的，即
 \[\forall a,b\in\mathbb{C},\forall e_1(t),e_2(t),H[ae_1(t)+be_2(t)]=aH[e_1(t)]+bH[e_2(t)]\]
-就说系统是\textbf{线性系统}(linear system)，且满足叠加法则 (principle of superposition)。
-有时将线性系统记为L.
-
-一个系统在e(t)=0时，也可能有响应，这样的响应称为\textbf{零输入响应}
-(zero input response,$r_{z.i}(t)$)。相应地，r(t)在没有激励时为0，则输入
-e(t)产生的响应称为\textbf{零状态响应}(zero state response,$r_{z.s}(t)$)，对
-于线性系统显然零输入响应为0，此时我们定义零状态响应有线性性的系统为线性系统。
-\textbf{全响应}$r(t)=r_{z.i}(t)+r_{z.s}(t)$.
-
-当$e(t)=\delta(t)$时，$r_{z.s}(t)$为\textbf{单位脉冲响应}，在不涉及零输入
-响应时就说r(t)为单位脉冲响应。当$e(t)=u(t)$时，响应r(t)称为\textbf{单位阶跃响应}。
-习惯上，将单位脉冲响应记为h(t)，单位阶跃响应记为g(t).
-
-系统还有一些其他的特性，下面一一进行说明。\\
-1.\textbf{时不变性}：表示一个系统的输出不依赖于输入信号施加于系统的时间，输
-入信号发生时移，输出信号也发生相同的时移，即$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b)$,
-用第二章中定义的时移算子的符号，时不变性可以记为$H\tau_b=\tau_b H$，换言之，时
-移和经过系统可交换，这与我们的直观相符。
-\textbf{线性时不变系统}(Linear Time-invariant System,LTI)满足$r(t)=(h*e)(t)$
-，h为单位脉冲响应，将在后文介绍。在考虑系统的初始状态时，只要零状态响应具有线性
-和时不变性，就说系统是线性时不变系统。
+就说系统是\textbf{线性系统}(linear system)，且满足叠加法则 (principle of superposition)。 有时将线性系统记为L.一个系统在e(t)=0时，也可能有响应，这样的响应称为\textbf{零输入响应} (zero input response,$r_{z.i}(t)$)。相应地，r(t)在没有激励时为0，则输入 e(t)产生的响应称为\textbf{零状态响应}(zero state response,$r_{z.s}(t)$)，对 于线性系统显然零输入响应为0，此时我们定义零状态响应有线性性的系统为线性系统。
+\textbf{全响应}$r(t)=r_{z.i}(t)+r_{z.s}(t)$.当$e(t)=\delta(t)$时，$r_{z.s}(t)$为\textbf{单位脉冲响应}，在不涉及零输入 响应时就说r(t)为单位脉冲响应。当$e(t)=u(t)$时，响应r(t)称为\textbf{单位阶跃响应}。 习惯上，将单位脉冲响应记为h(t)，单位阶跃响应记为g(t).系统还有一些其他的特性，下面一一进行说明。\\
+1.\textbf{时不变性}：表示一个系统的输出不依赖于输入信号施加于系统的时间，输 入信号发生时移，输出信号也发生相同的时移，即$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b)$, 用第二章中定义的时移算子的符号，时不变性可以记为$H\tau_b=\tau_b H$，换言之，时 移和经过系统可交换，这与我们的直观相符。
+\textbf{线性时不变系统}(Linear Time-invariant System,LTI)满足$r(t)=(h*e)(t)$ ，h为单位脉冲响应，将在后文介绍。在考虑系统的初始状态时，只要零状态响应具有线性 和时不变性，就说系统是线性时不变系统。
 \\
 \noindent 2.\textbf{因果性}：表示一个系统在有激励时，才会出现响应，或者说
-$r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准的定义方式，我
-们马上会看到它的作用），即
+$r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准的定义方式，我 们马上会看到它的作用），即
 \begin{equation}
     \forall t_0,(e_1(t)=e_2(t)\ for\ t<t_0)\Rightarrow (r_1(t)=r_2(t)\ for\ t<t_0)\label{eq:4.1}
 \end{equation}
-这个条件称为\textbf{因果性条件}(casuality condition)。对于线性系统，容易看
-出其因果性条件等价于
+这个条件称为\textbf{因果性条件}(casuality condition)。对于线性系统，容易看 出其因果性条件等价于
 \begin{equation}
     \forall t_0,(e(t)=0\ for\ t<t_0)\Rightarrow (r(t)=0\ for\ t<t_0)\label{eq:4.2}
 \end{equation}
@@ -2471,76 +1723,46 @@ $r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准�
 \begin{equation}
     h(t)=0\ for\ t<0\label{eq:4.4}
 \end{equation}
-其中h为单位脉冲响应。只要取$t_0=0$，就从因果性条件推出条件\ref{eq:4.3}；用
-时不变性，条件\ref{eq:4.3}可以推出条件\ref{eq:4.2}。对于单位脉冲响应，从
-$\delta=0\ for\ t<0$可以推出$h(t)=0\ for\ t<0$；如果$h(t)=0,e(t)=0\ for\ t<0$
-,则根据\ref{sec:convolution}中的结果，有$r(t)=(h*e)(t)=0\ for\ t<0$.
-
+其中h为单位脉冲响应。只要取$t_0=0$，就从因果性条件推出条件\ref{eq:4.3}；用 时不变性，条件\ref{eq:4.3}可以推出条件\ref{eq:4.2}。对于单位脉冲响应，从 $\delta=0\ for\ t<0$可以推出$h(t)=0\ for\ t<0$；如果$h(t)=0,e(t)=0\ for\ t<0$ ,则根据\ref{sec:convolution}中的结果，有$r(t)=(h*e)(t)=0\ for\ t<0$.
 \noindent 3.\textbf{稳定性}：表示一个系统在激励信号有界时，响应也是有界的，
-即bounded-input bounded-output(BIBO)。工程上，一个实用系统在所有可能条件下
-都保持稳定时至关重要的。
-
+即bounded-input bounded-output(BIBO)。工程上，一个实用系统在所有可能条件下 都保持稳定时至关重要的。
 \noindent 4.\textbf{记忆性}：表示一个系统在$t_0$时刻的响应不仅与该时刻的输
-入有关，还与其他时刻的输入有关，此时称系统是\textbf{记忆系统/动态系统}，与之
-相对的是\textbf{即时系统}，在$t_0$时刻的响应仅与$t_0$时刻的激励有关。
-
+入有关，还与其他时刻的输入有关，此时称系统是\textbf{记忆系统/动态系统}，与之 相对的是\textbf{即时系统}，在$t_0$时刻的响应仅与$t_0$时刻的激励有关。
 \noindent 5.\textbf{可逆性}：H（作为映射）如果是单射，则也是双射（因为我们
-不关注其值域），于是H是可逆的。换句话说，一种响应仅可能对应唯一的激励。
-
-以下列举一些常见的线性系统。
-
+不关注其值域），于是H是可逆的。换句话说，一种响应仅可能对应唯一的激励。以下列举一些常见的线性系统。
 \noindent 例1.时域乘积：\begin{equation}
     r(t)=f(t)e(t)
 \end{equation}
 例如描述开关开闭的系统，$f(t)=\Pi_T(t)$或$u(t)$，描述取样的系统，$f(t)=\shah(t)$.
-
 \noindent 例2.矩阵乘法：对于n维的离散激励信号$\mathbf{v}$，\begin{equation}
     \mathbf{w}=A\mathbf{v},A\in M_{n\times n}(\mathbb{C})
 \end{equation}
-例如，线性动力系统中，初值问题$\mathbf{\dot{x}}(t)=A\mathbf{x}(t)$的解
-为$H[\mathbf{v}]=e^{At}\mathbf{v}$.
-线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用
-$A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称
-算子；L的共轭转置定义为用$A^H$表示的算子，其中H表示矩阵的共轭转置，如果A是埃尔
-米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子}
-(self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义
+例如，线性动力系统中，初值问题$\mathbf{\dot{x}}(t)=A\mathbf{x}(t)$的解 为$H[\mathbf{v}]=e^{At}\mathbf{v}$. 线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用 $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称 算子；L的共轭转置定义为用$A^H$表示的算子，其中H表示矩阵的共轭转置，如果A是埃尔 米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子} (self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义
 \textbf{对称系统、自伴系统}。
-
 \noindent 例3.积分：\begin{equation}
     r(t)=\int_{a}^{b}k(x,y)e(y)\,dy
 \end{equation}
-其中，$k(x,y)$称为核函数(kernel)，$\int_{a}^{b}k(x,y)e(y)\,dy$称为对核积分
-(integrating against a kernel).对核积分非常类似于连续版本的矩阵乘积，我们同
+其中，$k(x,y)$称为核函数(kernel)，$\int_{a}^{b}k(x,y)e(y)\,dy$称为对核积分 (integrating against a kernel).对核积分非常类似于连续版本的矩阵乘积，我们同
 样可以定义：\begin{itemize}
     \item 上述系统的转置系统描述为$e(t)\mapsto\int_{a}^{b}k(y,x)e(y)\,dy$
     \item 如果$k(x,y)=k(y,x)$，称k是对称的并将系统称为\textbf{对称系统}
     \item 如果$k(x,y)=\overline{k(y,x)}$，称k是埃尔米特的并将系统称为\textbf{自伴系统}。
 \end{itemize}
-
 \noindent 例4.卷积
-
-取定连续信号$g,r(t)=g*e(t)$;取定周期离散信号$\mathbf{h},r[n]=\mathbf{h*e}[n]$.
-在标准正交基底下，卷积系统的矩阵是一个循环矩阵(circulant matrix)或托普利兹矩
+取定连续信号$g,r(t)=g*e(t)$;取定周期离散信号$\mathbf{h},r[n]=\mathbf{h*e}[n]$. 在标准正交基底下，卷积系统的矩阵是一个循环矩阵(circulant matrix)或托普利兹矩
 阵(Toepliz matrix)：\[\begin{pmatrix}
     h[0] & h[N-1] & \cdots & h[1]\\
     h[1] & h[0] & \cdots &  h[2]\\
     \vdots & \vdots & \ddots & \vdots\\
     h[N-1] & h[N-2] & \cdots & h[0]
 \end{pmatrix}\]
-
 \noindent 例5.信号平移：取定时延b，$r(t)=e(t-b)$;取定整数m，$r[n]=e[n-m]$.
-
 \noindent 例6.傅里叶变换：$r(t)=\mathcal{F} e(t)$.在一些光学仪器中可以实
-现空间上的傅里叶变换，这是变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作
-为径向对称函数的傅里叶变换的特例，零阶汉克尔变换可以用圆孔夫琅禾费衍射装置实现。
-对于这两个变换，见\ref{sec:Multi_Fourier}和\ref{sec:Hilbert}.
-
-下面介绍系统的\textbf{级联}(cascade)。设有两线性系统K,L,将两系统级联之后，构
+现空间上的傅里叶变换，这是变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作 为径向对称函数的傅里叶变换的特例，零阶汉克尔变换可以用圆孔夫琅禾费衍射装置实现。 对于这两个变换，见\ref{sec:Multi_Fourier}和\ref{sec:Hilbert}.下面介绍系统的\textbf{级联}(cascade)。设有两线性系统K,L,将两系统级联之后，构
 成的新系统仍构成线性系统：\begin{align*}
     LK[ae_1+be_2]=L[aK[e_1]+bK[e_2]]=aLK[e_1]+bLK[e_2]
 \end{align*}
-对于周期离散信号，两个系统都是矩阵乘法，则级联系统的矩阵是两矩阵的乘积，这
-正是定义矩阵乘法的原因之一；类似地，对于连续信号，如果两个系统都是对核积分系统：
+对于周期离散信号，两个系统都是矩阵乘法，则级联系统的矩阵是两矩阵的乘积，这 正是定义矩阵乘法的原因之一；类似地，对于连续信号，如果两个系统都是对核积分系统：
 \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{a}^{b}l(x,y)e(y)\,dy\]
 则级联系统$H=LK$也是对核积分系统，并且核函数为\begin{equation}
     h(x,z)=L_y(k(y,z))(x)=\int_{a}^{b}l(x,y)k(y,z)\,dy
@@ -2552,15 +1774,9 @@ $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对�
     &=\int_{a}^{b}e(z)\,dz\int_{a}^{b}l(x,y)k(y,z)\,dy\\
     &=\int_{a}^{b}h(x,z)e(z)\,dz
 \end{align*}
-可以看到，只要我们使用的函数满足富比尼定理(Fubini's thoerem)的条件，就可以交
-换积分次序，并得到前文中断言的证明。
-
-线性系统H的\textbf{脉冲响应}定义为$h(x,y)=H_x[\delta(x-y)]$，这与前文中定
-义的单变量函数$h(t)$略有区别。利用\ref{sec:convolution}中的结果，信号与
-$\delta$的卷积仍为它本身：
+可以看到，只要我们使用的函数满足富比尼定理(Fubini's thoerem)的条件，就可以交 换积分次序，并得到前文中断言的证明。线性系统H的\textbf{脉冲响应}定义为$h(x,y)=H_x[\delta(x-y)]$，这与前文中定 义的单变量函数$h(t)$略有区别。利用\ref{sec:convolution}中的结果，信号与 $\delta$的卷积仍为它本身：
 \[f(t)=(f*\delta)(t)=\int_{-\infty}^{\infty}f(x)\delta(t-x)\,dx\]
-因此可以说，信号先经过了一个与$\delta$卷积的系统才进入系统H。配合前文中关于级
-联系统的结果，如果系统H是对核的无穷限积分，就有\textbf{叠加定理}(superposition thoerem)
+因此可以说，信号先经过了一个与$\delta$卷积的系统才进入系统H。配合前文中关于级 联系统的结果，如果系统H是对核的无穷限积分，就有\textbf{叠加定理}(superposition thoerem)
 或称\textbf{施瓦兹核定理}(Schwartz kernel thoerem):\begin{equation}
     r(x)=\int_{-\infty}^{\infty}h(x,y)e(y)\,dy
 \end{equation}
@@ -2570,51 +1786,30 @@ $\delta$的卷积仍为它本身：
     &=\int_{-\infty}^{\infty}H[\delta(x-y)]e(y)\,dy\\
     &=\int_{-\infty}^{\infty}h(x,y)e(y)\,dy
 \end{align*}
-反过来，如果一个系统是激励信号与脉冲响应的含参积分，那么这个系统也是线性的，
-这得自积分的线性性。
-
-对于时不变系统，这个定理具有更加优美的形式。沿用前面的定义，时不变系统的脉冲响应为
+反过来，如果一个系统是激励信号与脉冲响应的含参积分，那么这个系统也是线性的， 这得自积分的线性性。对于时不变系统，这个定理具有更加优美的形式。沿用前面的定义，时不变系统的脉冲响应为
 \[h(x,y)=H_x[\delta(x-y)]=H[\tau_y\delta(x)]=\tau_y H[\delta(x)]\]
 按照单变量的脉冲响应的定义，这就是$\tau_y h(x)=h(x-y)$，它只依赖于x、y的差值，
 带入叠加定理：\begin{align*}
     r(x)&=\int_{-\infty}^{\infty}h(x-y)e(y)\,dy\\
     &=(h*e)(t)
 \end{align*}
-也就是说，信号经过线性时不变系统相当于与这个系统的单位脉冲响应做卷积。下面来验证，
-如果一个系统是激励信号与脉冲响应的卷积，那么这个系统也是线性时不变系统。线性性是
+也就是说，信号经过线性时不变系统相当于与这个系统的单位脉冲响应做卷积。下面来验证， 如果一个系统是激励信号与脉冲响应的卷积，那么这个系统也是线性时不变系统。线性性是
 显然的，我们来验证$H\tau_b=\tau_b H$:\begin{align*}
     H[\tau_b e(y)](x)=(h*\tau_b e)(x)=\tau_b(h*e)(x)=\tau_b H[e(y)]
 \end{align*}
-总之，“一个系统是线性系统”等价于“响应是激励对脉冲响应积分”，而“是线性时不变系统”
-等价于“响应是激励与脉冲响应的卷积”。
-
-看到卷积的结构，当然会想到对$r(t)=(h*e)(t)$做傅里叶变换，用对应的大写字母表示，
-即$R(\xi)=H(\xi)E(\xi)$或$R(\omega)=H(\omega)E(\omega)$，也就是说，在频域上
-线性时不变系统就是乘以脉冲响应的频域形式。
-
+总之，“一个系统是线性系统”等价于“响应是激励对脉冲响应积分”，而“是线性时不变系统” 等价于“响应是激励与脉冲响应的卷积”。看到卷积的结构，当然会想到对$r(t)=(h*e)(t)$做傅里叶变换，用对应的大写字母表示， 即$R(\xi)=H(\xi)E(\xi)$或$R(\omega)=H(\omega)E(\omega)$，也就是说，在频域上 线性时不变系统就是乘以脉冲响应的频域形式。
 \noindent 例1.1.求线性时不变系统的单位阶跃响应$g(t)$：\begin{align*}
     g(t)&=H[u(t)]=(u*h)(t)\\
     &=\int_{-\infty}^{\infty}u(t-y)h(y)\,dy\\
     &=\int_{-\infty}^{t}h(y)\,dy
 \end{align*}
-可以看到，单位阶跃响应就是单位脉冲响应的积分，利用这个性质，可以快速地求出单位阶
-跃响应，在使用卷积来描述线性时不变系统时，这个性质很容易得到，但在一些其他的线性
-时不变系统中很难想到具有这样的性质，例如下一节将讨论的系统。
-
+可以看到，单位阶跃响应就是单位脉冲响应的积分，利用这个性质，可以快速地求出单位阶 跃响应，在使用卷积来描述线性时不变系统时，这个性质很容易得到，但在一些其他的线性 时不变系统中很难想到具有这样的性质，例如下一节将讨论的系统。
 \section{微分方程}\label{sec:ODE}
-
-除了上一节中提到的几种系统，还有一种典型的具有因果性的线性时不变系统是用常系数线
-性微分方程表示的，在学习数学分析时我们曾遇到过这种微分方程，下面先回忆在数学分析
-中对于这种方程的处理方法。一个形如
+除了上一节中提到的几种系统，还有一种典型的具有因果性的线性时不变系统是用常系数线 性微分方程表示的，在学习数学分析时我们曾遇到过这种微分方程，下面先回忆在数学分析 中对于这种方程的处理方法。一个形如
 \[a_n y^{(n)}+a_{n-1}y^{(n-1)}+\cdot +a_1 y'+a_0 y=f\]
-称为\textbf{n阶常系数线性微分方程}，等式左侧的y和f都是t的函数，特别地，如果
-$f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。不难看出，如果找到了n阶常
-系数线性齐次微分方程的两个解$y_1,y_2$，则$ay_1+by_2$也是方程的解；另外，如果带
-入$y=e^{\lambda t}$并消去这一项，则微分方程化为其\textbf{特征方程}：
+称为\textbf{n阶常系数线性微分方程}，等式左侧的y和f都是t的函数，特别地，如果 $f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。不难看出，如果找到了n阶常 系数线性齐次微分方程的两个解$y_1,y_2$，则$ay_1+by_2$也是方程的解；另外，如果带 入$y=e^{\lambda t}$并消去这一项，则微分方程化为其\textbf{特征方程}：
 \[a_n\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_1\lambda+a_0=0\]
-根据代数基本定理，$\lambda$在复数域$\mathbb{C}$中有n个解（称之为\textbf{特征根}）
-，即微分方程一定有n个形如$e^{\lambda t}$的解。因此，对于常系数线性微分方程，我
-们的标准处理方法是：
+根据代数基本定理，$\lambda$在复数域$\mathbb{C}$中有n个解（称之为\textbf{特征根}） ，即微分方程一定有n个形如$e^{\lambda t}$的解。因此，对于常系数线性微分方程，我 们的标准处理方法是：
 \begin{enumerate}
     \item 先令$f(t)=0$，得到其对应的\textbf{齐次方程}，解其方程的特征方程得到n个\textbf{齐次解}(homogeneous solution)，记为$y_h(t)$；
     \item 找到一个\textbf{特解}(particular solution)使得它恰好满足原方程，记为$y_p(t)$；
@@ -2628,108 +1823,36 @@ $f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。不难看�
     \item 如果$f(t)=P(t)e^{\lambda t}$，$\lambda$为k重特征根，则特解$y_p(t)=t^k Q(t)e^{\lambda t}$，其中Q是与P次数相同的多项式，即$deg Q=degP$；
     \item 如果$f(t)=(P_1(t)\cos(\omega t)+P_2(t)\sin(\omega t))e^{\lambda t}$，$\lambda\pm i\omega$是k重特征根，则特解$y_p(t)=t^k(Q_1(t)\cos(\omega t)+Q_2(t)\sin(\omega t))e^{\lambda t}$，其中$degQ_1=degQ_2=max\{degP_1,degP_2\}$
 \end{itemize}
-如果确定了一组初始条件$y(t_0),y'(t_0),\cdots,y^{(n-1)}(t_0)$，则微分方程有唯
-一的解，因为完全解中的特解部分是确定的，而齐次解部分的n个解对应着n个系数，只要给
-定n个初始条件，就相当于给出了n个方程，可以解出所有的系数。
-
-下面介绍一些信号与系统课程中会用到的术语。
-
-一个用常系数线性微分方程描述的系统，就是指激励为$e(t)=f(t)$，响应为微分方程的完
-全解$y(t)$的系统，齐次解$y_h(t)$相当于在激励为0时系统的响应。其中，齐次解又称为
+如果确定了一组初始条件$y(t_0),y'(t_0),\cdots,y^{(n-1)}(t_0)$，则微分方程有唯 一的解，因为完全解中的特解部分是确定的，而齐次解部分的n个解对应着n个系数，只要给 定n个初始条件，就相当于给出了n个方程，可以解出所有的系数。下面介绍一些信号与系统课程中会用到的术语。一个用常系数线性微分方程描述的系统，就是指激励为$e(t)=f(t)$，响应为微分方程的完 全解$y(t)$的系统，齐次解$y_h(t)$相当于在激励为0时系统的响应。其中，齐次解又称为
 \textbf{自由响应}(natural response)，它不依赖于激励的形式，而特解又称为
-\textbf{强迫响应}(forced response)。注意区分它们与\ref{sec:System}中介绍的
-零状态响应、零输入响应，后者对于一般的系统都有定义，对于用微分方程描述的系统，齐
-次解和特解、零输入响应和零状态响应也是不同的分类方式。
-
+\textbf{强迫响应}(forced response)。注意区分它们与\ref{sec:System}中介绍的 零状态响应、零输入响应，后者对于一般的系统都有定义，对于用微分方程描述的系统，齐 次解和特解、零输入响应和零状态响应也是不同的分类方式。
 \noindent 例7.由微分方程及初始条件
 \[y'+2y=10,y(0)=1\]
-描述的系统，采用数学的解法，可以求出其特征方程$\lambda+2=0$的解$\lambda=-2$，
-从而有齐次解$y_h(t)=Ce^{-2t}$，C为常数，特解$y_p(t)=5$，完全解
-$y(t)=y_h(t)+y_p(t)=5+Ce^{-2t}$，带入$y(0)=1$得$5+C=1,C=-4$，因此最终的解为
+描述的系统，采用数学的解法，可以求出其特征方程$\lambda+2=0$的解$\lambda=-2$， 从而有齐次解$y_h(t)=Ce^{-2t}$，C为常数，特解$y_p(t)=5$，完全解 $y(t)=y_h(t)+y_p(t)=5+Ce^{-2t}$，带入$y(0)=1$得$5+C=1,C=-4$，因此最终的解为
 \[y(t)=5-4e^{-2t}\]
-采用系统响应分解，求零输入响应时，应求齐次方程满足初始条件得解，即令$y_h(0)=C=1$，
-得到$C=1,y_{z.i.}(t)=e^{-2t}$；而求零状态响应时，则应该求原方程在初始条件为0向
-量情况下的解，即在前面得到的完全解中令$y(0)=5+C=0$,得到$C=-5$，
-$y_{z.s.}(t)=5-5e^{-2t}$，将零输入响应、零状态响应相加，又得到了原来的解
-$y(t)=5-4e^{-2t}$。
-
-可见，$y_h(t)\neq y_{z.i.}(t),y_p(t)\neq y_{z.s.}(t)$。
-尽管从数学上我们先得到了齐次解和特解才进一步求出零输入响应、零状态响应，但解的这
-两种划分都是有意义的，后者揭示了：响应中有一部分齐次解用来使响应满足初始条件，而
-另一部分齐次解会与特解叠加得到无关初始条件、仅依赖于方程形式的解。
-
-由于我们对输入激励建模时，常常认为激励是瞬间施加到系统上的，并且经常认为激励施加
-的时间就是0时刻，我们需要区分0的左、右邻域内的系统状态，为此将激励接入之前的瞬间
-系统的状态称为\textbf{$0_-$状态}或\textbf{起始状态}，记为
+采用系统响应分解，求零输入响应时，应求齐次方程满足初始条件得解，即令$y_h(0)=C=1$， 得到$C=1,y_{z.i.}(t)=e^{-2t}$；而求零状态响应时，则应该求原方程在初始条件为0向 量情况下的解，即在前面得到的完全解中令$y(0)=5+C=0$,得到$C=-5$， $y_{z.s.}(t)=5-5e^{-2t}$，将零输入响应、零状态响应相加，又得到了原来的解 $y(t)=5-4e^{-2t}$。可见，$y_h(t)\neq y_{z.i.}(t),y_p(t)\neq y_{z.s.}(t)$。 尽管从数学上我们先得到了齐次解和特解才进一步求出零输入响应、零状态响应，但解的这 两种划分都是有意义的，后者揭示了：响应中有一部分齐次解用来使响应满足初始条件，而 另一部分齐次解会与特解叠加得到无关初始条件、仅依赖于方程形式的解。由于我们对输入激励建模时，常常认为激励是瞬间施加到系统上的，并且经常认为激励施加 的时间就是0时刻，我们需要区分0的左、右邻域内的系统状态，为此将激励接入之前的瞬间 系统的状态称为\textbf{$0_-$状态}或\textbf{起始状态}，记为
 \[y_{(k)}(0_-)=[y(0_-),y'(0-),\cdots,y^{(n-1)}(0_-)]\]
 将激励接入之后的瞬间系统的状态称为\textbf{$0_+$状态}或\textbf{初始状态}，记为
 \[y_{(k)}(0_+)=[y(0_+),y'(0+),\cdots,y^{(n-1)}(0_+)]\]
 注意此时我们是允许一些条件发生突变的。
-
 \noindent 例8.RLC振荡电路中，对于电感，
-$u_L=Ldi_L/dt$，施加于电感两侧的电压不会无穷大，其电流$i_L(t)$总是连续的，即
-$i_L(0_-)=i_L(0_+)=i_L(0)$，而其电压则可以不连续；对于电容，$i_C=Cdu_C/dt$，
-通过电容的电流不会无穷大，其电压$u_C(t)$总是连续的，即
-$u_C(0_-)=u_C(0_+)=u_C(0)$，而其电流可以不连续。电感电流、电容电压不突变的这个
-结果，称为换路定则。
-
-如果激励$f(t)$不连续，并不一定意味着$y(t)$多次连续可导，但$y^{(n)}(t)$的性质突
-然变差以至于$f(t)$不连续（构造这样的函数是比较困难的，函数形
-式也将比较复杂），而是$y(t)$不连续，这时需要将y视为一个分布来求导，见\ref{sec:distributions}。
-例如$f(t)=g(t)u(t)$时，完全解中可能含有$u(t)$及其导数$\delta(t)$。
-
-物理中的受迫振动，以及电路分析中的二阶电路，都是用二阶常系数线性微分方程描述的系
-统的例子，从直观上看，如果使激励（施加于系统的力，或者电源提供的电压、电流）经过
-一段时间后变为0，则响应一定也会随时间的增大而趋于0。因此，又将响应分为
+$u_L=Ldi_L/dt$，施加于电感两侧的电压不会无穷大，其电流$i_L(t)$总是连续的，即 $i_L(0_-)=i_L(0_+)=i_L(0)$，而其电压则可以不连续；对于电容，$i_C=Cdu_C/dt$， 通过电容的电流不会无穷大，其电压$u_C(t)$总是连续的，即 $u_C(0_-)=u_C(0_+)=u_C(0)$，而其电流可以不连续。电感电流、电容电压不突变的这个 结果，称为换路定则。如果激励$f(t)$不连续，并不一定意味着$y(t)$多次连续可导，但$y^{(n)}(t)$的性质突 然变差以至于$f(t)$不连续（构造这样的函数是比较困难的，函数形 式也将比较复杂），而是$y(t)$不连续，这时需要将y视为一个分布来求导，见\ref{sec:distributions}。 例如$f(t)=g(t)u(t)$时，完全解中可能含有$u(t)$及其导数$\delta(t)$。物理中的受迫振动，以及电路分析中的二阶电路，都是用二阶常系数线性微分方程描述的系 统的例子，从直观上看，如果使激励（施加于系统的力，或者电源提供的电压、电流）经过 一段时间后变为0，则响应一定也会随时间的增大而趋于0。因此，又将响应分为
 \textbf{稳态响应}(steady state response)$y_{ss}(t)$\\
-和\textbf{暂态响应}(transient state)$y_t(t)$，完全解中，$t\to\infty$时保留下来
-的分量称为稳态响应，例如一个常数，趋于0的分量为稳态响应，例如$e^{-\lambda t}$。
-
-由常系数线性齐次微分方程描述的系统，如果初始状态为0向量，验证其时不变性是十分简
-单的。设一个系统描述为
+和\textbf{暂态响应}(transient state)$y_t(t)$，完全解中，$t\to\infty$时保留下来 的分量称为稳态响应，例如一个常数，趋于0的分量为稳态响应，例如$e^{-\lambda t}$。由常系数线性齐次微分方程描述的系统，如果初始状态为0向量，验证其时不变性是十分简 单的。设一个系统描述为
 \[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdot +a_1 r'+a_0 r=e\]
 并且对于给定的激励$e(t)$找到了完全解$r(t)$，那么\begin{align*}
     \tau_b e&=\tau_b(a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdot +a_1 r'+a_0 r)\\
     &=a_n \tau_b r^{(n)}+a_{n-1}\tau_b r^{(n-1)}+\cdot +a_1 \tau_b r'+a_0 \tau_b r\\
     &=a_n (\tau_b r)^{(n)}+a_{n-1}(\tau_b r)^{(n-1)}+\cdot +a_1 (\tau_b r)'+a_0 (\tau_b r)
 \end{align*}
-即激励产生延时b时，零状态响应也产生延时b。至于零输入响应，不会由于激励的改变而改
-变，它不仅会破坏系统的时不变性，还会破坏系统的线性性，因为在初始状态非0时，直接
-将两个完全解相加，则所得信号的初始条件变为给定初始条件的两倍，但由于零输入相应是
-易于研究的，并且只要指出了零输入响应，就可以认为系统的初始状态为n维零向量来进行
-研究，最后将所得的零状态响应与零输入响应叠加，因此我们约定：由常系数线性微分方程
-描述的系统总是线性时不变系统，不论初始状态是否为0。从研究微分方程描述系统的线性、
-时不变性的过程可以看出，提出零状态响应、零输入响应的分解是必要的，并且我们还将很
-快看到这样的分解方式对于求解常系数线性微分方程的好处。
-
-以线性时不变系统的视角来看微分方程，自然会想到求这个系统的单位脉冲响应，也就是说，
-令方程右侧的激励信号为$\delta$，看所得响应$h(t)$，这样，根据上一小节中的结果，
-不论方程右侧的激励$e(t)$变为何种形式，只要它与$h(t)$的卷积是有定义的，就可以直接
-求出响应（或者说零状态响应）$r(t)=(h*e)(t)$，只要再叠加上零输入响应，就可以得到
-任意给定初始状态下方程的解，这是一个一劳永逸的工作，在实际问题中，我们经常给出系
-统的微分方程描述和初始条件，而激励则是任意的，现在就可以避开微分方程，直接计算卷
-积来求得系统的响应。数学上，这个脉冲响应$h(t)$被称为\textbf{基本解}(fundamental solution)，
-它在偏微分方程、数学物理和线性系统理论等领域中都有广泛的应用。
-
-那么，如何求这个单位脉冲响应呢？对于微分方程
+即激励产生延时b时，零状态响应也产生延时b。至于零输入响应，不会由于激励的改变而改 变，它不仅会破坏系统的时不变性，还会破坏系统的线性性，因为在初始状态非0时，直接 将两个完全解相加，则所得信号的初始条件变为给定初始条件的两倍，但由于零输入相应是 易于研究的，并且只要指出了零输入响应，就可以认为系统的初始状态为n维零向量来进行 研究，最后将所得的零状态响应与零输入响应叠加，因此我们约定：由常系数线性微分方程 描述的系统总是线性时不变系统，不论初始状态是否为0。从研究微分方程描述系统的线性、 时不变性的过程可以看出，提出零状态响应、零输入响应的分解是必要的，并且我们还将很 快看到这样的分解方式对于求解常系数线性微分方程的好处。以线性时不变系统的视角来看微分方程，自然会想到求这个系统的单位脉冲响应，也就是说， 令方程右侧的激励信号为$\delta$，看所得响应$h(t)$，这样，根据上一小节中的结果， 不论方程右侧的激励$e(t)$变为何种形式，只要它与$h(t)$的卷积是有定义的，就可以直接 求出响应（或者说零状态响应）$r(t)=(h*e)(t)$，只要再叠加上零输入响应，就可以得到 任意给定初始状态下方程的解，这是一个一劳永逸的工作，在实际问题中，我们经常给出系 统的微分方程描述和初始条件，而激励则是任意的，现在就可以避开微分方程，直接计算卷 积来求得系统的响应。数学上，这个脉冲响应$h(t)$被称为\textbf{基本解}(fundamental solution)， 它在偏微分方程、数学物理和线性系统理论等领域中都有广泛的应用。那么，如何求这个单位脉冲响应呢？对于微分方程
 \[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdot +a_1 r'+a_0 r=\delta\]
-要使等式右边出现$\delta$，$r(t)$中一定含有$\delta$及其导数、积分，根据\ref{sec:distributions}
-中的结果，$u'=\delta$，而$u(t)$的各阶积分都可以用$P(t)u(t)$来表示，其中$P(t)$
-是t的多项式，因此可以假定$r(t)=f_1(t)u(t)+f_2(t)\delta(t)+f_3(t)\delta'(t)+\cdots$。
-我们知道，$\delta$具有取样性质：$\delta(t)f(t)=\delta(t)f(0)$，类似地，还推导
-过$\delta'$与函数的乘积：$g\delta'=g(0)\delta'-g'(0)\delta$，不难想象，$\delta$
-的各阶导数与函数的乘积都是类似的（可以通过归纳法验证这一点），于是刚才的$r(t)$简
-化为
+要使等式右边出现$\delta$，$r(t)$中一定含有$\delta$及其导数、积分，根据\ref{sec:distributions} 中的结果，$u'=\delta$，而$u(t)$的各阶积分都可以用$P(t)u(t)$来表示，其中$P(t)$ 是t的多项式，因此可以假定$r(t)=f_1(t)u(t)+f_2(t)\delta(t)+f_3(t)\delta'(t)+\cdots$。 我们知道，$\delta$具有取样性质：$\delta(t)f(t)=\delta(t)f(0)$，类似地，还推导 过$\delta'$与函数的乘积：$g\delta'=g(0)\delta'-g'(0)\delta$，不难想象，$\delta$ 的各阶导数与函数的乘积都是类似的（可以通过归纳法验证这一点），于是刚才的$r(t)$简 化为
 \[r(t)=f(t)u(t)+a_1\delta+a_2\delta'+\cdots\]
-我们知道，分布与函数乘积的求导也满足莱布尼兹法则，运用这一点，将上式带入激励取为
-$\delta$的微分方程，可以通过待定系数法求出各个系数，并得到关于$f(t)$的常规的微分
-方程。很明显，我们不总是需要$\delta$及其高阶导数项，为此需要研究取到$u(t)$的几阶
-导数就足以完成基于待定系数法的求解，我们通过一个简单的例子来说明这个问题。
-
+我们知道，分布与函数乘积的求导也满足莱布尼兹法则，运用这一点，将上式带入激励取为 $\delta$的微分方程，可以通过待定系数法求出各个系数，并得到关于$f(t)$的常规的微分 方程。很明显，我们不总是需要$\delta$及其高阶导数项，为此需要研究取到$u(t)$的几阶 导数就足以完成基于待定系数法的求解，我们通过一个简单的例子来说明这个问题。
 \noindent 例9.求微分方程
 \[r''(t)+3r'(t)+2r(t)=e(t)\]
-的单位脉冲响应。令$r''(t)+3r'(t)+2r(t)=\delta$，如果$r(t)$中含有$\delta'$，则
-其各阶导数会因此含有$\delta$的更高阶导数，这不是我们所需要的，因此，令
+的单位脉冲响应。令$r''(t)+3r'(t)+2r(t)=\delta$，如果$r(t)$中含有$\delta'$，则 其各阶导数会因此含有$\delta$的更高阶导数，这不是我们所需要的，因此，令
 $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
     r'(t)&=f'(t)u(t)+f(t)\delta+a\delta'\\
     &=f'(t)u(t)+f(0)\delta+a\delta'\\
@@ -2756,48 +1879,18 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
     f(t)=e^{-t}-e^{-2t}\\
     h(t)=(e^{-t}-e^{-2t})u(t)
 \end{align*}
-总之，只要将齐次解乘以$u(t)$，求出对应阶导数并带回原方程对比系数，即可得到单位脉
-冲响应；由于单位阶跃响应形如$h(t)=y_h(t)u(t)$，满足$h(t)=0,t<0$，微分方程描述的
-系统还具有因果性。
-
-我们还可以对以上结果做一些推广：求解微分方程
+总之，只要将齐次解乘以$u(t)$，求出对应阶导数并带回原方程对比系数，即可得到单位脉 冲响应；由于单位阶跃响应形如$h(t)=y_h(t)u(t)$，满足$h(t)=0,t<0$，微分方程描述的 系统还具有因果性。我们还可以对以上结果做一些推广：求解微分方程
 \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m \delta^{(m)}\]
-当$r(t)$的最高次导的阶数不小于$\delta$的最高阶导阶数，即$N\geq M$时，解为
-$y_h(t)u(t)$；当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶数，即$N<M$时，
-解为\[y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}\]
-换言之，需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现。
-这个结果可以求出以下形式的系统的脉冲响应：
+当$r(t)$的最高次导的阶数不小于$\delta$的最高阶导阶数，即$N\geq M$时，解为 $y_h(t)u(t)$；当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶数，即$N<M$时， 解为\[y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}\] 换言之，需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现。 这个结果可以求出以下形式的系统的脉冲响应：
 \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m e^{(m)}(t)\]
-这同样时微分方程描述的系统，只不过从数学上我们没有必要考虑这种形式的方程，只要把
-方程右侧看作一个新的非齐次项，它与其他微分方程没有区别，但当系统用这种方式描述时，
-求解其脉冲响应就显得十分重要了。当然，正因为这种方程本质上还是一个非齐次的常系数
-线性微分方程，我们仍然可以用基本解的方法来求得脉冲响应，只需要在求出基本解后，将
-基本解与方程右侧做卷积，不过实际上记忆$\delta$的各阶导数的卷积特性并不是很有必要
-，通过待定系数法求解往往更快。
-
+这同样时微分方程描述的系统，只不过从数学上我们没有必要考虑这种形式的方程，只要把 方程右侧看作一个新的非齐次项，它与其他微分方程没有区别，但当系统用这种方式描述时， 求解其脉冲响应就显得十分重要了。当然，正因为这种方程本质上还是一个非齐次的常系数 线性微分方程，我们仍然可以用基本解的方法来求得脉冲响应，只需要在求出基本解后，将 基本解与方程右侧做卷积，不过实际上记忆$\delta$的各阶导数的卷积特性并不是很有必要 ，通过待定系数法求解往往更快。
 \section{系统的频率响应特性}\label{sec:freq_response}
-
-由于这两个小节中，绝大部分文献和教材都采用角频率进行讨论，并且涉及大量的三角函数
-运算时，角频率也更加方便，本章的这两个小节将直接使用角频率形式的傅里叶变换。
-
-在上一节中我们得到了$r(t)=(h*e)(t)$，看到卷积的结构，自然会想到对其做傅里叶变
-换，即\[R(\omega)=H(\omega)E(\omega)\]
-其中，$H$称为\textbf{系统函数}。一个物理可实现的系统，容易理解它必须满足因果性
-，即$h(t)=0,t<0$。实际上，这样的系统还必须满足\textbf{佩利-维纳准则}(Paley-Wiener criterion)，
-即系统函数$H(\omega)$必须满足以下两个条件：
+由于这两个小节中，绝大部分文献和教材都采用角频率进行讨论，并且涉及大量的三角函数 运算时，角频率也更加方便，本章的这两个小节将直接使用角频率形式的傅里叶变换。在上一节中我们得到了$r(t)=(h*e)(t)$，看到卷积的结构，自然会想到对其做傅里叶变 换，即\[R(\omega)=H(\omega)E(\omega)\] 其中，$H$称为\textbf{系统函数}。一个物理可实现的系统，容易理解它必须满足因果性 ，即$h(t)=0,t<0$。实际上，这样的系统还必须满足\textbf{佩利-维纳准则}(Paley-Wiener criterion)， 即系统函数$H(\omega)$必须满足以下两个条件：
 \begin{align*}
     &\int_{-\infty}^{\infty}|H(\omega)|^2\,d\omega<\infty\\
     &\int_{-\infty}^{\infty}\frac{|\ln|H(\omega)||}{1+\omega^2}\,d\omega<\infty
 \end{align*}
-
-在分析电路时
-曾见过它的另一种定义方式：$H(\omega)=Y(\omega)/X(\omega)$，其中$Y(\omega)$
-是输出端口信号的频域形式，$X(\omega)$是输入端口信号的频域形式，它与我们用傅里叶
-变换的理论给出的定义没有区别，但是展示了另一种求系统函数的视角。在学习电路分析时
-，我们知道线性的电感、电容可以在相量法下与线性电阻等同处理，统一地用\textbf{阻抗}来
-描述其电压电流关系。感值为L的电感，阻抗为$i\omega L$，容值为C的电容，阻抗为
-$1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实际上正是基于傅里变
-换（或拉普拉斯变换）的，例如，描述电容的方程为：
+在分析电路时 曾见过它的另一种定义方式：$H(\omega)=Y(\omega)/X(\omega)$，其中$Y(\omega)$ 是输出端口信号的频域形式，$X(\omega)$是输入端口信号的频域形式，它与我们用傅里叶 变换的理论给出的定义没有区别，但是展示了另一种求系统函数的视角。在学习电路分析时 ，我们知道线性的电感、电容可以在相量法下与线性电阻等同处理，统一地用\textbf{阻抗}来 描述其电压电流关系。感值为L的电感，阻抗为$i\omega L$，容值为C的电容，阻抗为 $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实际上正是基于傅里变 换（或拉普拉斯变换）的，例如，描述电容的方程为：
 \[i(t)=C\frac{d}{dt}v(t)\]
 对其做傅里叶变换，得到
 \[I(\omega)=i\omega C V(\omega)\]
@@ -2808,15 +1901,12 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
     % 输入端口
     \draw (0,2) to [short, o-] (1,2) % 输入接线端到电阻
           to [R, l=$R$] (4,2);       % 电阻R
-    
     % 电容C与接地
     \draw (4,2) to [C, l_=$C$] (4,0) % 电容C（下标注）
           to [short] (4,-0.5);   % 接地符号延伸
     \draw (4,0) node[ground]{};      % 接地符号
-    
     % 输出端口（从电阻与电容连接点引出）
     \draw (4,2) to [short, -o] (6,2);
-    
     % 标注输入输出电压
     \draw (0,2) node[left]{$V_{\text{in}}(\omega)$};  % 输入电压
     \draw (6,2) node[right]{$V_{\text{out}}(\omega)$}; % 输出电压
@@ -2827,15 +1917,7 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 \[
     H(\omega)=\frac{V_{out}(\omega)}{V_{in}(\omega)}=\frac{1}{1+i\omega RC}
 \]
-可见相量法可以省去列写微分方程和求傅里叶变换的过程，直接得到系统函数，这也是前文
-中强调定义式$H(\omega)=Y(\omega)/X(\omega)$的原因。
-
-我们还可以对给定的$\omega$，将$H(\omega)$看作一个复数，即$H(\omega)=|H(\omega)|e^{i\varphi(\omega)}$，
-因为我们总是可以用傅里叶变换的理论分析信号中各种（角）频率的成分。在电子信息领域，
-将$|H(\omega)|-\omega$称为系统的\textbf{幅频特性}，将$\varphi(\omega)-\omega$
-称为系统的\textbf{相频特性}，它们分别反映了系统对于给定频率成分的放大系数和相位
-旋转角度。这里$\varphi(\omega)$通常取主值，即$(-\pi,\pi]$内的值。
-
+可见相量法可以省去列写微分方程和求傅里叶变换的过程，直接得到系统函数，这也是前文 中强调定义式$H(\omega)=Y(\omega)/X(\omega)$的原因。我们还可以对给定的$\omega$，将$H(\omega)$看作一个复数，即$H(\omega)=|H(\omega)|e^{i\varphi(\omega)}$， 因为我们总是可以用傅里叶变换的理论分析信号中各种（角）频率的成分。在电子信息领域， 将$|H(\omega)|-\omega$称为系统的\textbf{幅频特性}，将$\varphi(\omega)-\omega$ 称为系统的\textbf{相频特性}，它们分别反映了系统对于给定频率成分的放大系数和相位 旋转角度。这里$\varphi(\omega)$通常取主值，即$(-\pi,\pi]$内的值。
 \noindent 例11.将激励信号$V_{in}(t)=\cos(\omega_0 t)$施加于例10中的RC电路，求输出
 信号$V_{out}(t)$\\
 解：激励信号的傅里叶变换为
@@ -2854,17 +1936,12 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
     &=Re[\frac{1}{1+i\omega_0 RC}e^{i\omega_0 t}]\\
     &=\frac{1}{\sqrt{1+(\omega_0 RC)^2}}\cos(\omega_0 t-\varphi(\omega_0))
 \end{align*}
-
 考虑$\omega_0$处$H(\omega)$的幅度和相位：
 \begin{align*}
     |H(\omega_0)|&=\frac{1}{\sqrt{1+(\omega_0 RC)^2}}\\
     \varphi(\omega_0)&=-\arctan(\omega_0 RC)
 \end{align*}
-前者恰为输出信号幅值1的放大倍数，后者为相位延迟，输出信号$V_{out}(t)$只用到了
-频域中的两个点$\pm\omega_0$，且由于系统函数偶对称，输出信号只显含$H(\omega_0)$
-的幅值的相位。这是因为$\cos(\omega_0 t)$在频域中只含有两个对称的频率成分。
-
-将以上过程进一步抽象:
+前者恰为输出信号幅值1的放大倍数，后者为相位延迟，输出信号$V_{out}(t)$只用到了 频域中的两个点$\pm\omega_0$，且由于系统函数偶对称，输出信号只显含$H(\omega_0)$ 的幅值的相位。这是因为$\cos(\omega_0 t)$在频域中只含有两个对称的频率成分。将以上过程进一步抽象:
 \begin{align*}
     \mathcal{F} H[e^{i\omega_0 t}]&=\mathcal{F} h(\omega)\mathcal{F} [e^{i\omega t}]\\
     &=H(\omega)\delta_{\omega_0}\\
@@ -2872,37 +1949,11 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 \end{align*}
 因此
 \[r(t)=H[e^{i\omega_0 t}]=H(\omega_0)e^{i\omega_0 t}\]
-将$H[e^{i\omega t}]$称为系统的\textbf{频率响应特性}，其中$e^{i\omega t}$
-（给定$\omega$，作为t的函数输入系统）称为系统H的以$H(\omega)$为\textbf{特征值}(eigenvalue)
-的\textbf{特征函数}(eigenfunction)。我们将在\ref{sec:DFT}中看到，系统函数的
-想法能够将表示离散线性时不变系统的循环矩阵对角化，其过渡矩阵是一种特殊的范德蒙德
-矩阵，要直接在高等代数中获得这个结论是比较困难的。
-
-在信号传输的过程中，有时希望信号经过一个系统，只有幅值发生变化，而波形不改变，
-例如小信号放大电路。波形改变的这种现象，称之为\textbf{失真}(distortion)。根据
-输出信号是否产生新的频率分量，将失真分为\textbf{线性失真}(linear distortion)
-和\textbf{非线性失真}(nonlinear distortion)；线性失真中，根据引起失真的方式，
-又分为\textbf{幅度失真}(amplitude distortion)和\textbf{相位失真}(phase distortion)。
-幅度失真是指系统的幅频特性不是常数，即不同频率成分的放大倍数不同；相位失真是指
-系统的相频特性不是线性的，即不同频率成分的相位延迟不同。
-
-对于一个理想的\textbf{无失真传输系统}，它只能对输入信号进行幅值的统一改变或相位
-的统一延迟，即\[r(t)=Ke(t-t_0)\]
-其中K为常数，$t_0$为常数延迟。由傅里叶变换的时移性质可知，这样的系统函数为
+将$H[e^{i\omega t}]$称为系统的\textbf{频率响应特性}，其中$e^{i\omega t}$ （给定$\omega$，作为t的函数输入系统）称为系统H的以$H(\omega)$为\textbf{特征值}(eigenvalue) 的\textbf{特征函数}(eigenfunction)。我们将在\ref{sec:DFT}中看到，系统函数的 想法能够将表示离散线性时不变系统的循环矩阵对角化，其过渡矩阵是一种特殊的范德蒙德 矩阵，要直接在高等代数中获得这个结论是比较困难的。在信号传输的过程中，有时希望信号经过一个系统，只有幅值发生变化，而波形不改变， 例如小信号放大电路。波形改变的这种现象，称之为\textbf{失真}(distortion)。根据 输出信号是否产生新的频率分量，将失真分为\textbf{线性失真}(linear distortion) 和\textbf{非线性失真}(nonlinear distortion)；线性失真中，根据引起失真的方式， 又分为\textbf{幅度失真}(amplitude distortion)和\textbf{相位失真}(phase distortion)。 幅度失真是指系统的幅频特性不是常数，即不同频率成分的放大倍数不同；相位失真是指 系统的相频特性不是线性的，即不同频率成分的相位延迟不同。对于一个理想的\textbf{无失真传输系统}，它只能对输入信号进行幅值的统一改变或相位 的统一延迟，即\[r(t)=Ke(t-t_0)\] 其中K为常数，$t_0$为常数延迟。由傅里叶变换的时移性质可知，这样的系统函数为
 \[H(\omega) = Ke^{-i\omega t_0}\]
-可以看到，$|H(\omega)|=K,t_0=-\varphi(\omega)/\omega$，其幅频特性是常数，图
-像为一水平线；相频特性是线性函数，图像为过原点的直线。
-
-更一般地，\[\tau_p(\omega)=-\frac{\varphi(\omega)}{\omega}\]
-描述了系统对不同频率成分造成时延的情况，称之为\textbf{相时延}(phase delay)；将
+可以看到，$|H(\omega)|=K,t_0=-\varphi(\omega)/\omega$，其幅频特性是常数，图 像为一水平线；相频特性是线性函数，图像为过原点的直线。更一般地，\[\tau_p(\omega)=-\frac{\varphi(\omega)}{\omega}\] 描述了系统对不同频率成分造成时延的情况，称之为\textbf{相时延}(phase delay)；将
 \[\tau_g(\omega)=-\frac{d\varphi(\omega)}{d\omega}\]
-称为\textbf{群时延}(group delay)或\textbf{包络延时}(envelope delay)，它描述
-了系统对各频率分量造成延时的变化率。对于无失真传输系统，$\tau_p(\omega)=\tau_g(\omega)=t_0$。
-根据电路分析的经验，看到$\tau_p(\omega)=-\varphi(\omega)/\omega$而定义$\tau_g(\omega)=-d\varphi(\omega)/d\omega$
-是自然的，在处理非线性电阻的伏安特性曲线时也曾类似地定义动态电阻和静态电阻，但其
-物理意义并不十分明显，在信号与系统的框架下，我们可以通过分析调幅信号的传输来理解
-相时延和群时延的意义。
-
+称为\textbf{群时延}(group delay)或\textbf{包络延时}(envelope delay)，它描述 了系统对各频率分量造成延时的变化率。对于无失真传输系统，$\tau_p(\omega)=\tau_g(\omega)=t_0$。 根据电路分析的经验，看到$\tau_p(\omega)=-\varphi(\omega)/\omega$而定义$\tau_g(\omega)=-d\varphi(\omega)/d\omega$ 是自然的，在处理非线性电阻的伏安特性曲线时也曾类似地定义动态电阻和静态电阻，但其 物理意义并不十分明显，在信号与系统的框架下，我们可以通过分析调幅信号的传输来理解 相时延和群时延的意义。
 \noindent 例12.设输入信号为单频复指数信号$e^{i\omega_0 t}$，求系统函数为$H(\omega)$
 的线性时不变系统的输出信号$r(t)$。\\
 解：输入信号的傅里叶变换为
@@ -2919,15 +1970,10 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
     &=H(\omega_0)e^{i\omega_0 t}\\
     &=|H(\omega_0)|e^{i(\omega_0 t-\varphi(\omega_0))}
 \end{align*}
-可以看到，输出信号仍然是单频复指数信号，其幅值被放大了$|H(\omega_0)|$倍，相位
-延迟了$\varphi(\omega_0)$，折合到时间上，就得到相时延为$\tau_p(\omega_0)=-\varphi(\omega_0)/\omega_0$。
-可以想象，能够分解成不同频率成分的信号，其各频率成分一般会产生不同的相时延，
-从而使得输出信号的波形发生变化。
-
+可以看到，输出信号仍然是单频复指数信号，其幅值被放大了$|H(\omega_0)|$倍，相位 延迟了$\varphi(\omega_0)$，折合到时间上，就得到相时延为$\tau_p(\omega_0)=-\varphi(\omega_0)/\omega_0$。 可以想象，能够分解成不同频率成分的信号，其各频率成分一般会产生不同的相时延， 从而使得输出信号的波形发生变化。
 \noindent 例13.设输入信号为调幅信号（关于调幅信号，见\ref{sec:modulation}）：
 \[e(t)=\cos(\omega_m t)\cos(\omega_c t)\]
-其中$\omega_c$为载波角频率，$\omega_m$为调制信号的角频率，且
-$\omega_c\gg \omega_m$。求系统函数为$H(\omega)$的线性时不变系统的输出信号$r(t)$。\\
+其中$\omega_c$为载波角频率，$\omega_m$为调制信号的角频率，且 $\omega_c\gg \omega_m$。求系统函数为$H(\omega)$的线性时不变系统的输出信号$r(t)$。\\
 解：将输入信号展开为
 \begin{align*}
     e(t)&=\frac{1}{2}[\cos((\omega_c+\omega_m)t)+\cos((\omega_c-\omega_m)t)]
@@ -2969,80 +2015,44 @@ $\omega_c\gg \omega_m$。求系统函数为$H(\omega)$的线性时不变系统�
     &+\frac{1}{2}\left[|H(\omega_c)|-\left.\frac{d|H(\omega)|}{d\omega}\right|_{\omega=\omega_c}\omega_m\right]\cos\left((\omega_c-\omega_m)t-\varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\\
     \approx&|H(\omega_c)|\cos(\omega_c t-\varphi(\omega_c))\cos\left(\omega_m\left[t+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\right]\right)
 \end{align*}
-对比输入信号\[e(t)=\cos(\omega_m t)\cos(\omega_c t)\]
-可以看到，输出信号的幅度大约变为$|H(\omega_c)|$倍，载波信号的相位延迟了$\varphi(\omega_c)$，
-调制信号的相位延迟了$\omega_m\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$，
-折合到时间上，就是群时延$\tau_g(\omega_c)=-\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$。
-因此，群时延描述了系统对调制信号的包络造成的延时。从信号的图像上来看，高频的载波
-信号的延时是不会造成很明显的变化的，而低频的调制信号的时延则会明显地反映在图像上
-，就像一个“信号群”在传播过程中整体产生了一段时延，群时延的名称就由此而来。
-
+对比输入信号\[e(t)=\cos(\omega_m t)\cos(\omega_c t)\] 可以看到，输出信号的幅度大约变为$|H(\omega_c)|$倍，载波信号的相位延迟了$\varphi(\omega_c)$， 调制信号的相位延迟了$\omega_m\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$， 折合到时间上，就是群时延$\tau_g(\omega_c)=-\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$。 因此，群时延描述了系统对调制信号的包络造成的延时。从信号的图像上来看，高频的载波 信号的延时是不会造成很明显的变化的，而低频的调制信号的时延则会明显地反映在图像上 ，就像一个“信号群”在传播过程中整体产生了一段时延，群时延的名称就由此而来。
 \section{调制与解调}\label{sec:modulation}
-
 %三种调制方式
 %升余弦滤波器，升余弦信号和升余弦包络线
 %时分复用，频分复用（现代的其他复用技术？）
-
 \chapter{拉普拉斯变换与系统的复频域分析}
-
 \section{复变函数}\label{sec:Complex}
-
 \section{拉普拉斯变换}\label{sec:Laplace_Transform}
-
 %紧支函数的傅里叶变换不紧支（见deepseek)
-
 \section{拉普拉斯逆变换}\label{sec:Laplace_Inverse}
-
 \section{系统的复频域分析}\label{sec:Complex_Freq_Analysis}
-
 \chapter{z变换与离散系统分析}
-
 \section{z变换}\label{sec:z_Transform}
-
 \section{离散系统的z域分析}\label{sec:Discrete_System_z_Analysis}
-
 \section{离散傅里叶变换初步}\label{sec:simple_DFT}
-
 \section{离散傅里叶变换进阶}\label{sec:DFT}
-
 \chapter{附录}%附录
-
-收录一些脱离信号与系统主线，却又对本书的理论体系的完整性十分重要的内容；收录一些
-未来可能会用到的数学工具。
-
+收录一些脱离信号与系统主线，却又对本书的理论体系的完整性十分重要的内容；收录一些 未来可能会用到的数学工具。
 \section{傅里叶级数的渐进特性，吉布斯现象}\label{sec:Asymptotic_Behaviour}
-
-在用计算机模拟函数的傅里叶级数展开时，只能取有限项，自然要问计算到多少项时误差
-足够小，为此，我们不加证明地给出以下定理：
+在用计算机模拟函数的傅里叶级数展开时，只能取有限项，自然要问计算到多少项时误差 足够小，为此，我们不加证明地给出以下定理：
 \begin{align*}
-     & \text{设}f\in C^p(\mathbb{R} )(p\geq1)\text{是周期函数,则部分和}
-    S_N^f(t)=\sum_{-N}^{N}c_k e^{ik\omega t}
+     & \text{设}f\in C^p(\mathbb{R} )(p\geq1)\text{是周期函数,则部分和} S_N^f(t)=\sum_{-N}^{N}c_k e^{ik\omega t}
     \text{在}\mathbb{R} \text{上逐点收敛、}                                   \\
      & \text{内闭一致收敛，且} \max|f(t)-S_N^f(t)|<\frac{1}{N^{p-\frac{1}{2}}}
 \end{align*}
-其中$C^p(\mathbb{R} )$表示p次连续可导的函数集。
-
-当$f(t)$不连续时，傅里叶级数的会在间断点处产生\textbf{吉布斯现象} (Gibbs' Phenomenon)
-：部分和$S_N^f(t)$在间断点处总会\textbf{过冲}（在间断点两侧出现超过原函数的峰值）
-，过冲幅度约为跳变幅度的9\%，并且$S_N^f(t)$会在间断点附近高频振荡，例如对于跳变
-幅度为2、周期为$2\pi$的周期矩形脉冲信号
+其中$C^p(\mathbb{R} )$表示p次连续可导的函数集。当$f(t)$不连续时，傅里叶级数的会在间断点处产生\textbf{吉布斯现象} (Gibbs' Phenomenon) ：部分和$S_N^f(t)$在间断点处总会\textbf{过冲}（在间断点两侧出现超过原函数的峰值） ，过冲幅度约为跳变幅度的9\%，并且$S_N^f(t)$会在间断点附近高频振荡，例如对于跳变 幅度为2、周期为$2\pi$的周期矩形脉冲信号
 \[R(x) =
     \begin{cases}
         1  & \text{if } 0<x<\pi  \\
         -1 & \text{if } -\pi<x<0
     \end{cases}\]
-其傅里叶级数的跳变值为1，
-$\varlimsup_{N \to \infty}S_N^R(t)=1.089490 \dots$。
-这是因为光滑的基函数很难逼近这种剧烈的局部变化，不得不用高频分量来补偿，高频分
-量带来了剧烈震动。$\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄
-利克雷定理失效，因为定理给出的是逐点收敛而非一致收敛，
+其傅里叶级数的跳变值为1， $\varlimsup_{N \to \infty}S_N^R(t)=1.089490 \dots$。 这是因为光滑的基函数很难逼近这种剧烈的局部变化，不得不用高频分量来补偿，高频分 量带来了剧烈震动。$\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄 利克雷定理失效，因为定理给出的是逐点收敛而非一致收敛，
 \[\varlimsup_{N \to \infty}S_N^R(t)=\lim_{N \to \infty}\max_{t\in \mathbb{R} }S_N^R(t)\neq \max_{t\in\mathbb{R}}\lim_{N\to\infty}S_N^R(t)\]
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{gibbs}
     \caption{吉布斯现象示意图}
 \end{figure}
-
 为了直观地理解它，我们来看一个经典的例子：
 \begin{align*}
     f_n(x)=
@@ -3052,13 +2062,9 @@ $\varlimsup_{N \to \infty}S_N^R(t)=1.089490 \dots$。
         0    & \text{otherwise}
     \end{cases}
 \end{align*}
-随n增大，$f(x)$逐点趋于0，因为对每一点$2/n$总能取到更小的值；但$f(x)$
-的最大值永远是1。
-
-研究傅里叶级数的渐进特性时，一个非常好用的工具是\textbf{狄利克雷核} (Dirichlet kernel)：
+随n增大，$f(x)$逐点趋于0，因为对每一点$2/n$总能取到更小的值；但$f(x)$ 的最大值永远是1。研究傅里叶级数的渐进特性时，一个非常好用的工具是\textbf{狄利克雷核} (Dirichlet kernel)：
 \[D_N(t)=\sum_{k=-N}^{N}e^{ik\omega t}=1+\sum_{k=1}^{N}(e^{ik\omega t}+e^{-ik\omega t})=1+2\sum_{k=1}^{N}\cos(k\omega t)\]
-它是依赖于所研究函数的周期T的，但简便起见，在符号$D_N(t)$中不体现这一点。我们可
-以用等比数列求和或积化和差裂项的方法化简$D_N(t)$：
+它是依赖于所研究函数的周期T的，但简便起见，在符号$D_N(t)$中不体现这一点。我们可 以用等比数列求和或积化和差裂项的方法化简$D_N(t)$：
 \begin{align*}
     D_N(t) & =\sum_{k=-N}^{N}e^{ik\omega t}=e^{-iN\omega t}\frac{1-e^{i(2N+1)\omega t}}{1-e^{i\omega t}}                  \\
            & =\frac{e^{i(N+1)\omega t}-e^{-iN\omega t}}{e^{i\omega t}-1}                                   \\
@@ -3068,15 +2074,11 @@ $\varlimsup_{N \to \infty}S_N^R(t)=1.089490 \dots$。
            & =1+\frac{\sin(N+\frac{1}{2})\omega t-\sin(\frac{\omega t}{2})}{\sin(\frac{\omega t}{2})}                     \\
            & =\frac{\sin(N+\frac{1}{2})\omega t}{\sin(\frac{\omega t}{2})}
 \end{align*}
-这两种结果是相符的，读者可自行验证，并且可以从后一结果想象出狄利克雷核的函数图
-像，它被$\pm 1/\sin(\frac{\omega t}{2})$包络并高速振荡。根据\ref{sec:Sampling and Interpolation}
-中的结果，$D_N(t)$是$\shah$函数的部分和，在$nT(n\in\mathbb{Z})$处，随$N\to\infty$，
-D也趋于无穷，并在其他位置趋于0。这是又一个最大值不趋于0，但逐点趋于0的例子。函数图像如下。
+这两种结果是相符的，读者可自行验证，并且可以从后一结果想象出狄利克雷核的函数图 像，它被$\pm 1/\sin(\frac{\omega t}{2})$包络并高速振荡。根据\ref{sec:Sampling and Interpolation} 中的结果，$D_N(t)$是$\shah$函数的部分和，在$nT(n\in\mathbb{Z})$处，随$N\to\infty$， D也趋于无穷，并在其他位置趋于0。这是又一个最大值不趋于0，但逐点趋于0的例子。函数图像如下。
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Figure_3}
 \end{figure}
-
 引入狄利克雷核后，就可以用以下恒等式研究傅里叶级数的部分和：
 \begin{align*}
     S_N^f(t) & =\sum_{-N}^{N}c_k e^{ik\omega t}                                                                                \\
@@ -3086,9 +2088,7 @@ D也趋于无穷，并在其他位置趋于0。这是又一个最大值不趋于
              & =\frac{1}{T}\int_{T}f(t-\tau)D_N(\tau)\,d\tau                                                & (\tau\to t-\tau) \\
              & =\frac{1}{T}\int_{T}f(t+\tau)D_N(\tau)\,d\tau                                                & (\tau\to t+\tau)
 \end{align*}
-
-在讨论傅里叶级数的收敛性前，先给出两个引理。第一个引理表明狄利克雷核在半周期上
-积分值为$\frac{T}{2}$，在证明傅里叶级数的逐点收敛性时将用到它。
+在讨论傅里叶级数的收敛性前，先给出两个引理。第一个引理表明狄利克雷核在半周期上 积分值为$\frac{T}{2}$，在证明傅里叶级数的逐点收敛性时将用到它。
 \begin{align}
     \int_{-\frac{T}{2}}^{0}D_N(t)\,dt=\int_{0}^{\frac{T}{2}}D_N(t)\,dt=\frac{T}{2}\label{eq:2.14}
 \end{align}
@@ -3100,15 +2100,13 @@ D也趋于无穷，并在其他位置趋于0。这是又一个最大值不趋于
                                      & =\frac{T}{2}+\frac{1}{\omega}\sum_{k=1}^{N}\frac{\sin(k\pi)}{k}=\frac{T}{2}               \\
     \intertext{$D_N(t)$是偶函数，得证。}
 \end{align*}
-
 第二个引理是\textbf{贝塞尔不等式} (Bessel's Inequality)：设$ f\in L^2([0,T]),c_n=\frac{1}{T}\int_{T}f(t)e^{-ik\omega t}\,dt$，则
 \begin{align}
     \sum_{-\infty}^{\infty}|c_n|^2\leq \frac{1}{T}\int_{T}|f(t)|^2\,dt\label{eq:2.15}
 \end{align}
 它给出了傅里叶系数平方和的上界的估计。收敛级数的通项必收敛，所以由此可以看出$c_n\to 0,n\to\infty$.
 \begin{align*}
-    \intertext{\textbf{Proof:}}
-    |f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}|^2 & =\left(f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}\right)\left(f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}\right)^*                                       \\
+    \intertext{\textbf{Proof:}} |f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}|^2 & =\left(f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}\right)\left(f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}\right)^*                                       \\
                                                & =\left(f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}\right)\left(f^*(t)-\sum_{n=-N}^{N}c_n e^{-in\omega t}\right)                                      \\
                                                & =|f(t)|^2-\sum_{n=-N}^{N}(c_n^*f(t)e^{in\omega t}+c_n f^*(t)e^{-in\omega t})+\sum_{m,n=-N}^{N}c_m c_n^*e^{i(m-n)\omega t}
 \end{align*}
@@ -3125,16 +2123,12 @@ D也趋于无穷，并在其他位置趋于0。这是又一个最大值不趋于
 这是非负函数的积分，积分值非负，即\begin{align*}
     \sum_{-\infty}^{\infty}|c_n|^2\leq \frac{1}{T}\int_{T}|f(t)|^2\,dt<\infty
 \end{align*}
-
-直接由狄利克雷条件证明逐点收敛性需要很专业的分析学工具，但我们可以适当地加强狄
-利克雷条件，让$f(t)$\textbf{分段光滑} (piecewise smooth)：
+直接由狄利克雷条件证明逐点收敛性需要很专业的分析学工具，但我们可以适当地加强狄 利克雷条件，让$f(t)$\textbf{分段光滑} (piecewise smooth)：
 \[f\in PS([0,T])\Longleftrightarrow \text{除有限个点外f均可导，并且这些点是f的第一类间断点}\]
-我们研究的多数函数是满足这样的性质的，并且我们将看到满足此条件会带来一些额外的
-性质。此时就可以相对简单地证明逐点收敛性：
+我们研究的多数函数是满足这样的性质的，并且我们将看到满足此条件会带来一些额外的 性质。此时就可以相对简单地证明逐点收敛性：
 \[\lim_{N\to\infty}S_N^f(t_0)=\frac{f(t_0+)+f(t_0-)}{2}\]
 \begin{align*}
-    \intertext{\textbf{Proof:}}
-    S_N^f(t_0)-\frac{f(t_0^+)+f(t_0^-)}{2} & =\frac{1}{T}\left(\int_{T}f(t_0-\tau)D_N(\tau)\,d\tau-\int_{0}^{\frac{T}{2}}f(t_0^+)D_N(\tau)\,d\tau-\int_{-\frac{T}{2}}^{0}f(t_0^-)D_N(\tau)\,d\tau\right) \\
+    \intertext{\textbf{Proof:}} S_N^f(t_0)-\frac{f(t_0^+)+f(t_0^-)}{2} & =\frac{1}{T}\left(\int_{T}f(t_0-\tau)D_N(\tau)\,d\tau-\int_{0}^{\frac{T}{2}}f(t_0^+)D_N(\tau)\,d\tau-\int_{-\frac{T}{2}}^{0}f(t_0^-)D_N(\tau)\,d\tau\right) \\
                                                                      & =\frac{1}{T}\left(\int_{0}^{\frac{T}{2}}(f(t_0-\tau)-f(t_0^+))D_N(\tau)\,d\tau+\int_{-\frac{T}{2}}^{0}(f(t_0-\tau)-f(t_0^-))D_N(\tau)\,d\tau\right)         \\
     S_N^f(t_0)-\frac{f(t_0^+)+f(t_0^-)}{2}  & =\frac{1}{T}\int_{T}g(t)(e^{i(N+1)\omega t}-e^{iN\omega t})\,dt                                                                                  \\
     \text{其中}g(t)                                                    & :=\begin{cases}
@@ -3143,11 +2137,7 @@ D也趋于无穷，并在其他位置趋于0。这是又一个最大值不趋于
                                                                          \end{cases}                                                      \\
     \text{由洛必达法则，$t\to 0$时，}\lim_{t\to 0^+}g(t)=                     & \lim_{t\to 0^+}\frac{f(t_0+t)-f(t_0^+)}{e^{i\omega t}}=\lim_{t\to 0^+}\frac{f'(t_0+t)}{ie^{i\omega t}}=\lim_{t\to 0^+}\frac{f'(t_0^+)}{i}
 \end{align*}
-$t\to 0^-$时同理。故g分段连续，当然是平方可积的，由贝塞尔不等式，
-$g(t)$的傅里叶系数平方和收敛，通项趋于0，$S_N^f(t_0)-(f(t_0^+)+f(t_0^-))/2=C_{-(N+1)}-C_N\to 0$
-，得证。
-
-在分段光滑的条件下，容易得到$f'(t)$的傅里叶系数，注意微积分基本定理可以分区间使用：
+$t\to 0^-$时同理。故g分段连续，当然是平方可积的，由贝塞尔不等式， $g(t)$的傅里叶系数平方和收敛，通项趋于0，$S_N^f(t_0)-(f(t_0^+)+f(t_0^-))/2=C_{-(N+1)}-C_N\to 0$ ，得证。在分段光滑的条件下，容易得到$f'(t)$的傅里叶系数，注意微积分基本定理可以分区间使用：
 \begin{equation}
     a'_n=n\omega b_n,b'_n=-n\omega a_n,c'_n=in\omega c_n
 \end{equation}
@@ -3156,41 +2146,23 @@ $g(t)$的傅里叶系数平方和收敛，通项趋于0，$S_N^f(t_0)-(f(t_0^+)+
     c'_n & =\frac{1}{T}\int_{T}f'(t)e^{-in\omega t}\,dt                                                         \\
          & =\frac{1}{T}\left.f(t)e^{-in\omega t}\right|_0^T+in\omega\int_{T}f(t)e^{-i\omega t}\,dt=in\omega c_n
 \end{align*}
-
-f的原函数F的傅里叶系数同理，并且只要\textbf{分段连续}（见\ref{sec:Fourier_Series}）
-即可保证f可积，但是我们必须保证F是周期函数，这要求f的直流分量为0：
+f的原函数F的傅里叶系数同理，并且只要\textbf{分段连续}（见\ref{sec:Fourier_Series}） 即可保证f可积，但是我们必须保证F是周期函数，这要求f的直流分量为0：
 \[F(t+T)-F(t)=\int_{T}f(t)dt=Tc_0=0,c_0=0\]
 此时，用刚刚得到的公式（2.16）就可直接得到F的傅里叶系数：
 \begin{equation}
     A_n=\frac{a_n}{n\omega},B_n=\frac{b_n}{n\omega},C_n=\frac{c_n}{in\omega}
 \end{equation}
-
-分段光滑还能够推出f的傅里叶级数\textbf{一致收敛}于f，从而可以逐项积分、逐项求
-导。回顾数学分析中的魏尔斯特拉斯M判别法：对于函数项级数
-$\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\infty$
-使得在区间E上$|f_n(x)|<M_n$，则$\sum_{n=1}^{\infty}f_n(x)$在E上绝对收敛且
-一致收敛。对于上述命题，只需证明$\sum_{n=1}^{\infty}|c_n|<\infty$.直接应用
-贝塞尔不等式是无效的，但可以通过一个小技巧完成证明：
+分段光滑还能够推出f的傅里叶级数\textbf{一致收敛}于f，从而可以逐项积分、逐项求 导。回顾数学分析中的魏尔斯特拉斯M判别法：对于函数项级数 $\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\infty$ 使得在区间E上$|f_n(x)|<M_n$，则$\sum_{n=1}^{\infty}f_n(x)$在E上绝对收敛且 一致收敛。对于上述命题，只需证明$\sum_{n=1}^{\infty}|c_n|<\infty$.直接应用 贝塞尔不等式是无效的，但可以通过一个小技巧完成证明：
 \begin{align*}
     \text{记}c'_n\text{为f'的傅里叶系数},c'_n =in\omega c_n,                            &                                                                                \\
     \sum_{n=-\infty}^{\infty}|c_n|=   |c_0|+\sum_{n\neq 0}| \frac{c'_n}{n}|\leq & |c_0|+(\sum_{n\neq 0}\frac{1}{n^2})^{1/2}(\sum_{n\neq 0}|c'_n|^2)^{1/2}<\infty
 \end{align*}
-最后一步使用了柯西-施瓦兹不等式。
-
-请读者思考：我们探究了指数形式傅里叶级数收敛的条件，对于三角函数形式的傅里叶级
-数应该怎么办？
-
+最后一步使用了柯西-施瓦兹不等式。请读者思考：我们探究了指数形式傅里叶级数收敛的条件，对于三角函数形式的傅里叶级 数应该怎么办？
 \section{分布的逼近，傅里叶反演公式}\label{sec:approach}
-
 %需要先有黎曼-勒贝格引理（见folland），再出傅里叶反演，有傅里叶反演才能构建出帕塞瓦尔恒等式，否则循环论证。
-
 \section{施瓦兹函数类及其好处}\label{sec:Schwartz_Functions}
-
 %紧支函数的傅里叶变换不再是紧支函数
 %时域频域不同时紧支（见ee261）
-
 \section{与傅里叶变换有关的其他变换}\label{sec:Other_Transforms}
-
 %正弦，余弦，拉东（？）
-
 \end{document}
