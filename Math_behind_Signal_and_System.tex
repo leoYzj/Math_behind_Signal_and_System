@@ -263,32 +263,34 @@ $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
 性空间和$L^p$空间，对其不感兴趣的读者，可以等需要时再阅读此小节的内
 容，只要知道函数空间上的正交基是怎么回事即可。
 
-在$\mathbb{C}$ -线性空间V中，如果定义了运算
-$d(\cdot,\cdot):V\times V\rightarrow \mathbb{C}  $，满足\textbf{度量公理}：
+在集合$V$中，如果定义了运算
+$d(\cdot,\cdot):V\times V\rightarrow \mathbb{R}  $，满足\textbf{度量公理}：
 \begin{enumerate}
     \item \textbf{非负性}：$d(x, y) \geq 0$
     \item \textbf{同一性}：$d(x, y) = 0$ 当且仅当 $x = y$
     \item \textbf{对称性}：$d(x, y) = d(y, x)$
     \item \textbf{三角不等式}：$d(x, z) \leq d(x, y) + d(y, z)$
 \end{enumerate}
-则称在V上定义了一种度量（事实上只要在拓扑空间中就能够定义度量）。
+则称在$V$上定义了一种度量。特别地，可以在$\mathbb{C}$ -线性空间$V$上定义度量。
 
 如果定义了运算
-$\|\cdot \| :V\rightarrow \mathbb{C} $，满足\textbf{范数公理}
+$\|\cdot \| :V\rightarrow \mathbb{R} $，满足\textbf{范数公理}
 \begin{enumerate}
     \item \textbf{非负性}：$\|\mathbf{x}\| \geq 0$
     \item \textbf{同一性}：$\|\mathbf{x}\| = 0$ 当且仅当 $\mathbf{x} = \mathbf{0}$
     \item \textbf{齐次性}：$\|\alpha \mathbf{x}\| = |\alpha| \, \|\mathbf{x}\|$
     \item \textbf{三角不等式/次可加性}：$\|\mathbf{x} + \mathbf{y}\| \leq \|\mathbf{x}\| + \|\mathbf{y}\|$
 \end{enumerate}
-则称在V上定义了一种范数，称V为线性赋范空间，在线性赋范空间上可以定义极限：
-\[\lim_{x \to x_0} f(x)=A:=\forall \epsilon>0\exists \delta>0(|x-x_0|<\delta\Rightarrow |f(x)-f(x_0)|<\epsilon) \]
+则称在$V$上定义了一种范数，称$V$为线性赋范空间。特别地，在$\mathbb{C}$ -线性空间$V$上定义范数后，可以自然地诱导出一种度量：
+$$d(\mathbf x,\mathbf y)=||\mathbf x-\mathbf y||$$
+在线性赋范空间上可以定义极限：
+\[\lim_{x \to x_0} f(x)=A:=\forall \epsilon>0\exists \delta>0(||x-x_0||<\delta\Rightarrow ||f(x)-f(x_0)||<\epsilon) \]
 这就是数学分析中的极限定义，只是将绝对值改成了范数，其余类似的极限定义不再赘述。
 如果线性赋范空间中所有柯西列都有极限，那么这个空间称为完备的线性赋范空间，或称
 为巴拿赫空间（有限维）、希尔伯特空间（无限维）。
 
 \noindent 例1.1.连续函数空间$C[a,b]$是不完备的线性赋范空间：在1-范数
-$\|f\|_1 =\int_{a}^{b}f(t)\,dt$下，其中的柯西列\begin{align*}
+$\|f\|_1 =\int_{a}^{b}|f(t)|\,\text dt$下，其中的柯西列\begin{align*}
     f_n(t)=\begin{cases}
         0,&\text{if }-1\leq t <0\\
         nt,&\text{if }0\leq t <\frac{1}{n}\\
@@ -325,12 +327,12 @@ $\|\mathbf{v}\|^2=\langle \mathbf{v}, \mathbf{v} \rangle$，
 只要取$d(\mathbf{x},\mathbf{y})=\|\mathbf{x-y}\|$，就由范数导出了一种度量，
 并且这种度量具有比一般的度量更强的性质。
 
-\textbf{正交基} (othorgnal bases)指的是内积空间V的一组基$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$
-，满足$\langle \mathbf{v_i},\mathbf{v_j}\rangle =0,i \neq j$ ，对V中任一向量$\mathbf{w}$，
+\textbf{正交基} (othorgnal bases)指的是内积空间$V$的一组基$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$
+，满足$\langle \mathbf{v_i},\mathbf{v_j}\rangle =0,i \neq j$ ，对$V$中任一向量$\mathbf{w}$，
 \[\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v_i}\]
 等式两边同时对$\mathbf{v_j}$做内积，得到
 \begin{align}
-    \langle \mathbf{w},\mathbf{v_j} \rangle=\langle \mathbf{v_j},\sum_{i = 1}^{n}  c_i \mathbf{v_i} \rangle =c_j\langle \mathbf{v_j},\mathbf{v_j} \rangle \\
+    \langle \mathbf{w},\mathbf{v_j} \rangle=\langle \sum_{i = 1}^{n}  c_i \mathbf{v_i},\mathbf{v_j} \rangle =c_j\langle \mathbf{v_j},\mathbf{v_j} \rangle \\
     c_j=\frac{\langle \mathbf{w},\mathbf{v_j} \rangle}{\langle \mathbf{v_j},\mathbf{v_j} \rangle},
     \mathbf{w}=\sum_{j = 1}^{n}  \frac{\langle \mathbf{w},\mathbf{v_j} \rangle}{\langle \mathbf{v_j},\mathbf{v_j} \rangle} \mathbf{v_j}\label{eq:2.2}
 \end{align}
@@ -346,8 +348,7 @@ $\langle \mathbf{v_i},\mathbf{v_i}\rangle =1,i \in \{1,2,\dots ,n\}$，称这组
                    & =\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2\langle\mathbf{v_i,v_i}\rangle+\sum_{1\leq i<j\leq n}\langle \mathbf{w,v_i}\rangle\langle \mathbf{w,v_j}\rangle\langle \mathbf{v_i,v_j}\rangle \\
                    & =\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2|\mathbf{v_i}|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2\label{eq:2.6}
 \end{align}
-这正是高维情况下的勾股定理（毕达哥拉斯恒等式）。可见做正交基分解能够极大地简化
-对线性赋范空间的研究。
+这正是高维情况下的勾股定理（毕达哥拉斯恒等式）。可见做正交基分解能够极大地简化对线性赋范空间的研究。
 
 对于\textbf{无限维线性空间}V，我们称向量列
 $\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
@@ -356,30 +357,18 @@ $\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
     \item 有限生成性：任取向量$\mathbf{w} \in V$，存在有限个向量
           $V'=\lbrace\mathbf{v_1,v_2,\dots,v_r}\rbrace\subset V $，$\mathbf{w}$可以用$V'$线性表出
 \end{itemize}
-这里要求“有限”是为了避免敛散性的问题：例如收敛的级数构成线性空间，如果我们声
-称取定了一组基（当然是无限的），并考察其中无限个基张成的空间，那么对于构成级数
-的每一项，均需要考察其敛散性。然而，级数的敛散性自然可以对前有限项不做要求，它
-们求和很可能不会收敛；从另一个角度来讲，一些更加抽象的线性空间中，也说不清楚基
-的无限和是否收敛，甚至在没有范数的线性空间中无法定义收敛。
+这里要求“有限”是为了避免敛散性的问题：例如收敛的级数构成线性空间，如果我们声称取定了一组基（当然是无限的），并考察其中无限个基张成的空间，那么对于构成级数的每一项，均需要考察其敛散性。然而，级数的敛散性自然可以对前有限项不做要求，它们求和很可能不会收敛；从另一个角度来讲，一些更加抽象的线性空间中，也说不清楚基的无限和是否收敛。
 
-函数空间是一种典型的无限维线性空间（因为多项式空间已经是无限维的），根据学习线
-性代数的经验，我们希望能找到一组单位正交基，使得函数在这组正交基下的分解能够体
-现函数的某些性质并便于后续的运算，然而，
-若只考虑有限和，这种想法所能研究的函数十分有限，例如我们马上就会见到的三角函数
-系和指数函数系，它们作为无限阶可微函数，有限和也是无限阶可微的。所以，我们应考
-虑将函数$f(t)$分解为一组相互正交的函数系$\{f_i(t)\}_{i=1}^{\infty}$组成的函
-数项级数。
+函数空间是一种典型的无限维线性空间（因为多项式空间已经是无限维的），根据学习线性代数的经验，我们希望能找到一组单位正交基，使得函数在这组正交基下的分解能够体现函数的某些性质并便于后续的运算，然而，若只考虑有限和，这种想法所能研究的函数十分有限，例如我们马上就会见到的三角函数系和指数函数系，它们作为无限阶可微函数，有限和也是无限阶可微的。所以，我们应考虑将函数$f(t)$分解为一组相互正交的函数系$\{f_i(t)\}_{i=1}^{\infty}$组成的函数项级数。
 
-我们面临的另一个问题是如何在函数空间上定义内积，从而定义正交性。一种比较自然的
-想法是利用（勒贝格）积分，积分区间有限，对于周期函数，自然地取为一个周期。换言
-之，我们考虑在空间
-\[L^2([0,T]):=\{f:[0,T]\rightarrow \mathbb{C} \mid \int_{T}|f(t)|^2\,dt<\infty\}\]
+我们面临的另一个问题是如何在函数空间上定义内积，从而定义正交性。一种比较自然的想法是利用（勒贝格）积分，积分区间有限，对于周期函数，自然地取为一个周期。换言之，我们考虑在空间
+\[L^2([0,T]):=\{f:[0,T]\rightarrow \mathbb{C} \big| \int_{T}|f(t)|^2\,\text dt<\infty\}\]
 上定义内积（为了区别于分布的符号，这里内积用圆括号表示，$^*$表示取共轭）：
 \[(f,g):=\int_{T}f(t)g^*(t)\,dt \]
 我们对这个定义做一些说明,但不给出证明，因为证明需要首先建立勒贝格积分的体系，
 读者可借助黎曼积分直观地理解它们：\\
-1.$L^p([0,T])(0<p\leq \infty)$空间表示在区间[0,T]上p次勒贝格可积的函数组成的函数空间，即
-\[L^p([0,T]):=\{f:[0,T]\rightarrow \mathbb{C} \mid \int_{T}f^p(t)\,dt<\infty\}\]
+1.$L^p([0,T])(0<p\leq \infty)$空间表示在区间$[0,T]$上$p$次勒贝格可积的函数组成的函数空间，即
+\[L^p([0,T]):=\{f:[0,T]\rightarrow \mathbb{C} \big| \int_{T}f^p(t)\,dt<\infty\}\]
 $L^p([0,T])$具有性质：
 \begin{itemize}
     \item \raggedright{} $L^p([0,T])$是线性空间\\
@@ -396,10 +385,10 @@ $L^p([0,T])$具有性质：
 
 有了内积就可以定义范数，从而可以给出$L^2([0,T])$空间上的函数项级数的（依范数）
 收敛的定义：如果
-\[\lim_{n \to \infty} \| f(t)-\sum_{i = 1}^{n}  a_i f_i(t)\|=0\]
-就认为级数$\sum_{i = 1}^{n}  a_i f_i(t)$是$f(t)$在这个正交函数系下的分解，
-此时记\[f\sim\sum_{n=1}^{\infty}a_n f_n\]
-它并不意味着等式右侧的函数项级数在某一点收敛于f.在$L^2([0,T])$空间中，我们不
+\[\lim_{n \to \infty} \| g(t)-\sum_{i = 1}^{n}  a_i f_i(t)\|=0\]
+就认为级数$\sum_{i = 1}^{n}  a_i f_i(t)$是$g(t)$在这个正交函数系下的分解，
+此时记\[g\sim\sum_{n=1}^{\infty}a_n f_n\]
+它并不意味着等式右侧的函数项级数在某一点收敛于$g$.在$L^2([0,T])$空间中，我们不
 区分仅在零测集（“区间长度”的总和总能取到任意小正数，例如至多可数集）上不相等的
 函数，换言之，$L^2([0,T])$空间不是常规意义下的函数的集合，而是\textbf{几乎处处}
 (almost every,a.e.)相等的函数构成的等价类，这里的等号表示的是两侧的函数同属一
@@ -416,7 +405,7 @@ $\sum_{i = 1}^{n}  a_i f_i(t)$几乎处处收敛
 $\{f_i(t)\}_{i=1}^{\infty}$中的所有函数正交，我们称$\{f_i(t)\}_{i=1}^{\infty}$
 为\textbf{完备正交函数系}，这意味着$L^2([0,T])$空间中的任一函数$f(t)$均可分
 解为这个函数系的函数项级数$\sum_{i = 1}^{\infty}  a_i f_i(t)$，由公式 (\ref{eq:2.2})，
-\[a_i=\frac{(f,f_i)}{(f_i,f_i)}=\frac{\int_{T}f(t)f_i^*(t)\,dt}{\int_{T}|f_i(t)|^2\,dt}\]
+\[a_i=\frac{(g,f_i)}{(f_i,f_i)}=\frac{\int_{T}g(t)f_i^*(t)\,dt}{\int_{T}|f_i(t)|^2\,dt}\]
 细心的读者可能已经发现，这里得到的公式用到了有限维线性空间中的结论，但要推广到
 无限维线性空间并不是显然的。我们将在下一节给出帕塞瓦尔定理之后一并讨论这个问题。
 
