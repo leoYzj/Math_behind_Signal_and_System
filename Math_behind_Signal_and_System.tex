@@ -132,22 +132,28 @@
 从电学的经验来看，电压、电流信号的功率总为其幅值的平方乘以某个常数，于是对于
 一般的信号我们也采取此定义。真实的物理世界中的信号的能量总是有限的，但是，为
 了更好地研究它们，很多时候使用真实信号的一部分做适当延拓作为研究对象，因此课
-程中将遇到一些不满足“方均可积”性质$\int_{-\infty}^{\infty}| f(x)| ^2\,dx
-    <\infty$的信号，我们将这种信号称为\textbf{功率信号}，因其能量无限而功率有限，
-而能量有限的信号就称为\textbf{能量信号}。为了区分某段时间内和全时域上的能量和功率，
-又将$(-T/2,T/2)$内的能量
-\[E_T=\int_{-T/2}^{T/2}| f(x)| ^2\,dx\]
-称为\textbf{归一化能量}，功率
-\[P_T=\frac{1}{T}\int_{-T/2}^{T/2}| f(x)| ^2\,dx\]
-称为\textbf{归一化功率}；
-\[E=\int_{-\infty}^{\infty}| f(x)| ^2\,dx\]称为\textbf{全时域能量}，
-\[P=\lim_{T \to \infty}  \frac{1}{T}\int_{-T/2}^{T/2}| f(x)| ^2\,dx\]
-称为\textbf{全时域功率}。
+程中将遇到一些不满足“方均可积”性质$\int_{-\infty}^{\infty}| f(x)| ^2\,dx<\infty$的信号，于是定义：
+\begin{definition}[功率信号与能量信号]
+能量无限而功率有限的信号称为\textbf{功率信号}：\[\int_{-\infty}^{\infty}| f(x)| ^2\,dx\to\infty,\frac{1}{T}\int_{-\infty}^{\infty}| f(x)|^2  \,dx<\infty\]
+而能量有限的信号称为\textbf{能量信号}：\[\int_{-\infty}^{\infty}| f(x)| ^2\,dx<\infty\]
+\end{definition}
 
-类似地，对于离散信号，定义\textbf{归一化能量}为\[E_k=\sum_{n = -k}^{k}  |x[n]|^2\]
-\textbf{归一化功率}为\[P_k=\frac{1}{2k+1}\sum_{n = -k}^{k}  |x[n]|^2\]\textbf{全时域能
-    量}为\[\sum_{n = -\infty}^{\infty}  |x[n]|^2\]\textbf{全时域功率}为
-\[\lim_{k \to \infty}  \frac{1}{2k+1}\sum_{n = -k}^{k}  |x[n]|^2\]
+为了区分某段时间内和全时域上的能量和功率，又定义：\begin{definition}
+\quad\newline
+    \textbf{归一化能量}：$E_T=\int_{-T/2}^{T/2}| f(x)| ^2\,dx$；\\
+    \textbf{归一化功率}：$P_T=\frac{1}{T}\int_{-T/2}^{T/2}| f(x)| ^2\,dx$\\
+\textbf{全时域能量}：$E=\int_{-\infty}^{\infty}| f(x)| ^2\,dx$；\\
+\textbf{全时域功率}：$P=\lim_{T \to \infty}  \frac{1}{T}\int_{-T/2}^{T/2}| f(x)| ^2\,dx$
+\end{definition}
+
+类似地，对于离散信号，定义：
+\begin{definition}
+    \quad\newline
+    \textbf{归一化能量}：$E_N=\sum_{n = -N}^{N}  |x[n]| ^2$；\\
+    \textbf{归一化功率}：$P_N=\frac{1}{2N+1}\sum_{n = -N}^{N}  |x[n]| ^2$\\
+\textbf{全时域能量}：$E=\sum_{n = -\infty}^{\infty}  |x[n]| ^2$；\\
+\textbf{全时域功率}：$P=\lim_{N \to \infty}  \frac{1}{2N+1}\sum_{n = -N}^{N}  |x[n]| ^2$
+\end{definition}
 
 读者可能已经注意到，并不是所有的函数都是可积的，例如$e^x$即使视为功率信号，其
 能量和功率也不具有意义，因此它既不属于能量信号，也不属于功率信号；另一种情况是：
@@ -200,11 +206,11 @@ $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
 这个函数在做卷积运算时有很好的性质，见\ref{sec:convolution}卷积；关于它的逼近方式，见\\
 附录\ref{sec:approach}。我们规定，$\delta_a(x)=\delta (x-a)$，即在$x=a$处取样的狄拉克函数。
 \begin{definition}[单位阶跃函数]
-    $u(x)=
+    \[u(x)=
     \begin{cases}
         0 & x<0 \\
         1 & x>0
-    \end{cases}$\\
+    \end{cases}\]
 \end{definition}
 这个函数在0处的值可以任意定义，一般取0、1或1/2，不会有影响，所以一般也不会讨论。由单
 位阶跃函数衍生出许多其他函数：\\
@@ -212,13 +218,12 @@ $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
         -1 & x<0 \\
         1  & x>0
     \end{cases}=u(t)-u(-t)\]
-\textbf{矩形脉冲}\[R_T(t)=u(t)-u(t-T)\]
-\textbf{门函数（矩形函数、$\Pi $函数）}\[G_T(t)=\Pi_T(t)=u(t+T/2)-u(t-T/2)\]
+\textbf{矩形脉冲、门函数（矩形函数、$\Pi $函数）}\[R_T(t)=u(t)-u(t-T),G_T(t)=\Pi_T(t)=u(t+T/2)-u(t-T/2)\]
 这里T为脉冲宽度，不加角标时，默认为1。
 
 单位阶跃函数的积分为单位斜变信号 (the unit ramp)，导数为狄拉克函数，从直观上
 这不难理解，将在\ref{sec:distributions}中讨论。
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Figure_1}
     \caption{取样函数、高斯函数、狄拉克函数、单位阶跃函数}
@@ -250,11 +255,11 @@ $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
 \begin{definition}[正弦序列]
     $x[n]=\sin(\Omega_0n)$,其中$\Omega_0$称为数字角频率。
 \end{definition}
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.4\textwidth]{disct_sin}
-\end{figure}
-
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.4\textwidth]{disct_sin}
+%\end{figure}
+%上不去下不来非要单开一页，注释了
 \chapter{连续信号的频域分析}%第二章
 在数学分析课程中，我们都学习过傅里叶级数的计算，所以本书将直接回顾几种情况下的
 傅里叶级数展开公式，然后从正交函数系的观点出发构建傅里叶级数的理论，再从傅里
@@ -297,7 +302,8 @@ $$d(\mathbf x,\mathbf y)=||\mathbf x-\mathbf y||$$
 如果线性赋范空间中所有柯西列都有极限，那么这个空间称为完备的线性赋范空间，或称
 为巴拿赫空间（有限维）、希尔伯特空间（无限维）。
 \begin{example}
-    连续函数空间$C[a,b]$是不完备的线性赋范空间：在1-范数
+    连续函数空间$C[a,b]$是不完备的线性赋范空间：\\
+    在1-范数
 $\|f\|_1 =\int_{a}^{b}|f(t)|\,\text dt$下，其中的柯西列\begin{align*}
     f_n(t)=\begin{cases}
         0,&\text{if }-1\leq t <0\\
@@ -416,13 +422,13 @@ $L^p([0,T])$具有性质：
 \begin{definition}[依范数收敛]
     如果
 \[\lim_{n \to \infty} \| f(t)-\sum_{i = 1}^{n}  a_i f_i(t)\|=0\]
-就认为级数$\sum_{i = 1}^{n}  a_i f_i(t)$是$g(t)$在这个正交函数系下的分解，
+就认为级数$\sum_{i = 1}^{n}  a_i f_i(t)$是$f(t)$在这个正交函数系下的分解，
 此时记\[f\sim\sum_{n=1}^{\infty}a_n f_n\]
 \end{definition}
 它并不意味着等式右侧的函数项级数在某一点收敛于$f$.在$L^2([0,T])$空间中，我们不
 区分仅在零测集（“区间长度”的总和总能取到任意小正数，例如至多可数集）上不相等的
 函数，换言之，$L^2([0,T])$空间不是常规意义下的函数的集合，而是\textbf{几乎处处}
-(almost every,a.e.)相等的函数构成的等价类，这里的等号表示的是两侧的函数同属一
+(almost every,a.e.)相等的函数构成的等价类，这里的$\sim$表示的是两侧的函数同属一
 个等价类，至于逐点收敛、一致收敛性，需要另作讨论。
 
 可以想象，依范数收敛要求极限内的函数相当接近于0，但如果在一个点处产生了误差，不论
@@ -432,16 +438,16 @@ $\sum_{i = 1}^{n}  a_i f_i(t)$几乎处处收敛
 可以处理这种情况，读者可以参考\ref{sec:signal}连续信号与离散信号中对勒贝格积分
 的讨论。
 \begin{definition}[完备正交函数系]
-    对于一个正交函数系$\{f_i(t)\}_{i=1}^{\infty}$，如果不存在非零的函数$f(t)\notin\{f_i(t)\}_{i=1}^{\infty}$使得$f(t)$与
+    对于一个正交函数系$\{f_i(t)\}_{i=1}^{\infty}$，如果不存在非零的函数$g(t)\notin\{f_i(t)\}_{i=1}^{\infty}$使得$g(t)$与
 $\{f_i(t)\}_{i=1}^{\infty}$中的所有函数正交，就称$\{f_i(t)\}_{i=1}^{\infty}$为\textbf{完备正交函数系}
 \end{definition}
-完备性意味着$L^2([0,T])$空间中的任一函数$f(t)$均可分解为这个函数系的函数项级数$\sum_{i = 1}^{\infty}  a_i f_i(t)$，我们沿用前文中给出的公式计算这些系数：
+完备性意味着$L^2([0,T])$空间中的任一函数$f(t)$均可分解为这个函数系的级数$\sum_{i = 1}^{\infty}  a_i f_i(t)$，我们沿用前文中给出的公式计算这些系数：
 \[a_i=\frac{(g,f_i)}{(f_i,f_i)}=\frac{\int_{T}g(t)f_i^*(t)\,dt}{\int_{T}|f_i(t)|^2\,dt}\]
 细心的读者可能已经发现，这里得到的公式用到了有限维线性空间中的结论，但要推广到
 无限维线性空间并不是显然的。我们将在下一节给出帕塞瓦尔定理之后一并讨论这个问题。
 
-典型的标准完备正交函数集有贝塞尔 (Bessel)函数、勒让德 (Legendre)多项式、小
-波 (wavelet)变换基函数等，下面仅讨论三角函数系和指数函数系。
+典型的标准完备正交函数集有贝塞尔函数(Bessel functions)、勒让德多项式 (Legendre polynomials)、小
+波变换基函数 (wavelet basis functions)等，下面仅讨论三角函数系和指数函数系。
 
 \section{傅里叶级数}\label{sec:Fourier_Series}
 首先回顾数学分析中几个计算傅里叶级数的公式。将周期为T的函数f展开为三角函数形式的傅里叶级数：
@@ -559,14 +565,19 @@ f画频谱只涉及图像的横向伸缩，此处不再赘述。
 
 需要指出的是，本小节中研究的函数均在$L^2([0,T])$空间中，但这并不能保证傅里叶
 级数存在且收敛，保证这一点需要\textbf{狄利克雷条件}：
-\begin{definition}[狄利克雷条件]\begin{itemize}[nosep, left=0pt]
+\begin{definition}[狄利克雷条件]
+    \quad
+    \begin{itemize}[nosep, left=0pt]
     \item $\int_{T}|f(t)|\,dt<\infty$
     \item 在一个周期内f连续或有有限个第一类间断点，即\textbf{分段连续} (piecewise continuous)
     \item 在一个周期内，f的极值点个数有限
 \end{itemize}
-满足此条件时，f的傅里叶级数展开在在任意点收敛到其左右极限的平均值，这个结果称为\textbf{狄利克雷定理}。
 \end{definition}
-前两个条件是容易理解的，对于最后一个条件，它实际上相当于要求f是有界变差函数 (Bounded Variatioin Function)，
+\begin{theorem}[狄利克雷定理]
+    满足狄利克雷条件时，f的傅里叶级数展开在在任意点收敛到其左右极限的平均值：
+    \[\forall t\in \mathbb{R},\sum_{k=\infty}^{\infty}c_k e^{2\pi ikt}=\frac{f(t+)+f(t-)}{2}\]
+\end{theorem}
+最后一个条件实际上相当于要求f是有界变差函数(Bounded Variatioin Function)，
 感兴趣的读者可以在实变函数的教材中了解这种函数。在附录\ref{sec:Asymptotic_Behaviour}中
 我们将讨论另外的更易理解的条件。
 
@@ -1260,9 +1271,9 @@ $(\Pi_{1/2}*\Pi_{1/2})(x)$；当$x=0$时，两矩形重合程度达到最大，�
 
 我们首先引入\textbf{支集}(support)的概念，读者只需理解其直观，真正理解它需要一些拓扑学的基础。
 \begin{definition}[支集]
-    $f:\mathbb{R}\to \mathbb{R}$，f的\textbf{支集}
+    设$f:\mathbb{R}\to \mathbb{R}$，f的\textbf{支集}
 $supp\ f=\overline{\{x\in\mathbb{R}:f(x)\neq 0\}}$
-\end{definition}设
+\end{definition}
 这里上划线不是取共轭，而是对集合取闭包，闭包包括集合本身的和它的极限点，$\mathbb{R}$中集合的闭包
 是闭集，例如，$(a,b)$的闭包是$[a,b]$.集合$\{x\in\mathbb{R}:f(x)\neq 0\}$的提
 出是自然的，取闭包则不那么容易理解。实际上，在度量空间（采用度量导出的拓扑）中，
@@ -1331,13 +1342,16 @@ $supp (f*g)\in [a+c,b+d]$,因为：
 分值也为1。更一般地：
 \begin{theorem}[卷积的“面积”关系]
 如果$f,g\in L^1(\mathbb{R})$，则
+\[\int_{-\infty}^{\infty}(f*g)(x)\,dx=\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(x-y)\,dx\]
+\end{theorem}
+\begin{proof}
 \begin{align*}
     \int_{-\infty}^{\infty}(f*g)(x)\,dx & =\int_{-\infty}^{\infty}\,dx\int_{-\infty}^{\infty}f(y)g(x-y)\,dy                                   \\
                                         & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(x-y)\,dx                                   \\
                                         & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(u)\,du                           & (u=x-y) \\
                                         & =\left(\int_{-\infty}^{\infty}f(x)\,dx\right)\left(\int_{-\infty}^{\infty}g(x)\,dx\right)
 \end{align*}
-\end{theorem}
+\end{proof}
 
 在统计学中，我们引入相关系数来描述两个随机变量之间的相关程度，类似地，在信号
 处理中，我们引入\textbf{相关系数}(correlation coefficient)来描述两个信号之间的相关
@@ -1443,9 +1457,9 @@ C为常数，因此可以考虑求发射信号与接收信号的互相关函数�
 获得1950年的菲尔兹奖。因此，下面将提到的广义函数空间$\mathcal{D} $也称为
 \textbf{索伯列夫-施瓦兹广义函数空间}。
 
-下面首先对一般的分布理论做一些讨论，再转回傅里叶分析中对于分布的应用，这时不对
-严谨性做过多要求，希望了解它们的读者可以参考泛函分析或傅里叶分析的教材。我们先介
-绍\textbf{泛函} (functional)和\textbf{对偶空间}(dual space)的概念。
+下面首先对一般的分布理论做一些讨论，再转回傅里叶分析中对于分布的应用，对于只希望掌握分布理论中的形式计算的读者，可以直接跳过前半部分，从定义2.5.6.施瓦兹空间与施瓦兹函数处开始阅读。
+
+我们先介绍\textbf{泛函} (functional)和\textbf{对偶空间}(dual space)的概念。
 \begin{definition}[线性映射与线性泛函]
     设X和Y是同一数域上的线性空间（这里不妨设为$\mathbb{R}$）如果
 $\forall x_1,x_2\in X$,映射$A:X\to Y$满足
@@ -1471,14 +1485,15 @@ $\forall x_1,x_2\in X$,映射$A:X\to Y$满足
 \begin{definition}[分布]
 记$\mathbb{R}$
 上的复值光滑紧支函数集为$\mathcal{C} $，如果将检验函数集取为$\mathcal{C}$,我们
-将其对偶空间$\mathcal{D} $中的元素称为分布，并规定函数$f\in \mathcal{C} $
-\footnote{实际上这里不需要要求$f\in\mathcal{C} $，只需要f在$\mathbb{R}$上局部可积（在任
-    意闭区间上可积）即可，但为了简化讨论，我们仅考虑光滑紧支函数。}所产生的分布$T_f$
+将其对偶空间$\mathcal{D} $中的元素称为分布，并规定函数$f\in \mathcal{C} $所产生的分布$T_f$
 为作用在$\mathcal{C}$上的以下\textbf{泛函}：
 \begin{equation*}
     \langle T_f,\varphi\rangle:=\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{C}
 \end{equation*}
 将这样的分布称为\textbf{正则分布}，而将无法用紧支函数描述的分布称为\textbf{奇异分布}。
+\begin{remark}
+   实际上这里不需要要求$f\in\mathcal{C} $，只需要f在$\mathbb{R}$上局部可积（在任意闭区间上可积）即可，但为了简化讨论，我们仅考虑光滑紧支函数。 
+\end{remark}
 \end{definition}
 \begin{example}
     尽管我们从形式上给出了$\delta$函数的定义，但它实际上应该采用定义
@@ -1833,7 +1848,7 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，则
 \begin{align*}
-    \langle \overline{T_f},\varphi\rangle & =\overline{\langle T_f,\overline{\varphi}\rangle}=\overline{\int_{-\infty}^{\infty}f(x)\overline{\varphi(x)}\,dx}=\overline{\langle T_f,\overline{\varphi}\rangle} \\
+    \langle \overline{T_f},\varphi\rangle=\int_{-\infty}^{\infty}\overline{f(x)}\varphi(x)\,dx=\overline{\int_{-\infty}^{\infty}f(x)\overline{\varphi(x)}\,dx}=\overline{\langle T_f,\overline{\varphi}\rangle} \\
 \end{align*}
 因此我们定义\begin{definition}[分布的共轭]
     \begin{equation*}
@@ -1841,16 +1856,26 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 \end{equation*}
 \end{definition}
 
-有了共轭就可以定义实分布和虚分布：
+有了共轭就可以仿照复数定义分布的实部、虚部以及实分布、纯虚分布：
+\begin{definition}[分布的实部、虚部]
+    设$T\in\mathcal{T} $，则
+    \[Re T=\frac{T+\overline{T}}{2}\]
+    称为T的\textbf{实部}，
+    \[Im T=\frac{T-\overline{T}}{2}\]
+    称为T的\textbf{虚部}。
+\end{definition}
 \begin{definition}[实分布与纯虚分布]
 如果$\overline{T}=T$，则称T为\textbf{实分布}；如果
 $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \end{definition}
-现在就来考察最后一条对偶性：
+现在就来考察实分布的最后一条对偶性。在函数的傅里叶变换理论中，我们知道：
+    \[f=\overline{f}\Rightarrow \mathcal{F}f^- =\overline{\mathcal{F} f}\]
+
+对于分布，
 \begin{align*}
     \langle\mathcal{F}T^-,\varphi\rangle =\langle T,\mathcal{F}\varphi^-\rangle
 \end{align*}
-我们并不能保证$\varphi$是实值函数\footnote{尽管在原始定义中没有提到这一点，但和前
+但是，我们并不能保证$\varphi$是实值函数\footnote{尽管在原始定义中没有提到这一点，但和前
     面引入施瓦兹函数类一样，要保证施瓦兹函数的傅里叶变换仍然是施瓦兹函数，而实值函数的
     傅里叶变换往往是复值函数。}，因此并不能推出实分布的最后一条对偶性。不过，我们还是可
 以得到分布的傅里叶变换的对称性：
@@ -1860,7 +1885,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
     T^-=-T\Rightarrow\mathcal{F} T^-=-\mathcal{F} T
 \end{align*}
 \end{theorem}
-因此分布的傅里叶变换的奇偶性与分布本身相同。
+换言之，分布的傅里叶变换的奇偶性与分布本身相同。
 
 \noindent 4.\textbf{分布的平移和伸缩}
 
@@ -1889,7 +1914,13 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \end{definition}
 
 现在就可以建立分布的傅里叶变换的平移和尺度变换定理：\begin{theorem}[分布的傅里叶变换的平移和尺度变换]
-    \begin{align*}
+\begin{align*}
+    &\mathcal{F}(\tau_b T)=\mathcal{F}(e^{2\pi ibx})T\\
+    &\mathcal{F}(\sigma_a T)=\frac{1}{|a|}\mathcal{F}(\sigma_a T)
+\end{align*}
+\end{theorem}
+\begin{proof}
+        \begin{align*}
     \langle\mathcal{F}(\tau_b T),\varphi\rangle =\langle \tau_b T,\mathcal{F}\varphi\rangle=\langle T,\tau_{-b}\mathcal{F}\varphi\rangle=\langle T,e^{2\pi ibx}\mathcal{F}\varphi\rangle=\langle \mathcal{F}(e^{2\pi ibx}T),\varphi\rangle \\
     \Rightarrow\mathcal{F}(\tau_b T)           =\mathcal{F}(e^{2\pi ibx}T)
 \end{align*}
@@ -1897,8 +1928,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
     \langle\mathcal{F}(\sigma_a T),\varphi\rangle =\langle \sigma_a T,\mathcal{F}\varphi\rangle=\langle T,\frac{1}{|a|}\sigma_{\frac{1}{a}}\mathcal{F}\varphi\rangle=\langle T,\frac{1}{|a|}\mathcal{F}\sigma_a \varphi\rangle=\langle \frac{1}{|a|}\mathcal{F}(\sigma_a T),\varphi\rangle \\
     \Rightarrow\mathcal{F}(\sigma_a T)           =\frac{1}{|a|}\mathcal{F}(\sigma_a T)
 \end{align*}
-\end{theorem}
-
+\end{proof}
 
 \noindent 5.\textbf{分布的傅里叶变换的微分性质}
 
@@ -1973,7 +2003,8 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
                                    & =\langle f*(g*T),\varphi\rangle                                \\
                                    & \Rightarrow (f*g)*T=f*(g*T),f,g\in\mathcal{S} ,T\in\mathcal{T}
 \end{align*}
-而线性性则和前面傅里叶变换的线性性没有多少区别：\ding{172}对函数的线性性
+而线性性则和前面傅里叶变换的线性性没有多少区别：\\
+\ding{172}对函数的线性性
 \begin{align*}
     \langle (af+bg)*T,\varphi\rangle & =\langle T,[(af+bg)^-]*\varphi\rangle                                               \\
                                      & =a\langle T,(f^-)*\varphi\rangle+b\langle T,(g^-)*\varphi\rangle                    \\
@@ -2061,8 +2092,8 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \begin{align*}
     \langle\mathds{1}*\delta',\varphi\rangle     & =\langle \mathds{1}(y),\langle \delta'(x),\varphi(x+y)\rangle\rangle                                                                   \\
                                                  & =\langle \mathds{1},-\varphi'\rangle                                                                                                   \\
-                                                 & =\int_{-\infty}^{\infty}\varphi'(y)\,dy                                                                                                \\
-                                                 & =\evalat{\varphi(y)}{-\infty}{\infty}=0                              & \Rightarrow(\mathds{1}*\delta')*u=0                             \\
+                                                 & =-\int_{-\infty}^{\infty}\varphi'(y)\,dy                                                                                                \\
+                                                 & =-\evalat{\varphi(y)}{-\infty}{\infty}=0                              & \Rightarrow(\mathds{1}*\delta')*u=0                             \\
     \langle \delta'*u,\varphi\rangle             & =\langle \delta'(y),\langle u(x),\varphi(x+y)\rangle\rangle                                                                            \\
                                                  & =\langle \delta'(y),\int_{y}^{\infty}\varphi(x)\,dx\rangle                                                                             \\
                                                  & =\varphi(0)=\langle \delta,\varphi\rangle                            & \Rightarrow \delta'*u=\delta                                    \\
@@ -2365,7 +2396,7 @@ $f(t)$的许多分析性质，例如我们可以逐项求导（从而和函数�
 
 我们来考察函数项级数$f_T(t)=\sum_{k=-\infty}^{\infty}f(t-kT)$退化为有限时的情况。
 \begin{definition}[时限函数与带限函数]
-    时域上紧支（即在$|t|$充分大时函数恒为0）的函数称之为\textbf{时限函数}，此时级数
+    时域上紧支（即在$|t|$充分大时函数恒为0）的函数称为\textbf{时限函数}，此时级数
 $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应的，在频域上紧
 支的函数称为\textbf{带限函数}。
 \end{definition}
@@ -2405,7 +2436,7 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
 }{
     \hat{\Phi}(k)=\mathcal{F} \varphi(2\pi k)
 }
-其中第二行到第三行的积分、求和换序用到了周期化函数作为函数项级数的一致收敛性。这个等式意味着对时
+证明中，第二行到第三行的积分与求和的换序用到了周期化函数作为函数项级数的一致收敛性。这个等式意味着对时
 限函数的关系$\mathcal{F} f(k)=Tc_k$对施瓦兹函数都成立（以上是周期化为$T=1$的情况
 ，读者可以自行推广至周期为其他值的情况），进一步，在恒等式
 \lr{
@@ -2812,26 +2843,30 @@ $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对�
 \end{example}
 
 \begin{example}[傅里叶变换]
-$r(t)=\mathcal{F} e(t)$.在一些光学仪器中可以实
-现空间上的傅里叶变换，这是变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作
+$r(t)=\mathcal{F} e(t)$.
+
+在一些光学仪器中可以实
+现空间上的傅里叶变换，这时变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作
 为径向对称函数的傅里叶变换的特例，零阶汉克尔变换可以用圆孔夫琅禾费衍射装置实现。
 对于这两个变换，见\ref{sec:Multi_Fourier}和\ref{sec:Hilbert}.
 \end{example}
 
 我们知道，函数与$\delta$的卷积还是它本身，这就好比信号在进入任何一个系统前，先经过了一个与$\delta$卷积的系统。这样的系统连接方式称为系统的\textbf{级联}(cascade)，下面就来研究这个话题。
 \begin{theorem}[线性系统的级联]
-    设有两线性系统K,L,将两系统级联之后，构
-成的新系统仍构成线性系统：\begin{align*}
+    设有两线性系统K,L,将两系统级联之后，所得的新系统仍是线性系统：\begin{align*}
     LK[ae_1+be_2]=L[aK[e_1]+bK[e_2]]=aLK[e_1]+bLK[e_2]
 \end{align*}
+\end{theorem}
 对于周期离散信号，两个系统都是矩阵乘法，则级联系统也可以用矩阵乘法来描述，并且其矩阵是两子系统的矩阵之乘积，这
-正是定义矩阵乘法的原因之一；类似地，对于连续信号，如果两个系统都是对核积分系统：
-\[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{a}^{b}l(x,y)e(y)\,dy\]
+正是定义矩阵乘法的原因之一；对于连续信号，如果两个系统都是对核积分系统，我们也有类似的结论：
+\begin{theorem}[对核积分系统的级联]
+    设有两对核积分系统K，L：
+    \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{a}^{b}l(x,y)e(y)\,dy\]
 则级联系统$H=LK$也是对核积分系统，并且核函数为\begin{equation*}
     h(x,z)=L_y(k(y,z))(x)=\int_{a}^{b}l(x,y)k(y,z)\,dy
 \end{equation*}
-这里$L_y$表示$k(x,y)$作为y的函数输入系统L，输出为x,y的双变量函数。
 \end{theorem}
+这里$L_y$表示$k(x,y)$作为y的函数输入系统L，输出为x,y的双变量函数。
 \begin{proof}\begin{align*}
     H[e(z)](x)&=LK[e(z)](x)\\
     &=\int_{a}^{b}l(x,y)\left(\int_{a}^{b}k(y,z)e(z)\,dz\right)\,dy\\
@@ -2876,14 +2911,10 @@ $r(t)=\mathcal{F} e(t)$.在一些光学仪器中可以实
     H[\tau_b e(y)](x)=(h*\tau_b e)(x)=\tau_b(h*e)(x)=\tau_b H[e(y)]
 \end{align*}
 总之，我们有：
-\begin{definition}[线性时不变系统的等价定义]
+\begin{proposition}[线性时不变系统的等价定义]
     “一个系统是线性系统”等价于“响应是激励对脉冲响应积分”，而“是线性时不变系统”
 等价于“响应是激励与脉冲响应的卷积”。
-\end{definition}
-
-看到卷积的结构，当然会想到对$r(t)=(h*e)(t)$做傅里叶变换，用对应的大写字母表示，
-即$R(\xi)=H(\xi)E(\xi)$或$R(\omega)=H(\omega)E(\omega)$，也就是说，在频域上
-线性时不变系统就是乘以脉冲响应的频域形式。我们将函数$H$称为\textbf{系统函数}(system function)或\textbf{传递函数}(transfer function)。
+\end{proposition}
 
 \begin{example}[单位阶跃响应]
 求线性时不变系统的单位阶跃响应$g(t)$：\begin{align*}
@@ -2931,6 +2962,20 @@ $f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
 如果确定了一组初始条件$y(t_0),y'(t_0),\cdots,y^{(n-1)}(t_0)$，则微分方程有唯
 一的解，因为完全解中的特解部分是确定的，而齐次解部分的n个解对应着n个系数，只要给
 定n个初始条件，就相当于给出了n个方程，可以解出所有的系数。
+\begin{example}
+    求解微分方程\[y''-3y'+2y=2e^{-x}\cos x+e^{2x}(4x+5)\]
+解：特征方程为$\lambda^2-3\lambda+2=0$，有两个特征根$\lambda_1=1,\lambda_2=2$，
+齐次解为$y_h(t)=C_1e^{\lambda_1 t}+C_2e^{\lambda_2 t}$。根据解的线性性，可以将方程拆分为：\begin{align*}
+    y''-3y'+2y=2e^{-x}\cos x\\
+    y''-3y'+2y=e^{2x}(4x+5)
+\end{align*}
+对于前一个方程，$-1+i$不是特征根，设方程特解为$y_1(t)=e^{-x}(A\cos x+B\sin x)$，带入原方程可得$A=\frac{1}{5},B=-\frac{1}{5}$，即$y_1(t)=\frac{1}{5}e^{-x}(\cos x-\sin x)$。\\
+对后一个方程，2是一重特征根，设方程特解为$y_2(t)=e^{2x}x(ax+b)$，带入原方程可得$a=2,b=1$，即$y_2(t)=e^{2x}x(2x+1)$。\\
+
+将齐次解与特解相加，得到完全解：\begin{align*}y(t)&=C_1e^{\lambda_1 t}+C_2e^{\lambda_2 t}+\frac{1}{5}e^{-x}(\cos x-\sin x)+e^{2x}x(2x+1)\\
+    &=C_1 e^{x}+\frac{1}{5}e^{-x}(\cos x-\sin x)+e^{2x}(2x^2+x+C_2)
+\end{align*}
+\end{example}
 
 下面介绍一些信号与系统课程中会用到的术语。
 \begin{definition}[自由响应与强迫相应]
@@ -2981,8 +3026,7 @@ $u_C(0_-)=u_C(0_+)=u_C(0)$，而其电流可以不连续。电感电流、电容
 结果，称为换路定则。
 \end{example}
 
-如果激励$f(t)$不连续，并不一定意味着$y(t)$多次连续可导，但$y^{(n)}(t)$的性质突
-然变差以至于$f(t)$不连续（构造这样的函数是比较困难的，函数形式也将比较复杂），而是$y(t)$不连续，这时需要将y视为一个分布来求导，见\ref{sec:distributions}。
+激励$f(t)$不连续，意味着$y(t)$（或它的某阶导数）不连续，这时需要将y视为一个分布来求导，见\ref{sec:distributions}。
 例如$f(t)=g(t)u(t)$时，完全解中可能含有$u(t)$及其导数$\delta(t)$。
 
 物理中的受迫振动，以及电路分析中的二阶电路，都是用二阶常系数线性微分方程描述的系
@@ -3058,7 +3102,8 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
     &=f''(t)u(t)+f'(0)\delta+f(0)\delta'+a\delta''
 \end{align*}
 再带入原方程：\begin{align*}
-    r''(t)+3r'(t)+2r(t)=&[f''(t)u(t)+f'(0)\delta+f(0)\delta'+a\delta'']\\
+    &r''(t)+3r'(t)+2r(t)\\
+    =&[f''(t)u(t)+f'(0)\delta+f(0)\delta'+a\delta'']\\
     &+3[f'(t)u(t)+f(0)\delta+a\delta']\\
     &+2[f(t)u(t)+a\delta]\\
     =&[f''(t)+3f'(t)+2f(t)]u(t)+[f'(0)+3f(0)+2a]\delta+[f(0)+3a]\delta'+a\delta''
@@ -3074,8 +3119,8 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 \[f''(t)+3f'(t)+2f(t)=0,f(0)=0,f'(0)=1\]
 这个方程正是一开始的微分方程的齐次方程,可以立即得到它的解：
 \begin{align*}
-    f(t)=e^{-t}-e^{-2t}\\
-    h(t)=(e^{-t}-e^{-2t})u(t)
+    &f(t)=e^{-t}-e^{-2t}\\
+    &h(t)=(e^{-t}-e^{-2t})u(t)
 \end{align*}
 总之，只要将齐次解乘以$u(t)$，求出对应阶导数并带回原方程对比系数，即可得到单位脉
 冲响应；由于单位阶跃响应形如$h(t)=y_h(t)u(t)$，满足$h(t)=0,t<0$，微分方程描述的
@@ -3087,8 +3132,8 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 
 我们还可以对以上结果做一些推广：求解微分方程
 \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m \delta^{(m)}\]
-当$r(t)$的最高次导的阶数不小于$\delta$的最高阶导阶数，即$N\geq M$时，解为
-$y_h(t)u(t)$；当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶数，即$N<M$时，
+当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶数，即$N> M$时，解为
+$y_h(t)u(t)$；当$r(t)$的最高次导的阶数不小于$\delta$的最高阶导阶数，即$N\leq M$时，
 解为\[y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}\]
 换言之，需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现。
 这个结果可以求出以下形式的系统的脉冲响应：
@@ -3099,6 +3144,25 @@ $y_h(t)u(t)$；当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶
 线性微分方程，我们仍然可以用基本解的方法来求得脉冲响应，只需要在求出基本解后，将
 基本解与方程右侧做卷积，不过实际上记忆$\delta$的各阶导数的卷积特性并不是很有必要
 ，通过待定系数法求解往往更快。
+\begin{example}
+    设系统由微分方程\[r''(t)+3r'(t)+2r(t)=e''(t)+e(t)\]描述，求其单位脉冲响应。\\
+    解：齐次方程的特征方程为$\lambda^2+3\lambda+2=0$，$\lambda_1=-1,\lambda_2=-2$，齐次解为$r_h(t)=C_1 e^{-t}+C_2 e^{-2t}$。\\
+    将$\delta$带入右式得到$\delta''+\delta$，为了使左式也出现$\delta''$，设单位脉冲响应为$h(t)=r_h(t)u(t)+C\delta$，则$h'(t)=r_h'(t)u(t)+r_h(0)\delta+C\delta',h''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''$
+    带入原方程得到：\begin{align*}
+        LHS=&(r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta'')\\
+        &+3(r_h'(t)u(t)+r_h(0)\delta+C\delta')\\
+        &+2(r_h(t)u(t)+C\delta)\\
+        =&(r''_h(t)+3r'_h(t)+2r_h(t))u(t)+(r'_h(0)+3r_h(0)+2C)\delta+(r_h(0)+3C)\delta'+C\delta''
+    \end{align*}
+    对比系数，得到：\begin{align*}
+        \begin{cases}
+            r'_h(0)+3r_h(0)+2C=1\\
+            r_h(0)+3C=0\\
+            C=1
+        \end{cases}
+    \end{align*}
+    所以$C=1,r_h(0)=-3,r'_h(0)=8$，注意$u(t)$的系数自然为0，这是由齐次解的性质保证的。满足上述条件的$C_1=2,C_2=-5$，因此单位脉冲响应为$h(t)=(2e^{-t}-5e^{-2t})u(t)+\delta$。
+\end{example}
 
 \section{系统的频率响应特性}\label{sec:freq_response}
 
@@ -3345,6 +3409,187 @@ $\omega_c\gg \omega_m$。求系统函数为$H(\omega)$的线性时不变系统�
 
 \section{复变函数}\label{sec:Complex}
 
+本小节将串写拉普拉斯变换所需的复变函数论中的一些基本概念和重要结果。实际上，只需要复变函数中一些最基础的概念即可建立起拉普拉斯变换理论的大部分内容，较为困难的部分在于用留数定理计算拉普拉斯逆变换，但这不会影响多数情况下的拉普拉斯逆变换的求解。因此，即便是未学过复变函数的读者，也可通过本小节快速把握拉普拉斯变换中所需的复变函数的内容。
+
+本小节我们主要参考美国数学会的经典教材Function Thoery of One Complex Variable by Robert E. Greene and Steven G. Krantz。后文中所述的逻辑关系与证明均可在该书中找到。在其他教材中，对逻辑关系可能有不同的的处理方式，特此说明。
+
+我们总是用$z$表示复数$x+iy$，$i$为虚数单位$\sqrt{-1}$。考虑复系数双变元多项式集$\mathbb{C}[x,y]$，通过做替换$x=\frac{z+\overline{z}}{2},y=\frac{z-\overline{z}}{2i}$，可以将$\mathbb{C}[x,y]$中的多项式$f(x,y)$表示为$g(z,\overline{z})$。在一些情况下，$g(z,\overline{z})$不显含$z$，例如$f(x,y)=x+iy$，$g(z,\overline{z})=z$。对于$f(x,y)$，我们可以用导数$\frac{\partial f}{\partial x},\frac{\partial f}{\partial y}$来描述它对$x,y$的依赖关系，同理为了表述多项式对$z,\overline{z}$的依赖关系，我们定义:\begin{definition}[形式导数]
+    设$f=u+iv\in C^1(\mathbb{C})$，$u,v$为复数域上的实值函数，则
+    \begin{align*}
+        \frac{\partial f}{\partial z}=\frac{1}{2}(\frac{\partial}{\partial x}-i\frac{\partial}{\partial y})f=\frac{1}{2}(\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y})+\frac{i}{2}(\frac{\partial v}{\partial x}-\frac{\partial u}{\partial y})\\
+        \frac{\partial f}{\partial \overline{z}}=\frac{1}{2}(\frac{\partial}{\partial x}+i\frac{\partial}{\partial y})f=\frac{1}{2}(\frac{\partial u}{\partial x}-\frac{\partial v}{\partial y})-\frac{i}{2}(\frac{\partial v}{\partial x}+\frac{\partial u}{\partial y})
+    \end{align*}
+\end{definition}
+
+读者可以自行验证，在这样的定义下有：\begin{claim}
+    \begin{align*}
+        \frac{\partial z}{\partial z}=\frac{\partial \overline{z}}{\partial \overline{z}}=1,\\
+        \frac{\partial z}{\partial \overline{z}}=\frac{\partial \overline{z}}{\partial z}=0
+    \end{align*}
+\end{claim}
+
+这种形式导数在其他方面也很像普通的导数，甚至可以说$z,\overline{z}$构成了一组新的坐标。
+\begin{claim}[莱布尼兹法则]
+    \[\frac{\partial}{\partial z}(fg)=f\frac{\partial}{\partial z}g+g\frac{\partial}{\partial z}f\]
+    \[\frac{\partial}{\partial \overline{z}}(fg)=f\frac{\partial}{\partial \overline{z}}g+g\frac{\partial}{\partial \overline{z}}f\]
+\end{claim}
+\begin{claim}[链式法则]
+    设$f,g\in C^1$，$f\circ g$有定义并记$w=g(z)$，则
+    \begin{align*}
+        \frac{\partial}{\partial z}(f\circ g)=\frac{\partial f}{\partial w}\frac{\partial g}{\partial z}+\frac{\partial f}{\partial \overline{w}}\frac{\partial\overline{g}}{\partial z}\\
+        \frac{\partial}{\partial \overline{z}}(f\circ g)=\frac{\partial f}{\partial w}\frac{\partial g}{\partial \overline{z}}+\frac{\partial f}{\partial \overline{w}}\frac{\partial\overline{g}}{\partial \overline{z}}
+    \end{align*}
+\end{claim}
+以上结论的证明略去，它们只是多元微分学的小练习。下面提出复变函数中最重要的\textbf{全纯函数}(holomorphic function)的概念：
+\begin{definition}[全纯函数]
+    设开集$U\in\mathbb{C}$，如果$f=u+iv\in C^1(U)$满足$\frac{\partial f}{\partial \overline{z}}=0,\forall z\in U$，则称$f$为$U$上的\textbf{全纯函数}(holomorphic function)。这等价于$u,v$在$U$上满足\textbf{柯西-黎曼方程组}(Cauchy-Riemann equations)：
+    \begin{align*}
+        \frac{\partial u}{\partial x}=\frac{\partial v}{\partial y},\\
+        \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}
+    \end{align*}
+\end{definition}
+
+有很多种方法来理解它，例如，从显然的同构$\mathbb{C}\cong \mathbb{R}^2$出发，将$f:\mathbb{C}\to\mathbb{C}$看作$f:\mathbb{R}^2\to\mathbb{R}^2$，则它的导数构成$\mathbb{R}-$线性映射；而如果$f$是全纯函数，它的导数构成$\mathbb{C}-$线性映射；全纯等价于极限\[f'(z)=\lim_{\zeta\to z}\frac{f(\zeta)-f(z)}{\zeta-z}\]
+存在，即全纯等价于复可导性；作为$f:\mathbb{R}^2\to\mathbb{R}^2$，其雅可比矩阵
+\[J_f(z)=\begin{bmatrix}\frac{\partial u}{\partial x}&\frac{\partial u}{\partial y}\\ \frac{\partial v}{\partial x}&\frac{\partial v}{\partial y}\end{bmatrix}\]
+在柯西-黎曼方程下化为
+\[J_f(z)=\begin{bmatrix}a&-b\\ b&a\end{bmatrix}=\begin{bmatrix}\lambda&0\\0&\lambda\end{bmatrix}\begin{bmatrix}\cos\theta&-\sin\theta\\ \sin\theta&\cos\theta\end{bmatrix}\]
+其中$a=\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y},b=\frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}$，$\lambda=a^2+b^2$，$\theta=\arctan(b/a)$。这表明全纯函数在局部上具有共形性质，经$f$映射，$z$一个充分小的增量被乘以$\lambda e^{i\theta}$，即幅值变为$\lambda$倍，辐角旋转$\theta$；此外，全纯性等价于解析性，即无限阶可导的函数，其泰勒级数在收敛域内一定收敛于这个函数本身，对实变函数这未必成立：
+\begin{example}
+    设$f(x)=\begin{cases}
+    e^{-1/x}&\text{,if\ }x> 0\\
+    0&\text{,if\ }x\leq 0
+    \end{cases}$，$f(x)$在$x=0$处各阶导数都是0，泰勒展开式也为0，收敛域为$\mathbb{R}$，但$f(x)\neq 0,x>0$，它不是解析函数。
+\end{example}
+另外，如果建立同构\[\mathbb{C}\cong \{xI+yJ\big| (x,y)\in\mathbb{R}^2\},I=\begin{bmatrix}
+    1&0\\
+    0&1
+\end{bmatrix},J=\begin{bmatrix}
+    0&-1\\
+    1&0
+\end{bmatrix}\]
+则全纯函数的雅可比矩阵是同构意义下的复数，即“复可导函数的导数是复数”。
+
+在数学分析中，我们曾学过曲线积分，它对于复平面上的复变函数也有意义：
+\begin{definition}[复线积分]
+    设开集$U\in\mathbb{C},f\in C^1(U),\gamma:[a,b]\to U$为$\mathbb{C}$中的$C^1$曲线，则
+    \begin{align*}
+        \int_{\gamma}f(z)\,dz=\int_a^bf(\gamma(t))\gamma'(t)\,dt
+    \end{align*}
+\end{definition}
+
+与实变函数的曲线积分一致，可以验证此复线积分不依赖于参数$t$的选取，从而是良定义的，并且有：\begin{claim}
+    \[f(\gamma(b))-f(\gamma(a))=\int_{a}^{b}(f\circ \gamma)'(t)\,dt=\int_{\gamma}\frac{\partial f}{\partial z}\,dz\]
+    \begin{remark}
+        前一个等号直接得自微积分基本定理，后一个等号才是需要证明的，读者可以带入形式导数的定义验算。
+    \end{remark}
+\end{claim}
+实际上还能将曲线推广至分段一阶可导，即$\gamma\in PS[a,b]$，只要分区间使用微积分基本定理，就能得到与上面一致的结论，但为了叙述的简洁性，下面不再提及这一点。
+
+后续内容中，我们用符号$D(z_0,r)$表示复平面上以$z_0=x_0+iy_0$为圆心，$r$为半径的开圆盘，即$D(z_0,r)=\{x+iy\in\mathbb{C}\big| (x-x_0)^2+(y-y_0)^2<r\}$；用符号$\mathcal{A} _a(r,R)=\{z\in\mathbb{C}|r<|z-a|<R\}$表示以$a$为圆心，内半径$r$，外半径$R$的开圆环。
+\begin{theorem}[柯西积分公式]
+    设开集$U\in\mathbb{C}$，$f\in C^1(U),D(z_0,r)\in U,\gamma:[a,b]\to \mathbb{C}$为$D(z_0,r)$中的$C^1$闭曲线，则
+    \[\forall z\in D(z_0,r),f(z)=\frac{1}{2\pi i}\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,d\zeta\]
+\end{theorem}
+\begin{theorem}[柯西积分定理]
+    设$f$是单连通开集$U\in\mathbb{C}$上的全纯函数，$\gamma(t)\in U$，则
+    \[\oint_{\gamma}f(z)\,dz=0\]
+\end{theorem}
+\textbf{单连通}(single connected)是一个拓扑学概念，直观上讲，它表示$U$道路连通且“没有洞”，例如单位圆是单连通的，而圆环$\mathcal{A}= \{x+iy\in\mathbb{C}|1<x^2+y^2<2\}$不是单连通的。单连通的另一种等价表述是，单连通集合内的任意两条闭曲线都可以“连续地变化到彼此”，例如$\mathcal{A} $中$\gamma_1(t)=1.5e^{it},t\in[0,2\pi]$和$\gamma_2(t)=1.5+0.1e^{it},t\in[0,2\pi]$都是闭曲线，但它们不能连续地变化到彼此，因此$\mathcal{A} $不是单连通的。
+
+根据Morera定理，单连通开集上的复线积分为0，则函数也是全纯函数，因此全纯函数与单连通开集上的复线积分为0是等价的。这种等价性表明可以用$\mathbb{R}^2$上的势场来理解全纯函数，其曲线积分具有路径无关性。对于了解微分形式的语言的读者，可以看出全纯函数$f=u+iv$相当于闭形式$u(x,y)\,dx+v(x,y)\,dy$（或者闭形式$-v(x,y)\,dx+u(x,y)\,dy$，对应另一个柯西-黎曼方程）。注意这种路径无关性只要求切换路径的区域上的全纯性，对于积分曲线包围不全纯点的情况，尽管复线积分一般不为0，但还是可以分段调整积分路径。例如对$f(z)=1/z$在曲线$\gamma(t)=e^{it},t\in[0,2\pi]$上积分，尽管$f$在包含原点的区域上不全纯，但可以将$\gamma$分成两段，分别在不包含原点的半圆上积分并调整积分路径。理解这一点将有利于理解后面的留数定理中对积分曲线的要求。
+
+逻辑上，应该先有柯西积分公式，再有复变函数的幂级数展开，即\textbf{洛朗级数展开}(Laurant series expansion)，最后建立留数定理，但我们将直接引入洛朗级数，并借助洛朗级数建立对复线积分和留数定理的直观。
+
+我们先补充一些复平面上的泰勒级数知识，再过渡到洛朗级数。
+\begin{definition}[复变函数的泰勒级数展开]
+    设$f$为开集$U\in\mathbb{C}$上的全纯函数，$D(a,R)\in U$，则$\forall z\in D(a,R)$，有
+    \[f(z)=\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(z-a)^n\]
+    其中$f^{(n)}(a)$表示$f$在$a$处的第n阶导数。
+\end{definition}
+这里$f$无限阶可导是由全纯性保证的，并且这些导数也全部是全纯函数。其实，单连通开集上的全纯函数一定是某个全纯函数的导数。 
+
+数学分析中，我们学过幂级数收敛半径的求法，复变函数的泰勒级数也有类似的结论：
+\begin{theorem}[柯西-阿达马公式]
+    复幂级数\[\sum_{n=0}^{\infty}c_n(z-a)^n\]
+    的收敛域为$D(a,R)$，其中收敛半径$R$由下式给出：
+    \[R=(\varlimsup_{n\to\infty}|c_n|^{1/n})^{-1}\]
+    在复幂级数的收敛域上，级数是绝对收敛且内闭一致收敛的。其本质还是与几何级数做比较。
+\end{theorem}
+这表明复幂级数的收敛半径与实幂级数的收敛半径求法一致，实幂级数的收敛半径可看作是复幂级数的收敛半径在实轴上的投影。前文中提到，复变函数的全纯性等价于解析性，因此全纯函数在其定义域内处处可展开成收敛于自身的泰勒级数。需要指出，在上述定义中我们其实已经给出一个很强的结论：只要$D(a,r)\in U$，则$f$在$a$处的泰勒级数在$D(a,r)$上收敛于$f$，即泰勒级数的收敛半径恰为$f$在$a$处到$U$的边界的距离，例如$f(z)=\frac{1}{1-z}$在$D(0,1)$上全纯，可以直接判断它在$z=0$处的泰勒级数$\sum_{n=0}^{\infty}z^n$的收敛半径为1，恰好是0到孤立奇点1的距离。
+
+对于$f(z)=1/z$这样的函数，它已经是很简洁的分式形式了，但它在$z=0$处并不是全纯函数，因此不能在包含0的开集上展开成泰勒级数。我们将破坏了全纯性的这种点称为\textbf{孤立奇点}(isolated singular point)，孤立表示它不构成奇点集的极限点。为了处理这种情况，我们引入\textbf{洛朗级数}，它相比泰勒级数添加了负幂次项。
+
+\begin{definition}[洛朗级数]
+    设$a\in\mathbb{C}$，形如
+    \[\sum_{n=-\infty}^{\infty}c_n(z-a)^n\]
+    的级数称为以$a$为中心的\textbf{洛朗级数}。将它的负幂次项部分视为$w=1/(z-a)$下的幂级数，则可用柯西-阿达马公式确定它的收敛域为圆环$\mathcal{A} _a(r,R)$，其中$R,r$分别称为洛朗级数的\textbf{外半径}(outer radius)和\textbf{内半径}(inner radius)，满足：
+    \[R=(\varlimsup_{n\to\infty}|c_n|^{1/n})^{-1},r=(\varlimsup_{n\to\infty}|c_{-n}|^{1/n})^{-1}\]
+    在圆环$\mathcal{A} _a(r,R)$上，洛朗级数是绝对收敛且内闭一致收敛的。
+\end{definition}
+事实上，对任意的全纯函数$f:U\to\mathbb{C}$，及孤立奇点$a\in U$，$f$在$a$处存在且有唯一的洛朗级数展开式。
+
+借助洛朗级数的一致收敛性，可以建立一个对柯西积分公式的直观认识：记$f_n(z)=1/z^n,n\in\mathbb{Z}$，则在逆时针绕0一周的闭曲线$\gamma$上，有
+\[\oint_{\gamma}f_n(z)\,dz=\begin{cases}0&n\neq 1\\2\pi i&n=1\end{cases}\]
+我们已经在前面说明了路径无关性，下面设$\gamma(t)=e^{it},t\in[0,2\pi]$，则
+\begin{align*}
+    \oint_{\gamma}f_n(z)\,dz&=\int_0^{2\pi}f_n(\gamma(t))\gamma'(t)\,dt\\
+    &=\int_0^{2\pi}\frac{1}{(e^{it})^n} ie^{it}\,dt\\
+    &=i\int_0^{2\pi}e^{i(1-n)t}\,dt\\
+    &=\begin{cases}
+        i\int_0^{2\pi}\,dt=2\pi i&n=1\\
+        i\left[\frac{e^{i(1-n)t}}{i(1-n)}\right]_0^{2\pi}=0&n\neq 1
+    \end{cases}
+\end{align*}
+将$f$展开为洛朗级数$f(z)=\sum_{n=-\infty}^{\infty}c_n z^n$，并在$\gamma$上积分，由于洛朗级数在闭曲线$\gamma$上内闭一致收敛，可以交换求和与积分的次序，得到
+\begin{align*}
+    \oint_{\gamma}f(z)\,dz&=\oint_{\gamma}\sum_{n=-\infty}^{\infty}c_n z^n\,dz\\
+    &=\sum_{n=-\infty}^{\infty}c_n\oint_{\gamma}z^n\,dz\\
+    &=2\pi i c_{-1}
+\end{align*}
+这就表明，洛朗级数中$(z-a)^{-1}$项的系数$c_{-1}$与复线积分有着密切的关系。尽管用它作为柯西积分定理的证明将导致循环论证，但它很好地解释了柯西积分公式的直观。
+
+多数情况下，洛朗级数的负幂次项并不真正构成级数，此时内半径必为0，即只要外半径$R>0$，洛朗级数就在展开点的去心邻域内收敛。例如$f(z)=1/z$在0处的展开式就是它本身。根据负幂次项是否存在、是否构成级数，我们可以将孤立奇点分为三类：
+\begin{definition}[孤立奇点的分类]
+    设$f$在开集$U\in\mathbb{C}$上全纯，$a$为$f$的孤立奇点，$f$在$a$处的洛朗级数展开式为
+    \[f(z)=\sum_{n=-\infty}^{\infty}c_n(z-a)^n\]
+    \begin{enumerate}
+        \item 如果$c_n=0,\forall n<0$，则称$a$为$f$的\textbf{可去奇点}(removable singularity)；
+        \item 如果存在$m\in\mathbb{Z}^+$使得$c_{-1}=c_{-2}=\cdots=c_{-m}=0,c_{-(m+1)}\neq 0$，则称$a$为$f$的\textbf{m阶极点}(pole of order m)；
+        其中$m=1$时，称$a$为$f$的\textbf{简单极点}(simple pole)；
+        \item 如果$c_n\neq 0$对无穷多个负整数$n$成立，则称$a$为$f$的\textbf{本性奇点}(essential singularity)。
+    \end{enumerate}
+\end{definition}
+例如，$f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z}$处有简单极点，$f(z)=\frac{\sin z}{z}$在0处有可去奇点。$k$阶极点意味着$f(z)$在$a$处趋于无穷的速度与$1/(z-a)^k$同阶。
+
+类似地也可以根据泰勒级数或等价无穷小量定义全纯函数的若干阶的零点，不过这不属于我们讨论的范围。
+
+回到柯西积分公式，$\frac{f(\zeta)}{\zeta-z}$这一结构相当于为$f(\zeta)$添加了一个简单极点，于是包含这个零点的闭曲线上积分值恰好等于$2\pi i$倍的$f(z)$，这并不是一个偶然现象，实际上，复线积分的值与被积函数在闭曲线内部的孤立奇点系数有着密切的关系，这就是\textbf{留数定理}(residue theorem)：
+\begin{theorem}[留数定理]
+    设$f$为开集$U\in\mathbb{C}$上的全纯函数，$a_1,a_2,\cdots,a_n$为$f$在$U$内的极点，$\gamma:[a,b]\to U$为包含所有$a_k$的$C^1$闭曲线，则
+    \[\oint_{\gamma}f(z)\,dz=2\pi i\sum_{k=1}^{n}\text{Res}(f,a_k)Ind_{\gamma}(a_k)\]
+    其中$\text{Res}(f,a_k)$称为$f$在$a_k$处的\textbf{留数}(residue)，它等于$f$在$a_k$处洛朗级数展开式中$(z-a_k)^{-1}$项的系数；$Ind_{\gamma}(a_k)$称为$\gamma$绕点$a_k$的\textbf{环绕数}(winding number)，它表示$\gamma$绕$a_k$转了多少圈。
+\end{theorem}
+注意计算环绕数时，以逆时针为正向，例如$\gamma(t)=e^{it},t\in[0,2\pi]$绕原点的环绕数为1，而$\gamma(t)=e^{-it},t\in[0,2\pi]$绕原点的环绕数为-1。希望了解环绕数严格定义的读者可以参考复变函数或拓扑学的教材。在留数定理的语境下又将积分路径称为\textbf{围道}(contour)。
+
+要找到$f$在$a$处的留数的计算公式，可以将$f$视同其在$a$处的洛朗级数展开式：
+\[f(z)=\sum_{n=-k}^{\infty}c_n(z-a)^n\]
+这里假设$a$为$f$的k阶极点。在处理泰勒级数时，我们在$f(x)=\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x-a)^n$中两边同时对$x$求导再令$x=a$，得到$f^{(m)}(a)=m!c_m$。类似地，在处理洛朗级数时，我们可以将其乘以$(z-a)^k$从而化归到泰勒级数：
+\begin{align*}
+    (z-a)^k f(z)&=\sum_{n=0}^{\infty}c_{n-k}(z-a)^n\\
+    \frac{d^(k-1)}{dz^(k-1)}((z-a)^k f(z))&=\sum_{n=0}^{\infty}c_{n-k}\frac{d^{(k-1)}}{dz^{(k-1)}}(z-a)^n\\
+    &=\sum_{n=k-1}^{\infty}c_{n-k}\frac{n!}{(n-k+1)!}(z-a)^{n-k+1}
+\end{align*}
+令$z\to a$，就得到留数的计算公式：\begin{proposition}
+    设$f$在$a$处有k阶极点，则
+    \[\text{Res}(f,a)=\frac{1}{(k-1)!}\lim_{z\to a}\frac{d^{(k-1)}}{dz^{(k-1)}}((z-a)^k f(z))\]
+    特别地，对于简单极点，有
+    \[\text{Res}(f,a)=\lim_{z\to a}(z-a)f(z)\]
+\end{proposition}
+
+%唯一延拓定理
+
+
 \section{拉普拉斯变换}\label{sec:Laplace_Transform}
 
 %紧支函数的傅里叶变换不紧支（见deepseek)
@@ -3536,7 +3781,7 @@ $g(t)$的傅里叶系数平方和收敛，通项趋于0，$S_N^f(t_0)-(f(t_0^+)+
 \end{proof}
 
 在分段光滑的条件下，容易得到$f'(t)$的傅里叶系数，注意微积分基本定理可以分区间使用：
-\begin{proposition}[$f'$的傅里叶系数]
+\begin{proposition}[导函数的傅里叶系数]
     \begin{equation*}
     a'_n=n\omega b_n,b'_n=-n\omega a_n,c'_n=in\omega c_n
 \end{equation*}
@@ -3553,7 +3798,7 @@ f的原函数F的傅里叶系数同理，并且只要\textbf{分段连续}（见
 即可保证f可积，但是我们必须保证F是周期函数，这要求f的直流分量为0：
 \[F(t+T)-F(t)=\int_{T}f(t)dt=Tc_0=0,c_0=0\]
 此时，用刚刚得到的公式（2.16）就可直接得到F的傅里叶系数：
-\begin{proposition}[$F$的傅里叶系数]
+\begin{proposition}[原函数的傅里叶系数]
     \begin{equation*}
     A_n=\frac{a_n}{n\omega},B_n=\frac{b_n}{n\omega},C_n=\frac{c_n}{in\omega}
 \end{equation*}
