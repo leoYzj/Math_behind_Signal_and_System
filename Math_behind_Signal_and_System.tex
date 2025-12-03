@@ -1102,7 +1102,7 @@ $g(t)=f(t)+f(-t)=\begin{cases}
 }
 \end{theorem}
 \begin{proof}
-设$f,g\in L^1(\mathbb{R})$,\lr{
+设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$,\lr{
 &\quad\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}\,d\xi\\
 &=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
 &=\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)e^{-2\pi i\xi x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
@@ -1196,16 +1196,15 @@ f*g&=\mathcal{F} ^{-1}(\mathcal{F} f\mathcal{F} g)\\
 作为一种新的函数空间上的运算，我们自然要讨论它是否满足线性性、结合律、
 交换律。事实上，它们都是成立的：
 \begin{proposition}[卷积的线性性、结合律、交换律]
-    设$f,g_1,g_2\in L^1(\mathbb{R}),a,b\in \mathbb{C}$，则有
     \begin{align*}
     f*(ag_1+bg_2) & =af*g_1+bf*g_2 \\
     (f*g)*h       & =f*(g*h)       \\
     f*g           & =g*f
 \end{align*}
 \end{proposition}
-线性性得自积分的线性性，交换律通过变量替换即可证明，下面仅证明结合律。\\
+线性性得自积分的线性性，交换律通过变量替换即可证明，下面仅证明结合律。
 \begin{proof}
-设$f,g,h\in L^1(\mathbb{R})$，则\begin{align*}
+\begin{align*}
     (f*g)*h(x) & =\int_{-\infty}^{\infty}(f*g)(x-y)h(y)\,dy=\int_{-\infty}^{\infty}h(y)\,dy\int_{-\infty}^{\infty}f(z)g(x-y-z)\,dz \\
                & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(z)g(x-y-z)h(y)\,dy\,dz=\int_{-\infty}^{\infty}f(z)(g*h)(x-z)\,dz
 \end{align*}
@@ -1341,7 +1340,6 @@ $supp (f*g)\in [a+c,b+d]$,因为：
 然要求两个概率密度函数在$\mathbb{R}$上的积分值为1时，它们的卷积在$\mathbb{R}$上的积
 分值也为1。更一般地：
 \begin{proposition}[卷积的“面积”关系]
-如果$f,g\in L^1(\mathbb{R})$，则
 \[\int_{-\infty}^{\infty}(f*g)(x)\,dx=\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(x-y)\,dx\]
 \end{proposition}
 \begin{proof}
@@ -2512,8 +2510,9 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
 }
 \end{claim}
 
-由于涉及分布级数及其换序问题，很难直接严格证明以上结果，但它的确是对的。结合$\shah$的
-傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义：
+由于涉及分布级数及其换序问题，很难严格证明以上结果，我们将在附录\ref{sec:Schwartz_Functions}给出更一般的情况的证明，但它过于晦涩和复杂，或许还是直接接受这种形式上的运算更好一些。
+
+结合$\shah$的傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义：
 \begin{definition}[$\shah$的等价定义]
     \[\shah(x)=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}\]
 \end{definition}
@@ -3845,11 +3844,146 @@ $\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\i
 \section{分布的逼近，傅里叶反演公式}\label{sec:approach}
 
 %需要先有黎曼-勒贝格引理（见folland），再出傅里叶反演，有傅里叶反演才能构建出帕塞瓦尔恒等式，否则循环论证。
+%ee261第四章也提到了分布的逼近。
 
 \section{施瓦兹函数类及其好处}\label{sec:Schwartz_Functions}
 
-%紧支函数的傅里叶变换不再是紧支函数
-%时域频域不同时紧支（见ee261）
+%傅里叶下的封闭性
+在\ref{sec:distributions}中，我们介绍了施瓦兹函数类及其对偶空间分布，并直接假定了施瓦兹函数类在傅里叶变换下的封闭性。这一小节将填补这个逻辑漏洞，并介绍施瓦兹函数类的一些其他好处。由于不涉及具体的计算，简洁起见，我们将在本节使用角频率$\omega$。
+
+首先，可以根据施瓦兹函数类的定义\[\mathcal{S} =\{\varphi\in C^{\infty}(\mathbb{R} ):\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \}\]给出它们在$|x|\to\infty$时的估计，从而施瓦兹函数$\varphi$必满足$\int_{-\infty}^{\infty}|\varphi(x)|\,dx<\infty$，即施瓦兹函数类是$L^1(\mathbb{R} )$的子集，于是\begin{align*}
+    \int_{-\infty}^{\infty}\varphi(t)e^{-i\omega t}\,dt&\leq \int_{-\infty}^{\infty}|\varphi(t)||e^{-i\omega t}|\,dt\\
+    &=\int_{-\infty}^{\infty}|\varphi(t)|\,dt<\infty
+\end{align*}
+即施瓦兹函数的傅里叶变换是良定义的，傅里叶逆变换同理。
+
+显然，施瓦兹函数在求导运算下是封闭的，即$\varphi\in\mathcal{S}\Rightarrow \varphi'\in\mathcal{S}$，并且乘以$x$的运算也是封闭的，即$\varphi\in\mathcal{S}\Rightarrow x\varphi\in\mathcal{S}$。利用这两个性质，可以证明施瓦兹函数类在傅里叶变换下的封闭性：
+\begin{theorem}[施瓦兹函数类在傅里叶变换下的封闭性]
+    设$\varphi\in\mathcal{S}$，则$\mathcal{F} \varphi,\mathcal{F} ^{-1} \varphi\in\mathcal{S}$。
+\end{theorem}
+\begin{proof}
+    只需证明$\lim_{|\omega|\to\infty}|\omega|^m \mathcal{F} \varphi^{(n)}(\omega)=0,\forall m,n\in\mathbb{N}$。由傅里叶变换的微分性质（见\ref{sec:Fourier}），
+    \begin{align*}
+    \mathcal{F} [\varphi'](\omega)&=i\omega \mathcal{F} \varphi(\omega)\\
+    \mathcal{F} [\varphi^{(n)}](\omega)&=(i\omega)^n \mathcal{F} \varphi(\omega)
+\end{align*}
+根据黎曼-勒贝格引理（见\ref{sec:approach}），\[\varphi^{(n)}\in L^1(\mathbb{R})\Rightarrow\lim_{|\omega|\to\infty}\mathcal{F}[ \varphi^{(n)}(\omega)]=0\]
+即\[\lim_{|\omega|\to\infty}(i\omega)^n \mathcal{F} \varphi(\omega)\to 0\]
+故$\mathcal{F} \varphi(\omega)\in\mathcal{S} $，同理可证明$\mathcal{F}^{-1} \varphi(\omega)\in\mathcal{S} $。
+\end{proof}
+
+%紧支函数的傅里叶变换不再是紧支函数%时域频域不同时紧支（见ee261，248）
+我们来验证，紧支函数的傅里叶变换不再是紧支函数，从而一开始介绍的$\mathcal{C} $在傅里叶变换下不封闭。事实上，非零函数不可能既时限，又带限，即：\begin{theorem}
+设$f\in L^1(\mathbb{R}),f\neq 0$，如果$f$在时域上紧支，则其傅里叶变换$\mathcal{F} f(\omega)$不可能在频域上紧支，反之亦然。
+    
+\end{theorem}
+\begin{proof}
+我们首先给出一个直观上的说明，再给出两种证明方法。
+
+假设$\mathcal{F} f(t)$支于$[-T/2,T/2]$，我们曾在\ref{sec:Sampling and Interpolation}中证明，$f(t)=\frac{T}{2\pi}Sa(Tt)*f(t)$，又在\ref{sec:convolution}中证明过卷积能够将函数的支集“相加”，故$f(t)$的支集应为$\mathbb{R}$，不是紧支的。要说明积分$Sa(Tt)*f(t)=\int_{-\infty}^{\infty}Sa(Tx)f(t-x)\,dx$在$|t|$充分大时不为0是困难的，但直观上容易接受这个结果。
+
+\textbf{法一}：反证法，假设$suppf\in[-T/2,T/2],supp\mathcal{F} f\in[-\Omega/2,\Omega/2]$，则
+\begin{align*}
+    f(t)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega\\
+    &=\frac{1}{2\pi}\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega
+\end{align*}
+由于$suppf\in[-T/2,T/2]$，所以$f(t)$在$|t|>T/2$时恒为0，故\[\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega=0,\forall |t|>T/2\]
+对以上恒等式两边同时求n阶导数，得到\[\int_{-\Omega/2}^{\Omega/2}(i\omega)^n \mathcal{F} f(\omega)e^{i\omega t}\,d\omega=0,\forall |t|>T/2\]
+取定$t_0>T/2$，有\begin{align*}
+    f(t)=&\frac{1}{2\pi}\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)e^{i\omega t_0}e^{i\omega (t-t_0)}\,d\omega
+\end{align*}
+将$e^{i\omega (t-t_0)}$展开成幂级数，得到\begin{align*}
+    f(t)=&\frac{1}{2\pi}\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)e^{i\omega t_0}\sum_{n=0}^{\infty}\frac{(i\omega (t-t_0))^n}{n!}\,d\omega\\
+    =&\frac{1}{2\pi}\sum_{n=0}^{\infty}\frac{((t-t_0))^n}{n!}\int_{-\Omega/2}^{\Omega/2}(i\omega)^n \mathcal{F} f(\omega)e^{i\omega t_0}\,d\omega=0
+\end{align*}
+这表明只有恒零函数才能做到时域、频域均紧支。
+
+看上去，即便$supp\mathcal{F} f\notin[-\Omega/2,\Omega/2]$，也可以用这种方法证明$f(t)$恒为0。但是，在积分区间为无限区间时，最后一步中的换序一般不成立，因为我们无法证明级数\[\sum_{n=0}^{\infty}\frac{((t-t_0))^n}{n!}(i\omega)^n \mathcal{F} f(\omega)e^{i\omega t_0}\]在$\omega \in (-\infty,\infty)$上一致收敛。
+
+\textbf{法二}：利用解析延拓的唯一性。设$suppf\in[-T/2,T/2]$，则\begin{align*}
+    \mathcal{F} f(\omega)&=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt\\
+    &=\int_{-T/2}^{T/2}f(t)e^{-i\omega t}\,dt
+\end{align*}
+这是一个实变函数，我们可以尝试将其做全纯延拓，不过为了符号的一致性，我们将变量改为$F(i\omega)=\mathcal{F} f(\omega)$，做替换$i\omega\to s=\sigma+i\omega$，得到$f(t)$的拉普拉斯变换：
+\begin{align*}
+    F(s)&=\int_{-T/2}^{T/2}f(t)e^{-st}\,dt
+\end{align*}
+由于积分区间有限，$f\in\mathcal{C} $光滑，以上积分总是存在的，并且可以对$s$求导，从而也是全纯的：\[F'(s)=-\int_{-T/2}^{T/2}tf(t)e^{-st}\,dt\]
+即$F(s)$是整函数。但是，$F(s)=0,\forall s=i\omega,|\omega|> \Omega/2$，这些点使得$F(s)=0,\forall s\in\mathbb{C}$，这样$f(t)$也只能为0。
+\end{proof}
+%拓扑（ds）
+施瓦兹函数类的另一个好处在于，它不仅保证了傅里叶变换下的封闭性，还使得傅里叶变换$\mathcal{F} :\mathcal{S} \to \mathcal{S} $是一个\textbf{线性拓扑自同构}，具体来说，这要求\begin{itemize}
+    \item $\mathcal{F} $是线性的
+    \item $\mathcal{F} $是双射（我们已经找到逆映射$\mathcal{F} ^{-1} $）
+    \item $\mathcal{F} $及其逆映射$\mathcal{F} ^{-1} $均为连续映射。
+\end{itemize}
+线性和双射显然成立，下面我们来说明连续性。为此，我们需要给施瓦兹函数类赋予一个拓扑结构。尽管$\mathcal{S}\in L^1(\mathbb{R} )$，但$L^p$空间的范数并不能很好地刻画施瓦兹函数类的性质，因此我们需要引入一族\textbf{半范数} (seminorm)：
+\begin{definition}[施瓦兹函数类的半范数]
+    对于$m,n\in\mathbb{N} $，定义施瓦兹函数类上的半范数
+    \[\|\varphi\|_{m,n}=\sup_{x\in\mathbb{R} }|x|^m|\varphi^{(n)}(x)|\]
+\end{definition}
+在这个范数下$\mathcal{S} $构成\textbf{弗雷歇空间} (Fréchet space)，即完备的拓扑向量空间。利用这些半范数，我们可以定义施瓦兹函数类中的收敛：
+\begin{definition}[施瓦兹函数类中的收敛]
+    设$\{\varphi_k\}\subset\mathcal{S} $，如果对于任意$m,n\in\mathbb{N} $，都有
+    \[\lim_{k\to\infty}\|\varphi_k-\varphi\|_{m,n}=0\]
+    则称$\varphi_k$在施瓦兹函数类中收敛于$\varphi$，记为$\varphi_k\to \varphi$。
+\end{definition}
+有了这些定义，我们就可以说明傅里叶变换及其逆映射的连续性：
+\begin{theorem}[傅里叶变换的连续性]
+    设$\varphi_k\to \varphi$，则$\mathcal{F} \varphi_k\to \mathcal{F} \varphi$。
+\end{theorem}
+\begin{proof}
+    不妨设$\varphi=\mathcal{F} \varphi=0$。由傅里叶变换的微分性质（见\ref{sec:Fourier}），
+    \begin{align*}
+    \mathcal{F} [((-it)^n\varphi_k)^{(m)}](\omega)&=(i\omega)^m \mathcal{F} [(-it)^n \varphi_k](\omega)\\
+    &=(i\omega)^m (\mathcal{F} \varphi_k)^{(n)}(\omega)\\
+    \|\mathcal{F} \varphi_k\|_{m,n}&=\sup_{\omega\in\mathbb{R} }|\omega|^m|(\mathcal{F} \varphi_k)^{(n)}(\omega)|\\
+    &=\sup_{\omega\in\mathbb{R} }|\mathcal{F} [((-it)^n \varphi_k)^{(m)}](\omega)|
+\end{align*}
+令$\phi_k=((-it)^n \varphi_k)^{(m)}\in\mathcal{S} $，则\begin{align*}
+    \|\mathcal{F} \varphi_k\|_{m,n}&=\sup_{\omega\in\mathbb{R} }|\mathcal{F} \phi_k(\omega)|\leq \int_{-\infty}^{\infty}|\phi_k(t)|\,dt
+\end{align*}
+问题转化为证明\[\int_{-\infty}^{\infty}|\phi_k(t)|\,dt\to 0\]
+考虑利用$\varphi_k\in\mathcal{S} ,\|\varphi_k\|_{m,n}\to 0,\forall m,n\in\mathbb{N}$给出$|\phi_k(t)|$的估计。利用莱布尼兹求导法则，有：
+\begin{align*}
+    |\phi_k(t)|&=|((-it)^n \varphi_k)^{(m)}(t)|\\
+&=\left|\sum_{j=0}^{m}\binom{m}{j}(t^n)^{(j)}\varphi_k^{(m-j)}(t)\right|\\
+    &\leq \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}|t|^{n-j}|\varphi_k^{(m-j)}(t)|
+\end{align*}
+由于$\|\varphi_k\|_{n-j+2,m-j}\to 0$，$\forall \epsilon>0,\exists N\in\mathbb{N},k>N\Rightarrow \|\varphi_k\|_{n-j+2,m-j}<\epsilon$，于是
+\begin{align*}
+    |\phi_k(t)|&\leq \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}\frac{\|\varphi_k\|_{n-j+2,m-j}}{|t|^2}\\
+    &<\frac{C\epsilon}{|t|^2},C=\sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}
+\end{align*}
+因此\begin{align*}
+    \int_{|t|\geq 1}|\phi_k(t)|\,dt&\leq \int_{|t|\geq 1}\frac{C\epsilon}{|t|^2}\,dt\\
+    &=2C\epsilon\int_{1}^{\infty}\frac{1}{t^2}\,dt=2C\epsilon
+\end{align*}
+而在$|t|<1$时，\begin{align*}
+    \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}|t|^{n-j}|\varphi_k^{(m-j)}(t)|&\leq \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}\|\varphi_k\|_{0,m-j}\\
+    &\leq C'\max_{0\leq j\leq \min(m,n)}\|\varphi_k\|_{0,m-j}<\epsilon
+\end{align*}
+$\phi_k$一致收敛于0，故\[\int_{|t|<1}|\phi_k(t)|\,dt\to 0\]
+综上，\[0\leq\|\mathcal{F} \varphi_k\|_{m,n}\leq\int_{-\infty}^{\infty}|\phi_k(t)|\,dt\to 0\]
+根据夹逼定理，$\|\mathcal{F} \varphi_k\|_{m,n}\to 0$，得证。
+\end{proof}
+
+我们曾在\ref{sec:Sampling and Interpolation}中，通过形式计算得到$\shah$分布的另一种定义：\begin{definition}[$\shah$的等价定义]
+    \[\shah(t)=\sum_{k=-\infty}^{\infty}e^{2\pi ikt}\]
+\end{definition}
+现在可以根据傅里叶变换的连续性说明这种形式运算是正确的:\begin{proof}
+设$\varphi\in\mathcal{S} $，定义分布$T=\sum_{k\in\mathbb{Z}}e^{2\pi ikt}$，则\begin{align*}
+    \langle T,\varphi\rangle&=\langle \lim_{N\to\infty}\sum_{k=-N}^{N}e^{2\pi ikt},\varphi\rangle\\
+   \langle \mathcal{F} T,\varphi\rangle&=\langle \mathcal{F} [\lim_{N\to\infty}\sum_{k=-N}^{N}e^{2\pi ikt}],\varphi\rangle\\
+    &=\langle \lim_{N\to\infty}\mathcal{F} [\sum_{k=-N}^{N}e^{2\pi ikt}],\varphi\rangle\\
+   &=\langle \lim_{N\to\infty}\sum_{k=-N}^{N}\delta_{2\pi k},\varphi\rangle\\
+   &=\langle \shah_{2\pi},\varphi\rangle\\
+   &=\langle \mathcal{F} \shah,\varphi\rangle
+\end{align*}
+因此$T=\shah$，得证。
+注意\[\langle T,\varphi\rangle\neq \lim_{N\to\infty}\langle \sum_{k=-N}^{N}e^{2\pi ikt},\varphi\rangle\]
+$\langle\rangle$表示在$\mathbb{R} $上积分，不能将它与极限进行交换。
+\end{proof}
 
 \section{与傅里叶变换有关的其他变换}\label{sec:Other_Transforms}
 
