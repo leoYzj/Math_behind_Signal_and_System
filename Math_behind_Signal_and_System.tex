@@ -2134,6 +2134,19 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 在\ref{sec:Fourier}中，我们已经从形式上得到了$sgn,u,1/t$，的傅里叶变换，现在有了
 分布的工具，就可以借助分布的傅里叶变换的对偶性说明之前的结论是严谨的。
 
+最后，我们指出，分布的傅里叶变换具有连续性，即：\begin{theorem}[分布的傅里叶变换的连续性]
+    设$\{T_n\}\subset\mathcal{T} $，$T\in\mathcal{T} $，如果$T_n\to T$，则$\mathcal{F} T_n\to\mathcal{F} T$.
+\end{theorem}
+\begin{proof}
+    设$\varphi\in\mathcal{S} $，则
+    \begin{align*}
+    \langle\mathcal{F} T_n-\mathcal{F} T,\varphi\rangle & =\langle T_n-T,\mathcal{F} \varphi\rangle \\
+    \lim_{n\to\infty}\langle\mathcal{F} T_n-\mathcal{F} T,\varphi\rangle & =\lim_{n\to\infty}\langle T_n-T,\mathcal{F} \varphi\rangle=0
+\end{align*}
+\end{proof}
+
+然而，要证明施瓦兹函数的傅里叶变换的连续性，要困难得多，我们将在附录\ref{sec:Schwartz_Functions}中给出其证明。
+
 \section{小结}\label{sec:sammary}
 本章所涉及的公式及性质汇总如下。鉴于我们已经获得了很多对于傅里叶分析的认识，本
 小节将以不同的顺序或方式来表述它们。
@@ -2499,18 +2512,18 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
     \[\sigma_a\shah=\frac{1}{a}\shah_{1/a},\shah_T=\frac{1}{T}\sigma_{1/T}\shah \quad (a\to\frac{1}{T})\]
 \end{proposition}
 
-值得注意的是，不论从直观上还是从形式计算上，$\shah$分布似乎有另一个傅里叶变换：
-\begin{claim}
-    \quad\lr{
-    \mathcal{F} \shah&=\sum_{k=-\infty}^{\infty}\mathcal{F} \delta_k\\
-    &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikt}
+根据分布的傅里叶变换的连续性，我们还可以直接对$\shah$分布的傅里叶变换做另一种推导：
+\lr{
+     \mathcal{F} \shah&= \mathcal{F} \left(\lim_{N\to\infty}\sum_{k=-N}^{N}\delta_k\right)\\
+    &=\lim_{N\to\infty}\sum_{k=-N}^{N}\mathcal{F} \delta_k\\
+    &=\lim_{N\to\infty}\sum_{k=-N}^{N}e^{-2\pi ikx}\\
+    &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}
 }{
-    \mathcal{F} \shah_{2\pi}&=\sum_{k=-\infty}^{\infty}\mathcal{F} \delta_{2k\pi}\\
-    &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikt}
+    \mathcal{F} \shah_{2\pi}&= \mathcal{F} \left(\lim_{N\to\infty}\sum_{k=-N}^{N}\delta_{2\pi k}\right)\\
+    &=\lim_{N\to\infty}\sum_{k=-N}^{N}\mathcal{F} \delta_{2\pi k}\\
+    &=\lim_{N\to\infty}\sum_{k=-N}^{N}e^{-2\pi ikx}\\
+    &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}
 }
-\end{claim}
-
-由于涉及分布级数及其换序问题，很难严格证明以上结果，我们将在附录\ref{sec:Schwartz_Functions}给出更一般的情况的证明，但它过于晦涩和复杂，或许还是直接接受这种形式上的运算更好一些。
 
 结合$\shah$的傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义：
 \begin{definition}[$\shah$的等价定义]
@@ -3929,7 +3942,7 @@ $\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\i
     则称$\varphi_k$在施瓦兹函数类中收敛于$\varphi$，记为$\varphi_k\to \varphi$。
 \end{definition}
 有了这些定义，我们就可以说明傅里叶变换及其逆映射的连续性：
-\begin{theorem}[傅里叶变换的连续性]
+\begin{theorem}[$\mathcal{S} $上傅里叶变换的连续性]
     设$\varphi_k\to \varphi$，则$\mathcal{F} \varphi_k\to \mathcal{F} \varphi$。
 \end{theorem}
 \begin{proof}
@@ -3965,25 +3978,12 @@ $\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\i
 \end{align*}
 $\phi_k$一致收敛于0，故\[\int_{|t|<1}|\phi_k(t)|\,dt\to 0\]
 综上，\[0\leq\|\mathcal{F} \varphi_k\|_{m,n}\leq\int_{-\infty}^{\infty}|\phi_k(t)|\,dt\to 0\]
-根据夹逼定理，$\|\mathcal{F} \varphi_k\|_{m,n}\to 0$，得证。
+根据夹逼定理，$\|\mathcal{F} \varphi_k\|_{m,n}\to 0$，得证。傅里叶逆变换同理。
 \end{proof}
 
-我们曾在\ref{sec:Sampling and Interpolation}中，通过形式计算得到$\shah$分布的另一种定义：\begin{definition}[$\shah$的等价定义]
-    \[\shah(t)=\sum_{k=-\infty}^{\infty}e^{2\pi ikt}\]
-\end{definition}
-现在可以根据傅里叶变换的连续性说明这种形式运算是正确的:\begin{proof}
-设$\varphi\in\mathcal{S} $，定义分布$T=\sum_{k\in\mathbb{Z}}e^{2\pi ikt}$，则\begin{align*}
-    \langle T,\varphi\rangle&=\langle \lim_{N\to\infty}\sum_{k=-N}^{N}e^{2\pi ikt},\varphi\rangle\\
-   \langle \mathcal{F} T,\varphi\rangle&=\langle \mathcal{F} [\lim_{N\to\infty}\sum_{k=-N}^{N}e^{2\pi ikt}],\varphi\rangle\\
-    &=\langle \lim_{N\to\infty}\mathcal{F} [\sum_{k=-N}^{N}e^{2\pi ikt}],\varphi\rangle\\
-   &=\langle \lim_{N\to\infty}\sum_{k=-N}^{N}\delta_{2\pi k},\varphi\rangle\\
-   &=\langle \shah_{2\pi},\varphi\rangle\\
-   &=\langle \mathcal{F} \shah,\varphi\rangle
-\end{align*}
-因此$T=\shah$，得证。
-注意\[\langle T,\varphi\rangle\neq \lim_{N\to\infty}\langle \sum_{k=-N}^{N}e^{2\pi ikt},\varphi\rangle\]
-$\langle\rangle$表示在$\mathbb{R} $上积分，不能将它与极限进行交换。
-\end{proof}
+在弱收敛的意义下，傅里叶变换同样是$\mathcal{T} =\mathcal{S} ' $上的线性拓扑自同构。在\ref{sec:distributions}中，我们已经证明过分布的傅里叶变换的连续性：\begin{theorem}[$\mathcal{T}$上傅里叶变换的连续性]
+    设$T_k\to T$，则$\mathcal{F} T_k\to \mathcal{F} T$。
+\end{theorem}
 
 \section{与傅里叶变换有关的其他变换}\label{sec:Other_Transforms}
 
