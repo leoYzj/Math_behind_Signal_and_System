@@ -1,5 +1,10 @@
 # Math-behind-Signal-and-System
 
-This repository contains the LaTeX source and figures for "Math behind Signal and System". It is included as a submodule in your main workspace.
+这个仓库存储了我的笔记《信号与系统的数学原理》的pdf和tex代码，可以找到最新版的pdf进行下载。本书正在持续更新中，预计2026年3月前完成大部分内容，在之后的半年里做一些微调。
 
-Edit the files here and push changes to the remote repository. Then update the parent repository's submodule reference if needed.
+本书旨在对信号与系统的数学原理进行补充和深化，大部分内容取材于“傅里叶分析”课程，并且融合了一些工程上的应用，以及实变函数、复变函数和泛函分析的初步知识。对于数学基础较好的读者，可以直接以本书为主要教材学习“信号与系统”课程，只需要再补充一些实践方面的知识(python/MATLAB)即可；对于数学基础一般的读者，阅读本书的部分小节可能比较困难，可以先学习“信号与系统”课程，在遇到教材没有解释清楚的内容时，再参考本书，也可以跳过一些不感兴趣的内容。对于严谨性没有太高要求，希望学会形式计算的读者，跳过一些小节不会有问题。
+
+如果阅读的过程中遇到问题或发现错误，可以直接在"issues"中提问，也可以发送至我的邮箱：<2144940552@qq.com>，也欢迎您提出修改意见。如果您希望直接对代码进行勘误，可以联系作者添加合作者，然后将所有代码、图片克隆至本地，创建新的分支进行修改。
+
+本书采用了知乎用户@木子穿叶的[LaTeX模板](https://zhuanlan.zhihu.com/p/1903257631335883996)，在此表示感谢。模板的代码存放在note-setup.tex中，其用法可以在以上链接中找到。
+
