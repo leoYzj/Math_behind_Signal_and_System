@@ -243,7 +243,7 @@ $\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。
 
 有时，使用\textbf{特征函数}(indicator function)更为方便：
 \begin{definition}
-    设集合$A\in\mathbb{R}$，其特征函数为
+    设集合$A\subset\mathbb{R}$，其特征函数为
     \[\chi_A(x)=\begin{cases}
         1 & x\in A \\
         0 & x\notin A
@@ -479,7 +479,10 @@ $\{f_i(t)\}_{i=1}^{\infty}$中的所有函数正交，就称$\{f_i(t)\}_{i=1}^{\
 波变换基函数 (wavelet basis functions)等，下面仅讨论三角函数系和指数函数系。
 
 \section{傅里叶级数}\label{sec:Fourier_Series}
-首先回顾数学分析中几个计算傅里叶级数的公式。将周期为T的函数f展开为三角函数形式的傅里叶级数：
+
+十九世纪初，傅里叶为了求解热传导问题中的偏微分方程，断言：任何周期函数都可以通过无穷多个正弦和余弦函数的线性组合来表示，即傅里叶级数。这一猜想引发了许多数学家的质疑，促进了分析学的发展，直到1829年，狄利克雷提出了傅里叶级数收敛的充分条件和严格证明。今天，傅里叶级数已经成为数学、物理中的重要工具。
+
+我们首先回顾数学分析中学过的几个计算傅里叶级数的公式。将周期为T的函数f展开为三角函数形式的傅里叶级数：
 \begin{align*}
     f(t) & =\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k \cos(k\omega t)+b_k\sin(k\omega t) \\
          & =\frac{c_0}{2}+\sum_{k = 1}^{\infty} c_k\cos(k\omega t+\varphi _k)
@@ -710,8 +713,7 @@ $B=\frac{2\pi}{\tau}$（仅考虑正频率）。
 变换、逆变换和卷积，但在傅里叶变换的理论中，这将导致许多公式在形式上有一些差别。
 这时，将同时给出两种傅里叶变换的公式，左侧为频率版本，用蓝色标注，右侧为角频率
 版本，用红色标注。对于频率的符号，物理上一般使用f或$\nu $，而一些傅里叶分析的
-书上则使用s或$\xi$，但鉴于f常常用来表示信号或函数，s用于表示复频率，我们将使用$\xi$
-作为频率的符号。
+书上则使用s或$\xi$，但鉴于f常常用来表示信号或函数，s用于表示复频率，我们将使用$\xi$作为频率的符号。
 
 定义傅里叶变换的一种动机是从傅里叶级数出发。要从傅里叶级数研究的周期现象转向傅
 里叶变换研究的非周期现象，自然能够想到在傅里叶级数相关的理论中，令T趋于无穷；
@@ -721,7 +723,7 @@ $B=\frac{2\pi}{\tau}$（仅考虑正频率）。
 我们做一个简单的尝试，令$f\in L^2(\mathbb{R})$（关于$L^2$空间的讨论，见\ref{sec:Linear_Space}）,$T\to \infty$
 ，则\[c_n=\frac{1}{T}\int_{T}f(t)e^{-ik\omega t}\,dt=\frac{1}{T}\int_{T}f(t)e^{-2\pi ik\xi t}\,dt\to 0\]
 这样做变换将丢失f的所有信息，不是我们希望看到的，但很明显，只要给以上公式乘上T，并认为$k\omega$
-或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)：
+或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)。傅里叶本人同样意识到了傅里叶级数向傅里叶变换的过渡，他用同样的方法从形式上得到了傅里叶变换的公式，但我们使用的指数函数其实是后来柯西、泊松等数学家开始使用的，它使得公式具有更加简洁的形式。
 \begin{definition}[傅里叶变换]
 设$f\in L^1(\mathbb{R})$，其傅里叶变换定义为
 \lr{
@@ -909,8 +911,9 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
 }
 注意变量代换时，如果$a<0$，积分上下限也会改变，这正是绝对值的来源，对此有疑惑的读者
 可以自行分情况验算。对于频域的伸缩定理，仅仅是时域伸缩定理的直接推论。\\
-6.微分性质
-\lr    {
+6.微分性质\\
+\ding{172}时域微分
+\lr{
 \mathcal{F} (f')(\xi)&=\int_{-\infty}^{\infty}f'(t)e^{-2\pi i\xi t}\,dt\\
 &=\int_{-\infty}^{\infty}e^{-2\pi i\xi t}\,df(t)\\
 &=\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty}+2\pi i\xi\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt\\
@@ -921,6 +924,7 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
 &=\evalat{e^{-i\omega t}f(t)}{-\infty}{\infty}+i\omega\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt\\
 &=i\omega\mathcal{F} f(\omega)
 }
+\ding{173}频域微分
 \lr{
     (\mathcal{F} f)'(\xi)&=\frac{d}{d\xi}\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt\\
 &=\int_{-\infty}^{\infty}f(t)\frac{\partial e^{-2\pi i\xi t}}{\partial \xi}\,dt\\
@@ -932,20 +936,18 @@ $F(\xi)=\mathcal{F} [f(t)]$的写法。
 &=-\int_{-\infty}^{\infty}itf(t)e^{-i\omega t}\,dt\\
 &=-\mathcal{F} (itf)(\omega)
 }
+也可以由第一个微分性质取傅里叶逆变换，再令$f'=\mathcal{F} g$证明。
 \end{proof}
 $\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty},\evalat{e^{-i\omega t}f(t)}{-\infty}{\infty}=0$
 是因为$f\in L^1(\mathbb{R})$要求反常积分$\int_{\mathbb{R}}|f(t)|\,dt<\infty$
 ,其必要条件为$f(t)\to 0,t\to\infty$，而复指数函数部分模值恒为1。对于后一等式
-中将求导与积分交换的操作，实际上是\textbf{莱布尼兹积分法则}，也即含参变量积分
+中将求导与积分交换使用了\textbf{莱布尼兹积分法则}，也即含参变量积分
 的求导，通常需要条件（以角频率形式为例）\begin{circlist}
     \item $\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt$对每个$\omega$可积
-    \item $\frac{\partial f(t)e^{-i\omega t}}{\partial \omega}=-itf(t)e^{-i\omega t}$存在
+    \item $\partial f(t)e^{-i\omega t}/\partial \omega=-itf(t)e^{-i\omega t}$存在
     \item 存在可积函数$g(t)$使得$|-itf(t)e^{-i\omega t}|\leq g(t)$
 \end{circlist}
-\ding{174}成立是因为定理假设$f(t),tf(t)$能够进行傅里叶变换，从而
-$f(t),tf(t)\in L^1(\mathbb(R)),g(t)=tf(t)$.
-工程上一般不涉及这些，仅作形式计算。也可以由第一个微分性质取傅里叶逆变换，再令
-$f'=\mathcal{F} g$。
+最后一条成立是因为定理假设$f(t),tf(t)\in L^1(\mathbb(R)),g(t)=tf(t)$，否则无法做傅里叶变换。
 
 下面介绍一些常用信号的傅里叶变换，并使用傅里叶反演公式和对偶性得到一些难以直接
 计算的常用傅里叶变换。
@@ -1032,7 +1034,11 @@ $f'=\mathcal{F} g$。
 \mathcal{F} u(\omega)&=\mathcal{F} [\frac{1}{2}(sgn(t)+1)]\\
 &=\pi\delta+\frac{1}{i\omega}\\
 }
-用傅里叶反演公式，
+\end{corollary}
+
+用傅里叶反演公式，得到：
+\begin{corollary}
+    \quad
 \lr{
     \mathcal{F} [\frac{1}{t}](\xi)&=-\pi i sgn(\xi)\\
 }{
@@ -1045,7 +1051,7 @@ $f'=\mathcal{F} g$。
         1-|t| & \text{if }|t|\leq 1 \\
         0     & \text{if }|t|>1
     \end{cases}\]
-它在卷积的章节中是一个很好的例子。由于其计算过于繁琐，这里不给出具体证明，感兴趣的读者可以自行补全。\lr{
+它在卷积的章节中是一个很好的例子。由于其计算过于繁琐，这里不给出具体证明，感兴趣的读者可以自行验证。\lr{
     \mathcal{F} sinc^2(\xi)&=\Lambda(t)\\
 }{
     \mathcal{F} Sa^2(\frac{\omega}{2})&=\Lambda(t)
@@ -1120,7 +1126,7 @@ $g(t)=f(t)+f(-t)=\begin{cases}
 }
 \end{example} 
 
-最后，我们给出\textbf{帕塞瓦尔恒等式}(Parseval's identity)，在一些文献中也称之为\textbf{普朗歇尔定理}(Plancherel theorem)，它表明信号在时域和频域的能量是相等的，进一步，傅里叶变换是$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上的等距变换，保持$L^2$范数不变。
+最后，我们给出\textbf{帕塞瓦尔恒等式}(Parseval's identity)，帕塞瓦尔在18世纪末提出了它的三角级数形式，但没有给出证明，如果将傅里叶变换视作傅里叶级数的推广，那么“能量守恒”也自然地推广到傅里叶变换。有时我们也称之为\textbf{普朗歇尔定理}(Plancherel theorem)，因为它于1910年普朗歇尔的博士论文中被严格证明，进一步，傅里叶变换是$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上的等距变换，保持$L^2$范数不变。
 \begin{theorem}[帕塞瓦尔恒等式/普朗歇尔定理]
     设$f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则
     \lr{
@@ -1252,7 +1258,6 @@ f*g&=\mathcal{F} ^{-1}(\mathcal{F} f\mathcal{F} g)\\
     f(t)=(f*\delta)(t)=\int_{-\infty}^{\infty}f(x)\delta(t-x)\,dx
 }
 \end{proposition}
-因而傅里叶变换构成$\langle L^1(\mathbb{R}),+,\cdot\rangle$与$\langle \mathcal{F} (L^1(\mathbb{R})),+,*\rangle$之间的环同态。
 \begin{proof}
 设$f\in L^1(\mathbb{R})$，则\lr{
 \mathcal{F} (f*\delta)(\xi)=\mathcal{F} f(\xi)\mathcal{F} \delta(\xi)=\mathcal{F} f(\xi)
@@ -1357,7 +1362,7 @@ $supp (f*g)\in [a+c,b+d]$,因为：
 然要求两个概率密度函数在$\mathbb{R}$上的积分值为1时，它们的卷积在$\mathbb{R}$上的积
 分值也为1。更一般地：
 \begin{proposition}[卷积的“面积”关系]
-\[\int_{-\infty}^{\infty}(f*g)(x)\,dx=\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(x-y)\,dx\]
+\[\int_{-\infty}^{\infty}(f*g)(x)\,dx=\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(x)\,dx\]
 \end{proposition}
 \begin{proof}
 \begin{align*}
@@ -1602,8 +1607,8 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
 接下来讨论分布理论在傅里叶分析中的应用。我们的目标是，在这个新的理论体系下：
 \begin{itemize}
     \item 允许$\delta$信号，单位阶跃信号，多项式，正弦、余弦函数等信号（作为分布）做傅里叶变换
-    \item 傅里叶变换和其反变换同时有定义；傅里叶反演公式成立
-    \item 帕塞瓦尔恒等式成立
+    \item 分布的傅里叶变换和其反变换同时有定义；傅里叶反演公式成立
+    \item 对于分布，帕塞瓦尔恒等式成立（之前我们只能在$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中使用它）
 \end{itemize}
 我们将看到，分布$T$的傅里叶变换$\mathcal{F} T$定义为
 \begin{equation}
@@ -2410,7 +2415,7 @@ $\mathcal{F} T^-=\overline{\mathcal{F} T}$，分布与分布的卷积的结合�
 容易看出，这个分布具有两条基本性质，其一是前面提到的周期化：$\shah_T*f(t)=f_T(t)$，其二是取样性质，它直接得自$\delta_a$的
 取样性质：$\shah_T f(t)=\sum_{k=-\infty}^{\infty}f(kT)\delta_{kT}$。另外，
 作为一个分布，有
-\[\langle \shah_T,\varphi\rangle=\langle \sum_{k=-\infty}^{\infty}\delta_{kT},\varphi\rangle=\sum_{k=-\infty}^{\infty}\varphi(kT)\]
+\[\langle \shah_T,\varphi\rangle=\left\langle \sum_{k=-\infty}^{\infty}\delta_{kT},\varphi\right\rangle=\sum_{k=-\infty}^{\infty}\varphi(kT)\]
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{shah.jpeg}
@@ -2537,7 +2542,7 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
     \[\sigma_a\shah=\frac{1}{a}\shah_{1/a},\shah_T=\frac{1}{T}\sigma_{1/T}\shah \quad (a\to\frac{1}{T})\]
 \end{proposition}
 
-根据分布的傅里叶变换的连续性，我们还可以直接对$\shah$分布的傅里叶变换做另一种推导：
+根据分布的傅里叶变换的连续性（见\ref{sec:distributions}最后的内容），我们还可以直接对$\shah$分布的傅里叶变换做另一种推导：
 \lr{
      \mathcal{F} \shah&= \mathcal{F} \left(\lim_{N\to\infty}\sum_{k=-N}^{N}\delta_k\right)\\
     &=\lim_{N\to\infty}\sum_{k=-N}^{N}\mathcal{F} \delta_k\\
@@ -2555,12 +2560,7 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
     \[\shah(x)=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}\]
 \end{definition}
 右边正是附录\ref{sec:Asymptotic_Behaviour}中提到的狄利克雷核在$N\to\infty$时的
-式子。需要注意，这个式子仅在分布的意义下成立，例如将这个正则分布作用在某一区间的特征函数
-\[\chi_{[a,b]}=\begin{cases}
-1,&x\in[a,b]\\
-0,&x\notin[a,b]
-\end{cases},\chi_{[a,b]}\in\mathcal{S} \]
-则可验证函数项级数$\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}$在整数点处趋于正无穷，在任意不包含整数点的区间上积分值为0。然而，作为函数项级数，我们只能得到整数点处的广义极限存在，这是一个几乎处处不收敛的函数项级数，例如在$x=1/2$处，级数项为$(-1)^k$。
+式子。需要注意，这个式子仅在分布的意义下成立，例如将这个正则分布作用在某一区间的特征函数$\chi_{[a,b]}\in\mathcal{S}$上，则可验证函数项级数$\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}$在整数点处趋于正无穷，在任意不包含整数点的区间上积分值为0。然而，作为函数项级数，我们只能得到整数点处的广义极限存在，这是一个几乎处处不收敛的函数项级数，例如在$x=1/2$处，级数项为$(-1)^k$。
 
 根据角频率形式下的$\shah$分布的傅里叶变换，可以想到$\shah$的伸缩的傅里叶变换仍具有
 $\shah$的形式，下面就来找出具体的公式：\lr{
@@ -2633,7 +2633,7 @@ $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$�
     f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
     &=Tsinc(Tt)*\mathcal{F} ^{-1} \left(\mathcal{F} f*\shah_T\right)\\
     &=T sinc(Tt)*\left(\frac{1}{T}\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\delta_{k/T}(t)\right)\\
-    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc\left(T(t-\frac{k}{T})\right)\\
+    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc\left(T\left(t-\frac{k}{T}\right)\right)\\
     &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
 }{
     f(t)&=\mathcal{F} ^{-1} [\Pi_T(\mathcal{F} f*\shah_T)](t)\\
@@ -2717,7 +2717,7 @@ L(x) = \sum_{i=0}^{n} y_i \ell_i(x)
 点处的值为0，在0处的值为1，于是可以直接利用每个数据点处的值限定所还原出信号在这
 一点的值，换言之，在以下这种公式所代表的插值方式下，数据点处的值是不会产生偏移
 的，$Sa$函数同理。
-\[f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc\left(T(t-\frac{k}{T})\right)\]
+\[f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc\left(T\left(t-\frac{k}{T}\right)\right)\]
 不同的是，拉格朗日插值法在数据点以外的位置往往会有误差，而以上插值方法在没有产生
 混叠现象时是精确的；另一种拟合的方向是允许数据点的测量有误差，以这种视角进行最优
 线性拟合就是最小二乘法做的工作，在测量误差可能比较大时，这一类拟合方法的表现会更
@@ -2757,15 +2757,12 @@ L(x) = \sum_{i=0}^{n} y_i \ell_i(x)
 \begin{definition}[线性系统]
     如果算子H是线性的，即
 \[\forall a,b\in\mathbb{C},\forall e_1(t),e_2(t),H[ae_1(t)+be_2(t)]=aH[e_1(t)]+bH[e_2(t)]\]
-就说系统是\textbf{线性系统}(linear system)，且满足叠加法则 (principle of superposition)。有时将线性系统记为L。
+就说系统是\textbf{线性系统}(linear system)，且满足叠加法则 (principle of superposition)。
 \end{definition}
 \begin{definition}[零输入响应与零状态响应]
-    一个系统在e(t)=0时，也可能有响应，这样的响应称为\textbf{零输入响应}
-(zero input response,$r_{z.i}(t)$)。相应地，r(t)在没有激励时为0，则输入
-e(t)产生的响应称为\textbf{零状态响应}(zero state response,$r_{z.s}(t)$)，对
-于线性系统显然零输入响应为0，此时我们定义零状态响应有线性性的系统为线性系统。
-\textbf{全响应}$r(t)=r_{z.i}(t)+r_{z.s}(t)$。
+    由于系统原有的能量，初始状态可能不为零，这时即便激励$e(t)=0$，响应$r(t)$也可能不为零。根据系统的线性性，可以将r(t)分解为两部分：\textbf{零输入响应}(zero input response,$r_{z.i}(t)$)和\textbf{零状态响应}(zero state response,$r_{z.s}(t)$)，零输入响应是指$e(t)=0$，由初始状态产生的响应，零状态响应则是将初始状态置零时的响应。\textbf{全响应}$r(t)=r_{z.i}(t)+r_{z.s}(t)$。
 \end{definition}
+对于零输入响应不为0的线性系统，直接将两个响应相加将得到两倍的零输入响应，这不是我们希望看到的，因此我们其实应该定义零状态响应有线性性的系统为线性系统。
 \begin{definition}[单位脉冲响应与单位阶跃响应]
     当$e(t)=\delta(t)$时，$r_{z.s}(t)$为\textbf{单位脉冲响应}，在不涉及零输入
 响应时就说r(t)为单位脉冲响应。当$e(t)=u(t)$时，响应r(t)称为\textbf{单位阶跃响应}。
@@ -2777,12 +2774,12 @@ e(t)产生的响应称为\textbf{零状态响应}(zero state response,$r_{z.s}(t
     如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b)$,则称该系统是\textbf{时不变系统}
 用第二章中定义的时移算子的符号，时不变性可以记为$H\tau_b=\tau_b H$，换言之，时移和经过系统可交换，这与我们的直观相符。
 
-如果激励和响应的自变量不是时间而是空间，我们同样可以定义系统的\textbf{移不变性}(shift invariance)，这时$H\tau_b=\tau_b H$中b是空间中的向量。后面的讨论中，不特意区分时域和空间域。
+如果激励和响应的自变量是空间，我们同样可以定义系统的\textbf{移不变性}(shift invariance)，这时$H\tau_b=\tau_b H$中b是空间中的向量。后面的讨论中，不特意区分时域和空间域。
 \end{definition}
 \begin{definition}[线性时不变系统]
     如果一个系统既是线性的又是时不变的，就说它是\textbf{线性时不变系统}(linear time-invariant system,LTI)。
 \end{definition}
-线性时不变系统满足$r(t)=(h*e)(t)$，h为单位脉冲响应，将在后文介绍。在考虑系统的初始状态时，只要零状态响应具有线性
+线性时不变系统满足$r(t)=(h*e)(t)$，h为单位脉冲响应，将在本小节的后文介绍。在考虑系统的初始状态时，只要零状态响应具有线性
 和时不变性，就说系统是线性时不变系统。
 
 \begin{definition}[因果性]
@@ -2807,19 +2804,18 @@ $r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准�
 \begin{equation}
     h(t)=0\ for\ t<0\label{eq:4.4}
 \end{equation}
-其中h为单位脉冲响应。只要取$t_0=0$，就从因果性条件推出条件\ref{eq:4.3}；用
+其中h为单位脉冲响应。只要取$t_0=0$，就从条件\ref{eq:4.2}推出条件\ref{eq:4.3}；用
 时不变性，条件\ref{eq:4.3}可以推出条件\ref{eq:4.2}。对于单位脉冲响应，从
 $\delta=0\ for\ t<0$可以推出$h(t)=0\ for\ t<0$；如果$h(t)=0,e(t)=0\ for\ t<0$
-,则根据\ref{sec:convolution}中的结果，有$r(t)=(h*e)(t)=0\ for\ t<0$.
+,则根据\ref{sec:convolution}中介绍的卷积的“支集相加”性质，有$r(t)=(h*e)(t)=0\ for\ t<0$.
 
 \begin{definition}[稳定性]
 如果一个系统在激励信号有界时，响应也是有界的，则称之为\textbf{稳定系统}(bounded-input bounded-output,BIBO)。
 \end{definition}
-工程上，一个实用系统在所有可能条件下都保持稳定时至关重要的。
+工程上，一个实用系统在所有可能条件下都保持稳定时至关重要的。我们将在\ref{sec:Complex_Freq_Analysis}中给出线性时不变系统具有稳定性的充分必要条件。
 
 \begin{definition}[记忆性]
-如果一个系统在$t_0$时刻的响应不仅与该时刻的输入有关，还与其他时刻的输入有关，则称之为\textbf{记忆系统/动态系统}，与之
-相对的是\textbf{即时系统}，在$t_0$时刻的响应仅与$t_0$时刻的激励有关。
+如果一个系统在$t_0$时刻的响应不仅与该时刻的输入有关，还与其他时刻的输入有关，则称之为\textbf{记忆系统/动态系统}，与之相对的是\textbf{即时系统}，在$t_0$时刻的响应仅与$t_0$时刻的激励有关，这使得我们可以直接用函数$r(t)=f(e(t))$对系统进行建模。
 \end{definition}
 
 \begin{definition}[可逆性]
@@ -2844,7 +2840,7 @@ $\delta=0\ for\ t<0$可以推出$h(t)=0\ for\ t<0$；如果$h(t)=0,e(t)=0\ for\ 
 \end{example}
 线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用
 $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称
-算子；L的共轭转置定义为用$A^H$表示的算子，其中H表示矩阵的共轭转置，如果A是埃尔
+算子；L的共轭转置定义为用$A^H$表示的线性算子，其中H表示矩阵的共轭转置，如果A是埃尔
 米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子}
 (self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义
 \textbf{对称系统、自伴系统}。
@@ -2913,8 +2909,7 @@ $r(t)=\mathcal{F} e(t)$.
 换积分次序，并得到前文中断言的证明。
 \end{proof}
 
-如果系统H是对核的无穷限积分，就有\textbf{叠加定理}(superposition thoerem)
-或称\textbf{施瓦兹核定理}(Schwartz kernel thoerem):
+如果系统H是对核的无穷限积分，就有\textbf{叠加定理}(superposition thoerem)，由于它是泛函分析中对应定理的特殊形式，有时也将它称为\textbf{施瓦兹核定理}(Schwartz kernel thoerem):
 \begin{theorem}[叠加定理/施瓦兹核定理]
     \begin{equation*}
     r(x)=\int_{-\infty}^{\infty}h(x,y)e(y)\,dy
@@ -2933,6 +2928,9 @@ $r(t)=\mathcal{F} e(t)$.
 \begin{definition}[线性系统的脉冲响应]
     线性系统H的\textbf{脉冲响应}定义为$h(x,y)=H_x[\delta(x-y)]$，其中$H_x$表示$\delta(x-y)$作为x的函数输入系统，输出为x,y的双变量函数。
 \end{definition}
+\begin{proposition}[线性系统的等价定义]
+    “一个系统是线性系统”等价于“响应是激励对脉冲响应积分”。
+\end{proposition}
 
 对于时不变系统，这个定理具有更加优美的形式。将系统视为线性系统，其脉冲响应为
 \[h(x,y)=H_x[\delta(x-y)]=H[\tau_y\delta(x)]=\tau_y H[\delta(x)]\]
@@ -2948,8 +2946,7 @@ $r(t)=\mathcal{F} e(t)$.
 \end{align*}
 总之，我们有：
 \begin{proposition}[线性时不变系统的等价定义]
-    “一个系统是线性系统”等价于“响应是激励对脉冲响应积分”，而“是线性时不变系统”
-等价于“响应是激励与脉冲响应的卷积”。
+    “一个系统是线性时不变系统”等价于“响应是激励与脉冲响应的卷积”。
 \end{proposition}
 
 \begin{example}[单位阶跃响应]
@@ -3771,17 +3768,17 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 
 借助唯一延拓定理，可以将实变量上的函数延拓为复变量上的全纯函数，例如$\sin x,\cos x,e^x$都可以延拓为复变量上的全纯函数，它们的复幂级数与实幂级数一致，并且运算公式（如和差角公式、欧拉公式等）均可以推广到复变量上，因为在实轴上恒为0的函数在复平面上也恒为0。
 
-\section{拉普拉斯变换}\label{sec:Laplace_Transform}
+\section{拉普拉斯变换初步}\label{sec:Laplace_Transform}
+
+十八世纪末，法国数学家皮埃尔-西蒙·拉普拉斯(Pierre-Simon Laplace,1749-1827)在研究天体力学问题时，提出了一种积分变换来处理微分方程，这种变换后来被称为\textbf{拉普拉斯变换}(Laplace transform)。拉普拉斯变换在工程学、物理学和控制理论等领域有着广泛的应用，特别是在信号处理和系统分析中。
 
 鉴于拉普拉斯变换的应用场景中使用角频率明显多于使用频率，我们在本书中采用角频率$\omega$作为拉普拉斯变换的变量。
 
-在\ref{sec:Fourier}中，我们介绍了傅里叶变换：\lr{
-    \mathcal{F} f(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt
-}{
+在\ref{sec:Fourier}中，我们介绍了傅里叶变换：\begin{align*}
     \mathcal{F} f(\omega)=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt
-}
+\end{align*}
 
-在不涉及收敛性的问题时，可以将$\omega$推广为复数$s=\sigma+i\omega$，根据含参变量积分的求导法则，这样的积分变换可以对$s$求导，从而是全纯函数。不过，添加$\sigma$会使得$t\to -\infty$时$|e^{-st}|=e^{-\sigma t}$快速增长，从而对所变换的函数提出很高的要。我们对这个定义稍加修改，得到\textbf{拉普拉斯变换}(Laplace transform)：
+在不涉及收敛性的问题时，可以将$\omega$推广为复数$s=\sigma+i\omega$，根据含参变量积分的求导法则，这样的积分变换可以对$s$求导，从而是全纯函数。不过，添加$\sigma$会使得$t\to -\infty$时$|e^{-st}|=e^{-\sigma t}$快速增长，从而对所变换的函数提出很高的要。我们对这个定义稍加修改：
 \begin{definition}[拉普拉斯变换]
     记\[\mathcal{E}=\{f:[0,\infty)\to\mathbb{C}|f\in PC[0,\infty),\exists C>0,a\in\mathbb{R},|f(t)|<Ce^{at},\forall t\geq 0\}\]
     其中$PC[0,\infty)$表示$[0,\infty)$上的分段连续函数。
@@ -3839,7 +3836,9 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
         \item 时域微分：设$f\in PS[0,\infty),f'\in\mathcal{E} $，则\[\mathcal{L} [f'(t)](s)=s\mathcal{L} f(s)-f(0+)\]
         这里$f'(0)$表示$f$在0处的右导数。
         \item 复频域微分：\[\mathcal{L} \{t f(t)\}(s)=-\frac{d}{ds}\mathcal{L} f(s)\]
-        \item 积分：\[\mathcal{L} \left\{\int_0^t f(x)\,dx\right\}(s)=\frac{1}{s}\mathcal{L} f(s)\]
+        \item 时域积分：\[\mathcal{L} \left\{\int_0^t f(x)\,dx\right\}(s)=\frac{1}{s}\mathcal{L} f(s)\]
+        \item 复频域积分：设$f(t)/t\in\mathcal{E} $，则\[\mathcal{L} \left\{\frac{f(t)}{t}\right\}(s)=\int_s^{\infty}\mathcal{L}f(x)\,dx\]
+        此处积分路径为复平面上满足$Im(s)=\omega$有界的任意从$s$到无穷远处的路径
     \end{itemize}
 \end{proposition}
 \begin{proof}
@@ -3866,10 +3865,15 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
         &=s\mathcal{L} f(s)-f(0+)
     \end{align*}
     6.复频域微分：已经在本节前面证明过。\\
-    7.积分：\begin{align*}
+    7.时域积分：\begin{align*}
         \mathcal{L} \left\{\int_0^t f(x)\,dx\right\}(s)&=\int_0^{\infty}\left(\int_0^t f(x)\,dx\right)e^{-st}\,dt\\
         &=\left[\frac{-1}{s}e^{-st}\int_0^t f(x)\,dx\right]_0^{\infty}+\frac{1}{s}\int_0^{\infty}f(t)e^{-st}\,dt\\
         &=\frac{1}{s}\mathcal{L} f(s)
+    \end{align*}
+    8.复频域积分：利用复频域的微分性质，有
+    \begin{align*}
+        \frac{d}{ds}\mathcal{L} \left\{\frac{f(t)}{t}\right\}(s)&=-\mathcal{L} f(s)\\
+        \mathcal{L} \left\{\frac{f(t)}{t}\right\}(s)&=\int_s^{\infty}\mathcal{L}f(x)\,dx
     \end{align*}
 \end{proof}
 很明显，时域微分性质和复频域微分性质都可以对更高阶的导数进行推广，其中，时域微分性质推广为\begin{align*}
@@ -3927,7 +3931,7 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 \begin{remark}
     严格来说，应该要求$f\in PS[0,\infty)$，并且最终的结论是：
     \[\frac{f(t-)+f(t+)}{2}=\frac{1}{2\pi i}\lim_{r\to\infty}\int_{b-ir}^{b +ir}\mathcal{L} f(s)e^{st}\,ds\]
-    因为这个逆变换是我们通过傅里叶反演公式给出的，尽管前文中没有提到，但\ref{sec:approach}中将会给出傅里叶反演公式更严格的表述和证明。前文中直接使用$f=\mathcal{F}^{-1}\{\mathcal{F} f\}$，是为了叙述简洁。
+    只要令$g(t)=f(t)e^{-\sigma t}$，并利用附录\ref{sec:approach}中傅里叶逆变换的结论，即可得到拉普拉斯逆变换。不过，我们仍不关心不连续点处的值，因此直接使用上面的结论。
 \end{remark}
 \begin{remark}
     这里的积分\[\lim_{r\to\infty}\int_{b-ir}^{b +ir}\mathcal{L} f(s)e^{st}\,ds\]
@@ -3944,7 +3948,114 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 
 下面给出一些常用函数的拉普拉斯变换计算作为例子。
 
-\section{拉普拉斯逆变换}\label{sec:Laplace_Inverse}
+\begin{example}[指数多项式]
+    设$f(t)=t^n e^{a t}u(t),n\in\mathbb{N} $，利用拉普拉斯变换的频移性质，有
+    \begin{align*}
+        \mathcal{L} f(s)&=\mathcal{L} \{t^n e^{a t}u(t)\}(s)\\
+        &=\mathcal{L} \{t^n u(t)\}(s-a)\\
+        &=\frac{\Gamma(n+1)}{(s-a)^{n+1}},\quad \sigma>a
+    \end{align*}
+    根据有理函数的理论，任意真分式函数都可以表示为若干个此类函数的线性组合，因此可以说$f$是指数多项式等价于$\mathcal{L} f$是真分式函数
+\end{example}
+
+\begin{example}[正弦、余弦函数]
+    这里给出两种求解方法。\\
+    方法一：利用欧拉公式化归为指数函数：
+    \begin{align*}
+        \mathcal{L}[\cos(\omega_0 t)](s)&=\mathcal{L} \{\cos(\omega_0 t)u(t)\}(s)\\
+        &=\frac{1}{2}\mathcal{L} \{e^{i\omega_0 t}u(t)\}(s)+\frac{1}{2}\mathcal{L} \{e^{-i\omega_0 t}u(t)\}(s)\\
+        &=\frac{1}{2}\left(\frac{1}{s-i\omega_0}+\frac{1}{s+i\omega_0}\right)\\
+        &=\frac{s}{s^2+\omega_0^2},\quad \sigma>0
+    \end{align*}
+    \begin{align*}
+        \mathcal{L}[\sin(\omega_0 t)](s)&=\mathcal{L} \{\sin(\omega_0 t)u(t)\}(s)\\
+        &=\frac{1}{2i}\mathcal{L} \{e^{i\omega_0 t}u(t)\}(s)-\frac{1}{2i}\mathcal{L} \{e^{-i\omega_0 t}u(t)\}(s)\\
+        &=\frac{1}{2i}\left(\frac{1}{s-i\omega_0}-\frac{1}{s+i\omega_0}\right)\\
+        &=\frac{\omega_0}{s^2+\omega_0^2},\quad \sigma>0
+    \end{align*}
+    方法二：利用微分性质：
+    \begin{align*}
+        -a^2\mathcal{L}[\cos(\omega_0 t)](s)&=\mathcal{L} [\cos''(\omega_0 t)](s)\\
+        &=s^2\mathcal{L} [\cos(\omega_0 t)](s)-s\cos(0+)-\cos'(0+)\\
+        &=s^2\mathcal{L} [\cos(\omega_0 t)](s)-s
+    \end{align*}
+    因此\[\mathcal{L} [\cos(\omega_0 t)](s)=\frac{s}{s^2+\omega_0^2}\]
+    同理，有\[\mathcal{L} [\sin(\omega_0 t)](s)=\frac{\omega_0}{s^2+\omega_0^2}\]
+\end{example}
+
+\begin{example}[取样函数]
+    结合正弦函数的拉普拉斯变换和拉普拉斯变换的复频域积分性质，有
+    \begin{align*}
+        \mathcal{L} \left\{\frac{\sin(\omega_0 t)}{t}\right\}(s)&=\int_s^{\infty}\mathcal{L}[\sin(\omega_0 t)](x)\,dx\\
+        &=\int_s^{\infty}\frac{\omega_0}{x^2+\omega_0^2}\,dx\\
+        &=\evalat{\arctan\frac{x}{\omega_0}}{s}{\infty}\\
+        &=\frac{\pi}{2}-\arctan\frac{s}{\omega_0}\\
+        &=\arctan\left(\frac{\omega_0}{s}\right),\sigma>0
+    \end{align*}
+\end{example}
+
+\begin{example}[正弦积分函数]
+    利用正弦函数的拉普拉斯变换和拉普拉斯变换的时域积分性质，有
+    \begin{align*}
+        \mathcal{L} \{\text{Si}(\omega_0 t)\}(s)&=\mathcal{L} \left\{\int_0^{\omega_0 t} \frac{\sin(x)}{x}\,dx\right\}(s)\\
+        &=\mathcal{L} \left\{\int_0^{t} \frac{\sin(\omega_0 x)}{x}\,dx\right\}(s)\\
+        &=\frac{1}{s}\mathcal{L} \left\{\frac{\sin(\omega_0 t)}{t}\right\}(s)\\
+        &=\frac{1}{s}\arctan\left(\frac{\omega_0}{s}\right),\sigma>0
+    \end{align*}    
+\end{example}
+
+最后我们来介绍一种拉普拉斯变换的级数求法。我们知道，多项式的拉普拉斯变换都可以通过$\mathcal{L} [t^n](s)=\frac{\Gamma(n+1)}{s^{n+1}}$来计算，那么对于一些可以展开为幂级数的函数，不难想到逐项求拉普拉斯变换，下面讨论这种操作的适用范围。在此之前，我们先介绍一个引理：
+\begin{lemma}
+    设$f\in\mathcal{E} ,|f(t)|\leq Ce^{at}$，则\begin{itemize}
+        \item $\forall x>a,\mathcal{L} f(x+iy)\to 0,|y|\to\infty$
+        \item $\forall y,\mathcal{L} f(x+iy)\to 0,x\to\infty$
+    \end{itemize}
+\end{lemma}
+\begin{proof}
+    1.令$g(t)=f(t)e^{-x t}$，则$|g(t)|\leq Ce^{-(x-a)t}$，因此$g\in L^1(\mathbb{R} )$，根据Riemann-Lebesgue引理，有
+    \[\mathcal{L} f(x+iy)=\mathcal{F} g(y)\to 0,|y|\to\infty\]
+    2.利用海涅归并原理，任取实部趋于无穷的序列$\{z_n\}$，满足$\mathcal{L} f(z_n)$存在（这要求$Re z>a$），我们要证明序列$\mathcal{L} f(z_n)\to 0$。由控制收敛定理，有
+    \begin{align*}
+        \int_{0}^{\infty}|f(t)e^{-z_n t}|\,dt&\leq \int_0^{\infty}Ce^{at}e^{-Re(z_n) t}\,dt\\
+        &=C\int_0^{\infty}e^{-(Re(z_n)-a)t}\,dt=\frac{C}{Re(z_n)-a}<\infty\\
+        \lim_{n\to\infty}\mathcal{L} f(z_n)&=\lim_{n\to\infty}\int_0^{\infty}f(t)e^{-z_n t}\,dt\\
+        &=\int_0^{\infty}\lim_{n\to\infty}f(t)e^{-z_n t}\,dt\\
+        &=0
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[拉普拉斯变换的级数求法]
+    设$f\in\mathcal{E} $，且在$[0,\infty)$上有幂级数展开
+    \[f(t)=\sum_{n=0}^{\infty}a_n t^n\]
+    如果存在$\omega_0>0$，使得级数
+    \[\sum_{n=0}^{\infty}|a_n|\frac{\Gamma(n+1)}{\omega_0^{n}}\]
+    收敛，则在$\sigma>\omega_0$时，级数
+    \[\sum_{n=0}^{\infty}a_n \frac{\Gamma(n+1)}{s^{n+1}}\]
+    收敛且等于$\mathcal{L} f(s)$，即$f$的拉普拉斯变换可以通过对其幂级数求拉普拉斯变换得到。
+\end{theorem}
+\begin{proof}
+    由条件知级数$\sum_{n=0}^{\infty}a_n \frac{\Gamma(n+1)}{s^{n+1}}$在$\sigma>\omega_0$时绝对收敛、内闭一致收敛，因此只需证明其和等于$\mathcal{L} f(s)$。拉普拉斯变换是一种积分变换，要将求和与积分换序，可以使用控制收敛定理：
+    \begin{align*}
+        &|a_n \Gamma(n+1)\omega_0^{-n}|\to 0, n\to\infty\\
+        &\implies |a_n|\leq C\frac{\omega_0^{n}}{\Gamma(n+1)}\\
+        &\implies |f(t)|\leq \sum_{n=0}^{\infty}|a_n|t^n\leq C\sum_{n=0}^{\infty}\frac{(\omega_0 t)^{n}}{\Gamma(n+1)}=Ce^{\omega_0 t}\\
+        &\implies \forall s,Re s=\omega_0+\phi>\omega_0,|f(t)e^{-s t}|\leq Ce^{-\phi t}
+    \end{align*}
+    因此控制收敛定理的条件成立，换序即证。
+\end{proof}
+
+更一般地，对于幂次不是整数的情况，可以推广以上结论：
+\begin{corollary}
+    设$f\in\mathcal{E} $，且在$[0,\infty)$上有广义幂级数展开
+    \[f(t)=\sum_{n=0}^{\infty}a_n t^{n+\alpha}\]
+    其中$0\leq\alpha<1$，如果存在$\omega_0>0$，使得级数
+    \[\sum_{n=0}^{\infty}|a_n|\frac{\Gamma(n+\alpha+1)}{\omega_0^{n}}\]
+    收敛，则在$\sigma>\omega_0$时，级数
+    \[\sum_{n=0}^{\infty}a_n \frac{\Gamma(n+\alpha+1)}{s^{n+\alpha+1}}\]
+    收敛且等于$\mathcal{L} f(s)$，即$f$的拉普拉斯变换可以通过对其广义幂级数求拉普拉斯变换得到。
+\end{corollary}
+
+\section{拉普拉斯变换进阶}\label{sec:Advanced_Laplace}
 
 \section{系统的复频域分析}\label{sec:Complex_Freq_Analysis}
 
@@ -4419,17 +4530,12 @@ $\int_{\delta/\lambda}^{\infty}|g(y)|\,dy\to 0,\delta/\lambda\to\infty$是$\int_
 }
 取$K$充分大，则以上两积分都是收敛反常积分的尾部，从而是趋于0的。
 
-对于$\int_{0}^{K}$部分，定义\lr{
+对于$\int_{0}^{K}$部分，定义\begin{align*}
     g(y)=\begin{cases}
     \frac{f(x-y)-f(x-)}{\pi y},&y\in [0,K]\\
     0,&\text{otherwise}
     \end{cases}
-}{
-    g(y)=\begin{cases}
-    \frac{f(x-y)-f(x-)}{\pi y},&y\in [0,K]\\
-    0,&\text{otherwise}
-    \end{cases}
-}
+\end{align*}
 则\lr{
     &\int_{0}^{K}[f(x-y)-f(x-)]\frac{\sin(2\pi R y)}{\pi y}\,dy\\
     &=\int_{0}^{K}g(y)\frac{e^{2\pi i Ry}-e^{-2\pi iR y}}{2i}\,dy\\
@@ -4520,7 +4626,74 @@ $\int_{\delta/\lambda}^{\infty}|g(y)|\,dy\to 0,\delta/\lambda\to\infty$是$\int_
 由于积分区间有限，$f\in\mathcal{C} $光滑，以上积分总是存在的，并且可以对$s$求导，从而也是全纯的：\[F'(s)=-\int_{-T/2}^{T/2}tf(t)e^{-st}\,dt\]
 即$F(s)$是整函数。但是，$F(s)=0,\forall s=i\omega,|\omega|> \Omega/2$，这些点使得$F(s)=0,\forall s\in\mathbb{C}$，这样$f(t)$也只能为0。
 \end{proof}
+
 %时域频域“带宽”积，海森堡不确定性原理
+必须指出，实际应用中我们总是考虑时域、频域都近似紧支的函数，指出时限、带限不共存，只是理论需要。事实上，时域上的“宽度”与频域上的“宽度”之间存在一个下界，这一点从\ref{sec:Fourier}中提出的伸缩定理就可以看出：
+\lr{
+    \mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f(\frac{\xi}{a})
+}{
+    \mathcal{F} [f(at)](\omega)=\frac{1}{|a|}\mathcal{F} f(\frac{\omega}{a})
+}
+随着$a$的增大，时域函数$f(at)$变得越来越集中，而频域函数$\mathcal{F} f(\frac{\xi}{a})$则变得越来越分散，反之亦然。
+
+我们可以用方差来定量描述这一关系。物理规律中许多现象都可以归结为这一数学事实，例如著名的\textbf{海森堡不确定性原理} (Heisenberg's uncertainty principle)。
+\begin{theorem}
+    时域信号、频域信号的方差之积满足不等式
+    \[\sigma(f)\sigma(F)\geq \frac{1}{4\pi}\]
+    其中$f\in L^1(\mathbb{R} )\cap L^2(\mathbb{R} )$，$F(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt$，$\sigma(f),\sigma(F)$分别为$f,F$的方差。
+\end{theorem}
+\begin{proof}
+    我们首先验证，$|f|^2$与$|F|^2$作为某个随机变量的概率密度函数是良定义的，从而其方差是良定义的。根据普朗歇尔定理（见\ref{sec:Fourier}），\lr{
+    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
+}{
+    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
+}
+    要使它们都是概率密度函数，我们就需要把$|f|^2,|F|^2$归一化，在频率形式的傅里叶变换下，这是自动成立的，而如果使用角频率来做傅里叶变换，则需要引入额外的归一化系数，因此下面仅使用频率。
+
+    我们知道，如果随机变量$X$的概率密度函数为$f(x)$，并且其方差有定义（二阶中心矩存在），则方差为$\sigma^2=\int_{-\infty}^{\infty}(x-\mu)^2 f(x)\,dx$，其中$\mu=\int_{-\infty}^{\infty}x f(x)\,dx$为数学期望。
+    
+    我们假设$f$和$F$的数学期望为0，否则可以通过时移、频移定理将它调整为0，而不影响另一个域上信号的模值；又假设\[\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt<\infty,\int_{-\infty}^{\infty}\xi^2|F(\xi)|^2\,d\xi<\infty\]
+    即方差存在，则\begin{align*}
+    4\pi^2 \sigma^2(f)\sigma^2(F)&=4\pi^2 \int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}\xi^2|F(\xi)|^2\,d\xi\\
+    &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}|2\pi i\xi F(\xi)|^2\,d\xi\\
+    &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}| \mathcal{F} [f'(t)](\xi)|^2\,d\xi\\
+    &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}| f'(t)|^2\,dt&\text{(普朗歇尔定理)}\\
+    &\geq \left(\int_{-\infty}^{\infty}|tf(t)||f'(t)|\,dt\right)^2&\text{(柯西-施瓦兹不等式)}\\
+    &\geq \left|\int_{-\infty}^{\infty}tf(t)f'(t)\,dt\right|^2&\text{(三角不等式)}\\
+    &=\frac{1}{4}\left|\int_{-\infty}^{\infty}|f(t)|^2\,dt\right|^2&\text{(分部积分)}\\
+    &=\frac{1}{4}
+    \end{align*}
+    因此，$\sigma(f)\sigma(F)\geq \frac{1}{4\pi}$，得证。
+\end{proof}
+
+读者可以自行验证，以上不等式取等于高斯函数。
+
+使用方差的定义可以轻松地得到一个有用的不等式，它给出了一种基于方差估计函数集中程度的方法，这就是\textbf{切比雪夫不等式} (Chebyshev's inequality)：
+\begin{theorem}[切比雪夫不等式]
+    设$f\in L^2(\mathbb{R} )$，则对于任意$a>0$，都有
+    \[\int_{|t|\geq a}|f(t)|^2\,dt\leq \frac{1}{a^2}\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\]
+    在概率论中它的表述是：设随机变量$X$的数学期望为$\mu$，方差为$\sigma^2$，则对于任意$k>0$，都有\[P(|X-\mu|\geq a)\leq \frac{\sigma^2}{a^2}\]
+\end{theorem}
+\begin{proof}
+    由于$a>0$，有
+    \begin{align*}
+    \int_{|t|\geq a}|f(t)|^2\,dt&=\int_{|t|\geq a}\frac{t^2}{t^2}|f(t)|^2\,dt\\
+    &\leq \frac{1}{a^2}\int_{|t|\geq a}t^2|f(t)|^2\,dt\\
+    &\leq \frac{1}{a^2}\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt
+\end{align*}
+\end{proof}
+
+例如，取$a=2\sigma(f)$，则有\[\int_{|t|\geq 2\sigma(f)}|f(t)|^2\,dt\leq \frac{1}{4}\]
+即$f$在区间$[-2\sigma(f),2\sigma(f)]$之外的能量不超过总能量的$1/4$，因此前面证明的$\sigma_f \sigma_F\geq 1/4\pi$又可以表述为时域上的“宽度”与频域上的“宽度”之积有下界，游戏可以定义信号的时宽、带宽积：
+\begin{definition}[时宽-带宽积]
+    设$f\in L^1(\mathbb{R} )\cap L^2(\mathbb{R} )$，$F(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt$，则$f$的\textbf{时宽}(time width)和\textbf{带宽}(bandwidth)定义分别为
+    \[T=2\sigma(f),B=2\sigma(F)\]
+    它们的乘积称为\textbf{时宽-带宽积} (time-bandwidth product)：
+    \[TB(f)=4\sigma(f)\sigma(F)\]
+\end{definition}
+
+我们也可以根据时域、频域函数的半高宽或$1/20$高宽（1dB带宽）来估计它们的集中程度。
+
 施瓦兹函数类的另一个好处在于，它不仅保证了傅里叶变换下的封闭性，还使得傅里叶变换$\mathcal{F} :\mathcal{S} \to \mathcal{S} $是一个\textbf{线性拓扑自同构}，具体来说，这要求\begin{itemize}
     \item $\mathcal{F} $是线性的
     \item $\mathcal{F} $是双射（我们已经找到逆映射$\mathcal{F} ^{-1} $）
