@@ -3018,7 +3018,7 @@ $f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
 \textbf{强迫响应}(forced response)。
 \end{definition}
 注意区分它们与\ref{sec:System}中介绍的
-零状态响应、零输入响应，后者对于一般的系统都有定义，对于用微分方程描述的系统，齐
+零状态响应、零输入响应，后者对于更一般的线性系统都有定义，对于用微分方程描述的系统，齐
 次解和特解、零输入响应和零状态响应也是不同的分类方式。
 
 \begin{example}[两种响应划分方式的区别]
@@ -3045,9 +3045,9 @@ $y(t)=5-4e^{-2t}$。
 \begin{definition}[起始状态和初始状态]
     将激励接入之前的瞬间
 系统的状态称为\textbf{$0_-$状态}或\textbf{起始状态}，记为
-\[y_{(k)}(0_-)=[y(0_-),y'(0-),\cdots,y^{(n-1)}(0_-)]\]
+\[y_{(k)}(0-)=[y(0-),y'(0-),\cdots,y^{(n-1)}(0-)]\]
 将激励接入之后的瞬间系统的状态称为\textbf{$0_+$状态}或\textbf{初始状态}，记为
-\[y_{(k)}(0_+)=[y(0_+),y'(0+),\cdots,y^{(n-1)}(0_+)]\]
+\[y_{(k)}(0+)=[y(0+),y'(0+),\cdots,y^{(n-1)}(0+)]\]
 \end{definition}
 注意此时我们是允许一些条件发生突变的。
 \begin{example}[换路定则]
@@ -3070,9 +3070,9 @@ $u_C(0_-)=u_C(0_+)=u_C(0)$，而其电流可以不连续。电感电流、电容
 完全解中，$t\to\infty$时保留下来的分量称为稳态响应，例如一个常数；$t\to\infty$时趋于0的分量为稳态响应，例如$e^{-\lambda t}$。
 \end{definition}
 
-\begin{theorem}
+\begin{proposition}
     由常系数线性齐次微分方程描述的系统，如果初始状态为0向量，则该系统是因果线性时不变系统。
-\end{theorem}
+\end{proposition}
 \begin{proof}
     设一个系统描述为
 \[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdot +a_1 r'+a_0 r=e\]
@@ -3094,7 +3094,6 @@ $u_C(0_-)=u_C(0_+)=u_C(0)$，而其电流可以不连续。电感电流、电容
 \begin{definition}
     由常系数线性微分方程描述的系统总是因果线性时不变系统，不论初始状态是否为0。
 \end{definition}
-从研究微分方程描述系统的线性、时不变性的过程可以看出，提出零状态响应、零输入响应的分解是必要的，并且我们还将很快看到这样的分解方式对于求解常系数线性微分方程的好处。
 
 以线性时不变系统的视角来看微分方程，自然会想到求这个系统的单位脉冲响应，也就是说，
 令方程右侧的激励信号为$\delta$，看所得响应$h(t)$，这样，根据上一小节中的结果，
@@ -3163,20 +3162,12 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
     以上例子中出现了满足$h(t)=y_h(t)u(t)$的信号，将这种信号称为\textbf{因果信号}(causal signal)
 \end{definition}
 
-我们还可以对以上结果做一些推广：求解微分方程
+更一般地，由微分方程\[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m e^{(m)}(t)\]
+描述的系统，其单位脉冲响应满足：
 \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m \delta^{(m)}\]
-当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶数，即$N> M$时，解为
-$y_h(t)u(t)$；当$r(t)$的最高次导的阶数不小于$\delta$的最高阶导阶数，即$N\leq M$时，
-解为\[y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}\]
-换言之，需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现。
-这个结果可以求出以下形式的系统的脉冲响应：
-\[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m e^{(m)}(t)\]
-这同样时微分方程描述的系统，只不过从数学上我们没有必要考虑这种形式的方程，只要把
-方程右侧看作一个新的非齐次项，它与其他微分方程没有区别，但当系统用这种方式描述时，
-求解其脉冲响应就显得十分重要了。当然，正因为这种方程本质上还是一个非齐次的常系数
-线性微分方程，我们仍然可以用基本解的方法来求得脉冲响应，只需要在求出基本解后，将
-基本解与方程右侧做卷积，不过实际上记忆$\delta$的各阶导数的卷积特性并不是很有必要
-，通过待定系数法求解往往更快。
+当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶数，即$N> M$时，解为$y_h(t)u(t)$；当$r(t)$的最高次导的阶数不小于$\delta$的最高阶导阶数，即$N\leq M$时，解为$y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}$。换言之，需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现。
+
+从数学上我们没有必要考虑这种形式的方程，只要把方程右侧看作一个新的非齐次项，它与其他微分方程没有区别，但作为一个线性时不变系统，求解其脉冲响应就显得十分重要了。另一种单位脉冲响应的求解方法是，将系统视作普通的常系数线性微分方程，将基本解与$\sum_{m=0}^{M}b_m e^{(m)}(t)$的卷积作为系统的单位脉冲响应，但这样涉及$\delta$各阶导数的卷积，计算较为复杂，通过待定系数法求解往往更快。
 \begin{example}
     设系统由微分方程\[r''(t)+3r'(t)+2r(t)=e''(t)+e(t)\]描述，求其单位脉冲响应。\\
     解：齐次方程的特征方程为$\lambda^2+3\lambda+2=0$，$\lambda_1=-1,\lambda_2=-2$，齐次解为$r_h(t)=C_1 e^{-t}+C_2 e^{-2t}$。\\
@@ -3341,15 +3332,14 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 的统一延迟，即\[r(t)=Ke(t-t_0)\]其中K为常数，$t_0$为常数延迟。由傅里叶变换的时移性质可知，无失真传输系统的系统函数为
 \[H(\omega) = Ke^{-i\omega t_0}\]可以看到，$|H(\omega)|=K,t_0=-\varphi(\omega)/\omega$，其幅频特性是常数，图像为一水平线；相频特性是线性函数，图像为过原点的直线，斜率$-t_0$对应系统造成的延时。
 
-实际上，由于物理限制，我们不可能实现一个无失真传输系统，但只要所讨论的信号的频谱基本都集中在特定的频段当中，我们就可以近似认为在这个频段上满足$|H(\omega)|=K,\varphi(\omega)=-\omega t_0$的系统是无失真传输系统。
+由于物理限制，我们不可能实现一个无失真传输系统，但只要所讨论的信号的频谱基本都集中在特定的频段当中，就可以近似认为在这个频段上满足$|H(\omega)|=K,\varphi(\omega)=-\omega t_0$的系统是无失真传输系统。
 
 对于一般的线性时不变系统，可以将时延$t_0=-\varphi(\omega)/\omega$由常数推广为$\omega$的函数$\tau_p(\omega)$。此外，$\varphi(\omega)/\omega$是$\varphi(\omega)-\omega$图像的割线斜率，而$d\varphi(\omega)/d\omega$是该图像在$\omega$处的切线斜率，仿照电路分析中对于动态电阻和静态电阻的处理，我们定义相时延和群时延：
 \begin{definition}[相时延和群时延]
 \[\tau_p(\omega)=-\frac{\varphi(\omega)}{\omega}\]
 描述了系统对不同频率成分造成时延的情况，称之为\textbf{相时延}(phase delay)；将
 \[\tau_g(\omega)=-\frac{d\varphi(\omega)}{d\omega}\]
-称为\textbf{群时延}(group delay)或\textbf{包络延时}(envelope delay)，它描述
-了系统对各频率分量造成延时的变化率。
+称为\textbf{群时延}(group delay)或\textbf{包络延时}(envelope delay)。
 \end{definition}
 
 对于无失真传输系统，$\tau_p(\omega)=\tau_g(\omega)=t_0$。
@@ -3365,8 +3355,7 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 延迟了$\varphi(\omega_0)$，折合到时间上，就得到相时延为$\tau_p(\omega_0)=-\varphi(\omega_0)/\omega_0$。
 \end{example}
 
-可以想象，能够分解成不同频率成分的信号，其各频率成分一般会产生不同的相时延，
-从而使得输出信号的波形发生变化。
+可以想象，能够分解成不同频率成分的信号，其各频率成分一般会产生不同的相时延，从而使得输出信号的波形发生变化，这就是相频特性不是线性函数导致的相位失真。
 
 \begin{example}[群时延]
 设输入信号为调幅信号（关于调幅信号，见\ref{sec:modulation}）：
@@ -3440,7 +3429,7 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 \[y(x,t)=A\cos\omega\left(t-\frac{x}{u}\right)=A\cos\left(\frac{2\pi t}{T}-\frac{2\pi x}{\lambda}\right)\]
 引入\textbf{波数}$k=\frac{2\pi}{\lambda}$，则简谐波可以表示为
 \[y(x,t)=A\cos(\omega t - k x)\]
-这里波数并不是指波的数目，而是一个将空间距离折算为相位延迟的比例系数。我们将宗量$\omega t-kx$称为波的\textbf{相位}(phase)，考察相位的传播速度，即令$\omega t-kx=const$，得到
+这里波数并不是指波的数目，而是一个将空间距离折算为相位延迟的比例系数，也可以将它理解为波的空间角频率：对简谐波$y(x,t)=A\cos(\omega t-kx)$的空间变量做傅里叶变换，将得到空间角频率仅有$\pm k$的成分，对三维空间中的平面波也有类似的结论，见\ref{sec:Multi_Fourier}。我们将宗量$\omega t-kx$称为波的\textbf{相位}(phase)，考察相位的传播速度，即令$\omega t-kx=const$（例如，振幅最大值处恒有$\omega t-kx=0$），得到
 \[\frac{dx}{dt}=\frac{\omega}{k}=u\]
 这个速度称为\textbf{相速度}(phase velocity)，它描述了波的相位传播的速度，可以看到相速度正是波速$u$。
 
@@ -3451,6 +3440,9 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 因此可以对给定的$\omega$求出系统函数为
 \[H(\omega)=e^{-i\omega \frac{L}{u}}=e^{-ikL},k=\frac{\omega}{u}\]
 可以看出，$k$实际上是关于$\omega$的函数$k(\omega)=\omega/u$，但在研究单频正弦波时看不出这一点。
+\begin{definition}[色散关系]
+    介质中波数$k$与角频率$\omega$之间的函数关系$k(\omega)$称为\textbf{色散关系}(dispersion relation)。
+\end{definition}
 
 一般地，设初始波形为$f(x)$，波速为$u$，可以确定$x=0$处的激励信号$e(t)=f(-ut)$。它的不同频率成分通过均匀色散介质构成的系统时，只产生相位失真，因此系统函数可以表示为
 \[H(\omega)=e^{-ik(\omega)L}\]
@@ -3469,9 +3461,27 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 即\[\tau_p(\omega)v_p(\omega)=\tau_g(\omega)v_g(\omega)=L\]
 
 \begin{definition}
-    波包即脉冲波形，\textbf{波包中心}是指脉冲波形中振幅最大的位置，其传播速度称为\textbf{波包速度}。
+    波包即脉冲波形，\textbf{波包中心}是指脉冲波形中振幅最大的位置。经验上，用波包中心移动的速度来表征波包的移动速度，并称之为\textbf{波包速度}，这也是能量和信息在介质中传播的速度。
 \end{definition}
-对于窄带光脉冲，群速度等于波包速度，因此也是能量和信息在介质中传播的速度。
+\begin{proposition}
+    对窄带光脉冲，其波包速度等于群速度。
+\end{proposition}
+\begin{proof}
+设窄带光脉冲的中心频率为$\omega_0$，即其振幅谱$\hat{A}(\omega)$集中在$\omega_0$附近，做傅里叶反变换，得到的时域信号为$x=0$处经过的波形$A(t)$。对各频率成分引入相位因子$e^{-ik(\omega)x}$来表征波的传输，得到$x$处的波形为
+\[\psi(x,t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\hat{A}(\omega)e^{i(\omega t-k(\omega)x)}\,d\omega\]
+对$k(\omega)$在$\omega_0$处做泰勒展开：
+\[k(\omega)\approx k(\omega_0)+k'(\omega_0)(\omega-\omega_0)\]
+将其代入$\psi(x,t)$中，得到
+\begin{align*}
+    \psi(x,t)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}\hat{A}(\omega)e^{i(\omega t-k(\omega_0)x-k'(\omega_0)(\omega-\omega_0)x)}\,d\omega\\
+    &=\frac{1}{2\pi}e^{i(\omega_0 t-k(\omega_0)x)}\int_{-\infty}^{\infty}\hat{A}(\omega)e^{i(\omega - \omega_0)(t - k'(\omega_0)x)}\,d\omega\\
+    &=\frac{1}{2\pi}e^{i(\omega_0 t-k(\omega_0)x)}\int_{-\infty}^{\infty}\hat{A}(\omega+\omega_0)e^{i\omega(t - k'(\omega_0)x)}\,d\omega&(\omega\to\omega-\omega_0)\\
+    &=e^{i(\omega_0 t-k(\omega_0)x)}\mathcal{F}^{-1}[\hat{A}(\omega+\omega_0)]\left(t - k'(\omega_0)x\right)\\
+    &=e^{i(\omega_0 t-k(\omega_0)x)}A\left(t - k'(\omega_0)x\right)e^{-i\omega_0 (t- k'(\omega_0)x)}\\
+    &=A\left(t - k'(\omega_0)x\right)e^{i(\omega_0 k'(\omega_0)-k(\omega_0))x}
+\end{align*}
+可以看到，波形的包络$A\left(t - k'(\omega_0)x\right)$以速度$v_g(\omega_0)=\frac{1}{k'(\omega_0)}$传播，因此波包速度等于群速度。
+\end{proof}
 
 \section{调制、解调与复用传输}\label{sec:modulation}
 
