@@ -789,14 +789,15 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
 下允许略去，例如我们同时承认$F(\xi)=\mathcal{F} [f(t)](\xi)$和
 $F(\xi)=\mathcal{F} [f(t)]$的写法。
 
-至此我们得到了傅里叶逆变换的定义：\begin{definition}[傅里叶逆变换]
+至此我们得到了傅里叶逆变换\footnote{在一些文献中，傅里叶变换为$\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt$，这样逆变换为$\frac{1}{\sqrt{2\pi}}\mathcal{F} ^{-1}f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}f(\omega)e^{i\omega t}\,d\omega$，公式具有对称性，但不具有直接的物理意义，并且没有本质区别，故本书不加以讨论。}的定义：
+\begin{definition}[傅里叶逆变换]
     设$f\in L^1(\mathbb{R})$，其傅里叶逆变换为\lr{
         \mathcal{F} ^{-1}f(t)=\int_{-\infty}^{\infty}f(\xi)e^{2\pi i\xi t}\,d\xi
     }{
         \mathcal{F} ^{-1}f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}f(\omega)e^{i\omega t}\,d\omega
     }
 \end{definition}
-并由傅里叶级数展开式类比，从形式上得到了\textbf{傅里叶反演公式} (the Fourier Inversion Thoerem)：
+并且从形式上得到了\textbf{傅里叶反演公式} (the Fourier Inversion Thoerem)：
 \begin{claim}[傅里叶反演公式]
     \[f=\mathcal{F} \mathcal{F} ^{-1}f=\mathcal{F} ^{-1}\mathcal{F} f\]
 \end{claim}
@@ -1509,7 +1510,7 @@ $\forall x_1,x_2\in X$,映射$A:X\to Y$满足
 将其对偶空间$\mathcal{D} $中的元素称为分布，并规定函数$f\in \mathcal{C} $所产生的分布$T_f$
 为作用在$\mathcal{C}$上的以下\textbf{泛函}：
 \begin{equation*}
-    \langle T_f,\varphi\rangle:=\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{C}
+    \left\langle T_f,\varphi\right\rangle:=\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{C}
 \end{equation*}
 将这样的分布称为\textbf{正则分布}，而将无法用紧支函数描述的分布称为\textbf{奇异分布}。
 \end{definition}
@@ -1530,28 +1531,28 @@ $\forall x_1,x_2\in X$,映射$A:X\to Y$满足
 
 设$f,g,\varphi\in\mathcal{C} $,有
 \begin{align*}
-    \langle (f\cdot g),\varphi\rangle=\int_{-\infty}^{\infty}(f\cdot g)(x)\varphi(x)\,dx=\int_{-\infty}^{\infty}f(x)(g\cdot\varphi)(x)\,dx=\langle f,(g\cdot\varphi)\rangle
+    \left\langle (f\cdot g),\varphi\right\rangle=\int_{-\infty}^{\infty}(f\cdot g)(x)\varphi(x)\,dx=\int_{-\infty}^{\infty}f(x)(g\cdot\varphi)(x)\,dx=\langle f,(g\cdot\varphi)\rangle
 \end{align*}
 因此对于任意的分布$T\in\mathcal{D} $，定义它与$g\in\mathcal{C} $的乘积$gT$
 由以下等式给出：
 \begin{definition}[分布与函数的乘法]
     \begin{equation*}
-    \langle gT,\varphi\rangle=\langle T,g\varphi\rangle
+    \left\langle gT,\varphi\right\rangle=\langle T,g\varphi\rangle
 \end{equation*}
 \end{definition}
 $g\varphi$就是普通的函数乘法。现在就可以说，分布集$\mathcal{D} $构成函数环
 $\mathcal{C} $上的模(module)，并且可以验证$\delta$的取样性质：
 \begin{align*}
-     & \langle g\delta,\varphi\rangle=\langle \delta,g\varphi\rangle=g(0)\varphi(0)=g(0)\langle\delta,\varphi\rangle \Rightarrow  g\delta=g(0)\delta
+     & \left\langle g\delta,\varphi\right\rangle=\langle \delta,g\varphi\rangle=g(0)\varphi(0)=g(0)\langle\delta,\varphi\rangle \Rightarrow  g\delta=g(0)\delta
 \end{align*}
 
 用同样的思路定义分布的微分：设$f,g,\varphi\in\mathcal{C} $,有
 \begin{align*}
-    \langle f',\varphi\rangle=\int_{-\infty}^{\infty}f'(x)\varphi(x)\,dx=-\int_{-\infty}^{\infty}f(x)\varphi'(x)\,dx=\langle f,\varphi'\rangle
+    \left\langle f',\varphi\right\rangle=\int_{-\infty}^{\infty}f'(x)\varphi(x)\,dx=-\int_{-\infty}^{\infty}f(x)\varphi'(x)\,dx=\left\langle f,\varphi'\right\rangle
 \end{align*}
 因此\begin{definition}[分布的微分]
     \begin{equation*}
-    \langle T',\varphi\rangle=-\langle T,\varphi'\rangle
+    \left\langle T',\varphi\right\rangle=-\left\langle T,\varphi'\right\rangle
 \end{equation*}
 \end{definition}
 注意$\varphi\in\mathcal{C} $是无限阶可导的，我们可以由此定义分布的任意阶导数。
@@ -1559,19 +1560,19 @@ $\mathcal{C} $上的模(module)，并且可以验证$\delta$的取样性质：
 \ref{sec:signal}中提到的单位阶跃函数$u(t)$和$\delta$，现在就可以将它们
 视为分布并求各阶导数：
 \begin{align*}
-     & \langle u,\varphi\rangle:=\int_{0}^{\infty}\varphi(x)\,dx                                                                      \\
-     & \langle u',\varphi\rangle=-\langle u,\varphi'\rangle=-\int_{0}^{\infty}\varphi'(x)\,dx=\varphi(0)=\langle\delta,\varphi\rangle \\
-     & \langle \delta',\varphi\rangle=-\langle \delta,\varphi'\rangle=-\varphi'(0)
+     & \left\langle u,\varphi\right\rangle:=\int_{0}^{\infty}\varphi(x)\,dx                                                                      \\
+     & \left\langle u',\varphi\right\rangle=-\left\langle u,\varphi'\right\rangle=-\int_{0}^{\infty}\varphi'(x)\,dx=\varphi(0)=\left\langle\delta,\varphi\right\rangle \\
+     & \left\langle \delta',\varphi\right\rangle=-\left\langle \delta,\varphi'\right\rangle=-\varphi'(0)
 \end{align*}
 $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x)$的“函数”描述，但
 可以看到$\delta^{(n)}$作为一个泛函（分布）作用是取测试函数的$(-1)^n$倍的n阶导。
 现在也就不难理解$\delta^{(n)}$与函数相乘的公式，例如，
 \begin{align*}
-    \langle g\delta',\varphi\rangle & =\langle \delta',g\varphi\rangle                \\
-                                    & =-\langle\delta,(g\varphi)'\rangle              \\
-                                    & =-\langle\delta,g'\varphi+g\varphi'\rangle      \\
+    \left\langle g\delta',\varphi\right\rangle & =\left\langle \delta',g\varphi\right\rangle                \\
+                                    & =-\left\langle\delta,(g\varphi)'\right\rangle              \\
+                                    & =-\left\langle\delta,g'\varphi+g\varphi'\right\rangle      \\
                                     & =-(g(0)\varphi'(0)+g'(0)\varphi(0))             \\
-                                    & =\langle g(0)\delta'-g'(0)\delta,\varphi\rangle
+                                    & =\left\langle g(0)\delta'-g'(0)\delta,\varphi\right\rangle
     \Rightarrow g\delta'=g(0)\delta'-g'(0)\delta
 \end{align*}
 \end{example}
@@ -1583,22 +1584,22 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
     \item 任何分布$T\in\mathcal{D} $都是无穷次可微的
     \item 微分算子$D:\mathcal{D} \to\mathcal{D} $是线性的
     \item 微分算子D满足莱布尼兹法则(Leibniz rule):
-          \[(gT)'=g'T+gT'\]从而数学分析中的莱布尼兹公式在分布理论中仍成立：
-          \[(gT)^{(m)}=\sum_{k=0}^{m}C_m^k T^{(k)}g^{(m-k)}\]
+          \[\left(gT\right)'=g'T+gT'\]从而数学分析中的莱布尼兹公式在分布理论中仍成立：
+          \[\left(gT\right)^{(m)}=\sum_{k=0}^{m}C_m^k T^{(k)}g^{(m-k)}\]
     \item 微分算子D是连续的（表述见证明）
 \end{enumerate}
 \end{theorem}
 \begin{proof}
 \begin{enumerate}
-    \item 得自$\mathcal{C} $中函数的无限可微性：$\langle T^{(m)},\varphi\rangle=(-1)^m\langle T,\varphi^{(m)}\rangle$.
+    \item 得自$\mathcal{C} $中函数的无限可微性：$\left\langle T^{(m)},\varphi\right\rangle=(-1)^m\left\langle T,\varphi^{(m)}\right\rangle$.
     \item 显然。
     \item 只需验证莱布尼兹法则。
           \begin{align*}
-              \langle (gT)',\varphi\rangle & =-\langle gT,\varphi'\rangle=-\langle T,g\varphi'\rangle=-\langle T,(g\varphi)'-g'\varphi\rangle                                            \\
-                                           & =\langle T',g\varphi\rangle+\langle T,g'\varphi\rangle=\langle gT',\varphi\rangle+\langle g'T,\varphi\rangle=\langle gT'+g'T,\varphi\rangle
+              \left\langle (gT)',\varphi\right\rangle & =-\left\langle gT,\varphi'\right\rangle=-\left\langle T,g\varphi'\right\rangle=-\left\langle T,(g\varphi)'-g'\varphi\right\rangle                                            \\
+                                           & =\left\langle T',g\varphi\right\rangle+\left\langle T,g'\varphi\right\rangle=\left\langle gT',\varphi\right\rangle+\left\langle g'T,\varphi\right\rangle=\left\langle gT'+g'T,\varphi\right\rangle
           \end{align*}
-    \item 设当$m\to\infty$时，$T_m\to T$，即$\forall\varphi\in\mathcal{C} ,\langle T_m,\varphi\rangle\to\langle T,\varphi\rangle$，
-          则\[\langle T_m',\varphi\rangle=-\langle T_m,\varphi'\rangle\to-\langle T,\varphi'\rangle=\langle T',\varphi\rangle\]
+    \item 设当$m\to\infty$时，$T_m\to T$，即$\forall\varphi\in\mathcal{C} ,\left\langle T_m,\varphi\right\rangle\to\left\langle T,\varphi\right\rangle$，
+          则\[\left\langle T_m',\varphi\right\rangle=-\left\langle T_m,\varphi'\right\rangle\to-\left\langle T,\varphi'\right\rangle=\left\langle T',\varphi\right\rangle\]
 \end{enumerate}
 可以看到，分布理论中极限的概念是通过测试函数来定义的，如果分布序列$\{T_m\}_{m=1}^{\infty}$
 作用在任何测试函数上都是趋于某个分布T作用于这个测试函数的值，就说序列$\{T_m\}$
@@ -1613,7 +1614,7 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
 \end{itemize}
 我们将看到，分布$T$的傅里叶变换$\mathcal{F} T$定义为
 \begin{equation}
-    \langle\mathcal{F}T,\varphi\rangle=\langle T,\mathcal{F}\varphi\rangle
+    \left\langle\mathcal{F}T,\varphi\right\rangle=\left\langle T,\mathcal{F}\varphi\right\rangle
 \end{equation}
 然而，测试函数$\varphi\in\mathcal{C} $的傅里叶变换$\mathcal{F}\varphi$并不属于
 $\mathcal{C} $
@@ -1622,7 +1623,7 @@ $\mathcal{C} $
 $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textbf{施瓦兹空间}(Schwartz space)$\mathcal{S} $
 ，它是$\mathbb{R}$上所有无限可微函数的集合，这些函数及其各阶导数都以比任何负幂更快的速度趋于0，即
 \begin{definition}[施瓦兹空间与施瓦兹函数]
-    \[\mathcal{S} =\{\varphi\in C^{\infty}(\mathbb{R} ):\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \}\]
+    \[\mathcal{S} =\left\{\varphi\in C^{\infty}(\mathbb{R} )\left|\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \right.\right\}\]
 施瓦兹空间中的函数称为\textbf{施瓦兹函数}(Schwartz function)，它们是非常光滑且
 衰减很快的函数，因此又称为\textbf{速降函数}(rapidly decreasing function)
 \end{definition}
@@ -1635,15 +1636,15 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 \end{definition}
 我们仍定义
 \begin{align}
-    T(\varphi)                 & =\langle T,\varphi\rangle                                        \\
-    \langle T_f,\varphi\rangle & =\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{S}
+    T(\varphi)                 & =\left\langle T,\varphi\right\rangle                                        \\
+    \left\langle T_f,\varphi\right\rangle & =\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{S}
 \end{align}
 易见$\mathcal{C} \subset \mathcal{S} ,\mathcal{T} \subset\mathcal{D}. $
 
 有了施瓦兹函数类$\mathcal{S} $和缓增分布$\mathcal{T} $，我们就可以定义分布的傅里
 叶变换，还可以定义有关分布的一系列算子。前文中曾定义分布与函数的乘法和分布的导数，
 现在认为正则分布是由施瓦兹函数导出的，则显然能够推广到缓增分布，即\begin{align}
-    \langle gT,\varphi\rangle=\langle T,g\varphi\rangle,\langle T',\varphi\rangle=\langle T,\varphi'\rangle,g\in\mathcal{S} ,T\in\mathcal{T}
+    \left\langle gT,\varphi\right\rangle=\left\langle T,g\varphi\right\rangle,\left\langle T',\varphi\right\rangle=\left\langle T,\varphi'\right\rangle,g\in\mathcal{S} ,T\in\mathcal{T}
 \end{align}
 用同样的方式，我们依次讨论作用于缓增分布的各种算子。
 
@@ -1651,21 +1652,21 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，则
 \begin{align*}
-    \langle\mathcal{F}T_f,\varphi\rangle & =\int_{-\infty}^{\infty}\mathcal{F}f(x)\varphi(x)\,dx                                       \\
+    \left\langle\mathcal{F}T_f,\varphi\right\rangle & =\int_{-\infty}^{\infty}\mathcal{F}f(x)\varphi(x)\,dx                                       \\
                                          & =\int_{-\infty}^{\infty}\varphi(x)\,dx\int_{-\infty}^{\infty}f(y)e^{-2\pi ixy}\,dy          \\
                                          & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}\varphi(x)e^{-2\pi ixy}\,dx          \\
-                                         & =\int_{-\infty}^{\infty}f(y)\mathcal{F}\varphi(y)\,dy=\langle T_f,\mathcal{F}\varphi\rangle
+                                         & =\int_{-\infty}^{\infty}f(y)\mathcal{F}\varphi(y)\,dy=\left\langle T_f,\mathcal{F}\varphi\right\rangle
 \end{align*}
 因此我们定义\begin{definition}[分布的傅里叶变换]
     \begin{align*}
-        \langle \mathcal{F} T,\varphi\rangle & =\langle T,\mathcal{F} \varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+        \left\langle \mathcal{F} T,\varphi\right\rangle & =\left\langle T,\mathcal{F} \varphi\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
     \end{align*}
 \end{definition}
 
 傅里叶逆变换同理:
 \begin{definition}[分布的傅里叶反变换]
     \begin{align*}
-        \langle \mathcal{F} ^{-1}T,\varphi\rangle & =\langle T,\mathcal{F} ^{-1}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+        \left\langle \mathcal{F} ^{-1}T,\varphi\right\rangle & =\left\langle T,\mathcal{F} ^{-1}\varphi\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
     \end{align*}
 \end{definition}
 
@@ -1674,11 +1675,11 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 \end{theorem}
 \begin{proof}
     \begin{align*}
-    \langle \mathcal{F} ^{-1}\mathcal{F} T,\varphi\rangle & =\langle \mathcal{F} T,\mathcal{F} ^{-1}\varphi\rangle \\
-                                                          & =\langle T,\mathcal{F} \mathcal{F} ^{-1}\varphi\rangle \\
-                                                          & =\langle T,\varphi\rangle                              \\
-    \langle \mathcal{F} \mathcal{F} ^{-1}T,\varphi\rangle & =\langle T,\mathcal{F} ^{-1}\mathcal{F} \varphi\rangle \\
-                                                          & =\langle T,\varphi\rangle
+    \left\langle \mathcal{F} ^{-1}\mathcal{F} T,\varphi\right\rangle & =\left\langle \mathcal{F} T,\mathcal{F} ^{-1}\varphi\right\rangle \\
+                                                          & =\left\langle T,\mathcal{F} \mathcal{F} ^{-1}\varphi\right\rangle \\
+                                                          & =\left\langle T,\varphi\right\rangle                              \\
+    \left\langle \mathcal{F} \mathcal{F} ^{-1}T,\varphi\right\rangle & =\left\langle T,\mathcal{F} ^{-1}\mathcal{F} \varphi\right\rangle \\
+                                                          & =\left\langle T,\varphi\right\rangle
 \end{align*}
 \end{proof}
 
@@ -1689,39 +1690,39 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 \begin{proof}
     尽管没有明确指出，我们也会很自然的想到定义
 \begin{equation}
-    \langle aT+bS,\varphi\rangle=a\langle T,\varphi\rangle+b\langle S,\varphi\rangle
+    \left\langle aT+bS,\varphi\right\rangle=a\left\langle T,\varphi\right\rangle+b\left\langle S,\varphi\right\rangle
 \end{equation}
 于是\begin{align*}
-    \langle \mathcal{F} (aT+bS),\varphi\rangle & =a\langle T,\mathcal{F} \varphi\rangle+b\langle S,\mathcal{F} \varphi\rangle                     \\
-                                               & =a\langle \mathcal{F} T,\varphi\rangle+b\langle \mathcal{F} S,\varphi\rangle                     \\
-                                               & =\langle a\mathcal{F} T+b\mathcal{F} S,\varphi\rangle                                            \\
+    \left\langle \mathcal{F} (aT+bS),\varphi\right\rangle & =a\left\langle T,\mathcal{F} \varphi\right\rangle+b\left\langle S,\mathcal{F} \varphi\right\rangle                     \\
+                                               & =a\left\langle \mathcal{F} T,\varphi\right\rangle+b\left\langle \mathcal{F} S,\varphi\right\rangle                     \\
+                                               & =\left\langle a\mathcal{F} T+b\mathcal{F} S,\varphi\right\rangle                                            \\
                                                & \Rightarrow \mathcal{F} (aT+bS)=a\mathcal{F} T+b\mathcal{F} S,a,b\in\mathbb{C},S,T\in\mathcal{T}
 \end{align*}
 \end{proof}
 \begin{example}[$\delta$的傅里叶变换]
     现在可以严谨地求出$\delta$的傅里叶变换：
 \begin{align*}
-    \langle\mathcal{F}\delta,\varphi\rangle=\langle \delta,\mathcal{F}\varphi\rangle=\mathcal{F}\varphi(0)=\int_{-\infty}^{\infty}\varphi(x)\,dx=\langle \mathds{1},\varphi\rangle \\
+    \left\langle\mathcal{F}\delta,\varphi\right\rangle=\left\langle \delta,\mathcal{F}\varphi\right\rangle=\mathcal{F}\varphi(0)=\int_{-\infty}^{\infty}\varphi(x)\,dx=\left\langle \mathds{1},\varphi\right\rangle \\
     \Rightarrow\mathcal{F}\delta =\mathds{1}
 \end{align*}
 \end{example}
 \begin{example}[$\delta$的平移的傅里叶变换]
     $\delta$的平移$\delta_a$作为一种分布，定义为
 \begin{equation}
-    \delta_a(\varphi)=\langle \delta_a,\varphi\rangle=\varphi(a)
+    \delta_a(\varphi)=\left\langle \delta_a,\varphi\right\rangle=\varphi(a)
 \end{equation}
 它的傅里叶变换为
 \lr{
-\langle\mathcal{F}\delta_a,\varphi\rangle&=\langle \delta_a,\mathcal{F}\varphi\rangle\\
+\left\langle\mathcal{F}\delta_a,\varphi\right\rangle=\left\langle \delta_a,\mathcal{F}\varphi\right\rangle\\
 &=\mathcal{F}\varphi(a)\\
 &=\int_{-\infty}^{\infty}\varphi(x)e^{-2\pi iax}\,dx\\
-&=\langle e^{-2\pi iax},\varphi\rangle \\
+&=\left\langle e^{-2\pi iax},\varphi\right\rangle \\
 &\Rightarrow\mathcal{F}\delta_a =e^{-2\pi iax}
 }{
-\langle\mathcal{F}\delta_a,\varphi\rangle&=\langle \delta_a,\mathcal{F}\varphi\rangle\\
+\left\langle\mathcal{F}\delta_a,\varphi\right\rangle=\left\langle \delta_a,\mathcal{F}\varphi\right\rangle\\
 &=\mathcal{F}\varphi(a)\\
 &=\int_{-\infty}^{\infty}\varphi(x)e^{-i a x}\,dx\\
-&=\langle e^{-i a x},\varphi\rangle \\
+&=\left\langle e^{-i a x},\varphi\right\rangle \\
 &\Rightarrow\mathcal{F}\delta_a =e^{-i a x}
 }
 根据阿贝尔-狄利克雷判别法（A-D判别法，请自行查看数学分析的教材），$\langle e^{-i a x},\varphi\rangle$
@@ -1732,19 +1733,19 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 \begin{example}[分布$\mathds{1}$的傅里叶变换]
 尽管$\mathds{1}\notin L^1(\mathbb{R})$，但可以
 认为它是缓增分布，因为对于任意的$\varphi\in\mathcal{S} $，都有
-\[\langle \mathds{1},\varphi\rangle=\int_{-\infty}^{\infty}\varphi(x)\,dx<\infty\]
+\[\left\langle \mathds{1},\varphi\right\rangle=\int_{-\infty}^{\infty}\varphi(x)\,dx<\infty\]
 因此可以求它的傅里叶变换：
 \lr{
-    \langle \mathcal{F} \mathds{1},\varphi\rangle&=\langle \mathds{1},\mathcal{F} \varphi\rangle\\
+    \left\langle \mathcal{F} \mathds{1},\varphi\right\rangle&=\left\langle \mathds{1},\mathcal{F} \varphi\right\rangle\\
     &=\int_{-\infty}^{\infty}\mathcal{F} \varphi(\xi)\,d\xi\\
     &=\mathcal{F} \mathcal{F} \varphi(0)\\
-    &=\varphi(0)=\langle \delta,\varphi\rangle\\
+    &=\varphi(0)=\left\langle \delta,\varphi\right\rangle\\
     \Rightarrow \mathcal{F} \mathds{1}&=\delta
 }{
-    \langle \mathcal{F} \mathds{1},\varphi\rangle&=\langle \mathds{1},\mathcal{F} \varphi\rangle\\
+    \left\langle \mathcal{F} \mathds{1},\varphi\right\rangle&=\left\langle \mathds{1},\mathcal{F} \varphi\right\rangle\\
     &=\int_{-\infty}^{\infty}\mathcal{F} \varphi(\xi)\,d\xi\\
     &=\mathcal{F} \mathcal{F} \varphi(0)\\
-    &=2\pi\varphi(0)=2\pi\langle \delta,\varphi\rangle\\
+    &=2\pi\varphi(0)=2\pi\left\langle \delta,\varphi\right\rangle\\
     \Rightarrow \mathcal{F} \mathds{1}&=2\pi\delta
 }
 \end{example}
@@ -1753,13 +1754,13 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，自然可以定义$T_f^-=T_{f^-}$,
 \begin{align*}
-    \langle T_f^-,\varphi\rangle & =\int_{-\infty}^{\infty}f(-x)\varphi(x)\,dx \\
+    \left\langle T_f^-,\varphi\right\rangle & =\int_{-\infty}^{\infty}f(-x)\varphi(x)\,dx \\
                                  & =\int_{-\infty}^{\infty}f(y)\varphi(-y)\,dy \\
-                                 & =\langle T_f,\varphi^-\rangle
+                                 & =\left\langle T_f,\varphi^-\right\rangle
 \end{align*}
 因此我们定义\begin{definition}[分布的反转]
     \begin{equation*}
-    \langle T^-,\varphi\rangle=\langle T,\varphi^-\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+    \left\langle T^-,\varphi\right\rangle=\left\langle T,\varphi^-\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
@@ -1780,19 +1781,19 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 和常规的函数一样，现在也可以不区分反转与傅里叶变换的先后，而统一地记作$\mathcal{F} T^-$.
 \begin{proof}
     \begin{align*}
-    \langle\mathcal{F}(T^-),\varphi\rangle=\langle T^-,\mathcal{F}\varphi\rangle=\langle T,\mathcal{F} \varphi^-\rangle=\langle\mathcal{F}T,\varphi^-\rangle=\langle(\mathcal{F}T)^-,\varphi\rangle \\
+    \left\langle\mathcal{F}(T^-),\varphi\right\rangle=\left\langle T^-,\mathcal{F}\varphi\right\rangle=\left\langle T,\mathcal{F} \varphi^-\right\rangle=\left\langle\mathcal{F}T,\varphi^-\right\rangle=\left\langle(\mathcal{F}T)^-,\varphi\right\rangle \\
     \Rightarrow\mathcal{F}(T^-)= (\mathcal{F}T)^-
 \end{align*}
 考察反转与傅里叶逆变换的关系：
 \lr{
-    \langle\mathcal{F}T^-,\varphi\rangle&=\langle T,\mathcal{F}\varphi^-\rangle\\
-    &=\langle T,\mathcal{F} ^{-1}\varphi\rangle\\
-    &=\langle\mathcal{F}^{-1}T,\varphi\rangle\\
+    \left\langle\mathcal{F}T^-,\varphi\right\rangle&=\left\langle T,\mathcal{F}\varphi^-\right\rangle\\
+    &=\left\langle T,\mathcal{F} ^{-1}\varphi\right\rangle\\
+    &=\left\langle\mathcal{F}^{-1}T,\varphi\right\rangle\\
     &\Rightarrow\mathcal{F}T^-= \mathcal{F}^{-1}T
 }{
-    \langle\mathcal{F}T^-,\varphi\rangle&=\langle T,\mathcal{F}\varphi^-\rangle\\
-    &=\langle T,2\pi\mathcal{F} ^{-1}\varphi\rangle\\
-    &=\langle2\pi\mathcal{F}^{-1}T,\varphi\rangle\\
+    \left\langle\mathcal{F}T^-,\varphi\right\rangle=\left\langle T,\mathcal{F}\varphi^-\right\rangle\\
+    &=\left\langle T,2\pi\mathcal{F} ^{-1}\varphi\right\rangle\\
+    &=\left\langle2\pi\mathcal{F}^{-1}T,\varphi\right\rangle\\
     &\Rightarrow\mathcal{F}T^-= 2\pi\mathcal{F}^{-1}T
 }
 \end{proof}
@@ -1807,13 +1808,13 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 \end{theorem}
 \begin{proof}
 设$f,g\in\mathcal{S} $,\lr{
-    \langle \mathcal{F} f,\overline{\mathcal{F} g}\rangle&=\langle \mathcal{F} f,\mathcal{F}^{-1}\overline{g}\rangle\\
-    &=\langle f,\mathcal{F} \mathcal{F} ^{-1}\overline{g}\rangle\\
-    &=\langle f,\overline{g}\rangle
+    \left\langle \mathcal{F} f,\overline{\mathcal{F} g}\right\rangle&=\left\langle \mathcal{F} f,\mathcal{F}^{-1}\overline{g}\right\rangle\\
+    &=\left\langle f,\mathcal{F} \mathcal{F} ^{-1}\overline{g}\right\rangle\\
+    &=\left\langle f,\overline{g}\right\rangle
 }{
-    \langle \mathcal{F} f,\overline{\mathcal{F} g}\rangle&=\langle f,2\pi\mathcal{F}^{-1}\overline{g}\rangle\\
-    &=\langle f,2\pi\mathcal{F} \mathcal{F} ^{-1}\overline{g}\rangle\\
-    &=2\pi\langle f,\overline{g}\rangle
+    \left\langle \mathcal{F} f,\overline{\mathcal{F} g}\right\rangle=\left\langle f,2\pi\mathcal{F}^{-1}\overline{g}\right\rangle\\
+    &=\left\langle f,2\pi\mathcal{F} \mathcal{F} ^{-1}\overline{g}\right\rangle\\
+    &=2\pi\left\langle f,\overline{g}\right\rangle
 }
 取$g=f$即证。
 \end{proof}
@@ -1821,7 +1822,7 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 
 \begin{example}[$\delta$是偶分布]
     \begin{align*}
-    \langle \delta^-,\varphi\rangle & =\langle \delta,\varphi^-\rangle=\varphi^-(0)=\varphi(0)=\langle \delta,\varphi\rangle \\
+    \left\langle \delta^-,\varphi\right\rangle & =\left\langle \delta,\varphi^-\right\rangle=\varphi^-(0)=\varphi(0)=\left\langle \delta,\varphi\right\rangle \\
     \Rightarrow \delta^-            & =\delta
 \end{align*}
 \end{example}
@@ -1866,11 +1867,11 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，则
 \begin{align*}
-    \langle \overline{T_f},\varphi\rangle=\int_{-\infty}^{\infty}\overline{f(x)}\varphi(x)\,dx=\overline{\int_{-\infty}^{\infty}f(x)\overline{\varphi(x)}\,dx}=\overline{\langle T_f,\overline{\varphi}\rangle} \\
+    \left\langle \overline{T_f},\varphi\right\rangle=\int_{-\infty}^{\infty}\overline{f(x)}\varphi(x)\,dx=\overline{\int_{-\infty}^{\infty}f(x)\overline{\varphi(x)}\,dx}=\overline{\left\langle T_f,\overline{\varphi}\right\rangle} \\
 \end{align*}
 因此我们定义\begin{definition}[分布的共轭]
     \begin{equation*}
-    \langle \overline{T},\varphi\rangle=\overline{\langle T,\overline{\varphi}\rangle},T\in\mathcal{T} ,\varphi\in\mathcal{S}
+    \left\langle \overline{T},\varphi\right\rangle=\overline{\left\langle T,\overline{\varphi}\right\rangle},T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
@@ -1891,7 +1892,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 
 对于分布，
 \begin{align*}
-    \langle\mathcal{F}T^-,\varphi\rangle =\langle T,\mathcal{F}\varphi^-\rangle
+    \left\langle\mathcal{F}T^-,\varphi\right\rangle =\left\langle T,\mathcal{F}\varphi^-\right\rangle
 \end{align*}
 但是，我们并不能保证$\varphi$是实值函数\footnote{尽管在原始定义中没有提到这一点，但和前
     面引入施瓦兹函数类一样，要保证施瓦兹函数的傅里叶变换仍然是施瓦兹函数，而实值函数的
@@ -1909,25 +1910,25 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，自然可以定义$\tau_b T_f=T_{\tau_b f}$，
 \begin{align*}
-    \langle \tau_b T_f,\varphi\rangle & =\int_{-\infty}^{\infty}f(x-b)\varphi(x)\,dx \\
+    \left\langle \tau_b T_f,\varphi\right\rangle & =\int_{-\infty}^{\infty}f(x-b)\varphi(x)\,dx \\
                                       & =\int_{-\infty}^{\infty}f(y)\varphi(y+b)\,dy \\
-                                      & =\langle T_f,\tau_{-b}\varphi\rangle
+                                      & =\left\langle T_f,\tau_{-b}\varphi\right\rangle
 \end{align*}
 因此我们定义\begin{definition}[分布的平移]
     \begin{equation*}
-    \langle \tau_b T,\varphi\rangle=\langle T,\tau_{-b}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+    \left\langle \tau_b T,\varphi\right\rangle=\left\langle T,\tau_{-b}\varphi\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，自然可以定义$\sigma_a T_f=T_{\sigma_a f}$，
 \begin{align*}
-    \langle \sigma_a T_f,\varphi\rangle & =\int_{-\infty}^{\infty}f(ax)\varphi(x)\,dx                                  \\
+    \left\langle \sigma_a T_f,\varphi\right\rangle & =\int_{-\infty}^{\infty}f(ax)\varphi(x)\,dx                                  \\
                                         & =\frac{1}{|a|}\int_{-\infty}^{\infty}f(y)\varphi\left(\frac{y}{a}\right)\,dy \\
-                                        & =\frac{1}{|a|}\langle T_f,\sigma_{1/a}\varphi\rangle
+                                        & =\frac{1}{|a|}\left\langle T_f,\sigma_{1/a}\varphi\right\rangle
 \end{align*}
 因此我们定义\begin{definition}[分布的伸缩]
     \begin{equation*}
-    \langle\sigma_a T,\varphi\rangle=\langle T,\frac{1}{|a|}\sigma_{1/a}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+    \left\langle\sigma_a T,\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\sigma_{1/a}\varphi\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
@@ -1939,11 +1940,11 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \end{theorem}
 \begin{proof}
         \begin{align*}
-    \langle\mathcal{F}(\tau_b T),\varphi\rangle =\langle \tau_b T,\mathcal{F}\varphi\rangle=\langle T,\tau_{-b}\mathcal{F}\varphi\rangle=\langle T,e^{2\pi ibx}\mathcal{F}\varphi\rangle=\langle \mathcal{F}(e^{2\pi ibx}T),\varphi\rangle \\
+    \left\langle\mathcal{F}(\tau_b T),\varphi\right\rangle =\left\langle \tau_b T,\mathcal{F}\varphi\right\rangle=\left\langle T,\tau_{-b}\mathcal{F}\varphi\right\rangle=\left\langle T,e^{2\pi ibx}\mathcal{F}\varphi\right\rangle=\left\langle \mathcal{F}(e^{2\pi ibx}T),\varphi\right\rangle \\
     \Rightarrow\mathcal{F}(\tau_b T)           =\mathcal{F}(e^{2\pi ibx}T)
 \end{align*}
 \begin{align*}
-    \langle\mathcal{F}(\sigma_a T),\varphi\rangle =\langle \sigma_a T,\mathcal{F}\varphi\rangle=\langle T,\frac{1}{|a|}\sigma_{\frac{1}{a}}\mathcal{F}\varphi\rangle=\langle T,\frac{1}{|a|}\mathcal{F}\sigma_a \varphi\rangle=\langle \frac{1}{|a|}\mathcal{F}(\sigma_a T),\varphi\rangle \\
+    \left\langle\mathcal{F}(\sigma_a T),\varphi\right\rangle =\left\langle \sigma_a T,\mathcal{F}\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\sigma_{\frac{1}{a}}\mathcal{F}\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\mathcal{F}\sigma_a \varphi\right\rangle=\left\langle \frac{1}{|a|}\mathcal{F}(\sigma_a T),\varphi\right\rangle \\
     \Rightarrow\mathcal{F}(\sigma_a T)           =\frac{1}{|a|}\mathcal{F}(\sigma_a T)
 \end{align*}
 \end{proof}
@@ -1953,28 +1954,28 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 我们已经得到$\langle T',\varphi\rangle=-\langle T,\varphi'\rangle$，现在结合
 分布与函数的乘法，仿照函数的情形得到分布的傅里叶变换的微分性质：
 \lr{
-    \langle\mathcal{F} (T'),\varphi\rangle&=-\langle T,(\mathcal{F} \varphi)'\rangle\\
-    &=\langle T,\mathcal{F} (2\pi i t\varphi)\rangle\\
-    &=\langle 2\pi i\xi\mathcal{F}T,\varphi\rangle\\
-    &\Rightarrow\mathcal{F} (T')=2\pi i\xi\mathcal{F}T
+    \left\langle\mathcal{F} (T'),\varphi\right\rangle=-\left\langle T,(\mathcal{F} \varphi)'\right\rangle\\
+    =\left\langle T,\mathcal{F} (2\pi i t\varphi)\right\rangle\\
+    =\left\langle 2\pi i\xi\mathcal{F}T,\varphi\right\rangle\\
+    \Rightarrow\mathcal{F} (T')=2\pi i\xi\mathcal{F}T
 }{
-    \langle\mathcal{F} (T'),\varphi\rangle&=-\langle T,(\mathcal{F} \varphi)'\rangle\\
-    &=\langle T,\mathcal{F} (i t\varphi)\rangle\\
-    &=\langle i\omega\mathcal{F}T,\varphi\rangle\\
+    \left\langle\mathcal{F} (T'),\varphi\right\rangle=-\left\langle T,(\mathcal{F} \varphi)'\right\rangle\\
+    &=\left\langle T,\mathcal{F} (i t\varphi)\right\rangle\\
+    &=\left\langle i\omega\mathcal{F}T,\varphi\right\rangle\\
     &\Rightarrow\mathcal{F} (T')=i\omega\mathcal{F}T
 }
 这与函数的傅里叶变换的微分性质一致，注意将$t$换成$\xi$或$\omega$，只是符号上的改
 变，用以区分所讨论的场景。同样地，
 \lr{
-    \langle (\mathcal{F} T)',\varphi\rangle&=\langle T,-\mathcal{F} (\varphi')\rangle\\
-    &=\langle T,-2\pi i\xi\mathcal{F} \varphi\rangle\\
-    &=\langle -\mathcal{F} (2\pi i tT),\varphi\rangle\\
-    &\Rightarrow (\mathcal{F} T)'=-\mathcal{F} (2\pi i tT)
+    \left\langle (\mathcal{F} T)',\varphi\right\rangle=\left\langle T,-\mathcal{F} (\varphi')\right\rangle\\
+    =\left\langle T,-2\pi i\xi\mathcal{F} \varphi\right\rangle\\
+    =\left\langle -\mathcal{F} (2\pi i tT),\varphi\right\rangle\\
+    \Rightarrow (\mathcal{F} T)'=-\mathcal{F} (2\pi i tT)
 }{
-    \langle(\mathcal{F} T)',\varphi\rangle&=\langle T,-\mathcal{F} (\varphi)'\rangle\\
-    &=\langle T,-i\omega\mathcal{F} \varphi\rangle\\
-    &=\langle -\mathcal{F} (itT),\varphi\rangle\\
-    &\Rightarrow (\mathcal{F} T)'=-\mathcal{F} (itT)
+    \left\langle(\mathcal{F} T)',\varphi\right\rangle=\left\langle T,-\mathcal{F} (\varphi)'\right\rangle\\
+    =\left\langle T,-i\omega\mathcal{F} \varphi\right\rangle\\
+    =\left\langle -\mathcal{F} (itT),\varphi\right\rangle\\
+    \Rightarrow (\mathcal{F} T)'=-\mathcal{F} (itT)
 }
 也即
 \lr{
@@ -2001,72 +2002,72 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 
 设$f,g,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，自然可以定义$(T_f)*g=T_{(f*g)}$，
 \begin{align*}
-    \langle T_f*g,\varphi\rangle & =\int_{-\infty}^{\infty}(f*g)(x)\varphi(x)\,dx                                           \\
+    \left\langle T_f*g,\varphi\right\rangle & =\int_{-\infty}^{\infty}(f*g)(x)\varphi(x)\,dx                                           \\
                                  & =\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(y)g(x-y)\,dy\right)\varphi(x)\,dx \\
                                  & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(x-y)\varphi(x)\,dx              \\
                                  & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g^- (y-x)\varphi(x)\,dx           \\
                                  & =\int_{-\infty}^{\infty}f(y)[(g^-) *\varphi](y)\,dy                                      \\
-                                 & =\langle T_f,(g^-)*\varphi\rangle
+                                 & =\left\langle T_f,(g^-)*\varphi\right\rangle
 \end{align*}
 因此我们定义\begin{definition}[分布与函数的卷积]
-    \[\langle T*g,\varphi\rangle=\langle T,(g^-)*\varphi\rangle\]
+    \[\left\langle T*g,\varphi\right\rangle=\left\langle T,(g^-)*\varphi\right\rangle\]
 \end{definition}
 
 从定义分布与函数的卷积的过程可以看出，应当要求卷积的交换律仍然成立；“结合律”在目前
 只限于讨论$(f*g)*T$是否等于$f*(g*T)$，我们来验证这一性质：
 \begin{align*}
-    \langle (f*g)*T,\varphi\rangle & =\langle T,(f*g)^- *\varphi\rangle                             \\
-                                   & =\langle T,(f^-)*(g^-)*\varphi\rangle                          \\
-                                   & =\langle g*T,(f^-)*\varphi\rangle                              \\
-                                   & =\langle f*(g*T),\varphi\rangle                                \\
+    \left\langle (f*g)*T,\varphi\right\rangle & =\left\langle T,(f*g)^- *\varphi\right\rangle                             \\
+                                   & =\left\langle T,(f^-)*(g^-)*\varphi\right\rangle                          \\
+                                   & =\left\langle g*T,(f^-)*\varphi\right\rangle                              \\
+                                   & =\left\langle f*(g*T),\varphi\right\rangle                                \\
                                    & \Rightarrow (f*g)*T=f*(g*T),f,g\in\mathcal{S} ,T\in\mathcal{T}
 \end{align*}
 而线性性则和前面傅里叶变换的线性性没有多少区别：\\
 \ding{172}对函数的线性性
 \begin{align*}
-    \langle (af+bg)*T,\varphi\rangle & =\langle T,[(af+bg)^-]*\varphi\rangle                                               \\
-                                     & =a\langle T,(f^-)*\varphi\rangle+b\langle T,(g^-)*\varphi\rangle                    \\
-                                     & =a\langle f*T,\varphi\rangle+b\langle g*T,\varphi\rangle                            \\
-                                     & =\langle af*T+bg*T,\varphi\rangle                                                   \\
+    \left\langle (af+bg)*T,\varphi\right\rangle & =\left\langle T,[(af+bg)^-]*\varphi\right\rangle                                               \\
+                                     & =a\left\langle T,(f^-)*\varphi\right\rangle+b\left\langle T,(g^-)*\varphi\right\rangle                    \\
+                                     & =a\left\langle f*T,\varphi\right\rangle+b\left\langle g*T,\varphi\right\rangle                            \\
+                                     & =\left\langle af*T+bg*T,\varphi\right\rangle                                                   \\
                                      & \Rightarrow (af+bg)*T=af*T+bg*T,a,b\in\mathbb{C},f,g\in\mathcal{S} ,T\in\mathcal{T} 
 \end{align*}
 {\parskip=0pt \ding{173} 对分布的线性性}
 \begin{align*}
-    \langle f*(aS+bT),\varphi\rangle & =\langle aS+bT,(f^-)*\varphi\rangle                                                 \\
-                                     & =a\langle S,(f^-)*\varphi\rangle+b\langle T,(f^-)*\varphi\rangle                    \\
-                                     & =a\langle f*S,\varphi\rangle+b\langle f*T,\varphi\rangle                            \\
-                                     & =\langle af*S+bf*T,\varphi\rangle                                                   \\
+    \left\langle f*(aS+bT),\varphi\right\rangle & =\left\langle aS+bT,(f^-)*\varphi\right\rangle                                                 \\
+                                     & =a\left\langle S,(f^-)*\varphi\right\rangle+b\left\langle T,(f^-)*\varphi\right\rangle                    \\
+                                     & =a\left\langle f*S,\varphi\right\rangle+b\left\langle f*T,\varphi\right\rangle                            \\
+                                     & =\left\langle af*S+bf*T,\varphi\right\rangle                                                   \\
                                      & \Rightarrow f*(aS+bT)=af*S+bf*T,a,b\in\mathbb{C},f\in\mathcal{S} ,S,T\in\mathcal{T}
 \end{align*}
 
 下面研究卷积定理是否仍成立：\\\ding{172}时域卷积
 \lr{
-    \langle \mathcal{F} (g*T),\varphi\rangle&=\langle T,(g^-)*\mathcal{F} \varphi\rangle\\
-    &=\langle T,(\mathcal{F} \mathcal{F} g)*\mathcal{F} \varphi\rangle\\
-    &=\langle T,\mathcal{F} [(\mathcal{F} g) \varphi]\rangle\\
-    &=\langle \mathcal{F} T,(\mathcal{F} g)\varphi\rangle\\
-    &=\langle \mathcal{F} g\mathcal{F} T,\varphi\rangle\\
+    \left\langle \mathcal{F} (g*T),\varphi\right\rangle&=\left\langle T,(g^-)*\mathcal{F} \varphi\right\rangle\\
+    &=\left\langle T,(\mathcal{F} \mathcal{F} g)*\mathcal{F} \varphi\right\rangle\\
+    &=\left\langle T,\mathcal{F} [(\mathcal{F} g) \varphi]\right\rangle\\
+    &=\left\langle \mathcal{F} T,(\mathcal{F} g)\varphi\right\rangle\\
+    &=\left\langle \mathcal{F} g\mathcal{F} T,\varphi\right\rangle\\
     &\Rightarrow \mathcal{F} (g*T)=\mathcal{F} g\mathcal{F} T
 }{
-    \langle \mathcal{F} (g*T),\varphi\rangle&=\langle T,(g^-)*\mathcal{F} \varphi\rangle\\
-    &=\langle T,\frac{1}{2\pi}(\mathcal{F} \mathcal{F} g)*\mathcal{F} \varphi\rangle\\
-    &=\langle T,\mathcal{F} [(\mathcal{F} g) \varphi]\rangle\\
-    &=\langle \mathcal{F} T,(\mathcal{F} g)\varphi\rangle\\
-    &=\langle \mathcal{F} g\mathcal{F} T,\varphi\rangle\\
+    \left\langle \mathcal{F} (g*T),\varphi\right\rangle&=\left\langle T,(g^-)*\mathcal{F} \varphi\right\rangle\\
+    &=\left\langle T,\frac{1}{2\pi}(\mathcal{F} \mathcal{F} g)*\mathcal{F} \varphi\right\rangle\\
+    &=\left\langle T,\mathcal{F} [(\mathcal{F} g) \varphi]\right\rangle\\
+    &=\left\langle \mathcal{F} T,(\mathcal{F} g)\varphi\right\rangle\\
+    &=\left\langle \mathcal{F} g\mathcal{F} T,\varphi\right\rangle\\
     &\Rightarrow \mathcal{F} (g*T)=\mathcal{F} g\mathcal{F} T
 }
 \ding{173}频域卷积
 \lr{
-    \langle\mathcal{F} (gT),\varphi\rangle&=\langle T,g\mathcal{F} \varphi\rangle\\
-    &=\langle T,\mathcal{F} \mathcal{F} (g^-) \mathcal{F} \varphi\rangle\\
-    &=\langle T,\mathcal{F} [\mathcal{F} g^- *\varphi]\rangle\\
-    &=\langle\mathcal{F} T*\mathcal{F} g,\varphi\rangle\\
+    \left\langle \mathcal{F} (gT),\varphi\right\rangle&=\left\langle T,g\mathcal{F} \varphi\right\rangle\\
+    &=\left\langle T,\mathcal{F} \mathcal{F} (g^-) \mathcal{F} \varphi\right\rangle\\
+    &=\left\langle T,\mathcal{F} [\mathcal{F} g^- *\varphi]\right\rangle\\
+    &=\left\langle\mathcal{F} T*\mathcal{F} g,\varphi\right\rangle\\
     &\Rightarrow \mathcal{F} (gT)=\mathcal{F} g*\mathcal{F} T
 }{
-    \langle\mathcal{F} (gT),\varphi\rangle&=\langle T,g\mathcal{F} \varphi\rangle\\
-    &=\langle T,\frac{1}{2\pi}\mathcal{F} \mathcal{F} (g^-) \mathcal{F} \varphi\rangle\\
-    &=\langle T,\frac{1}{2\pi}\mathcal{F} [\mathcal{F} g^- *\varphi]\rangle\\
-    &=\frac{1}{2\pi}\langle\mathcal{F} T*\mathcal{F} g,\varphi\rangle\\
+    \left\langle\mathcal{F} (gT),\varphi\right\rangle&=\left\langle T,g\mathcal{F} \varphi\right\rangle\\
+    &=\left\langle T,\frac{1}{2\pi}\mathcal{F} \mathcal{F} (g^-) \mathcal{F} \varphi\right\rangle\\
+    &=\left\langle T,\frac{1}{2\pi}\mathcal{F} [\mathcal{F} g^- *\varphi]\right\rangle\\
+    &=\frac{1}{2\pi}\left\langle\mathcal{F} T*\mathcal{F} g,\varphi\right\rangle\\
     &\Rightarrow \mathcal{F} (gT)=\frac{1}{2\pi}\mathcal{F} g*\mathcal{F} T
 }
 综上我们得到：\begin{theorem}[分布与函数的卷积定理]
@@ -2086,39 +2087,39 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 这个积分。设$f,g,\varphi\in\mathcal{S} ,S_f,T_g\in\mathcal{T} $，根据前面已经
 得到的结果，
 \begin{align*}
-    \langle S_f *T_g,\varphi\rangle & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(y)g(x-y)\varphi(x)\,dx\,dy           \\
+    \left\langle S_f *T_g,\varphi\right\rangle & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(y)g(x-y)\varphi(x)\,dx\,dy           \\
                                     & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(y)g(u)\varphi(u+y)\,du\,dy & (x-y=u) \\
                                     & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}g(u)\varphi(u+y)\,du           \\
-                                    & =\langle f(y),\langle g(u),\varphi(u+y)\rangle\rangle
+                                    & =\left\langle f(y),\langle g(u),\varphi(u+y)\rangle\right\rangle
 \end{align*}
 如果允许给分布标上自变量（对于能用函数表示的分布，即便不属于$\mathcal{S} $，这样做
 也的确是有意义的），那么我们可以定义：\begin{definition}[分布与分布的卷积]
     \begin{equation*}
-    \langle S*T,\varphi\rangle=\langle S(y),\langle T(x),\varphi(x+y)\rangle\rangle,S,T\in\mathcal{T} ,\varphi\in\mathcal{S} ,\langle T(x),\varphi(x+y)\rangle\in\mathcal{S}
+    \left\langle S*T,\varphi\right\rangle=\left\langle S(y),\left\langle T(x),\varphi(x+y)\right\rangle\right\rangle,S,T\in\mathcal{T} ,\varphi\in\mathcal{S} ,\left\langle T(x),\varphi(x+y)\right\rangle\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
-注意我们必须要求$\langle T(x),\varphi(x+y)\rangle\in\mathcal{S}$，如果不满足这
+注意我们必须要求$\left\langle T(x),\varphi(x+y)\right\rangle\in\mathcal{S}$，如果不满足这
 个条件，我们就只好说$S*T$无定义。对于分布之间的卷积，交换律和结合律就不总是成立了，
-交换律在$\langle S,\varphi\rangle\in\mathcal{S} ,\langle T,\varphi\rangle\notin\mathcal{S}$
+交换律在$\left\langle S,\varphi\right\rangle\in\mathcal{S} ,\left\langle T,\varphi\right\rangle\notin\mathcal{S}$
 时被破坏，对于结合律，从形式上可以两次套用分布与分布卷积的定义，得到
 \begin{equation*}
-    \langle R*(S*T),\varphi\rangle=\langle T(x),\langle S(y),\langle R(z),\varphi(x+y+z)\rangle\rangle\rangle=\langle (R*S)*T,\varphi\rangle
+    \left\langle R*(S*T),\varphi\right\rangle=\left\langle T(x),\left\langle S(y),\left\langle R(z),\varphi(x+y+z)\right\rangle\right\rangle\right\rangle=\left\langle (R*S)*T,\varphi\right\rangle
 \end{equation*}
 然而当证明过程中任何一步遇到卷积无定义的情况，这个证明就会失效。
 \begin{example}[结合律的失效]
 \begin{align*}
-    \langle\mathds{1}*\delta',\varphi\rangle     & =\langle \mathds{1}(y),\langle \delta'(x),\varphi(x+y)\rangle\rangle                                                                   \\
-                                                 & =\langle \mathds{1},-\varphi'\rangle                                                                                                   \\
+    \left\langle\mathds{1}*\delta',\varphi\right\rangle     & =\left\langle \mathds{1}(y),\left\langle \delta'(x),\varphi(x+y)\right\rangle\right\rangle                                                                   \\
+                                                 & =\left\langle \mathds{1},-\varphi'\right\rangle                                                                                                   \\
                                                  & =-\int_{-\infty}^{\infty}\varphi'(y)\,dy                                                                                                \\
                                                  & =-\evalat{\varphi(y)}{-\infty}{\infty}=0                              & \Rightarrow(\mathds{1}*\delta')*u=0                             \\
-    \langle \delta'*u,\varphi\rangle             & =\langle \delta'(y),\langle u(x),\varphi(x+y)\rangle\rangle                                                                            \\
-                                                 & =\langle \delta'(y),\int_{y}^{\infty}\varphi(x)\,dx\rangle                                                                             \\
-                                                 & =\varphi(0)=\langle \delta,\varphi\rangle                            & \Rightarrow \delta'*u=\delta                                    \\
-    \langle\mathds{1}*(\delta'*u),\varphi\rangle & =\langle \mathds{1}(y),\langle \delta(x),\varphi(x+y)\rangle\rangle                                                                    \\
-                                                 & =\langle \mathds{1},\varphi\rangle                                                                                                     \\
+    \left\langle \delta'*u,\varphi\right\rangle             & =\left\langle \delta'(y),\left\langle u(x),\varphi(x+y)\right\rangle\right\rangle                                                                            \\
+                                                 & =\left\langle \delta'(y),\int_{y}^{\infty}\varphi(x)\,dx\right\rangle                                                                             \\
+                                                 & =\varphi(0)=\left\langle \delta,\varphi\right\rangle                            & \Rightarrow \delta'*u=\delta                                    \\
+    \left\langle\mathds{1}*(\delta'*u),\varphi\right\rangle & =\left\langle \mathds{1}(y),\left\langle \delta(x),\varphi(x+y)\right\rangle\right\rangle                                                                    \\
+                                                 & =\left\langle \mathds{1},\varphi\right\rangle                                                                                                     \\
                                                  & =\int_{-\infty}^{\infty}\varphi(y)\,dy                                                                                                 \\
-                                                 & =\langle \mathds{1},\varphi\rangle                                   & \Rightarrow \mathds{1}*(\delta'*u)=\mathds{1}*\delta=\mathds{1}
+                                                 & =\left\langle \mathds{1},\varphi\right\rangle                                   & \Rightarrow \mathds{1}*(\delta'*u)=\mathds{1}*\delta=\mathds{1}
 \end{align*}
 可见\begin{equation*}
     (\mathds{1}*\delta')*u                       \neq\mathds{1}*(\delta'*u)
@@ -2128,26 +2129,26 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \begin{example}[与$\delta$卷积]
     分布$T*\delta$必然有定义，并且$T*\delta=T$.
 \begin{align*}
-    \langle T*\delta,\varphi\rangle & =\langle T(y),\langle \delta(x),\varphi(x+y)\rangle\rangle \\
-                                    & =\langle T,\varphi\rangle
+    \left\langle T*\delta,\varphi\right\rangle & =\left\langle T(y),\left\langle \delta(x),\varphi(x+y)\right\rangle\right\rangle \\
+                                    & =\left\langle T,\varphi\right\rangle
 \end{align*}
 \end{example}
 
 \begin{example}[$\delta_a$的平移作用]
     分布$\delta_a*\varphi$必然有定义，并且$\delta_a*\varphi=\tau_a \varphi$.
     \begin{align*}
-    \langle \delta_a*\delta_b,\varphi\rangle & =\langle \delta_a(y),\langle\delta_b(x),\varphi(x+y)\rangle\rangle \\
-                                             & =\langle \delta_a(y),\varphi(b+y)\rangle                    \\
+    \left\langle \delta_a*\delta_b,\varphi\right\rangle & =\left\langle \delta_a(y),\left\langle\delta_b(x),\varphi(x+y)\right\rangle\right\rangle \\
+                                             & =\left\langle \delta_a(y),\varphi(b+y)\right\rangle                    \\
                                              & =\varphi(a+b)                                               \\
-                                             & =\langle\delta_{(a+b)},\varphi\rangle                       \\
+                                             & =\left\langle\delta_{(a+b)},\varphi\right\rangle                       \\
                                              & \Rightarrow \delta_a*\delta_b=\delta_{(a+b)}
 \end{align*}
 这与函数的情况是一致的：\begin{align*}
-    \langle f*\delta_a,\varphi\rangle & =\langle \delta_a,(f^-)*\varphi\rangle                  \\
+    \left\langle f*\delta_a,\varphi\right\rangle & =\left\langle \delta_a,(f^-)*\varphi\right\rangle                  \\
                                       & =(f^-)*\varphi(a)                                       \\
                                       & =\int_{-\infty}^{\infty}f(-x)\varphi(a-x)\,dx & (a-x=y) \\
                                       & =\int_{-\infty}^{\infty}f(y-a)\varphi(y)\,dy            \\
-                                      & =\langle \tau_a f,\varphi\rangle                        \\
+                                      & =\left\langle \tau_a f,\varphi\right\rangle                        \\
                                       & \Rightarrow f*\delta_a=\tau_a f
 \end{align*}
 \end{example}
@@ -2160,8 +2161,8 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \begin{proof}
     设$\varphi\in\mathcal{S} $，则
     \begin{align*}
-    \langle\mathcal{F} T_n-\mathcal{F} T,\varphi\rangle & =\langle T_n-T,\mathcal{F} \varphi\rangle \\
-    \lim_{n\to\infty}\langle\mathcal{F} T_n-\mathcal{F} T,\varphi\rangle & =\lim_{n\to\infty}\langle T_n-T,\mathcal{F} \varphi\rangle=0
+    \left\langle\mathcal{F} T_n-\mathcal{F} T,\varphi\right\rangle & =\left\langle T_n-T,\mathcal{F} \varphi\right\rangle \\
+    \lim_{n\to\infty}\left\langle\mathcal{F} T_n-\mathcal{F} T,\varphi\right\rangle & =\lim_{n\to\infty}\left\langle T_n-T,\mathcal{F} \varphi\right\rangle=0
 \end{align*}
 \end{proof}
 
@@ -2437,7 +2438,7 @@ $\sum_{k=-\infty}^{\infty}f(t-kT)$实际上是有限和，当然收敛。相应�
 \[\mathcal{F} f=\Pi_T\mathcal{F} f\]
 前者在傅里叶变换下能够带来一些新的东西，见本节后续内容。这里我们先讨论后一恒等式：
 \begin{theorem}[采样函数的“卷积幺元”作用]
-    设带限函数$f(t)$满足$supp\mathcal{F} f\subset [-T/2,T/2]$，则\lr{
+    设带限函数$f(t)$满足$\text{supp}\ \mathcal{F} f\subset [-T/2,T/2]$，则\lr{
     f(t)=Tsinc(Tt)*f(t)
 }{
     f(t)=\frac{T}{2\pi}Sa(Tt)*f(t)
@@ -2590,7 +2591,7 @@ $T\cdot\frac{1}{T}=1$，以角频率为自变量做傅里叶变换，$T\cdot\fra
 视角。对多维的$\shah$分布的讨论，见\ref{sec:Multi_Fourier}。二维$\shah$分布在
 $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$分布称为\textbf{钉床函数}(bed of nails)。
 
-讨论完$\shah$的傅里叶变换，就可以回到一开始的话题。对于时限函数$f(t),suppf\subset[-T/2,T/2]$，研究恒等式
+讨论完$\shah$的傅里叶变换，就可以回到一开始的话题。对于时限函数$f(t),\text{supp}\ f\subset[-T/2,T/2]$，研究恒等式
 \[f(x)=\Pi_{T}(f*\shah_T)(x)\]
 通过傅里叶变换告诉我们的内容。对$f*\shah_T$做傅里叶变换，有
 \lr{
@@ -2621,7 +2622,7 @@ $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$�
 可以看到，我们用$\mathcal{F} f(k/T)sinc(T\xi-k)$或$\mathcal{F} f(2\pi k/T)Sa(T\omega-2\pi k)$
 表示出了函数$\mathcal{F} f$，而表达式中的抽样函数完全依赖于所进行的周期化的周期T，也
 就是说我们只需要用$\mathcal{F} f(k/T)$或$\mathcal{F} f(2\pi k/T)$处的值，就能还原
-处完整的$\mathcal{F} f$，进一步，对于带限函数$f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，可以提出
+处完整的$\mathcal{F} f$，进一步，对于带限函数$f(t),\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$，可以提出
 完全类似的恒等式，称为\textbf{抽样定理}(the sampling thoerem)：
 \begin{theorem}[抽样定理]
     \[\mathcal{F} f(x)=\Pi_T(\mathcal{F} f*\shah_T)(x)\]
@@ -2677,7 +2678,7 @@ $\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$�
     \includegraphics[width=0.4\textwidth]{cos.jpeg}
 \end{figure}
 这正是混叠现象。从频域上不难理解它，在建立抽样定理时我们曾要求
-$f(t),supp\mathcal{F} f\subset[-\nu_m,\nu_m]$，利用由此得到的公式
+$f(t),\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$，利用由此得到的公式
 \lr{
     f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
 }{
@@ -3558,11 +3559,11 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 
 本小节将串写拉普拉斯变换所需的复变函数论中的一些基本概念和重要结果。实际上，只需要复变函数中一些最基础的概念即可建立起拉普拉斯变换理论的大部分内容。因此，即便是未学过复变函数的读者，也可通过本小节快速把握拉普拉斯变换中所需的复变函数的内容。
 
-我们总是用$z$表示复数$x+iy$。考虑复系数双变元多项式集$\mathbb{C}[x,y]$，通过做替换$x=\frac{z+\overline{z}}{2},y=\frac{z-\overline{z}}{2i}$，可以将$\mathbb{C}[x,y]$中的多项式$f(x,y)$表示为$g(z,\overline{z})$。在一些情况下，$g(z,\overline{z})$不显含$z$，例如$f(x,y)=x+iy$，$g(z,\overline{z})=z$。对于$f(x,y)$，我们可以用导数$\frac{\partial f}{\partial x},\frac{\partial f}{\partial y}$来描述它对$x,y$的依赖关系，同理，为了表述多项式对$z,\overline{z}$的依赖关系，我们定义:\begin{definition}[形式导数]
+我们总是用$z$表示复数$x+iy$。考虑复系数双变元多项式集$\mathbb{C}[x,y]$，通过做替换$x=\frac{z+\overline{z}}{2},y=\frac{z-\overline{z}}{2i}$，可以将$\mathbb{C}[x,y]$中的多项式$f(x,y)$表示为$g(z,\overline{z})$。在一些情况下，$g(z,\overline{z})$不显含$\overline{z}$，例如$f(x,y)=x+iy$，$g(z,\overline{z})=z$。对于$f(x,y)$，我们可以用导数$\frac{\partial f}{\partial x},\frac{\partial f}{\partial y}$来描述它对$x,y$的依赖关系，同理，为了表述多项式对$z,\overline{z}$的依赖关系，我们定义:\begin{definition}[形式导数]
     设$f=u+iv\in C^1(\mathbb{C})$，$u,v$为复数域上的实值函数，则
     \begin{align*}
-        \frac{\partial f}{\partial z}=\frac{1}{2}(\frac{\partial}{\partial x}-i\frac{\partial}{\partial y})f=\frac{1}{2}(\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y})+\frac{i}{2}(\frac{\partial v}{\partial x}-\frac{\partial u}{\partial y})\\
-        \frac{\partial f}{\partial \overline{z}}=\frac{1}{2}(\frac{\partial}{\partial x}+i\frac{\partial}{\partial y})f=\frac{1}{2}(\frac{\partial u}{\partial x}-\frac{\partial v}{\partial y})-\frac{i}{2}(\frac{\partial v}{\partial x}+\frac{\partial u}{\partial y})
+        \frac{\partial f}{\partial z}=\frac{1}{2}\left(\frac{\partial}{\partial x}-i\frac{\partial}{\partial y}\right)f=\frac{1}{2}\left(\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}\right)+\frac{i}{2}\left(\frac{\partial v}{\partial x}-\frac{\partial u}{\partial y}\right)\\
+        \frac{\partial f}{\partial \overline{z}}=\frac{1}{2}\left(\frac{\partial}{\partial x}+i\frac{\partial}{\partial y}\right)f=\frac{1}{2}\left(\frac{\partial u}{\partial x}-\frac{\partial v}{\partial y}\right)-\frac{i}{2}\left(\frac{\partial v}{\partial x}+\frac{\partial u}{\partial y}\right)
     \end{align*}
 \end{definition}
 注意$f$未必是多项式，多项式只是为了给我们提供一个直观的动机和理解方式。
@@ -3601,30 +3602,36 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
 \begin{definition}[全纯函数]
     设开集$U\in\mathbb{C}$，如果$f=u+iv\in C^1(U)$满足$\frac{\partial f}{\partial \overline{z}}=0,\forall z\in U$，则称$f$为$U$上的\textbf{全纯函数}(holomorphic function)。这等价于$u,v$在$U$上满足\textbf{柯西-黎曼方程组}(Cauchy-Riemann equations)：
     \begin{align*}
-        \frac{\partial u}{\partial x}=\frac{\partial v}{\partial y},\frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y},\text{或}\frac{\partial f}{\partial y}= i\frac{\partial f}{\partial x}
+        \begin{cases}
+        \frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}\\
+        \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}
+        \end{cases},\text{或}\frac{\partial f}{\partial y}= i\frac{\partial f}{\partial x}
     \end{align*}
 \end{definition}
 \begin{definition}[整函数]
     如果$f$在整个复平面$\mathbb{C}$上全纯，则称$f$为\textbf{整函数}(entire function)。
 \end{definition}
 
-全纯等价于极限\[f'(z)=\lim_{\zeta\to z}\frac{f(\zeta)-f(z)}{\zeta-z}\]
-存在，即全纯等价于复可导性；全纯函数还是无限阶可导的，并且其各阶导数也是全纯函数，并且全纯性等价于解析性，即其泰勒级数在收敛域内一定收敛于这个函数本身：
+全纯等价于极限\[\lim_{\zeta\to z}\frac{f(\zeta)-f(z)}{\zeta-z}\]
+存在，即全纯等价于复可导性，并且由此定义的导数$f'(z)=\frac{\partial f}{\partial z}$；全纯函数还是无限阶可导的，其各阶导数也是全纯函数，并且全纯性等价于解析性，即其泰勒级数在收敛域内一定收敛于这个函数本身：
 \begin{definition}[复变函数的泰勒级数展开]
     设$f$为开集$U\in\mathbb{C}$上的全纯函数，$D(a,R)\in U$，则$\forall z\in D(a,R)$，有
     \[f(z)=\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(z-a)^n\]
     其中$f^{(n)}(a)$表示$f$在$a$处的第n阶导数。
 \end{definition}
 
-对实变函数这未必成立：
+以上定义其实隐含了一个很强的结论：只要$D(a,r)\in U$，则$f$在$a$处的泰勒级数在$D(a,r)$上收敛于$f$，即泰勒级数的收敛半径恰为$f$在$a$处到$U$的边界的距离。
+\begin{example}
+    函数$f(z)=\frac{1}{1-z}$在$D(0,1)$上全纯，可以直接判断它在$z=0$处的泰勒级数$\sum_{n=0}^{\infty}z^n$的收敛半径为1，恰好是0到不全纯的点1的距离。
+\end{example}
+
+对实变函数，即便无限阶可导，泰勒级数也未必收敛于函数本身，即未必解析：
 \begin{example}
     设$f(x)=\begin{cases}
     e^{-1/x}&\text{,if\ }x> 0\\
     0&\text{,if\ }x\leq 0
     \end{cases}$，$f(x)$在$x=0$处各阶导数都是0，泰勒展开式也为0，收敛域为$\mathbb{R}$，但$f(x)\neq 0,x>0$，它不是解析函数。
 \end{example}
-
-以上定义其实隐含了一个很强的结论：只要$D(a,r)\in U$，则$f$在$a$处的泰勒级数在$D(a,r)$上收敛于$f$，即泰勒级数的收敛半径恰为$f$在$a$处到$U$的边界的距离，例如$f(z)=\frac{1}{1-z}$在$D(0,1)$上全纯，可以直接判断它在$z=0$处的泰勒级数$\sum_{n=0}^{\infty}z^n$的收敛半径为1，恰好是0到不全纯的点1的距离。
 
 数学分析中，我们学过幂级数收敛半径的求法，复变函数的泰勒级数也有类似的结论：
 \begin{theorem}[柯西-阿达马公式]
@@ -3633,7 +3640,7 @@ $1/(i\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实
     \[R=\left(\varlimsup_{n\to\infty}|c_n|^{1/n}\right)^{-1}\]
     这里的极限是广义极限，即允许$R=0$（仅在中心点收敛）或$R=\infty$（级数在整个复平面上收敛）。
 \end{theorem}
-在复幂级数的收敛域上，级数是绝对收敛且内闭一致收敛的。其本质还是与几何级数做比较，收敛半径与实幂级数的收敛半径求法一致，实幂级数的收敛半径可看作是复幂级数的收敛半径在实轴上的投影。使用柯西-阿达马公式求出的收敛半径与前面提到的“到不全纯区域的距离”总是一致的。
+在复幂级数的收敛域上，级数是绝对收敛且内闭一致收敛的。其本质还是与几何级数做比较，收敛半径与实幂级数的收敛半径求法一致，实幂级数的收敛半径可看作是复幂级数的收敛半径在实轴上的投影。使用柯西-阿达马公式求出的收敛半径与前面提到的“到不全纯区域的距离”总是一致的，读者可以对例5.1.1.自行验算。
 
 在数学分析中，我们曾学过曲线积分，它对于复平面上的复变函数也有意义：
 \begin{definition}[复线积分]
@@ -3842,15 +3849,15 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 
 在不涉及收敛性的问题时，可以将$\omega$推广为复数$s=\sigma+i\omega$，根据含参变量积分的求导法则，这样的积分变换可以对$s$求导，从而是全纯函数。不过，添加$\sigma$会使得$t\to -\infty$时$|e^{-st}|=e^{-\sigma t}$快速增长，从而对所变换的函数提出很高的要。我们对这个定义稍加修改：
 \begin{definition}[拉普拉斯变换]
-    记\[\mathcal{E}=\{f:[0,\infty)\to\mathbb{C}|f\in PC[0,\infty),\exists C>0,a\in\mathbb{R},|f(t)|<Ce^{at},\forall t\geq 0\}\]
+    记\[\mathcal{E}=\left\{f:[0,\infty)\to\mathbb{C}\left|f\in PC[0,\infty),\exists C>0,a\in\mathbb{R},|f(t)|<Ce^{at},\forall t\geq 0\right.\right\}\]
     其中$PC[0,\infty)$表示$[0,\infty)$上的分段连续函数。
     对$f\in\mathcal{E}$，其拉普拉斯变换定义为
     \[\mathcal{L} f(s)=\int_{0}^{\infty}f(t)e^{-st}\,dt,\quad s=\sigma+i\omega\]
-    其中$s$的实部$\sigma$必须满足$\sigma>a$，将它称为拉普拉斯变换的\textbf{收敛域}。\\
+    其中$s$的实部$\sigma$必须满足$\sigma>a$，将它称为拉普拉斯变换的\textbf{收敛域}，直线$\sigma=a$称为\textbf{收敛轴}。\\
     如果$f(t)$是时域信号，$\mathcal{L} f(s)$称为\textbf{复频域信号}。
     我们仍记$\mathcal{L} f(s)$为$F(s)$或$\hat{f}(s)$（在涉及傅里叶变换时，我们会避免使用它们或加以说明），并记$f\overset{\mathcal{L} }{\longleftrightarrow} F(s)$。
 \end{definition}
-在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（见\ref{sec:ODE}，$f(t)=f(t)u(t)$），就可以认为$f\in\mathcal{E}$，后文中不会特意区分$f$的定义域。
+在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（见\ref{sec:ODE}，$f(t)=f(t)u(t)$），就可以认为$f\in\mathcal{E}$，后文中不会特意区分$f$的定义域\footnote{实际上，如果$\exists T>0,\text{supp}\ f\subset [T,\infty)$，积分$\int_{-\infty}^{\infty}f(t)e^{-st}\,dt$在很多情况下也存在，我们将这种变换称为\textbf{双边拉普拉斯变换}，而将前面给出的变换称为\textbf{单边拉普拉斯变换}。}。
 
 在$\mathcal{E} $上定义拉普拉斯变换，是因为对于$f\in\mathcal{E} $，当$\sigma>a$时，给出拉普拉斯变换的积分是绝对收敛的：
 \begin{align*}
@@ -3865,7 +3872,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 \end{align*}
 这正是拉普拉斯变换的复频域微分性质。
 
-根据全纯函数的唯一延拓性，如果$\mathcal{L} f(s)$可以延拓至$\sigma\leq a$的一些区域，则延拓是唯一的，我们也认为延拓所得的定义域更大的函数是$f$的拉普拉斯变换。
+根据全纯函数的唯一延拓性，如果$\mathcal{L} f(s)$可以延拓至$\sigma\leq a$的一些区域，则延拓是唯一的，尽管这时积分不一定存在，我们也认为延拓所得的定义域更大的函数是$f$的拉普拉斯变换。
 \begin{example}[多项式的拉普拉斯变换]
     设$f(t)=t^\nu(\nu\geq 0)$，则$f\in\mathcal{E} $，且
     \begin{align*}
@@ -3932,7 +3939,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
     \end{align*}
     5.时域微分：\begin{align*}
         \mathcal{L} [f'(t)](s)&=\int_0^{\infty}f'(t)e^{-st}\,dt\\
-        &=\evalat{(f(t)e^{-st})}{0}{\infty}+\int_0^{\infty}sf(t)e^{-st}\,dt\\
+        &=\evalat{\left(f(t)e^{-st}\right)}{0}{\infty}+\int_0^{\infty}sf(t)e^{-st}\,dt\\
         &=s\mathcal{L} f(s)-f(0)
     \end{align*}
     6.复频域微分：已经在本节前面证明过。\\
@@ -3968,7 +3975,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 \begin{example}[时移性质]
     设$f\in\mathcal{E} ,t_0>0$，令$\tilde{f}(t)=f(t)e^{-\sigma t}$，则
     \begin{align*}
-        \mathcal{L}[f(t-t_0)u(t-t_0)](s)&=\mathcal{F} \{\tilde{f}(t-t_0)u(t-t_0)\}(\omega)\\
+        \mathcal{L}[f(t-t_0)u(t-t_0)](s)&=\mathcal{F} \left[\tilde{f}(t-t_0)u(t-t_0)\right](\omega)\\
         &=e^{-i\omega t_0}\mathcal{F} \tilde{f}(\omega)\\
         &=e^{-s t_0}\mathcal{L} f(s)
     \end{align*}
@@ -3982,8 +3989,8 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 \end{align*}
 有
     \begin{align*}
-        \mathcal{L} \{(f*g)(t)\}(s)&=\mathcal{F} [f*g(t)e^{-\sigma t}](\omega)\\
-        &=\mathcal{F} [\tilde{f}*\tilde{g}](\omega)\\
+        \mathcal{L} \left[f*g\right](s)&=\mathcal{F} \left[f*g(t)e^{-\sigma t}\right](\omega)\\
+        &=\mathcal{F} \left[\tilde{f}*\tilde{g}\right](\omega)\\
         &=\mathcal{F} \tilde{f}(\omega)\cdot \mathcal{F} \tilde{g}(\omega)\\
         &=\mathcal{L} f(s)\cdot \mathcal{L} g(s)
     \end{align*}
@@ -3995,8 +4002,8 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 \begin{example}[指数多项式]
     设$f(t)=t^\nu e^{a t}u(t),\text{Re}\nu>-1$，利用拉普拉斯变换的频移性质，有
     \begin{align*}
-        \mathcal{L} f(s)&=\mathcal{L}[t^\nu e^{a t}u(t)](s)\\
-        &=\mathcal{L} [t^\nu u(t)](s-a)\\
+        \mathcal{L} f(s)&=\mathcal{L}\left[t^\nu e^{a t}u(t)\right](s)\\
+        &=\mathcal{L} \left[t^\nu u(t)\right](s-a)\\
         &=\frac{\Gamma(\nu+1)}{(s-a)^{\nu+1}},\sigma>a
     \end{align*}
     根据有理函数的理论，任意真分式函数都可以表示为若干个此类函数的线性组合，因此可以说$f$是指数多项式等价于$\mathcal{L} f$是真分式函数
@@ -4053,19 +4060,33 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 
 由于$f\in\mathcal{E}$对函数增长速度的要求是相当低的（作为反例，$e^{t^2}\notin\mathcal{E}$），我们只需要单独处理$\delta$分布，而不需要重新构建一整套分布的理论。仍考虑将拉普拉斯变换化归为傅里叶变换，即
 \[\mathcal{L} f(s)=\mathcal{F} [f(t)e^{-\sigma t}](\omega),s=\sigma+i\omega\]
-这里$\mathcal{F} [f(t)e^{-\sigma t}](\omega)$实际上依赖于两个变量$\sigma,\omega$，但我们只写出$\omega$，并将$\sigma$视为一个参数。这样一来，我们就可以将拉普拉斯变换推广到$\delta$分布上：
+这里$\mathcal{F} [f(t)e^{-\sigma t}](\omega)$实际上依赖于两个变量$\sigma,\omega$，但我们只写出$\omega$，并将$\sigma$视为一个参数。这样一来，我们就可以将拉普拉斯变换推广到$\delta$分布上（为了避免变量符号的问题，我们将变量统一地用$x$表示）：
 \begin{align*}
-    \langle \mathcal{L}\delta,\phi\rangle=\langle e^{-\sigma t}\delta,\mathcal{F} \phi\rangle=\mathcal{F}\varphi(0)=\int_{-\infty}^{\infty}\phi(t)\,dt=\langle \mathds{1},\phi\rangle
+    \left\langle \mathcal{L}\delta,\phi\right\rangle=\left\langle e^{-\sigma x}\delta,\mathcal{F} \varphi\right\rangle=\left\langle \delta,e^{-\sigma x}\mathcal{F} \varphi\right\rangle=\mathcal{F}\varphi(0)=\int_{-\infty}^{\infty}\varphi(t)\,dt=\left\langle \mathds{1},\varphi\right\rangle
 \end{align*}
 其中$\mathds{1}$表示恒为1的函数。我们知道，多项式的拉普拉斯变换是真分式函数，而如果将$\delta$分布也纳入考虑，则可以得到任意有理函数。
 
-用同样的方法，我们还可以得到$\delta$的平移的拉普拉斯变换：
+用同样的方法，我们还可以得到$\delta$的平移和导数的拉普拉斯变换：
 \begin{align*}
-    \langle \mathcal{L}\delta_a,\phi\rangle&=\langle e^{-\sigma t}\delta_a,\mathcal{F} \phi\rangle\\
+    \left\langle \mathcal{L}\delta_a,\varphi\right\rangle&=\left\langle e^{-\sigma x}\delta_a,\mathcal{F} \varphi\right\rangle\\
     &=e^{-\sigma a}\mathcal{F}\varphi(a)\\
-    &=\int_{-\infty}^{\infty}\phi(t)e^{-s a}\,dt\\
-    &=\langle e^{-s a},\phi\rangle
+    &=\int_{-\infty}^{\infty}\varphi(t)e^{-s a}\,dt\\
+    &=\left\langle e^{-s a},\varphi\right\rangle\\
+    \left\langle \mathcal{L}\left[\delta'\right],\varphi\right\rangle&=\left\langle e^{-\sigma x}\delta',\mathcal{F} \varphi\right\rangle\\
+    &=-\left\langle \delta,\left(e^{-\sigma x}\mathcal{F} \varphi\right)'\right\rangle\\
+    &=-\left\langle \delta,-\sigma e^{-\sigma x}\mathcal{F} \varphi + e^{-\sigma x}(\mathcal{F} \varphi)'\right\rangle\\
+    &=\left\langle \delta,\sigma e^{-\sigma x}\mathcal{F} \varphi + i\omega e^{-\sigma x}\mathcal{F} \varphi\right\rangle\\
+    &=(\sigma + i\omega)\mathcal{F} \varphi(0)\\
+    &=s\left\langle \mathds{1},\varphi\right\rangle
+    \implies \mathcal{L}\left[\delta'\right]=s\\
 \end{align*}
+因此我们得到：
+\begin{proposition}
+    设$a\in\mathbb{R}$，则$\mathcal{L} \delta_a=e^{-s a}$；\\
+    $\mathcal{L} \left[\delta'\right]=s$，进一步可得$\mathcal{L} \left[\delta^{(n)}\right]=s^n$。
+\end{proposition}
+
+读者可能感到疑惑：$\delta_{a}$在$a<0$时并不是因果的，另外，根据时域微分性质，$\mathcal{L} [\delta'](s)=s\mathcal{L} [\delta](s)-\delta(0)$，但$\delta(0)=\infty$。实际上，时域微分性质并不适用于分布，况且我们无从谈起一个奇异分布在$0$处的值。可见，作为形式上的函数定义的$\delta(x)$会在一些地方出现问题，必须谨慎使用。
 
 此外我们来介绍一种拉普拉斯变换的级数求法。我们知道，多项式的拉普拉斯变换都可以通过$\mathcal{L} [t^n](s)=\frac{\Gamma(n+1)}{s^{n+1}}$来计算，那么对于一些可以展开为幂级数的函数，不难想到逐项求拉普拉斯变换，下面讨论这种操作的适用范围。在此之前，我们先介绍一个引理：
 \begin{lemma}
@@ -4155,7 +4176,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
     如果对某个$b>a$，当$r\to\infty$时，$f_{r,b}(t)\to f(t)\in\mathcal{E}$，则\[\forall b>a,\lim_{r\to\infty}f_{r,b}(t)=f(t),\text{且}F=\mathcal{L} f\]
 \end{theorem}
 \begin{remark}
-    事实上，$\alpha>\frac{1}{2}$即可保证定理成立，但这样证明会非常复杂，这里不再讨论。
+    事实上，$\alpha>\frac{1}{2}$即可保证定理成立，但这样证明会非常复杂，本书不再讨论。
 \end{remark}
 \begin{proof}
     我们首先证明$\lim_{r\to\infty}f_{r,b}(t)$与$b$无关。设$b_1,b_2>a$，选择以$b_1\pm ir,b_2\pm ir$为顶点的矩形围道$C_r$，则由于$|F(s)|\leq C(1+|s|)^{-\alpha}$，矩形顶边、底边的积分趋于0，而$F(s)$在$\text{Re}\ s>a$上全纯，由柯西定理知$\int_{C_r}F(s)e^{st}\,ds=0$，因此$lim_{r\to\infty}f_{r,b_1}(t)=lim_{r\to\infty}f_{r,b_2}(t)=f(t)$。
@@ -4204,7 +4225,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 
 下面介绍两种求解部分分式展开的系数的方法。
 
-\noindent 法一：待定系数法
+\noindent \textbf{法一：待定系数法}
 
 按照以上命题给出的展开式形式设未知数，将展开式通分，然后与原式的分子比较系数，得到一个线性方程组，解出各未知数即可。
 \begin{example}
@@ -4226,9 +4247,13 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
     因此\[F(s)=\frac{3}{s+1}-\frac{1}{s+2}\]
 \end{example}
 
-\noindent 法二：取极限法（又称为赫维赛德掩盖法）
+\noindent \textbf{法二：取极限法}（又称为赫维赛德掩盖法）
 
-按照以上命题给出的展开式形式设未知数，对于一次因式$(s-r)^m$，将等式两边同时乘以$(s-r)^m$，然后令$s\to r$，即可解出最高次幂的系数。对于次高次幂的系数，将等式两边同时乘以$(s-r)^{m-1}$，然后对$s$求导，再令$s\to r$，即可解出次高次幂的系数；也可以先约去已经求出的最高次幂项，再乘以$(s-r)^{m-1}$并令$s\to r$，依此类推。二次因式的处理类似，因为以上方法并不限于实数域。
+按照以上命题给出的展开式形式设未知数，\begin{itemize}
+    \item 对于一次因式最高次幂$(s-r)^m$的系数，将等式两边同时乘以$(s-r)^m$，然后令$s\to r$，即可解出最高次幂的系数；
+    \item 对于一次因式次高次幂的系数，将等式两边同时乘以$(s-r)^{m-1}$，然后对$s$求导，再令$s\to r$，即可解出次高次幂的系数；也可以先约去已经求出的最高次幂项，再乘以$(s-r)^{m-1}$并令$s\to r$，依此类推
+    \item 二次因式的处理类似，因为可以在复数范围内做因式分解（如果你愿意，可以对比正余弦函数的拉普拉斯变换，配平方得到二次不可约因式的拉普拉斯逆变换，但相信你看懂例5.3.4.后就再也不会这样做了）
+\end{itemize}
 
 \begin{example}
     设\[F(s)=\frac{1}{(s+1)^2(s+2)(s^2+1)}\]
@@ -4363,7 +4388,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 与第四章的思路类似，我们可以通过系统函数来分析微分方程、动态电路，此外还可以通过系统函数来分析系统的稳定性，下面一一进行介绍。
 
 拉普拉斯变换是处理常系数线性微分方程的有力工具。根据拉普拉斯变换的时域微分性质：
-\[\mathcal{L} [f^{(n)}(t)](s)=s^n\mathcal{L} f(s)-s^{n-1}f(0+)-s^{n-2}f'(0+)-\cdots -f^{(n-1)}(0+)\]
+\[\mathcal{L} [f^{(n)}(t)](s)=s^n\mathcal{L} f(s)-s^{n-1}f(0)-s^{n-2}f'(0)-\cdots -f^{(n-1)}(0)\]
 可以将常系数线性微分方程转化为代数方程，还能够一并处理初始条件。我们先提出一个一般的解法，再通过一个具体的例子来展示拉普拉斯变换的威力。
 
 考虑常系数线性微分方程
@@ -4650,7 +4675,7 @@ $\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\i
 
 \section{分布的逼近，傅里叶反演公式}\label{sec:approach}
 
-在\ref{sec:Sampling and Interpolation}中，我们对带限函数提出了公式：如果$supp\mathcal{F} f\subset[-\frac{T}{2},\frac{T}{2}]$，则有
+在\ref{sec:Sampling and Interpolation}中，我们对带限函数提出了公式：如果$\text{supp}\ \mathcal{F} f\subset[-\frac{T}{2},\frac{T}{2}]$，则有
 \lr{
     f(t)=Tsinc(Tt)*f(t)
 }{
@@ -4934,13 +4959,13 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 %傅里叶下的封闭性
 在\ref{sec:distributions}中，我们介绍了施瓦兹函数类及其对偶空间分布，并直接假定了施瓦兹函数类在傅里叶变换下的封闭性。这一小节将填补这个逻辑漏洞，并介绍施瓦兹函数类的一些其他好处。由于不涉及具体的计算，简洁起见，我们将在本节使用角频率$\omega$。
 
-首先，可以根据施瓦兹函数类的定义\[\mathcal{S} =\{\varphi\in C^{\infty}(\mathbb{R} ):\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \}\]给出它们在$|x|\to\infty$时的估计，从而施瓦兹函数$\varphi$必满足$\int_{-\infty}^{\infty}|\varphi(x)|\,dx<\infty$，即施瓦兹函数类是$L^1(\mathbb{R} )$的子集，于是\begin{align*}
+首先，可以根据施瓦兹函数类的定义\[\mathcal{S} =\left\{\varphi\in C^{\infty}(\mathbb{R} )\left|\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \right.\right\}\]给出它们在$|x|\to\infty$时的估计，从而施瓦兹函数$\varphi$必满足$\int_{-\infty}^{\infty}|\varphi^{(n)}(x)|\,dx<\infty,n\in\mathbb{N}$，即施瓦兹函数类是$L^1(\mathbb{R} )$的子集，于是\begin{align*}
     \int_{-\infty}^{\infty}\varphi(t)e^{-i\omega t}\,dt&\leq \int_{-\infty}^{\infty}|\varphi(t)||e^{-i\omega t}|\,dt\\
     &=\int_{-\infty}^{\infty}|\varphi(t)|\,dt<\infty
 \end{align*}
 即施瓦兹函数的傅里叶变换是良定义的，傅里叶逆变换同理。
 
-显然，施瓦兹函数在求导运算下是封闭的，即$\varphi\in\mathcal{S}\Rightarrow \varphi'\in\mathcal{S}$，并且乘以$x$的运算也是封闭的，即$\varphi\in\mathcal{S}\Rightarrow x\varphi\in\mathcal{S}$。利用这两个性质，可以证明施瓦兹函数类在傅里叶变换下的封闭性：
+显然，施瓦兹函数在求导运算下是封闭的，即$\varphi\in\mathcal{S}\implies \varphi'\in\mathcal{S}$，并且乘以$x$的运算也是封闭的，即$\varphi\in\mathcal{S}\implies x\varphi\in\mathcal{S}$。利用这两个性质，可以证明施瓦兹函数类在傅里叶变换下的封闭性：
 \begin{theorem}[施瓦兹函数类在傅里叶变换下的封闭性]
     设$\varphi\in\mathcal{S}$，则$\mathcal{F} \varphi,\mathcal{F} ^{-1} \varphi\in\mathcal{S}$。
 \end{theorem}
@@ -4950,7 +4975,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     \mathcal{F} [\varphi'](\omega)&=i\omega \mathcal{F} \varphi(\omega)\\
     \mathcal{F} [\varphi^{(n)}](\omega)&=(i\omega)^n \mathcal{F} \varphi(\omega)
 \end{align*}
-根据黎曼-勒贝格引理（见\ref{sec:approach}），\[\varphi^{(n)}\in L^1(\mathbb{R})\Rightarrow\lim_{|\omega|\to\infty}\mathcal{F}[ \varphi^{(n)}(\omega)]=0\]
+根据黎曼-勒贝格引理（见\ref{sec:approach}），\[\varphi^{(n)}\in L^1(\mathbb{R})\implies\lim_{|\omega|\to\infty}\mathcal{F}[ \varphi^{(n)}(\omega)]=0\]
 即\[\lim_{|\omega|\to\infty}(i\omega)^n \mathcal{F} \varphi(\omega)\to 0\]
 故$\mathcal{F} \varphi(\omega)\in\mathcal{S} $，同理可证明$\mathcal{F}^{-1} \varphi(\omega)\in\mathcal{S} $。
 \end{proof}
@@ -4960,43 +4985,43 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 设$f\in L^1(\mathbb{R}),f\neq 0$，如果$f$在时域上紧支，则其傅里叶变换$\mathcal{F} f(\omega)$不可能在频域上紧支，反之亦然。
     
 \end{theorem}
+
 \begin{proof}
-我们首先给出一个直观上的说明，再给出两种证明方法。
+我们假设$\text{supp}\ f\in[-T/2,T/2],\text{supp}\ \mathcal{F} f\in[-\Omega/2,\Omega/2]$，证明$f=0$。
 
-假设$\mathcal{F} f(t)$支于$[-T/2,T/2]$，我们曾在\ref{sec:Sampling and Interpolation}中证明，$f(t)=\frac{T}{2\pi}Sa(Tt)*f(t)$，又在\ref{sec:convolution}中证明过卷积能够将函数的支集“相加”，故$f(t)$的支集应为$\mathbb{R}$，不是紧支的。要说明积分$Sa(Tt)*f(t)=\int_{-\infty}^{\infty}Sa(Tx)f(t-x)\,dx$在$|t|$充分大时不为0是困难的，但直观上容易接受这个结果。
-
-\textbf{法一}：反证法，假设$suppf\in[-T/2,T/2],supp\mathcal{F} f\in[-\Omega/2,\Omega/2]$，则
+\textbf{法一}：
 \begin{align*}
     f(t)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega\\
     &=\frac{1}{2\pi}\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega
 \end{align*}
-由于$suppf\in[-T/2,T/2]$，所以$f(t)$在$|t|>T/2$时恒为0，故\[\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega=0,\forall |t|>T/2\]
+由于$\text{supp}\ f\in[-T/2,T/2]$，所以$f(t)$在$|t|>T/2$时恒为0，故\[\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega=0,\forall |t|>T/2\]
 对以上恒等式两边同时求n阶导数，得到\[\int_{-\Omega/2}^{\Omega/2}(i\omega)^n \mathcal{F} f(\omega)e^{i\omega t}\,d\omega=0,\forall |t|>T/2\]
 取定$t_0>T/2$，有\begin{align*}
     f(t)=&\frac{1}{2\pi}\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)e^{i\omega t_0}e^{i\omega (t-t_0)}\,d\omega
 \end{align*}
-将$e^{i\omega (t-t_0)}$展开成幂级数，得到\begin{align*}
+将$e^{i\omega (t-t_0)}$展开成幂级数：\begin{align*}
+    e^{i\omega (t-t_0)}=&\sum_{n=0}^{\infty}\frac{(i\omega (t-t_0))^n}{n!}
+\end{align*}
+则该幂级数在$\mathbb{R}$上收敛且内闭一致收敛，特别地，在有限区间$[-\Omega/2,\Omega/2]$上一致收敛，因此可以将求和与积分换序，得到\begin{align*}
     f(t)=&\frac{1}{2\pi}\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)e^{i\omega t_0}\sum_{n=0}^{\infty}\frac{(i\omega (t-t_0))^n}{n!}\,d\omega\\
     =&\frac{1}{2\pi}\sum_{n=0}^{\infty}\frac{((t-t_0))^n}{n!}\int_{-\Omega/2}^{\Omega/2}(i\omega)^n \mathcal{F} f(\omega)e^{i\omega t_0}\,d\omega=0
 \end{align*}
 这表明只有恒零函数才能做到时域、频域均紧支。
 
-看上去，即便$supp\mathcal{F} f\notin[-\Omega/2,\Omega/2]$，也可以用这种方法证明$f(t)$恒为0。但是，在积分区间为无限区间时，最后一步中的换序一般不成立，因为我们无法证明级数\[\sum_{n=0}^{\infty}\frac{((t-t_0))^n}{n!}(i\omega)^n \mathcal{F} f(\omega)e^{i\omega t_0}\]在$\omega \in (-\infty,\infty)$上一致收敛。
-
-\textbf{法二}：利用解析延拓的唯一性。设$suppf\in[-T/2,T/2]$，则\begin{align*}
+\textbf{法二}：利用解析延拓的唯一性。设$\text{supp}\ f\in[-T/2,T/2]$，则\begin{align*}
     \mathcal{F} f(\omega)&=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt\\
     &=\int_{-T/2}^{T/2}f(t)e^{-i\omega t}\,dt
 \end{align*}
-这是一个实变函数，我们可以尝试将其做全纯延拓，不过为了符号的一致性，我们将变量改为$F(i\omega)=\mathcal{F} f(\omega)$，做替换$i\omega\to s=\sigma+i\omega$，得到$f(t)$的拉普拉斯变换：
+这是一个可导的实变函数，可以将其做全纯延拓。我们在\ref{sec:Laplace_Transform}中已经介绍过拉普拉斯变换，不过那时使用的是单边拉普拉斯变换，这里为了涵盖$\text{supp}\ f\in[-T/2,T/2]$的情形，我们使用双边拉普拉斯变换：
 \begin{align*}
-    F(s)&=\int_{-T/2}^{T/2}f(t)e^{-st}\,dt
+    F(s)=\int_{-\infty}^{\infty}f(t)e^{-st}\,dt=\int_{-T/2}^{T/2}f(t)e^{-st}\,dt,F(i\omega)=\mathcal{F} f(\omega)
 \end{align*}
-由于积分区间有限，$f\in\mathcal{C} $光滑，以上积分总是存在的，并且可以对$s$求导，从而也是全纯的：\[F'(s)=-\int_{-T/2}^{T/2}tf(t)e^{-st}\,dt\]
-即$F(s)$是整函数。但是，$F(s)=0,\forall s=i\omega,|\omega|> \Omega/2$，这些点使得$F(s)=0,\forall s\in\mathbb{C}$，这样$f(t)$也只能为0。
+它同样具备全纯性。由于积分区间有限，$f\in\mathcal{C} $光滑，以上积分总是存在的，并且可以对$s$求导，从而也是全纯的：\[F'(s)=-\int_{-T/2}^{T/2}tf(t)e^{-st}\,dt\]
+即$F(s)$是整函数。但是，$F(s)=0,\forall s=i\omega,|\omega|> \Omega/2$，由唯一延拓定理，$F(s)=0,\forall s\in\mathbb{C}$，因此$f(t)=0$。
 \end{proof}
 
 %时域频域“带宽”积，海森堡不确定性原理
-必须指出，实际应用中我们总是考虑时域、频域都近似紧支的函数，指出时限、带限不共存，只是理论需要。事实上，时域上的“宽度”与频域上的“宽度”之间存在一个下界，这一点从\ref{sec:Fourier}中提出的伸缩定理就可以看出：
+必须指出，实际应用中我们总是考虑时域、频域都近似紧支的函数，指出时限、带限不共存，只是理论需要。事实上，时域上的“宽度”与频域上的“宽度”之积存在一个下界，这一点从\ref{sec:Fourier}中提出的伸缩定理就可以看出：
 \lr{
     \mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f(\frac{\xi}{a})
 }{
@@ -5004,12 +5029,13 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 }
 随着$a$的增大，时域函数$f(at)$变得越来越集中，而频域函数$\mathcal{F} f(\frac{\xi}{a})$则变得越来越分散，反之亦然。
 
-我们可以用方差来定量描述这一关系。物理规律中许多现象都可以归结为这一数学事实，例如著名的\textbf{海森堡不确定性原理} (Heisenberg's uncertainty principle)。
+我们可以用方差来定量描述这一关系。
 \begin{theorem}
     时域信号、频域信号的方差之积满足不等式
     \[\sigma(f)\sigma(F)\geq \frac{1}{4\pi}\]
     其中$f\in L^1(\mathbb{R} )\cap L^2(\mathbb{R} )$，$F(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt$，$\sigma(f),\sigma(F)$分别为$f,F$的方差。
 \end{theorem}
+物理规律中许多现象都可以归结为这一数学事实，例如著名的\textbf{海森堡不确定性原理} (Heisenberg's uncertainty principle)。
 \begin{proof}
     我们首先验证，$|f|^2$与$|F|^2$作为某个随机变量的概率密度函数是良定义的，从而其方差是良定义的。根据普朗歇尔定理（见\ref{sec:Fourier}），\lr{
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
@@ -5024,12 +5050,11 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     即方差存在，则\begin{align*}
     4\pi^2 \sigma^2(f)\sigma^2(F)&=4\pi^2 \int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}\xi^2|F(\xi)|^2\,d\xi\\
     &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}|2\pi i\xi F(\xi)|^2\,d\xi\\
-    &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}| \mathcal{F} [f'(t)](\xi)|^2\,d\xi\\
+    &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}| \mathcal{F} [f'(t)](\xi)|^2\,d\xi&\text{(时域微分性质)}\\
     &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}| f'(t)|^2\,dt&\text{(普朗歇尔定理)}\\
     &\geq \left(\int_{-\infty}^{\infty}|tf(t)||f'(t)|\,dt\right)^2&\text{(柯西-施瓦兹不等式)}\\
-    &\geq \left|\int_{-\infty}^{\infty}tf(t)f'(t)\,dt\right|^2&\text{(三角不等式)}\\
-    &=\frac{1}{4}\left|\int_{-\infty}^{\infty}|f(t)|^2\,dt\right|^2&\text{(分部积分)}\\
-    &=\frac{1}{4}
+    &=\frac{1}{4}\int_{-\infty}^{\infty}|f(t)|^2\,dt^2&\text{(分部积分)}\\
+    &=\frac{1}{4}&\text{(归一化)}
     \end{align*}
     因此，$\sigma(f)\sigma(F)\geq \frac{1}{4\pi}$，得证。
 \end{proof}
@@ -5051,10 +5076,13 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 \end{align*}
 \end{proof}
 
-例如，取$a=2\sigma(f)$，则有\[\int_{|t|\geq 2\sigma(f)}|f(t)|^2\,dt\leq \frac{1}{4}\]
-即$f$在区间$[-2\sigma(f),2\sigma(f)]$之外的能量不超过总能量的$1/4$，因此前面证明的$\sigma_f \sigma_F\geq 1/4\pi$又可以表述为时域上的“宽度”与频域上的“宽度”之积有下界，游戏可以定义信号的时宽、带宽积：
+\begin{example}
+    取$a=2\sigma(f)$，则有\[\int_{|t|\geq 2\sigma(f)}|f(t)|^2\,dt\leq \frac{1}{4}\]
+即$f$在区间$[-2\sigma(f),2\sigma(f)]$之外的能量不超过总能量的$1/4$。
+\end{example}
+可见，前面证明的$\sigma_f \sigma_F\geq 1/4\pi$又可以表述为时域上的“宽度”与频域上的“宽度”之积有下界，由此可以定义信号的时宽、带宽积：
 \begin{definition}[时宽-带宽积]
-    设$f\in L^1(\mathbb{R} )\cap L^2(\mathbb{R} )$，$F(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt$，则$f$的\textbf{时宽}(time width)和\textbf{带宽}(bandwidth)定义分别为
+    设$f\in L^1(\mathbb{R} )\cap L^2(\mathbb{R} )$，$F(\xi)=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt$，且它们的方差存在，则$f$的\textbf{时宽}(time width)和\textbf{带宽}(bandwidth)定义分别为
     \[T=2\sigma(f),B=2\sigma(F)\]
     它们的乘积称为\textbf{时宽-带宽积} (time-bandwidth product)：
     \[TB(f)=4\sigma(f)\sigma(F)\]
@@ -5067,12 +5095,12 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     \item $\mathcal{F} $是双射（我们已经找到逆映射$\mathcal{F} ^{-1} $）
     \item $\mathcal{F} $及其逆映射$\mathcal{F} ^{-1} $均为连续映射。
 \end{itemize}
-线性和双射显然成立，下面我们来说明连续性。为此，我们需要给施瓦兹函数类赋予一个拓扑结构。尽管$\mathcal{S}\in L^1(\mathbb{R} )$，但$L^p$空间的范数并不能很好地刻画施瓦兹函数类的性质，因此我们需要引入一族\textbf{半范数} (seminorm)：
+我们已经证明过$\mathcal{F}$是线性的双射，下面来说明连续性。为此，我们需要给施瓦兹函数类赋予一个拓扑结构。尽管$\mathcal{S}\in L^1(\mathbb{R} )$，但$L^p$空间的范数并不能很好地刻画施瓦兹函数类的性质，因此我们需要引入一族\textbf{半范数} (seminorm)：
 \begin{definition}[*施瓦兹函数类的半范数]
     对于$m,n\in\mathbb{N} $，定义施瓦兹函数类上的半范数
     \[\|\varphi\|_{m,n}=\sup_{x\in\mathbb{R} }|x|^m|\varphi^{(n)}(x)|\]
 \end{definition}
-在这个范数下$\mathcal{S} $构成\textbf{弗雷歇空间} (Fréchet space)，即完备的拓扑向量空间。利用这些半范数，我们可以定义施瓦兹函数类中的收敛：
+在这个范数下$\mathcal{S} $构成\textbf{弗雷歇空间} (Fréchet space)。利用这些半范数，我们可以定义施瓦兹函数类中的收敛：
 \begin{definition}[*施瓦兹函数类中的收敛]
     设$\{\varphi_k\}\subset\mathcal{S} $，如果对于任意$m,n\in\mathbb{N} $，都有
     \[\lim_{k\to\infty}\|\varphi_k-\varphi\|_{m,n}=0\]
@@ -5085,35 +5113,37 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 \begin{proof}
     不妨设$\varphi=\mathcal{F} \varphi=0$。由傅里叶变换的微分性质（见\ref{sec:Fourier}），
     \begin{align*}
-    \mathcal{F} [((-it)^n\varphi_k)^{(m)}](\omega)&=(i\omega)^m \mathcal{F} [(-it)^n \varphi_k](\omega)\\
+    \mathcal{F}\left[\left((-it)^n\varphi_k\right)^{(m)}\right](\omega)&=(i\omega)^m \mathcal{F}\left[(-it)^n \varphi_k\right](\omega)\\
     &=(i\omega)^m (\mathcal{F} \varphi_k)^{(n)}(\omega)\\
-    \|\mathcal{F} \varphi_k\|_{m,n}&=\sup_{\omega\in\mathbb{R} }|\omega|^m|(\mathcal{F} \varphi_k)^{(n)}(\omega)|\\
-    &=\sup_{\omega\in\mathbb{R} }|\mathcal{F} [((-it)^n \varphi_k)^{(m)}](\omega)|
+    \|\mathcal{F} \varphi_k\|_{m,n}&=\sup_{\omega\in\mathbb{R} }|\omega|^m\left|(\mathcal{F} \varphi_k)^{(n)}(\omega)\right|\\
+    &=\sup_{\omega\in\mathbb{R} }\left|\mathcal{F}\left[((-it)^n \varphi_k)^{(m)}\right](\omega)\right|
 \end{align*}
-令$\phi_k=((-it)^n \varphi_k)^{(m)}\in\mathcal{S} $，则\begin{align*}
+令$\phi_k=\left((-it)^n \varphi_k\right)^{(m)}\in\mathcal{S} $，则
+\begin{align*}
     \|\mathcal{F} \varphi_k\|_{m,n}&=\sup_{\omega\in\mathbb{R} }|\mathcal{F} \phi_k(\omega)|\leq \int_{-\infty}^{\infty}|\phi_k(t)|\,dt
 \end{align*}
 问题转化为证明\[\int_{-\infty}^{\infty}|\phi_k(t)|\,dt\to 0\]
 考虑利用$\varphi_k\in\mathcal{S} ,\|\varphi_k\|_{m,n}\to 0,\forall m,n\in\mathbb{N}$给出$|\phi_k(t)|$的估计。利用莱布尼兹求导法则，有：
 \begin{align*}
-    |\phi_k(t)|&=|((-it)^n \varphi_k)^{(m)}(t)|\\
+    |\phi_k(t)|&=\left|\left((-it)^n \varphi_k\right)^{(m)}(t)\right|\\
 &=\left|\sum_{j=0}^{m}\binom{m}{j}(t^n)^{(j)}\varphi_k^{(m-j)}(t)\right|\\
     &\leq \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}|t|^{n-j}|\varphi_k^{(m-j)}(t)|
 \end{align*}
-由于$\|\varphi_k\|_{n-j+2,m-j}\to 0$，$\forall \epsilon>0,\exists N\in\mathbb{N},k>N\Rightarrow \|\varphi_k\|_{n-j+2,m-j}<\epsilon$，于是
+由于$\|\varphi_k\|_{n-j+2,m-j}\to 0$，有：$\forall \epsilon>0,\exists N\in\mathbb{N},k>N\implies \|\varphi_k\|_{n-j+2,m-j}<\epsilon$，于是
 \begin{align*}
     |\phi_k(t)|&\leq \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}\frac{\|\varphi_k\|_{n-j+2,m-j}}{|t|^2}\\
     &<\frac{C\epsilon}{|t|^2},C=\sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}
 \end{align*}
-因此\begin{align*}
+因此有\begin{align*}
     \int_{|t|\geq 1}|\phi_k(t)|\,dt&\leq \int_{|t|\geq 1}\frac{C\epsilon}{|t|^2}\,dt\\
     &=2C\epsilon\int_{1}^{\infty}\frac{1}{t^2}\,dt=2C\epsilon
 \end{align*}
 而在$|t|<1$时，\begin{align*}
-    \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}|t|^{n-j}|\varphi_k^{(m-j)}(t)|&\leq \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}\|\varphi_k\|_{0,m-j}\\
+    \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}|t|^{n-j}\left|\varphi_k^{(m-j)}(t)\right|&\leq \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}\|\varphi_k\|_{0,m-j}\\
     &\leq C'\max_{0\leq j\leq \min(m,n)}\|\varphi_k\|_{0,m-j}<\epsilon
 \end{align*}
-$\phi_k$一致收敛于0，故\[\int_{|t|<1}|\phi_k(t)|\,dt\to 0\]
+即$\phi_k$一致收敛于0，因此有
+\[\int_{|t|<1}|\phi_k(t)|\,dt\to 0\]
 综上，\[0\leq\|\mathcal{F} \varphi_k\|_{m,n}\leq\int_{-\infty}^{\infty}|\phi_k(t)|\,dt\to 0\]
 根据夹逼定理，$\|\mathcal{F} \varphi_k\|_{m,n}\to 0$，得证。傅里叶逆变换同理。
 \end{proof}
@@ -5132,7 +5162,7 @@ $\phi_k$一致收敛于0，故\[\int_{|t|<1}|\phi_k(t)|\,dt\to 0\]
     &=\int_{-\infty}^{\infty}|f_k(t)-f(t)|^2\,dt\\
     &=\|f_k-f\|_2^2
     }{
-    \|\mathcal{F} f_k-\mathcal{F} f\|_2^2&=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f_k(\omega)-\mathcal{F} f(\omega)|^2\,d\omega\\
+    \|\mathcal{F} f_k-\mathcal{F} f\|_2^2&=\int_{-\infty}^{\infty}|\mathcal{F} f_k(\omega)-\mathcal{F} f(\omega)|^2\,d\omega\\
     &=2\pi\int_{-\infty}^{\infty}|f_k(t)-f(t)|^2\,dt\\
     &=2\pi\|f_k-f\|_2^2
     }
