@@ -16,6 +16,8 @@
 \usepackage{pifont}
 \usepackage{enumitem}
 \usepackage{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes,calc}
 \usepackage{standalone}
 \usepackage{silence}
 \usepackage{biblatex}
@@ -158,7 +160,7 @@
 }{}
 \ExplSyntaxOff
 
-\title{信号与系统的数学原理}
+\title{信号与系统中的数学}
 \author{严子竣}
 \date{\today}
 
@@ -173,7 +175,7 @@
 
 同时，我注意到现在的信号与系统教材中对很多数学上的内容的处理过于简单化，以至于同学们对一些公式感到不解，我希望结合《信号与系统》教材和实变函数、复变函数和傅里叶分析等教材，对这样的内容做一些补充和深化。对于其中比较复杂的内容，我会用“*”进行标注，以提示读者可以选择性地阅读。
 
-本书将不会涉及信号与系统实践部分，对一些语文性质的概念从简处理，希望了解这些内容的读者可以自行查看信号与系统教材。对于两种不同的傅里叶变换，将并排给出两种公式，左侧为频率版本，右侧为角频率版本。为了逻辑的完整性和内容的精确性，本书会引入一些远超工科教学范围的内容，力求朴素平和却又不失深度，其中所涉及的技术细节不在我们的关注范围，读者也可以自行选择是否阅读这些内容。本书默认读者已经学习过一到两学期的数学分析（或高等数学/微积分）以及高等代数（或线性代数）课程，不过只要理解一元微积分，阅读前四章及附录就不会有问题；只要掌握复数运算、理解曲线积分，阅读后两章就不会有问题。
+本书将不会涉及信号与系统实践部分，对一些语文性质的概念从简处理，希望了解这些内容的读者可以自行查看信号与系统教材。对于两种不同的傅里叶变换，将并排给出两种公式，左侧为频率版本，右侧为角频率版本。为了逻辑的完整性和内容的精确性，本书会引入一些远超工科教学范围的内容，力求朴素平和却又不失深度，其中所涉及的技术细节不在我们的关注范围，读者也可以自行选择是否阅读这些内容。本书默认读者已经学习过一到两学期的数学分析（或高等数学/微积分）以及高等代数（或线性代数）课程，不过只要理解一元微积分，阅读前四章及就不会有问题；只要掌握复数运算、理解曲线积分，阅读后两章就不会有问题。
 
 限于作者水平，书中难免存在不足之处，希望读者可以提出宝贵的意见或建议，可以反馈至我的电子邮箱：2024212622@bupt.cn。
 
@@ -193,12 +195,6 @@
 \renewcommand{\contentsname}{简要目录}
 \etocsetnexttocdepth{1}% 1=section
 \tableofcontents
-
-\clearpage
-
-\renewcommand{\contentsname}{详尽目录}
-\etocsetnexttocdepth{2}% 2=subsection
-\tableofcontents%目录（详尽）
 
 \clearpage
 
@@ -725,7 +721,7 @@ $\omega=\frac{2\pi}{T}$，傅里叶级数展开为
     满足狄利克雷条件时，f的傅里叶级数展开在在任意点收敛到其左右极限的平均值：
     \[\forall t\in \mathbb{R},\sum_{k=\infty}^{\infty}c_k e^{2\pi ikt}=\frac{f(t+)+f(t-)}{2}\]
 \end{theorem}
-最后一个条件实际上相当于要求f是有界变差函数(Bounded Variatioin Function)，感兴趣的读者可以在实变函数的教材中了解这种函数。在\ref{sub:uniform_converge}中我们将讨论另外的更易理解的条件：
+最后一个条件实际上相当于要求f是有界变差函数(Bounded Variatioin Function)，感兴趣的读者可以在实变函数的教材（如\cite{real_analysis}）中了解这种函数。在\ref{sub:uniform_converge}中我们将讨论另外的更易理解的条件：
 \begin{definition}[分段光滑]
     在区间$[a,b]$上，函数$f$称为\textbf{分段光滑} (piecewise smooth)，如果存在区间的划分$a=x_0<x_1<\dots <x_n=b$，使得在每个子区间$(x_{i-1},x_i)$上f可微，且区间端点处$f$的左右导数存在，记作$f\in PS[a,b]$。
 \end{definition}
@@ -2246,7 +2242,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \end{align*}
 \end{proof}
 
-然而，要证明施瓦兹函数的傅里叶变换的连续性，要困难得多，我们将在附录\ref{sub:fourier_continuous}中给出其证明。
+然而，要证明施瓦兹函数的傅里叶变换的连续性，要困难得多，我们将在\ref{sub:fourier_continuous}中给出其证明。
 
 \chapter{关于傅里叶变换的进一步讨论}
 
@@ -2322,7 +2318,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 对任意的t，考察级数$\sum_{k=-\infty}^{\infty}f(t-kT)$的收敛性时，只需要将n取为0，m取为不小于2的整数，则在$|k|$充分大时，级数比$C/n^2$更小，从而绝对收敛。注意这种估计方式并不依赖于自变量t的选取，因此这个函数项级数一致收敛，其和函数会保留$f(t)$的许多分析性质，例如我们可以逐项求导（从而和函数也无限阶可导）、逐项积分，还可以交换求和符号与其他极限过程的顺序（见数学分析教材，如\cite{zorich}\cite{xinjiang}）。
 
 \subsection{泊松求和公式}\label{sub:possion_summation}
-本小节\textbf{泊松求和公式}(the Poisson summation formula)，它揭示了傅里叶级数与傅里叶变换的深刻关系。
+本小节旨在说明\textbf{泊松求和公式}(the Poisson summation formula)，它揭示了傅里叶级数与傅里叶变换的深刻关系。
 \begin{theorem}[泊松求和公式]
 \begin{align*}
     \sum_{k=-\infty}^{\infty}\varphi(k)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)
@@ -2386,8 +2382,8 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
     &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}
 \end{align*}
 
-结合$\shah$的傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义：
-\begin{definition}[$\shah$的等价定义]
+结合$\shah$的傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义。实际上，这就是$\shah$作为一个周期分布的傅里叶级数展开（分布的周期性是通过$\tau_1 \shah=\shah$体现的）：
+\begin{definition}[$\shah$的傅里叶级数形式]
     \[\shah(x)=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}\]
 \end{definition}
 右边正是\ref{sub:dirichlet_kernel}中提到的狄利克雷核在$N\to\infty$时的式子。需要注意，这个式子仅在分布的意义下成立，例如将这个分布作用在某一区间的特征函数$\chi_{[a,b]}\in\mathcal{S}$上，则可验证函数项级数$$\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}$$在整数点处趋于正无穷，在任意不包含整数点的区间上积分值为0。然而，作为函数项级数，我们只能得到整数点处的广义极限存在，这是一个几乎处处不收敛的函数项级数，例如在$x=1/2$处，级数项为$(-1)^k$，其和函数在多数点没有定义，只能作为奇异分布来定义。
@@ -2617,20 +2613,17 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 \begin{definition}[线性时不变系统]
     如果一个系统既是线性的又是时不变的，就说它是\textbf{线性时不变系统}(linear time-invariant system,LTI)。
 \end{definition}
-线性时不变系统满足$r(t)=(h*e)(t)$，h为单位脉冲响应，将在本小节的后文介绍。在考虑系统的初始状态时，只要零状态响应具有线性
-和时不变性，就说系统是线性时不变系统。
+线性时不变系统满足$r(t)=(h*e)(t)$，h为单位脉冲响应，将在本小节的后文介绍。在考虑系统的初始状态时，只要零状态响应具有线性和时不变性，就说系统是线性时不变系统。
 
 \begin{definition}[因果性]
 一个系统在有激励时，才会出现响应，或者说
-$r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准的定义方式，我
-们马上会看到它的作用），即
+$r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准的定义方式，我们马上会看到它的作用），即
 \begin{equation}
     \forall t_0,\left(e_1(t)=e_2(t)\ for\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ for\ t<t_0\right)\label{eq:4.1}
 \end{equation}
 这个条件称为\textbf{因果性条件}(casuality condition)。
 \end{definition}
-对于线性系统，容易看
-出其因果性条件等价于
+对于线性系统，容易看出其因果性条件等价于
 \begin{equation}
     \forall t_0,\left(e(t)=0\ for\ t<t_0\right)\implies \left(r(t)=0\ for\ t<t_0\right)\label{eq:4.2}
 \end{equation}
@@ -2670,13 +2663,9 @@ $r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准�
 对于n维的离散激励信号$\mathbf{v}$，\begin{equation}
     \mathbf{w}=A\mathbf{v},A\in M_{n\times n}(\mathbb{C})
 \end{equation}
-例如，线性动力系统中，初值问题$\mathbf{\dot{x}}(t)=A\mathbf{x}(t)$的解
-为$H[\mathbf{v}]=e^{At}\mathbf{v}$。
+例如，线性动力系统中，初值问题$\mathbf{\dot{x}}(t)=A\mathbf{x}(t)$的解为$H[\mathbf{v}]=e^{At}\mathbf{v}$。
 \end{example}
-线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用
-$A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称
-算子；L的共轭转置定义为用$A^H$表示的线性算子，其中H表示矩阵的共轭转置，如果A是埃尔
-米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子}
+线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用$A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称算子；L的共轭转置定义为用$A^H$表示的线性算子，其中H表示矩阵的共轭转置，如果A是埃尔米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子}
 (self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义
 \textbf{对称系统、自伴系统}。
 
@@ -2684,11 +2673,9 @@ $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对�
 \begin{equation*}
     r(t)=\int_{a}^{b}k(x,y)e(y)\,dy
 \end{equation*}
-其中，$k(x,y)$称为核函数(kernel)，$\int_{a}^{b}k(x,y)e(y)\,dy$称为对核积分
-(integrating against a kernel).
+其中，$k(x,y)$称为核函数(kernel)，$\int_{a}^{b}k(x,y)e(y)\,dy$称为对核积分(integrating against a kernel).
 \end{example}
-对核积分非常类似于连续版本的矩阵乘积，我们同
-样可以定义：\begin{itemize}
+对核积分非常类似于连续版本的矩阵乘积，我们同样可以定义：\begin{itemize}
     \item 上述系统的转置系统描述为$e(t)\mapsto\int_{a}^{b}k(y,x)e(y)\,dy$
     \item 如果$k(x,y)=k(y,x)$，称k是对称的并将系统称为\textbf{对称系统}
     \item 如果$k(x,y)=\overline{k(y,x)}$，称k是埃尔米特的并将系统称为\textbf{自伴系统}。
@@ -2697,8 +2684,7 @@ $A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对�
 \begin{example}[卷积]
     取定连续信号$g,r(t)=g*e(t)$;取定周期离散信号$\mathbf{h},r[n]=\mathbf{h*e}[n]$.
 \end{example}
-在标准正交基底下，卷积系统的矩阵是一个循环矩阵(circulant matrix)或托普利兹矩
-阵(Toepliz matrix)：\[\begin{pmatrix}
+在标准正交基底下，卷积系统的矩阵是一个循环矩阵(circulant matrix)或托普利兹矩阵(Toepliz matrix)：\[\begin{pmatrix}
     h[0] & h[N-1] & \cdots & h[1]\\
     h[1] & h[0] & \cdots &  h[2]\\
     \vdots & \vdots & \ddots & \vdots\\
@@ -2722,8 +2708,7 @@ $r(t)=\mathcal{F} e(t)$.
     LK[ae_1+be_2]=L[aK[e_1]+bK[e_2]]=aLK[e_1]+bLK[e_2]
 \end{align*}
 \end{theorem}
-对于周期离散信号，两个系统都是矩阵乘法，则级联系统也可以用矩阵乘法来描述，并且其矩阵是两子系统的矩阵之乘积，这
-正是定义矩阵乘法的原因之一；对于连续信号，如果两个系统都是对核积分系统，我们也有类似的结论：
+对于周期离散信号，两个系统都是矩阵乘法，则级联系统也可以用矩阵乘法来描述，并且其矩阵是两子系统的矩阵之乘积，这正是定义矩阵乘法的原因之一；对于连续信号，如果两个系统都是对核积分系统，我们也有类似的结论：
 \begin{theorem}[对核积分系统的级联]
     设有两对核积分系统K，L：
     \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{a}^{b}l(x,y)e(y)\,dy\]
@@ -2755,8 +2740,7 @@ $r(t)=\mathcal{F} e(t)$.
     &=\int_{-\infty}^{\infty}h(x,y)e(y)\,dy
 \end{align*}
 \end{proof}
-反过来，如果一个系统是激励信号与脉冲响应的含参积分，那么这个系统也是线性的，
-这得自积分的线性性。至此我们有了充分的动机去定义：
+反过来，如果一个系统是激励信号与脉冲响应的含参积分，那么这个系统也是线性的，这得自积分的线性性。至此我们有了充分的动机去定义：
 \begin{definition}[线性系统的脉冲响应]
     线性系统H的\textbf{脉冲响应}定义为$h(x,y)=H_x[\delta(x-y)]$，其中$H_x$表示$\delta(x-y)$作为x的函数输入系统，输出为x,y的双变量函数。
 \end{definition}
@@ -2766,14 +2750,11 @@ $r(t)=\mathcal{F} e(t)$.
 
 对于时不变系统，这个定理具有更加优美的形式。将系统视为线性系统，其脉冲响应为
 \[h(x,y)=H_x[\delta(x-y)]=H[\tau_y\delta(x)]=\tau_y H[\delta(x)]\]
-按照单变量的脉冲响应的定义，这就是$\tau_y h(x)=h(x-y)$，它只依赖于x、y的差值，
-带入叠加定理：\begin{align*}
+按照单变量的脉冲响应的定义，这就是$\tau_y h(x)=h(x-y)$，它只依赖于x、y的差值，带入叠加定理：\begin{align*}
     r(x)&=\int_{-\infty}^{\infty}h(x-y)e(y)\,dy\\
     &=(h*e)(t)
 \end{align*}
-也就是说，信号经过线性时不变系统相当于与这个系统的单位脉冲响应做卷积。下面来验证，
-如果一个系统是激励信号与脉冲响应的卷积，那么这个系统也是线性时不变系统。线性性是
-显然的，我们来验证$H\tau_b=\tau_b H$:\begin{align*}
+也就是说，信号经过线性时不变系统相当于与这个系统的单位脉冲响应做卷积。下面来验证，如果一个系统是激励信号与脉冲响应的卷积，那么这个系统也是线性时不变系统。线性性是显然的，我们来验证$H\tau_b=\tau_b H$:\begin{align*}
     H[\tau_b e(y)](x)=(h*\tau_b e)(x)=\tau_b(h*e)(x)=\tau_b H[e(y)]
 \end{align*}
 总之，我们有：
@@ -2787,17 +2768,14 @@ $r(t)=\mathcal{F} e(t)$.
     &=\int_{-\infty}^{\infty}u(t-y)h(y)\,dy\\
     &=\int_{-\infty}^{t}h(y)\,dy
 \end{align*}
-可以看到，单位阶跃响应就是单位脉冲响应的积分，利用这个性质，可以快速地求出单位阶
-跃响应，在使用卷积来描述线性时不变系统时，这个性质很容易得到，但在一些其他的线性
-时不变系统中很难想到具有这样的性质，例如下一节将讨论的系统。
+可以看到，单位阶跃响应就是单位脉冲响应的积分，利用这个性质，可以快速地求出单位阶跃响应，在使用卷积来描述线性时不变系统时，这个性质很容易得到，但在一些其他的线性时不变系统中很难想到具有这样的性质，例如下一节将讨论的系统。
 \end{example}
 
 \section{常系数线性微分方程}\label{sec:ODE}
 
+除了上一节中提到的几种系统，还有一种典型的具有因果性的线性时不变系统是用常系数线性微分方程表示的，在学习数学分析时我们曾遇到过这种微分方程，下面先回忆在数学分析中对于这种方程的处理方法\cite{xinjiang}\cite{ode}
+
 \subsection{解法回顾}\label{sub:solution_of_ODE}
-除了上一节中提到的几种系统，还有一种典型的具有因果性的线性时不变系统是用常系数线
-性微分方程表示的，在学习数学分析时我们曾遇到过这种微分方程，下面先回忆在数学分析
-中对于这种方程的处理方法\cite{xinjiang}\cite{ode}。
 \begin{definition}[常系数线性微分方程]
     一个形如
 \[a_n y^{(n)}+a_{n-1}y^{(n-1)}+\cdots +a_1 y'+a_0 y=f\]
@@ -2826,9 +2804,7 @@ $f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
     \item 如果$f(t)=P(t)e^{\lambda t}$，$\lambda$为k重特征根，则特解$y_p(t)=t^k Q(t)e^{\lambda t}$，其中Q是与P次数相同的多项式，即$deg Q=degP$；
     \item 如果$f(t)=(P_1(t)\cos(\omega t)+P_2(t)\sin(\omega t))e^{\lambda t}$，$\lambda\pm i\omega$是k重特征根，则特解$y_p(t)=t^k(Q_1(t)\cos(\omega t)+Q_2(t)\sin(\omega t))e^{\lambda t}$，其中$degQ_1=degQ_2=max\{degP_1,degP_2\}$
 \end{itemize}
-如果确定了一组初始条件$y(t_0),y'(t_0),\cdots,y^{(n-1)}(t_0)$，则微分方程有唯
-一的解，因为完全解中的特解部分是确定的，而齐次解部分的n个解对应着n个系数，只要给
-定n个初始条件，就相当于给出了n个方程，可以解出所有的系数。
+如果确定了一组初始条件$y(t_0),y'(t_0),\cdots,y^{(n-1)}(t_0)$，则微分方程有唯一的解，因为完全解中的特解部分是确定的，而齐次解部分的n个解对应着n个系数，只要给定n个初始条件，就相当于给出了n个方程，可以解出所有的系数。
 \begin{example}
     求解微分方程\[y''-3y'+2y=2e^{-x}\cos x+e^{2x}(4x+5)\]
 解：特征方程为$\lambda^2-3\lambda+2=0$，有两个特征根$\lambda_1=1,\lambda_2=2$，
@@ -2846,34 +2822,21 @@ $f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
 \subsection{信号与系统中的一些术语}\label{sub:term_in_ODE}
 \begin{definition}[自由响应与强迫相应]
     一个用常系数线性微分方程描述的系统，就是指激励为$e(t)=f(t)$，响应为微分方程的完
-全解$y(t)$的系统，齐次解$y_h(t)$相当于在激励为0时系统的响应。其中，齐次解又称为
-\textbf{自由响应}(natural response)，它不依赖于激励的形式，而特解又称为
-\textbf{强迫响应}(forced response)。
+全解$y(t)$的系统，齐次解$y_h(t)$相当于在激励为0时系统的响应。其中，齐次解又称为\textbf{自由响应}(natural response)，它不依赖于激励的形式，而特解又称为\textbf{强迫响应}(forced response)。
 \end{definition}
-注意区分它们与\ref{sub:concepts_of_system}中介绍的零状态响应、零输入响应，后者对于更一般的线性系统都有定义，对于用微分方程描述的系统，齐
-次解和特解、零输入响应和零状态响应也是不同的分类方式。
+注意区分它们与\ref{sub:concepts_of_system}中介绍的零状态响应、零输入响应，后者对于更一般的线性系统都有定义，对于用微分方程描述的系统，齐次解和特解、零输入响应和零状态响应也是不同的分类方式。
 
 \begin{example}[两种响应划分方式的区别]
     由微分方程及初始条件
 \[y'+2y=10,y(0)=1\]
-描述的系统，采用数学的解法，可以求出其特征方程$\lambda+2=0$的解$\lambda=-2$，
-从而有齐次解$y_h(t)=Ce^{-2t}$，C为常数，特解$y_p(t)=5$，完全解
-$y(t)=y_h(t)+y_p(t)=5+Ce^{-2t}$，带入$y(0)=1$得$5+C=1,C=-4$，因此最终的解为
-\[y(t)=5-4e^{-2t}\]
-采用系统响应分解，求零输入响应时，应求齐次方程满足初始条件得解，即令$y_h(0)=C=1$，
-得到$C=1,y_{z.i.}(t)=e^{-2t}$；而求零状态响应时，则应该求原方程在初始条件为0向
-量情况下的解，即在前面得到的完全解中令$y(0)=5+C=0$,得到$C=-5$，
-$y_{zs}(t)=5-5e^{-2t}$，将零输入响应、零状态响应相加，又得到了原来的解
-$y(t)=5-4e^{-2t}$。
+描述的系统，采用数学的解法，可以求出其特征方程$\lambda+2=0$的解$\lambda=-2$，从而有齐次解$y_h(t)=Ce^{-2t}$，C为常数，特解$y_p(t)=5$，完全解$y(t)=y_h(t)+y_p(t)=5+Ce^{-2t}$，带入$y(0)=1$得$5+C=1,C=-4$，因此最终的解为\[y(t)=5-4e^{-2t}\]
+采用系统响应分解，求零输入响应时，应求齐次方程满足初始条件得解，即令$y_h(0)=C=1$，得到$C=1,y_{z.i.}(t)=e^{-2t}$；而求零状态响应时，则应该求原方程在初始条件为0向量情况下的解，即在前面得到的完全解中令$y(0)=5+C=0$,得到$C=-5$，$y_{zs}(t)=5-5e^{-2t}$，将零输入响应、零状态响应相加，又得到了原来的解$y(t)=5-4e^{-2t}$。
 
 可见，$y_h(t)\neq y_{zi}(t),y_p(t)\neq y_{zs}(t)$。
 \end{example}
-尽管从数学上我们先得到了齐次解和特解才进一步求出零输入响应、零状态响应，但解的这
-两种划分都是有意义的，后者揭示了：响应中有一部分齐次解用来使响应满足初始条件，而
-另一部分齐次解会与特解叠加得到无关初始条件、仅依赖于方程形式的解。
+尽管从数学上我们先得到了齐次解和特解才进一步求出零输入响应、零状态响应，但解的这两种划分都是有意义的，后者揭示了：响应中有一部分齐次解用来使响应满足初始条件，而另一部分齐次解会与特解叠加得到无关初始条件、仅依赖于方程形式的解。
 
-由于我们对输入激励建模时，常常认为激励是瞬间施加到系统上的，并且经常认为激励施加
-的时间就是0时刻，我们需要区分0的左、右邻域内的系统状态，为此定义\cite{signal_systems}：
+由于我们对输入激励建模时，常常认为激励是瞬间施加到系统上的，并且经常认为激励施加的时间就是0时刻，我们需要区分0的左、右邻域内的系统状态，为此定义\cite{signal_systems}：
 \begin{definition}[起始状态和初始状态]
     将激励接入之前的瞬间系统的状态称为\textbf{$0_-$状态}或\textbf{起始状态}，记为
 \[y^{(k)}(0-)=[y(0-),y'(0-),\cdots,y^{(n-1)}(0-)]\]
@@ -2888,13 +2851,9 @@ $y(t)=5-4e^{-2t}$。
     RLC振荡电路中，对于电感，$u_L=Ldi_L/dt$，施加于电感两侧的电压不会无穷大，其电流$i_L(t)$总是连续的，即$i_L(0_-)=i_L(0_+)=i_L(0)$，而其电压则可以不连续；对于电容，$i_C=Cdu_C/dt$，通过电容的电流不会无穷大，其电压$u_C(t)$总是连续的，即$u_C(0_-)=u_C(0_+)=u_C(0)$，而其电流可以不连续。电感电流、电容电压不突变的这个结果，称为换路定则。
 \end{example}
 
-激励$f(t)$不连续，意味着$y(t)$（或它的某阶导数）不连续，这时需要将y视为一个分布来求导，见\ref{sub:general_distributions}。
-例如$f(t)=g(t)u(t)$时，完全解中可能含有$u(t)$及其导数$\delta(t)$。
+激励$f(t)$不连续，意味着$y(t)$（或它的某阶导数）不连续，这时需要将y视为一个分布来求导，见\ref{sub:general_distributions}。例如$f(t)=g(t)u(t)$时，完全解中可能含有$u(t)$及其导数$\delta(t)$。
 
-物理中的受迫振动，以及电路分析中的二阶电路，都是用二阶常系数线性微分方程描述的系
-统的例子，从直观上看，如果使激励（施加于系统的力，或者电源提供的电压、电流）经过
-一段时间后变为0，则响应一定也会随时间的增大而趋于0。因此，又可以将响应分为\textbf{稳态响应}(steady state response)$y_{ss}(t)$
-和\textbf{暂态响应}(transient state)$y_t(t)$：
+物理中的受迫振动，以及电路分析中的二阶电路，都是用二阶常系数线性微分方程描述的系统的例子，从直观上看，如果使激励（施加于系统的力，或者电源提供的电压、电流）经过一段时间后变为0，则响应一定也会随时间的增大而趋于0。因此，又可以将响应分为\textbf{稳态响应}(steady state response)$y_{ss}(t)$和\textbf{暂态响应}(transient state)$y_t(t)$：
 \begin{definition}[稳态响应和暂态响应]
 完全解中，$t\to\infty$时保留下来的分量称为稳态响应，例如一个常数；$t\to\infty$时趋于0的分量为稳态响应，例如$e^{-\lambda t}$。
 \end{definition}
@@ -3006,10 +2965,10 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 
 由于这两节中，绝大部分文献和教材都采用角频率进行讨论，并且涉及大量的三角函数运算时，角频率也更加方便，本章的这两个小节将直接使用角频率形式的傅里叶变换。
 
-\subsection{频响的引出}\label{sub:freq_response}
+\subsection{频率响应特性的引出}\label{sub:freq_response}
 在上一节中我们得到了$r(t)=(h*e)(t)$，看到卷积的结构，自然会想到对其做傅里叶变换，即\[R(\omega)=H(\omega)E(\omega)\]
 \begin{definition}[频率响应]
-    将$H(\omega)$称为$r(t)$的\textbf{频率响应}。
+    将$H(\omega)$称为$r(t)$的\textbf{频率响应}，简称\textbf{频响}。
 \end{definition}
 一个物理可实现的系统，容易理解它必须满足因果性，即$h(t)=0,t<0$。实际上，这样的系统还必须满足\textbf{佩利-维纳准则}(Paley-Wiener criterion)\cite{signal_systems}：
 \begin{definition}[佩利-维纳准则]
@@ -3614,9 +3573,9 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 
 \begin{example}[三角函数]
     在实变量的情形下，熟知\begin{align*}
-        \sin^2 x+\cos^2 x&=1\\
-        \sin(x+y)&=\sin x\cos y+\cos x\sin y\\
-        \cos(x+y)&=\cos x\cos y-\sin x\sin y
+        &\sin^2 x+\cos^2 x=1\\
+        &\sin(x+y)=\sin x\cos y+\cos x\sin y\\
+        &\cos(x+y)=\cos x\cos y-\sin x\sin y
     \end{align*}
     我们定义：\begin{align*}
         f(z)&=\sin^2 z+\cos^2 z-1\\
@@ -3663,8 +3622,15 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
     \mathcal{F} f(\omega)=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt
 \end{align*}
 
-在不涉及收敛性的问题时，可以将$\omega$推广为复数$s=\sigma+i\omega$，根据含参变量积分的求导法则，这样的积分变换可以对$s$求导，从而是全纯函数。不过，添加$\sigma$会使得$t\to -\infty$时$|e^{-st}|=e^{-\sigma t}$快速增长，从而对所变换的函数提出很高的要。我们对这个定义稍加修改\cite{folland}：
-\begin{definition}[拉普拉斯变换]
+在不涉及收敛性的问题时，可以将$\omega$推广为复数$s=\sigma+i\omega$，根据含参变量积分的求导法则，这样的积分变换可以对$s$求导，从而是全纯函数。这个积分变换就是\textbf{双边拉普拉斯变换}：
+\begin{definition}[双边拉普拉斯变换]
+    设函数$f$局部可积，$\exists a,b\in\mathbb{R},a<b$（我们允许$a=-\infty$和$b=\infty$），使得$f(t)e^{-at}$和$f(t)e^{-bt}$均绝对可积，则对$\text{Re}\ s\in[a,b]$，$f$的双边拉普拉斯变换定义为
+    \[\mathcal{L}f(s)=\int_{-\infty}^{\infty}f(t)e^{-st}\,dt\]
+\end{definition}
+“局部可积”即$f$在任意有限区间上可积，这个条件是为了保证在添加适当的收敛因子$e^{-st}$后，拉普拉斯积分收敛，从而拉普拉斯变换有定义。
+
+在$\sigma>0$时，这个收敛因子会使得$t\to -\infty$时$|e^{-st}|=e^{-\sigma t}$快速增长，从而对所变换的函数提出很高的要。实际上，更多时候我们仅使用\textbf{单边拉普拉斯变换}，定义如下\cite{folland}：
+\begin{definition}[单边拉普拉斯变换]
     记\[\mathcal{E}=\left\{f:[0,\infty)\to\mathbb{C}\left|f\in PC[0,\infty),\exists C>0,a\in\mathbb{R},|f(t)|<Ce^{at},\forall t\geq 0\right.\right\}\]
     其中$PC[0,\infty)$表示$[0,\infty)$上的分段连续函数。
     对$f\in\mathcal{E}$，其拉普拉斯变换定义为
@@ -3673,7 +3639,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
     如果$f(t)$是时域信号，$\mathcal{L} f(s)$称为\textbf{复频域信号}。
     我们仍记$\mathcal{L} f(s)$为$F(s)$或$\hat{f}(s)$（在涉及傅里叶变换时，我们会避免使用它们或加以说明），并记$f\overset{\mathcal{L} }{\longleftrightarrow} F(s)$。
 \end{definition}
-在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（见\ref{sub:term_in_ODE}，$f(t)=f(t)u(t)$），就可以认为$f\in\mathcal{E}$，后文中不会特意区分$f$的定义域\footnote{实际上，在积分存在的前提下，$\int_{-\infty}^{\infty}f(t)e^{-st}\,dt$称为\textbf{双边拉普拉斯变换}\cite{oppenheim1997signals}，对应地，将前面给出的变换称为\textbf{单边拉普拉斯变换}。}。
+在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（见\ref{sub:term_in_ODE}，$f(t)=f(t)u(t)$），就可以认为$f\in\mathcal{E}$，后文中不会特意区分$f$的定义域。
 
 在$\mathcal{E} $上定义拉普拉斯变换，是因为对于$f\in\mathcal{E} $，当$\sigma>a$时，给出拉普拉斯变换的积分是绝对收敛的：
 \begin{align*}
@@ -3698,7 +3664,8 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
     \end{align*}
 尽管积分只在$\sigma>0$时收敛，但$\mathcal{L} f(s)$可以延拓为$\mathbb{C}\backslash\{0\}$上的全纯函数。
 \begin{remark}
-    其实，这个公式对实部大于$-1$的$\nu$都成立。尽管$-1<\text{Re}\ \nu<0$时，$f(t)=t^\nu$在$t=0$处无界，但由于
+    其实，这个公式对实部大于$-1$的$\nu$都成立。尽管$-1<\text{Re}\ \nu<0$时，$f(t)=t^\nu$\\
+    在$t=0$处无界，但由于
 \[\left|\int_{0}^{1}t^{\nu}e^{-st}\,dt\right|\leq \int_0^1 t^\nu\,dt=\frac{1}{\nu+1},\sigma>0\]
 \[\left|\int_{1}^{\infty}t^{\nu}e^{-st}\,dt\right|\leq \int_1^\infty e^{-\sigma t}\,dt=\frac{e^{-\sigma}}{\sigma},\sigma>0\]
 其拉普拉斯变换是存在的。因此，我们可以认为$t^\nu\in\mathcal{E},\text{Re}\ \nu>-1$.
@@ -3719,12 +3686,13 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 
 \begin{proposition}[拉普拉斯变换的性质]
     设$f,g\in\mathcal{E} $，$a,b\in\mathbb{C}$，则：\begin{itemize}
-        \item 线性：\[\mathcal{L} [af(t)+bg(t)](s)=a\mathcal{L} f(s)+b\mathcal{L} g(s)\]
+        \item 线性：在$f,g$的公共收敛域内，有\[\mathcal{L} [af(t)+bg(t)](s)=a\mathcal{L} f(s)+b\mathcal{L} g(s)\]
         \item 时移：\[\mathcal{L} [f(t-t_0)u(t-t_0)](s)=e^{-s t_0}\mathcal{L} f(s)\]
         \item 频移：\[\mathcal{L} [e^{a t}f(t)](s)=\mathcal{L} f(s-a)\]
         \item 伸缩：设$a>0$，则\[\mathcal{L} [f(at)](s)=\frac{1}{a}\mathcal{L} f\left(\frac{s}{a}\right)\]
         \item 时域微分：设$f\in C^1[0,\infty),f'\in\mathcal{E} $，则\[\mathcal{L} [f'(t)](s)=s\mathcal{L} f(s)-f(0)\]
-        $f'(t)$在0处的定义为$f$在0处的右导数$\lim_{h\to 0+}\dfrac{f(h)-f(0)}{h}$。
+        $f'(t)$在0处的定义为$f$在0处的右导数：$$f'(0):=\lim_{h\to 0+}\dfrac{f(h)-f(0)}{h}$$
+        注意我们必须要求$f$是连续的，否则微积分基本定理需要分段使用，会使公式更加复杂。得到时域微分性质至少应该要求$f$是连续且分段光滑的。
         \item 复频域微分：\[\mathcal{L} [t f(t)](s)=-\frac{d}{ds}\mathcal{L} f(s)\]
         \item 时域积分：\[\mathcal{L} \left[\int_0^t f(x)\,dx\right](s)=\frac{1}{s}\mathcal{L} f(s)\]
         \item 复频域积分：设$\dfrac{f(t)}{t}\in\mathcal{E} $，则\[\mathcal{L} \left[\frac{f(t)}{t}\right](s)=\int_s^{\infty}\mathcal{L}f(x)\,dx\]
@@ -3733,7 +3701,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 \end{proposition}
 \begin{remark}
     很明显，时域微分性质和复频域微分性质都可以对更高阶的导数进行推广，其中，时域微分性质推广为\begin{align*}
-\mathcal{L} [f^{(n)}(t)](s)&=s^n\mathcal{L} f(s)-\sum_{k=0}^{n-1}s^{n-1-k}f^{(k)}(0+)\\
+\mathcal{L} [f^{(n)}(t)](s)&=s^n\mathcal{L} f(s)-\sum_{k=0}^{n-1}s^{n-1-k}f^{(k)}(0)\\
 &=s^n\mathcal{L} f(s)-s^{n-1}f(0)-s^{n-2}f'(0)-\cdots -f^{(n-1)}(0)
 \end{align*}
 \end{remark}
@@ -3888,7 +3856,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 \end{example}
 
 \subsection{拉普拉斯变换的级数求法}\label{sub:laplace_by_series}
-我们知道，多项式的拉普拉斯变换都可以通过$\mathcal{L} [t^n](s)=\frac{\Gamma(n+1)}{s^{n+1}}$来计算，那么对于一些可以展开为幂级数的函数，不难想到逐项求拉普拉斯变换，下面讨论这种操作的适用范围。在此之前，我们先介绍一个引理：
+我们知道，多项式的拉普拉斯变换都可以通过$$\mathcal{L} [t^n](s)=\dfrac{\Gamma(n+1)}{s^{n+1}}$$来计算，那么对于一些可以展开为幂级数的函数，不难想到逐项求拉普拉斯变换，下面讨论这种操作的适用范围。在此之前，我们先介绍一个引理：
 \begin{lemma}
     设$f\in\mathcal{E} ,|f(t)|\leq Ce^{at}$，则\begin{itemize}
         \item $\forall x>a,\mathcal{L} f(x+iy)\to 0,|y|\to\infty$
@@ -3939,16 +3907,16 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 \section{拉普拉斯逆变换}\label{sec:Laplace_Inverse}
 
 \subsection{两种拉普拉斯反演公式}\label{sub:laplace_inversion}
-我们仍然令$g(t)=f(t)e^{-\sigma t}$，从而将傅里叶反演公式推广到拉普拉斯反演公式：
+我们仍然令$\tilde{f}(t)=f(t)e^{-\sigma t}$，从而将傅里叶反演公式推广到拉普拉斯反演公式：
 \begin{theorem}[拉普拉斯反演公式]
-    设$f\in\mathcal{E} $，则
+    设$f\in\mathcal{E}\cap PS[0,\infty) $，则
     \[f(t)=\frac{1}{2\pi i}\lim_{r\to\infty}\int_{b-ir}^{b +ir}\mathcal{L} f(s)e^{st}\,ds\]
     其中$b>a$，$a$为$f$的拉普拉斯变换的收敛域下界。
 \end{theorem}
 \begin{remark}
-    严格来说，应该要求$f\in PS[0,\infty)$，并且最终的结论是：
+    严格来说，我们只能得到
     \[\frac{f(t-)+f(t+)}{2}=\frac{1}{2\pi i}\lim_{r\to\infty}\int_{b-ir}^{b +ir}\mathcal{L} f(s)e^{st}\,ds\]
-    只要令$g(t)=f(t)e^{-\sigma t}$，并利用\ref{sub:fourier_inversion}中傅里叶逆变换的结论，即可得到拉普拉斯逆变换。不过，我们仍不关心不连续点处的值，因此直接使用上面的结论。
+    不过，我们仍不关心不连续点处的值，因此后文中将直接使用上面的结论。要求分段光滑是为了保证傅里叶反演公式成立，在\ref{sub:fourier_inversion}中，对应我们给出的第二个版本的傅里叶反演公式（定理A.2.6.）。读者也可参考其他版本的傅里叶反演公式来替换对$f$和$\mathcal{L} f$的要求，从而得到不同版本的拉普拉斯反演公式。
 \end{remark}
 \begin{remark}
     这里的积分\[\lim_{r\to\infty}\int_{b-ir}^{b +ir}\mathcal{L} f(s)e^{st}\,ds\]
@@ -3973,7 +3941,9 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
     属于$\mathcal{E} $，且$F(s)=\mathcal{L} f(s),\forall \text{Re}\ s>a$。
 \end{theorem}
 \begin{remark}
-    这里的条件$\alpha>1$保证了$F(b+i\omega)\in L^1$（作为$\omega$的函数），尽管$b=0$时$\dfrac{1}{|b+i\omega|^{\alpha}}\notin L^1$，这是因为$F$是全纯函数，在$\omega=0$处不会出现奇点。事实上，$\alpha>\frac{1}{2}$即可保证定理成立，但这样证明会非常复杂\cite{folland}。
+    这里的条件$\alpha>1$保证了$F(b+i\omega)\in L^1(\mathbb{R})$（作为$\omega$的函数），尽管$b=0$时，
+    $$|s|^{-\alpha}=\dfrac{1}{|b+i\omega|^{\alpha}}=\frac{1}{\omega^{\alpha}}\notin L^1(\mathbb{R})$$
+    这是因为$F$是全纯函数，在$\omega=0$处不会出现奇点。换言之，我们给出了$F$“尾部”的估计。事实上，$\alpha>\dfrac{1}{2}$即可保证定理成立，但这样证明会非常复杂\cite{folland}。
 \end{remark}
 \begin{proof}
     首先，我们证明由积分$\dfrac{1}{2\pi i}\lim_{r\to\infty}\int_{b-ir}^{b +ir}F(s)e^{st}\,ds$定义的函数$f(t)$是良定义的。一方面，由于$|F(s)|\leq C|s|^{-\alpha}$，有
@@ -3983,15 +3953,16 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 
     注意到以上证明并不依赖于$t$的取值，极限过程$\lim_{r\to\infty}$对$t\in\mathbb{R}$是内闭一致收敛的，因此可以由被积函数$F(s)e^{st}$的连续性推出$f(t)$的连续性。
 
-    接下来，我们证明$f(t)\in\mathcal{E} $。一方面，$f$是因果的：$\forall t<0$，取$b>0$，并取围道如图5.1，其中$\gamma_1$为$b+ir$到$b -ir$的直线段，$\gamma_2$为以原点为圆心，$b -ir$到$b+ir$的圆弧，半径$R=\sqrt{b^2+r^2}$。由柯西积分定理，有
-    \[\int_{\gamma_1+\gamma_2}F(s)e^{st}\,ds=0\]
-    对$\gamma_2$，有
-    \[\left|\int_{\gamma_2}F(s)e^{st}\,ds\right|\leq \int_{\gamma_2}|F(s)||e^{st}|\,|ds|\leq C\int_{\gamma_2}|s|^{-\alpha}e^{b t}\,|ds|\leq C|R|^{-\alpha}\cdot \pi R\to 0,r\to\infty\]
-    \begin{figure}[H]
+    接下来，我们证明$f(t)\in\mathcal{E} $。一方面，$f$是因果的：$\forall t<0$，取$b>0$，并取围道如图5.1：
+        \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{contour2}
         \caption{拉普拉斯逆变换的围道}
     \end{figure}
+    其中$\gamma_1$为$b+ir$到$b -ir$的直线段，$\gamma_2$为以原点为圆心，$b -ir$到$b+ir$的圆弧，半径$R=\sqrt{b^2+r^2}$。由柯西积分定理，有
+    \[\int_{\gamma_1+\gamma_2}F(s)e^{st}\,ds=0\]
+    对$\gamma_2$，有
+    \[\left|\int_{\gamma_2}F(s)e^{st}\,ds\right|\leq \int_{\gamma_2}|F(s)||e^{st}|\,|ds|\leq C\int_{\gamma_2}|s|^{-\alpha}e^{b t}\,|ds|\leq C|R|^{-\alpha}\cdot \pi R\to 0,r\to\infty\]
     
     因此$$f(t)=\dfrac{1}{2\pi i}\lim_{r\to\infty}\int_{\gamma_1}F(s)e^{st}\,ds=0,t<0$$
 
@@ -4007,7 +3978,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
         f(t)e^{-b t}=\frac{1}{2\pi}\lim_{r\to\infty}\int_{-r}^{r}F(b+i\omega)e^{i\omega t}\,d\omega
         =\mathcal{F}^{-1} [F(b+i\omega)](t)
     \end{align*}
-    我们已经证明过$f$连续和$F(b+i\omega)\in L^1(\mathbb{R})$，因此可以使用傅里叶反演公式（见附录\ref{sub:fourier_inversion}的定理A.2.5.），得到
+    我们已经证明过$f$连续和$F(b+i\omega)\in L^1(\mathbb{R})$，因此可以使用傅里叶反演公式（见\ref{sub:fourier_inversion}的定理A.2.5.），得到
     \begin{align*}
         F(b+i\omega)&=\mathcal{F} [f(t)e^{-b t}](\omega)\\
         &=\int_{-\infty}^{\infty}f(t)e^{-b t}e^{-i\omega t}\,dt\\
@@ -4092,7 +4063,17 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
     \[F(s)=\frac{1/2}{s+1}+\frac{1}{(s+1)^2}+\frac{1/3}{s+2}+\frac{-\frac{1}{5}s}{s^2+1}\]
 \end{example}
 
-我们也可以用留数定理计算拉普拉斯逆变换，通常选择由$b\pm ir,-r\pm ir$组成的矩形围道，其中$b>0$需保证$F(s)$在$\text{Re}\ s>b$上全纯（因此在$r\to\infty$时极点全部位于围道内），见下方左图：
+进行部分分式展开后，真分式函数就化为若干个分母为一次因式、二次因式的分式函数之和，这样，容易通过指数多项式和三角函数的拉普拉斯变换公式，以及拉普拉斯变换的时移性质计算出拉普拉斯逆变换。下面给出一个例子：
+\begin{example}[部分分式展开法求拉普拉斯逆变换]
+    设\[F(s)=\frac{1}{(s+1)^2(s+2)(s^2+1)}\]
+    在上例中，我们已经得到：
+    \[F(s)=\frac{1/2}{s+1}+\frac{1}{(s+1)^2}+\frac{1/3}{s+2}+\frac{-\frac{1}{5}s}{s^2+1}\]
+    因此
+    \[f(t)=\mathcal{L}^{-1}F(s)=\frac{1}{2}e^{-t}+te^{-t}+\frac{1}{3}e^{-2t}-\frac{1}{5}\cos t\]
+\end{example}
+
+\subsection{使用留数定理计算拉普拉斯逆变换}\label{sub:residue_laplace_inverse}
+本小节介绍使用留数定理计算拉普拉斯逆变换的方法。一般地，我们选择由$b\pm ir,-r\pm ir$组成的矩形围道，其中$b>0$需保证$F(s)$在$\text{Re}\ s>b$上全纯（因此在$r\to\infty$时极点全部位于围道内），见下方左图：
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{contour}
@@ -4195,7 +4176,7 @@ $$\lim_{t\to\infty}\frac{ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
     \[\varlimsup_{t\to\infty}\frac{ln|f(t)|}{t}\leq \frac{a'+\sigma_c}{2}<\sigma_c\]
 \end{proof}
 
-其实，以上的定理和证明对$\varlimsup_{t\to\infty}\frac{ln|f(t)|}{t}=\pm\infty$的情形也是成立的，它们分别对应$\mathcal{L} f(s)$无定义和$\mathcal{L} f(s)$为整函数的情形。
+其实，以上的定理和证明对$\varlimsup_{t\to\infty}\dfrac{ln|f(t)|}{t}=\pm\infty$的情形也是成立的，它们分别对应$\mathcal{L} f(s)$无定义和$\mathcal{L} f(s)$为整函数的情形。
 
 下面来看思路二。设$\mathcal{L} f(s)$在$\text{Re}\ s>a$上良定义且等于$F(s)$，我们讨论$F(s)$在更大的区域$\text{Re}\ s>a'(a'<a)$上是否也是$f$的拉普拉斯变换。我们在上一节的定理5.3.2.中处理过类似的情况，因此我们先来看$F(s)$满足这一定理的条件时的情形。
 
@@ -4227,19 +4208,21 @@ $$\lim_{t\to\infty}\frac{ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
 
     容易验证$f(t)(-t)^n e^{-b t}$在$[0,\infty)$上的积分一致收敛，根据含参变量反常积分积分的求导法则，有
     \[F^{(n)}(b)=\int_{0}^{\infty}f(t)(-t)^n e^{-b t}\,dt\]
+
+    考虑截断积分
+    \begin{align*}
+        \int_{0}^{R}f(t)e^{-a t}\,dt&=\int_{0}^{R}f(t)e^{-b t}\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}t^n\,dt
+    \end{align*}
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{sigma_c}
         \caption{收敛域示意图}
     \end{figure}
-    考虑截断积分
-    \begin{align*}
-        \int_{0}^{R}f(t)e^{-a t}\,dt&=\int_{0}^{R}f(t)e^{-b t}\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}t^n\,dt
-    \end{align*}
-    由$\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}t^n\,dt$在$[0,R]$上一致收敛，可交换求和与积分次序，得到
+    由$\sum_{n=0}^{\infty}\dfrac{(b-a)^n}{n!}t^n\,dt$在$[0,R]$上一致收敛，可交换求和与积分次序，得到
     \begin{align*}
         \int_{0}^{R}f(t)e^{-a t}\,dt&=\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}\int_{0}^{R}f(t)t^n e^{-b t}\,dt
     \end{align*}
+    
     由于$f(t)$单调，不妨设$f(t)\geq 0$（可以考虑$g(t)=-f(t)$，$f(t)$单调递增，剩余的工作只是处理$u(t)$），而$b>a$，级数的每一项都是非负的。由单调收敛定理，有
     \begin{align*}
         \lim_{R\to\infty}\int_{0}^{R}f(t)e^{-a t}\,dt&=\lim_{R\to\infty}\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}\int_{0}^{R}f(t)t^n e^{-b t}\,dt\\
@@ -4331,17 +4314,17 @@ $$\lim_{t\to\infty}\frac{ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
 本小节介绍\textbf{初值定理}和\textbf{终值定理}，它们可以通过拉普拉斯变换直接得到函数在$t=0$和$t\to\infty$时的极限值，而不需要求出函数的显式表达式。
 \begin{theorem}[初值定理]
     设$f\in PS[0,\infty),f,f'\in\mathcal{E},F(s)=\mathcal{L} f(s)$，则
-    \[f(0+)=\lim_{\text{Re}\ s\to\infty}sF(s)\]
+    \[f(0)=\lim_{\text{Re}\ s\to\infty}sF(s)\]
 \end{theorem}
 这表明系统的高频响应对应时域的瞬时的初始行为。
 \begin{proof}
     由拉普拉斯变换的时域微分性质，有
-    \[sF(s)=s\mathcal{L} f(s)=\mathcal{L} f'(s)+f(0+)\]
+    \[sF(s)=s\mathcal{L} f(s)=\mathcal{L} f'(s)+f(0)\]
     取极限$\text{Re}\ s\to\infty$，有
-    \[\lim_{\text{Re}\ s\to\infty}sF(s)=\lim_{\text{Re}\ s\to\infty}\mathcal{L} f'(s)+f(0+)=\lim_{\text{Re}\ s\to\infty}\int_{0}^{\infty}f'(t)e^{-st}\,dt+f(0+)\]
-    由于$f'\in\mathcal{E} $，在$\text{Re}\ s$充分大时时，$f'(t)e^{-st}\leq C e^{-\epsilon t},\epsilon$为一充分小正数。因此由控制收敛定理，有
+    \[\lim_{\text{Re}\ s\to\infty}sF(s)=\lim_{\text{Re}\ s\to\infty}\mathcal{L} f'(s)+f(0)=\lim_{\text{Re}\ s\to\infty}\int_{0}^{\infty}f'(t)e^{-st}\,dt+f(0)\]
+    由于$f'\in\mathcal{E} $，在$\text{Re}\ s$充分大时时，$f'(t)e^{-st}\leq C e^{-\epsilon t},\epsilon$为一充分小正数。由控制收敛定理，有
     \[\lim_{\text{Re}\ s\to\infty}\int_{0}^{\infty}f'(t)e^{-st}\,dt=\int_{0}^{\infty}\lim_{\text{Re}\ s\to\infty}f'(t)e^{-st}\,dt=0\]
-    从而\[f(0+)=\lim_{\text{Re}\ s\to\infty}sF(s)\]
+    从而\[f(0)=\lim_{\text{Re}\ s\to\infty}sF(s)\]
 \end{proof}
 
 \begin{theorem}[终值定理]
@@ -4365,12 +4348,13 @@ $$\lim_{t\to\infty}\frac{ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
 \end{proof}
 
 \subsection{在双边拉普拉斯变换中的应用}\label{sub:bilateral_laplace}
-本小节对\ref{sub:introduction_of_laplace}中提到的双边拉普拉斯变换的收敛域进行简单讨论，以便后面与z变换进行比较。双边拉普拉斯变换具有一些与单边拉普拉斯变换不同的性质，但这不是本书的重点，读者可以暂时跳过本节，在阅读\ref{sub:relation_z_laplace}时再对照本小节。
+本小节对\ref{sub:introduction_of_laplace}中提到的双边拉普拉斯变换的收敛域进行简单讨论，以便后面与z变换进行比较。双边拉普拉斯变换具有一些与单边拉普拉斯变换不同的性质（尤其是时域微分性质），但这不是本书的重点，读者可以仿照单边拉普拉斯变换自行推导它们。如有需要，读者可以暂时跳过本小节，在阅读\ref{sub:relation_z_laplace}时再回过头来阅读。
+
+回忆双边拉普拉斯变换的定义：
 \begin{definition}[双边拉普拉斯变换]
     设函数$f$局部可积，$\exists a,b\in\mathbb{R},a<b$（我们允许$a=-\infty$和$b=\infty$），使得$f(t)e^{-at}$和$f(t)e^{-bt}$均绝对可积，则对$\text{Re}\ s\in[a,b]$，$f$的双边拉普拉斯变换定义为
     \[\mathcal{L}f(s)=\int_{-\infty}^{\infty}f(t)e^{-st}\,dt\]
 \end{definition}
-“局部可积”即$f$在任意有限区间上可积，这个条件是为了保证在添加适当的收敛因子$e^{-st}$后，拉普拉斯积分收敛，从而拉普拉斯变换有定义。
 
 为了确定$a,b$的取值范围，我们可以拆分双边拉普拉斯积分，并仿照单边拉普拉斯变换的收敛域分析方法，分别讨论$t\to\infty$和$t\to-\infty$时$f(t)$的增长速率：
 \[\mathcal{L}f(s)=\int_{-\infty}^{0}f(t)e^{-st}\,dt+\int_{0}^{\infty}f(t)e^{-st}\,dt\]
@@ -4389,7 +4373,7 @@ $$\lim_{t\to\infty}\frac{ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
 \[|f(t)|\sim C e^{b t}\iff ln|f(t)|\sim b t + ln C\iff \frac{|f(t)|}{t}\sim b+\frac{ln C}{t}=b\]
 这时有
 $$\text{Re}\ s=b-\epsilon,\int_{-\infty}^{0}f(t)e^{-st}\,dt\leq\int_{-\infty}^{0}C e^{\epsilon t}\,dt<\infty$$
-因此可以看出$\sigma_c^+=\varliminf_{t\to -\infty}\frac{ln|f(t)|}{t}$（可以带入$f(t)=e^{-t\sin t}$验证这里必须取下极限）。
+因此可以看出$\sigma_c^+=\varliminf_{t\to -\infty}\dfrac{ln|f(t)|}{t}$（可以带入$f(t)=e^{-t\sin t}$验证这里必须取下极限）。
 
 综上所述，我们得到：\begin{theorem}
     设函数$f$局部可积，则其双边拉普拉斯变换的收敛横坐标可由以下公式得到：
@@ -4407,53 +4391,11 @@ $$\text{Re}\ s=b-\epsilon,\int_{-\infty}^{0}f(t)e^{-st}\,dt\leq\int_{-\infty}^{0
 
 不难发现，双边拉普拉斯变换的收敛性分析与洛朗级数有着诸多相似之处，我们将在\ref{sub:relation_z_laplace}中讨论这一点。
 
-%初值定理和终值定理
-
-%\section{分布及其拉普拉斯变换}\label{sec:Laplace_Distribution}
-
-%直观上，很容易理解$\mathcal{L} \delta(s)=1$，但要严格地证明它，我们需要引入分布的拉普拉斯变换的概念。仿照\ref{sec:distributions}中的做法，我们希望$\langle \mathcal{L} T,\phi\rangle=\langle T,\mathcal{L} \phi\rangle$，然而$\mathcal{L} T$定义在复频域上，我们需要明确$\langle,\rangle$在什么范围上进行。
-
-%一种解决办法是，沿用前两个小节的思路，将拉普拉斯变换看作傅里叶变换的推广，即
-%\[\mathcal{L} f(s)=\mathcal{F} [f(t)e^{-\sigma t}](\omega),s=\sigma +i\omega\]
-%这里$\mathcal{F} [f(t)e^{-\sigma t}](\omega)$实际上依赖于两个变量$\sigma,\omega$，但我们只写出$\omega$，并将$\sigma$视为一个参数。这样一来，我们就可以将拉普拉斯变换推广到分布上：
-%\begin{align*}
-%    \langle \mathcal{L} T,\phi\rangle=\langle e^{-\sigma t}T,\mathcal{F} \phi\rangle
-%\end{align*}
-%我们从形式上得到了分布的拉普拉斯变换，下面逐步建立它的严格定义，并推导类似函数的拉普拉斯变换的一些性质。
-
-%\begin{definition}[施瓦兹函数类及缓增分布]
-%   在$[0,\infty)$上，定义施瓦兹函数类为
-%    \[\mathcal{S} ([0,\infty))=\{\phi\in C^{\infty} ([0,\infty))|\lim_{x\to\infty}|x|^m \varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N}\}\]
-%    其对偶空间$\mathcal{T} ([0,\infty))$称为缓增分布空间，其元素$T$称为缓增分布，将$\varphi\in\mathcal{S} ([0,\infty))$连续、线性地映射到一个复数
-%    $T(\varphi)=\langle T,\varphi\rangle\in\mathbb{C}$。
-%\end{definition}
-%我们同样不区分函数是否定义在$[0,\infty)$上还是$\mathbb{R} $上，只要$\varphi(t)=\varphi(t)u(t)$。正则分布$T_f,f=uf\in\mathcal{E}$的定义可以写作
-%\[T_f(\varphi)=\langle T_f,\varphi\rangle=\int_{-\infty}^{\infty}f(t)\varphi(t)\,dt=\int_0^{\infty}f(t)\varphi(t)\,dt,\forall \varphi\in\mathcal{S} ([0,\infty))\]
-
-%\begin{definition}[分布的拉普拉斯变换]
-%    对分布$T\in\mathcal{T} ([0,\infty))$，如果存在实数$a$，使得$\forall\sigma>a$，$e^{-\sigma t}T\in\mathcal{T} ([0,\infty))$，则称$T$在右半平面$\text{Re}\ s>a$上可拉普拉斯变换。其拉普拉斯变换定义为：
-%    \[\langle \mathcal{L} T,\phi\rangle=\langle e^{-\sigma t}T,\mathcal{F} \phi\rangle,\forall \phi\in\mathcal{S} ([0,\infty))\]
-%\end{definition}
-
-%此外，\ref{sec:distributions}中分布的导数、分布与函数的乘法、分布的共轭等概念很容易推广到$\mathcal{T} ([0,\infty))$上：
-%\begin{definition}
-%    设$T\in\mathcal{T} ([0,\infty))$，则其导数$T'$定义为
-%    \[\langle T',\varphi\rangle=-\langle T,\varphi'\rangle\]
-%    设$f\in C^{\infty} ([0,\infty))$，则分布与函数的乘法定义为
-%    \[\langle f T,\varphi\rangle=\langle T,f \varphi\rangle\]
-%    分布的共轭定义为
-%    \[\langle \overline{T},\varphi\rangle=\overline{\langle T,\overline{\varphi}\rangle}\]
-%    分布的时延定义为
-%    \[\langle \tau_b T,\varphi\rangle=\langle T,u\tau_{-b}\varphi\rangle\]
-%    分布的伸缩定义为
-%    \[\langle \sigma_a T,\varphi\rangle=\langle T,\frac{1}{a}\sigma_{1/a}\varphi\rangle\]
-%    分布的卷积定义为
-%    \[\langle g*T,\varphi\rangle=\langle T,g^- *\varphi\rangle\]
-%\end{definition}
-
 \section{系统的复频域分析}\label{sec:Complex_Freq_Analysis}
-%说明单边的改进形式0-，然后用它讨论微分方程和动态电路；微分性质要仔细考虑一下
-由于$f\in\mathcal{E}$对函数增长速度的要求是相当低的（作为反例，$e^{t^2}\notin\mathcal{E}$），我们只需要单独处理$\delta$分布，而不需要重新构建一整套分布的理论。仍考虑将拉普拉斯变换化归为傅里叶变换，即
+
+\subsection{拉普拉斯变换的改进}\label{sub:improvement_of_laplace}
+
+由于$f\in\mathcal{E}$对函数增长速度的要求是相当低的（作为反例，$e^{t^2}\notin\mathcal{E}$），我们只需要单独处理$\delta$分布，而不需要重新构建一整套分布的理论\footnote{希望深入了解分布及其拉普拉斯变换的读者，可以参考\cite{Laplace_Distribution}。\cite{distribution}讨论这个话题时，采用了与本书类似的处理方法，这实际上不是拉普拉斯变换的分布理论。}。仍考虑将拉普拉斯变换化归为傅里叶变换，即
 \[\mathcal{L} f(s)=\mathcal{F} [f(t)e^{-\sigma t}](\omega),s=\sigma+i\omega\]
 这里$\mathcal{F} [f(t)e^{-\sigma t}](\omega)$实际上依赖于两个变量$\sigma,\omega$，但我们只写出$\omega$，并将$\sigma$视为一个参数\cite{distribution}。这样一来，我们就可以将拉普拉斯变换推广到$\delta$分布上（为了避免变量符号的问题，我们将变量统一地用$x$表示）：
 \begin{align*}
@@ -4479,18 +4421,45 @@ $$\text{Re}\ s=b-\epsilon,\int_{-\infty}^{0}f(t)e^{-st}\,dt\leq\int_{-\infty}^{0
     设$a\in\mathbb{R}$，则$\mathcal{L} \delta_a=e^{-s a}$；$\mathcal{L} \left[\delta'\right]=s$，进一步可得$\mathcal{L} \left[\delta^{(n)}\right]=s^n$。
 \end{proposition}
 
-看上去，$\delta_a$在$a<0$时非因果，但它是作为一个分布定义的。
+看上去，$\delta(0)=\infty,\mathcal{L} \delta'=\mathcal{L} \delta-\infty$，而$\delta_a$在$a<0$时非因果，但$\delta$应作为一个分布来理解，因此以上结果与我们之前所定义的拉普拉斯变换并不矛盾。
 
-与第四章的思路类似，我们可以通过系统函数来分析微分方程、动态电路，，还将介绍系统流图与梅森增益公式，下面一一进行介绍。
+不过，我们可以通过另一种方式，几乎完全避开分布的问题。在本节中，我们将（单边）拉普拉斯变换的定义修改为：
+\begin{definition}[拉普拉斯变换，改进版]
+    设函数$f$局部可积，且$\exists a\in\mathbb{R}$，使得$f(t)e^{-at}$绝对可积，则对$\text{Re}\ s\in[a,\infty)$，$f$的拉普拉斯变换定义为
+    \[\mathcal{L} f(s)=\int_{0-}^{\infty}f(t)e^{-st}\,dt\]
+\end{definition}
+这里，积分限中的“0-”的含义是：
+\[\mathcal{L} f(s)=\lim_{M\to 0-}\int_{M}^{\infty}f(t)e^{-st}\,dt=\int_{0-}^{\infty}f(t)e^{-st}\,dt\]
 
+在这种定义下，拉普拉斯变换的各种运算性质仍成立，但时域微分性质略有差别：
+\begin{proposition}[拉普拉斯变换的时域微分性质]
+    设$f\in C^1[0,\infty),f'$局部可积，则
+    \[\mathcal{L} [f'](s)=s\mathcal{L} f(s)-f(0-)\]
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        \mathcal{L} [f'](s)&=\int_{0-}^{\infty}f'(t)e^{-st}\,dt\\
+        &=\evalat{f(t)e^{-st}}{0-}{\infty}+\int_{0-}^{\infty}f(t)se^{-st}\,dt\\
+        &=s\mathcal{L} f(s)-f(0-)
+    \end{align*}
+\end{proof}
+
+初值定理也将变为$f(0-)=\lim_{\text{Re}\ s\to\infty}sF(s)$。
+
+形式上，$u(0-)=\delta(0-)=0$，自然得到$$\mathcal{L} u(s)=\frac{1}{s}\implies\mathcal{L} \delta(s)=s\mathcal{L} u(s)-u(0-)=\mathds{1}$$
+$\delta$的各阶导数同理。这样，分布理论处理的问题仅仅在于$\delta_a(a<0)$，但我们很少用到它们。
+
+可以看到，这样的定义方式帮助我们避开了$u(t)$跳变的问题和$\delta(0)=\infty$的问题，同时积分下限为“0-”排除了$f$在$(-\infty,0)$上的行为对拉普拉斯变换的影响，仅仅是拉普拉斯变换的改进，而没有对任何性质产生本质影响。另外，这样的定义方式有助于我们讨论微分方程描述的系统的起始状态，下一小节就来讨论这个问题。
+
+\subsection{常系数线性微分方程}\label{sub:laplace_ODE}
 拉普拉斯变换是处理常系数线性微分方程的有力工具。根据拉普拉斯变换的时域微分性质：
-\[\mathcal{L}\left[f^{(n)}(t)\right](s)=s^n\mathcal{L} f(s)-s^{n-1}f(0)-s^{n-2}f'(0)-\cdots -f^{(n-1)}(0)\]
-可以将常系数线性微分方程转化为代数方程，还能够一并处理初始条件。我们先提出一个一般的解法，再通过一个具体的例子来展示拉普拉斯变换的威力。
+\[\mathcal{L}\left[f^{(n)}(t)\right](s)=s^n\mathcal{L} f(s)-s^{n-1}f(0-)-s^{n-2}f'(0-)-\cdots -f^{(n-1)}(0-)\]
+可以将常系数线性微分方程转化为代数方程，还能够一并处理起始状态。我们先提出一个一般的解法，再通过一个具体的例子来展示拉普拉斯变换的威力。
 
 考虑常系数线性微分方程
 \[a_n r^{(n)}(t)+a_{n-1}r^{(n-1)}(t)+\cdots +a_1 r'(t)+a_0 r(t)=e(t)\]
-其中$f,r\in\mathcal{E} $，并且给定初始条件（注意区分它与\ref{sub:term_in_ODE}中初始状态的区别）：
-\[r(0)=c_0,r'(0)=c_1,\cdots,r^{(n-1)}(0)=c_{n-1}\]
+其中$f,r\in\mathcal{E} $，并且给定初始状态：
+\[r(0-)=c_0,r'(0-)=c_1,\cdots,r^{(n-1)}(0-)=c_{n-1}\]
 记$\mathcal{L} r(s)=R(s),\mathcal{L} e(s)=E(s)$，则对方程两边进行拉普拉斯变换，有
 \begin{align*}
     &a_n\left(s^n R(s)-s^{n-1}c_0 -s^{n-2}c_1 -\cdots -c_{n-1}\right)\\
@@ -4503,79 +4472,86 @@ $$\text{Re}\ s=b-\epsilon,\int_{-\infty}^{0}f(t)e^{-st}\,dt\leq\int_{-\infty}^{0
 P(s)&=a_n s^n +a_{n-1} s^{n-1}+\cdots +a_1 s+a_0\\
 Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-2}c_0 +s^{n-3}c_1 +\cdots +c_{n-2}\right)+\cdots +a_1 c_0
 \end{align*}
-因此\[R(s)=\frac{E(s)}{P(s)}+\frac{Q(s)}{P(s)}=R_{zs}(s)+R_{zi}(s)\]
+因此
+\[R(s)=\frac{E(s)}{P(s)}+\frac{Q(s)}{P(s)}=R_{zs}(s)+R_{zi}(s)\]
 现在，微分方程问题就转化为求$R(s)$的拉普拉斯逆变换的问题，并且可以求出系统函数
 \[H(s)=\frac{R_{zs}(s)}{E(s)}=\frac{1}{P(s)}\]
+与\ref{sub:fundamental_solution}类似，常系数线性微分方程所描述的系统作为一个线性时不变系统，其零状态响应的求解也可以归结为单位脉冲响应，即基本解的求解。现在，我们找到了一种新的、更为方便的求解方法，即先由拉普拉斯变换求得系统函数在做拉普拉斯逆变换。
 
 \begin{example}[常系数线性微分方程]
     设系统由如下微分方程描述：
-    \[r''(t)+3r'(t)+2r(t)=e(t)\]
-    初始条件为$r(0)=1,r'(0)=2$。求系统函数$H(s)$及单位阶跃响应$g(t)$。\\
-    解：对方程两边进行拉普拉斯变换，有
+    \[r''(t)+3r'(t)+2r(t)=e'(t)+3e(t)\]
+    初始状态为$r(0-)=1,r'(0-)=2$。求系统函数$H(s)$及单位阶跃响应$g(t)$。\\
+    解：对方程两边进行拉普拉斯变换，有（注意$e(0-)=u(0-)=0$）
     \begin{align*}
-        \left(s^2 R(s)-s-2\right)+3\left(s R(s)-1\right)+2 R(s)=E(s)
+        \left(s^2 R(s)-s-2\right)+3\left(s R(s)-1\right)+2 R(s)=sE(s)+3E(s)
     \end{align*}
     整理得
-    \[R(s)=\frac{E(s)+s+5}{s^2+3s+2}\]
+    \[R(s)=\frac{(s+3)E(s)+s+5}{s^2+3s+2}\]
     因此系统函数为
-    \[H(s)=\frac{R(s)}{E(s)}=\frac{1}{s^2+3s+2}=\frac{1}{s+1}-\frac{1}{s+2}\]
+    \[H(s)=\frac{R_{zs}(s)}{E(s)}=\frac{s+3}{s^2+3s+2}=\frac{2}{s+1}-\frac{1}{s+2}\]
     做拉普拉斯反变换得到（零状态）单位脉冲响应：
     \begin{align*}
-        h(t)&=\mathcal{L}^{-1} \left[\frac{1}{s+1}-\frac{1}{s+2}\right](t)\\
-        &=(e^{-t}-e^{-2t})u(t)
+        h(t)=\mathcal{L}^{-1} \left[\frac{1}{s+1}+\frac{1}{s+2}\right](t)=(2e^{-t}-e^{-2t})u(t)
     \end{align*}
     积分得到零状态响应：
     \begin{align*}
-    r_{zs}(t)=\int_0^{t}h(x)\,dx=(0.5+e^{-t}-0.5e^{-2t})u(t)
+    r_{zs}(t)=\int_0^{t}h(x)\,dx=(1.5-2e^{-t}+0.5e^{-2t})u(t)
     \end{align*}
     对于零输入响应，有
     \begin{align*}
-        R_{zi}(s)&=\frac{s+5}{s^2+3s+2}\\
-        &=\frac{1.5}{s+1}-\frac{0.5}{s+2}
+        R_{zi}(s)=\frac{s+5}{s^2+3s+2}=\frac{4}{s+1}-\frac{3}{s+2}
     \end{align*}
-    反变换即得$r_{zi}(t)=(1.5e^{-t}-0.5e^{-2t})u(t)$，因此全响应为$r(t)=(1.5+e^{-t}-1.5e^{-2t})u(t)$。
+    反变换即得$$r_{zi}(t)=(4e^{-t}-3e^{-2t})u(t)$$
+    实际上，零输入响应并不是因果的，但由于单边拉普拉斯变换自动舍弃了负半轴的信息，我们只能得到$t\geq 0$时的信号情况。不难看出$r_{zi}(t)=4e^{-t}-3e^{-2t},t<0$。
+
+    我们一般不考虑$t<0$的情况，而直接将全响应写为
+    $$r(t)=r_{zs}(t)+r_{zi}(t)=(1.5+2e^{-t}-2.5e^{-2t})u(t)$$
 
     此外，也可以用$\mathcal{L} u(s)=1/s$直接计算单位阶跃响应得全响应：
     \begin{align*}
-        R(s)&=\frac{1}{s(s^2+3s+2)}+\frac{s+5}{s^2+3s+2}\\
-        &=\frac{1.5}{s}+\frac{1}{s+1}-\frac{1.5}{s+2}
+        R(s)&=\frac{s+3}{s(s^2+3s+2)}+\frac{s+5}{s^2+3s+2}\\
+        &=\frac{1.5}{s}+\frac{2}{s+1}-\frac{2.5}{s+2}
     \end{align*}
-    反变换即得$r(t)=(1.5+e^{-t}-1.5e^{-2t})u(t)$。
+    反变换即得$r(t)=(1.5+2e^{-t}-2.5e^{-2t})u(t)$。
 \end{example}
 
-下面介绍动态电路的复频域分析方法。与\ref{sub:freq_response}节类似，对描述线性元件的微分方程做拉普拉斯变换，即可得到它们的复频域模型：
+数学上，将微分方程中的函数在某一点的各阶导数值称为\textbf{初始条件}，即（以$t=0$为例）：
+\[r(0)=r_0,r'(0)=r'_0,\cdots,r^{(n-1)}(0)=r^{(n-1)}_0\]
+这时只需要经典的拉普拉斯变换就可以处理带初始条件的微分方程了（我们称这样的问题为\textbf{初值问题}）。在函数连续可微的情况下，起始状态、初始状态和初始条件三个概念是等价的，但在信号与系统中，由于我们对激励的建模是允许它进行跳变的，引入起始状态、初始状态更为方便，而改进后的拉普拉斯变换很好地适配了这种需求——一般地，我们会给出系统的起始状态，而初始状态则要依赖于激励的选取。
+
+\subsection{动态电路的复频域分析}\label{sub:laplace_circuit}
+
+本小节介绍动态电路的复频域分析方法。与\ref{sub:freq_response}节类似，对描述线性元件的微分方程做拉普拉斯变换，即可得到它们的复频域模型：
 \begin{example}
     描述电容的方程为：
     \[i(t)=C\frac{dv(t)}{dt}\]
     对其做拉普拉斯变换，得到
-    \[I(s)=C\left(sV(s)-v(0)\right)\]
-    由于$v(0)$未必为0，不能直接用阻抗$1/sC$来描述电容，需要引入电容的初始电压源模型：
-    \[V(s)=\frac{1}{sC}I(s)+\frac{v(0)}{s}\]
+    \[I(s)=C\left(sV(s)-v(0-)\right)\]
+    由于$v(0-)$未必为0，不能直接用阻抗$1/sC$来描述电容，需要引入电容的起始电压源模型：
+    \[V(s)=\frac{1}{sC}I(s)+\frac{v(0-)}{s}\]
     \begin{center}
-        \begin{circuitikz}[american]
+        \begin{circuitikz}[american, scale=0.8, transform shape]
             \draw (0,0) to[short, o-] (1,0)
             to[C=$1/sC$] (3.5,0)
-            to[V=$v(0)/s$] (6,0)
+            to[V=$v(0-)/s$] (6,0)
             to[short, -o] (7,0);
         \end{circuitikz}
     \end{center}
     描述电感的方程为：
     \[v(t)=L\frac{di(t)}{dt}\]
     对其做拉普拉斯变换，得到
-    \[V(s)=L\left(sI(s)-i(0)\right)\]
-    引入电感的初始电流源模型：
+    \[V(s)=L\left(sI(s)-i(0-)\right)\]
+    引入电感的起始电流源模型：
     \begin{center}
-        \begin{circuitikz}[american]
+        \begin{circuitikz}[american, scale=0.8, transform shape]
             \draw (0,0) to[short, o-] (1,0)
             to[L=$sL$] (3.5,0)
-            to[I=$Li(0)$] (6,0)
+            to[I=$Li(0-)$] (6,0)
             to[short, -o] (7,0);
         \end{circuitikz}
     \end{center}
-    在零状态条件下，初始电压源/电流源均为0，可以直接使用阻抗模型。
-    \begin{remark}
-        一些文献中，使用$\mathcal{L} f(s)=\int_{0-}^{\infty}f(t)e^{-st}\,dt$作为拉普拉斯变换的定义，这样得到的初始电压源/电流源模型的值为$v(0-)/s$和$i(0-)/s$，但由于电容电压连续、电感电流连续，两种模型实质上是一样的。
-    \end{remark}
+    在零状态条件下，起始电压源/电流源均为0，可以直接使用阻抗模型。
 \end{example}
 
 作为一个例子，我们使用复频域分析的方法来处理一个二阶动态电路：
@@ -4624,14 +4600,318 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
     做拉普拉斯逆变换，得到
     \[i(t)=\frac{E}{L\beta}e^{-\alpha t}\sin(\beta t)u(t)\]
     系统处于欠阻尼状态，电流以衰减振荡的形式缓慢回到平衡位置。
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{damp}
+        \caption{不同阻尼状态下的电流响应}
+    \end{figure}
 \end{example}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{damp}
-    \caption{不同阻尼状态下的电流响应}
-\end{figure}
-%零极点特性与高通低通
-%系统流图与梅森增益公式
+
+%\subsection{零极点图与频率响应特性}\label{sub:zero_pole_characteristics}
+
+\subsection{系统流图与梅森增益公式}\label{sub:mason_gain_formula}
+
+系统的\textbf{信号流图}(signal flow graph)由香农在1942年发明，后经梅森(J.E. Mason)推广完善，成为分析线性时不变系统的有力工具，因此又称为\textbf{梅森信号流图}(Mason signal flow graph)。
+
+\begin{definition}
+信号流图是一种有向图，其节点表示系统的变量（输入、输出或中间变量），有向边表示变量之间的线性关系，边上的权值表示线性关系的系数。信号流图可以直观地反映系统的结构特性，并且可以通过图论的方法来分析系统的传递函数。
+
+信号流图相关术语汇总如下：\begin{itemize}
+    \item \textbf{节点}：表示系统的输入/输出或中间变量，分为\textbf{输入节点（源点）}、\textbf{输出节点（阱点）}和\textbf{混合节点}；
+    \item \textbf{支路}：连接两个节点的有向边，表示系统，边上的权值为系统函数，又称\textbf{增益}；
+    \item \textbf{通路}：沿支路方向连接的节点序列，其中，不自交的通路称为\textbf{开通路}，从源点到阱点的开通路称为\textbf{前向通路}。将通路上各支路增益之积称为\textbf{通路增益}；
+    \item \textbf{环路/闭通路}：起点和终点相同且不自交的通路。将环路上各支路增益之积称为\textbf{环路增益}；
+    \item \textbf{不接触环路}：没有公共节点的两环路称为不接触环路；
+\end{itemize}
+\end{definition}
+
+\begin{example}[信号流图]
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[auto, >=Stealth, node distance=1.8cm, every node/.style={font=\small}]
+            % node styles: hollow smaller circles
+            \tikzset{
+                signode/.style={circle, draw, minimum size=2mm, inner sep=0pt, line width=0.6pt},
+                lab/.style={font=\small}
+            }
+            % nodes (empty hollow circles)
+            \node[signode] (x1) {};
+            \node[signode, below=1.2cm of x1] (x2) {};
+            \node[signode, right=2.2cm of x1] (m1) {};
+            \node[signode, right=2.2cm of x2] (m2) {};
+            \node[signode, right=2.2cm of m1] (y1) {};
+            \node[signode, right=2.2cm of m2] (y2) {};
+            % external labels (placed to avoid overlap)
+            \node[lab, left=1mm of x1] {$X_1$};
+            \node[lab, left=1mm of x2] {$X_2$};
+            \node[lab, right=1mm of y1] {$Y_1$};
+            \node[lab, right=1mm of y2] {$Y_2$};
+            % forward path gains use H_i, feedback/return gains use G_j
+            \draw[->] (x1) to node[midway, above,  inner sep=1pt] {$H_1$} (m1);
+            \draw[->] (x2) to node[midway, below,  inner sep=1pt] {$H_2$} (m1);
+            \draw[->] (m1) to node[midway, above,  inner sep=1pt] {$H_3$} (y1);
+            \draw[->] (m2) to node[midway, below,  inner sep=1pt] {$H_4$} (y2);
+            % adjusted label positions for G_5 and G_6 to avoid overlap
+            \draw[->] (m1) to[bend right=8] node[midway, right,xshift=6pt, yshift=4pt,  inner sep=1pt] {$G_5$} (m2);
+            \draw[->] (m2) to[bend right=22] node[midway, left, xshift=-6pt,yshift=-4pt,  inner sep=1pt] {$G_6$} (m1);
+            \draw[->] (m1) edge[loop above, looseness=50] node[  inner sep=1pt] {$L_1$} (m1);
+        \end{tikzpicture}
+    \end{figure}
+    上图中，$X_1,X_2$为输入节点，$Y_1,Y_2$为输出节点，其他节点为混合节点。记上、下两个混合节点对应的中间变量分别为$M_1,M_2$，则
+    \begin{align*}
+        M_1&=H_1 X_1+H_2 X_2+L_1 M_1+G_5 M_2\\
+        M_2&=G_6 M_1\\
+        Y_1&=H_3 M_1\\
+        Y_2&=H_4 M_2
+    \end{align*}
+    这是一个以$M_1,M_2,Y_1,Y_2$为未知数的线性方程组，可以解得\begin{align*}
+        M_1&=\frac{H_1 X_1+H_2 X_2}{1-L_1-G_5 G_6}\\
+        M_2&=\frac{G_6 (H_1 X_1+H_2 X_2)}{1-L_1-G_5 G_6}\\
+        Y_1&=\frac{H_3 (H_1 X_1+H_2 X_2)}{1-L_1-G_5 G_6}\\
+        Y_2&=\frac{H_4 G_6 (H_1 X_1+H_2 X_2)}{1-L_1-G_5 G_6}
+    \end{align*}
+\end{example}
+
+信号流图是一种有向图，$n$个节点的信号流图可以通过$n$阶的\textbf{邻接矩阵}$A$来表示，其元素$a_{ij}$表示从节点$j$到节点$i$的支路增益，如果没有支路连接这两个节点，则$a_{ij}=0$。显然，信号流图可由其邻接矩阵唯一表示，但邻接矩阵中会有一些冗余的行和列。我们通过一个例子来说明这一点。
+
+\begin{example}
+    上例中，节点依次为$X_1,X_2,M_1,M_2,Y_1,Y_2$，则对应的邻接矩阵为
+    \[A= \begin{bmatrix}
+        0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 \\
+        H_1 & H_2 & L_1 & G_5 & 0 & 0 \\
+        0 & 0 & G_6 & 0 & 0 & 0 \\
+        0 & 0 & H_3 & 0 & 0 & 0 \\
+        0 & 0 & 0 & H_4 & 0 & 0
+    \end{bmatrix}\]
+    在信号流图的语境下，源点对应的列和阱点对应的行均为0。有冗余的行和列，不是我们希望看到的。
+
+    事实上，我们仅仅需要中间节点对应的邻接矩阵。由于响应$Y_1,Y_2$直接取自中间节点，只需要求解$M_1,M_2$，就可获取系统的全部信息。将信号流图表示为一个线性方程组：
+    \[\begin{bmatrix}
+        M_1 \\
+        M_2
+    \end{bmatrix}=
+    \begin{bmatrix}
+        L_1 & G_5\\
+        G_6 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        M_1 \\
+        M_2
+    \end{bmatrix}+\begin{bmatrix}
+        H_1 X_1 + H_2 X_2 \\
+        0
+    \end{bmatrix},\text{即}\mathbf{M}=A\mathbf{M}+\mathbf{X}\]
+    其中$$A=\begin{bmatrix}
+        L_1 & G_5\\
+        G_6 & 0
+    \end{bmatrix}\text{为邻接矩阵},\mathbf{M}=\begin{bmatrix}
+        M_1 \\
+        M_2
+    \end{bmatrix},\mathbf{X}=\begin{bmatrix}
+        H_1 X_1 + H_2 X_2 \\
+        0
+    \end{bmatrix}$$
+    整理得\[\begin{bmatrix}
+        H_1 X_1 + H_2 X_2 \\
+        0
+    \end{bmatrix}=\begin{bmatrix}
+        1 -L_1 & -G_5\\
+        -G_6 & 1
+    \end{bmatrix}\begin{bmatrix}
+        M_1 \\
+        M_2
+    \end{bmatrix},\text{即}\mathbf{X}=(I-A)\mathbf{M}\]
+    只要矩阵\[S=I-A=\begin{bmatrix}
+        1 -L_1 & -G_5\\
+        -G_6 & 1
+    \end{bmatrix}\]
+    可逆，就可以求解出$M_1,M_2$，我们将这个矩阵称为\textbf{系统矩阵}(system matrix)，而将$A$称为\textbf{增益矩阵}，它是信号流图的\textbf{中间节点}对应的邻接矩阵。系统矩阵的行列式称为\textbf{特征行列式}，记为$\Delta$。在本例中，有\begin{align*}
+        \Delta&=\begin{vmatrix}
+        1 -L_1 & -G_5 \\
+        -G_6 & 1
+    \end{vmatrix}=1-L_1-G_5 G_6
+    \end{align*}
+    要使系统稳定，必须有$\Delta=1-L_1-G_5 G_6\neq 0$，否则$M_1,M_2,Y_1,Y_2\to\infty$。
+\end{example}
+
+现在来考虑更一般的情况：对于有n个中间节点$M_1,M_2,\cdots,M_n$的系统，不妨设激励接入的节点为$M_1$（否则可用叠加原理单独分析各个激励），则系统对应的线性方程组为\begin{align*}
+    M_1&=a_{11} M_1 + a_{12} M_2 + \cdots + a_{1n} M_n + X\\
+    M_2&=a_{21} M_1 + a_{22} M_2 + \cdots + a_{2n} M_n\\
+    &\vdots\\
+    M_n&=a_{n1} M_1 + a_{n2} M_2 + \cdots + a_{nn} M_n
+\end{align*}
+写成矩阵形式为
+\[\mathbf{M}=A\mathbf{M}+\mathbf{X}\]
+其中$$\mathbf{M}=\begin{bmatrix}
+    M_1 \\
+    M_2 \\
+    \vdots \\
+    M_n
+\end{bmatrix},\mathbf{X}=\begin{bmatrix}
+    X \\
+    0 \\
+    \vdots \\
+    0
+\end{bmatrix}$$
+在系统矩阵$S=I-A$可逆时，有
+\[\mathbf{M}=(I-A)^{-1}\mathbf{X}=S^{-1}\mathbf{X}\]
+因此中间节点$M_i$可由以下公式计算：\[M_i=\frac{S^*_{1i}}{\Delta} X\]
+其中$\Delta=|S|$为特征行列式，$S^*_{1i}$为系统矩阵$S$的去掉第1行、第i列所得的余子式。输出节点的响应是中间节点线性组合，以$M_n$为输出为例，我们可以写出\textbf{梅森增益公式}(Mason gain formula)：
+\begin{theorem}[梅森增益公式]
+    设系统有$n$个中间节点$M_1,M_2,\cdots,M_n$，激励$X$接入节点$M_1$，响应$Y$取自节点$M_n$，则
+    \[H=\frac{Y}{X}=(S^{-1})_{1n}=\frac{S^*_{n1}}{\Delta}\]
+    其中$\Delta=|S|$为特征行列式，$S^*_{n1}$为系统矩阵$S$的去掉第n行、第1列所得的代数余子式。
+\end{theorem}
+
+根据行列式的图论展开的几何意义，梅森增益公式又可以写成如下形式：
+\begin{theorem}[梅森增益公式，图论形式]
+    设系统有$n$个中间节点$M_1,M_2,\cdots,M_n$，激励$X$接入节点$M_1$，响应$Y$取自节点$M_n$，则
+    \[H=\frac{Y}{X}=\frac{\sum_{k}g_k\Delta_k}{\Delta}\]
+    其中$g_k$为从源点到阱点的第$k$条前向通路增益，$\Delta_k$为去掉与第$k$条前向通路接触的所有环路后的特征行列式。
+
+    特征行列式可由以下公式计算：
+    $$\Delta=1-\sum_a L_a+\sum_{b,c}L_b L_c-\sum_{d,e,f}L_d L_e L_f+\cdots$$
+    其中$\sum_a L_a$表示所有环路增益之和，$\sum_{b,c}L_b L_c$表示所有两两不接触环路增益的乘积之和，$\sum_{d,e,f}L_d L_e L_f$表示所有三者互不接触环路增益的乘积之和，依此类推。
+\end{theorem}
+
+下面来解释为什么行列式展开具有几何意义。首先，根据行列式的公式：
+\[\text{det}S=\sum_{\sigma\in S_n}\text{sgn}(\sigma)\prod_{i=1}^{n}s_{i,\sigma(i)}\]
+其中$S_n$为所有$n$个元素的排列组成的集合，$\text{sgn}(\sigma)$为排列$\sigma$的符号。对于$S=I-A$，对角元为$s_{ii}=1-a_{ii}$，非对角元为$s_{ij}=-a_{ij}$。
+
+我们知道，每个置换都可以分解为不相交循环的乘积，例如，$\sigma(1)=3,\sigma(3)=4,\sigma(4)=1,\sigma(2)=5,\sigma(5)=2$可以表示为$\sigma=(1\ 3\ 4)(2\ 5)$，对应中间节点组成的环路$M_1\to M_3\to M_4\to M_1$和$M_2\to M_5\to M_2$。因此，行列式的每一项$\prod_{i=1}^{n}s_{i,\sigma(i)}$都可以看作是由若干个不接触环路增益的乘积。如果环路中出现不动点$\sigma(i)=i$，则对应的$s_{ii}=1-a_{ii}$中的1，表示该节点不参与任何环路；如果考虑自环，则对应$-a_{ii}$。
+
+其次，考虑正负号的问题。对于k-循环，它对$\text{sgn}(\sigma)$的贡献为$(-1)^{k-1}$，而每个增益对应一个$-a_{ij}$，因此k-循环对行列式的贡献为$(-1)^{k-1}(-1)^k=-1$。因此，$l$个互不接触的环路增益之积的符号应为$(-1)^l$。
+\begin{example}
+    考虑具有六个中间节点的信号流图，我们来计算$\sigma=(1)(2)(3\ 4\ 5\ 6)$对应的行列式项：
+    \[\text{sgn}(\sigma)\prod_{i=1}^{6}s_{i,\sigma(i)}=s_{1,1}s_{2,2}s_{3,4}s_{4,5}s_{5,6}s_{6,3}=(1-a_{11})(1-a_{22})a_{34}a_{45}a_{56}a_{63}\]
+    将因式$(1-a_{11})(1-a_{22})$展开，得到
+    \[a_{34}a_{45}a_{56}a_{63}-a_{11}\cdot a_{34}a_{45}a_{56}a_{63}-a_{22}\cdot a_{34}a_{45}a_{56}a_{63}+a_{11}\cdot a_{22}\cdot a_{34}a_{45}a_{56}a_{63}\]
+    记环路$L:M_3\to M_4\to M_5\to M_6\to M_3$，这四项分别对应以下四种情况：\begin{itemize}
+        \item 不考虑节点$M_1,M_2$的自环，仅考虑环路L，符号为$-1$；
+        \item 不考虑节点$M_2$的自环，考虑节点$M_1$的自环以及环路L，符号为$+1$；
+        \item 不考虑节点$M_1$的自环，考虑节点$M_2$的自环以及环路L，符号为$+1$；
+        \item 考虑节点$M_1,M_2$的自环以及环路L，符号为$-1$。
+    \end{itemize}
+\end{example}
+
+最后，对于代数余子式$S^*_{n1}=\sum_{k}g_k\Delta_k$，我们考虑将$S$按第$n$行展开：
+\[\text{det}S=\Delta=\sum_{j=1}^{n}s_{nj}S^*_{nj}\]
+这样，$S^*_{n1}$就对应$s_{n1}$的系数。行列式公式中某一项包含$s_{n1}$，说明置换$\sigma$中有$\sigma(1)=n$，即环路包含$M_1\to M_n$。将该环路的其余部分补全，就得到了一条从$M_1$到$M_n$的前向通路，其前向通路增益为$g_k$。去掉与该环路接触的节点后，剩下的部分正好对应$\Delta_k$。
+
+注意，如果原图中不含有$M_1\to M_n$的支路，则$s_{n1}=0$，此时我们只好假想有一条“增益为0”的支路连接$M_1$和$M_n$，才能看出代数余子式的几何意义。因此，在梅森增益公式中，我们总是需要将前向通路考虑进来，而不管是否存在$M_1\to M_n$的支路。
+
+\begin{example}
+    考虑具有4个中间节点的信号流图，其增益矩阵为
+    \[A=\begin{bmatrix}
+        0 & a_{12} & 0 & 0 \\
+        a_{21} & 0 & a_{23} & a_{24} \\
+        0 & 0 & 0 & a_{34} \\
+        0 & 0 & 0 & 0
+    \end{bmatrix}\]
+    系统矩阵为
+    \[S=\begin{bmatrix}
+        1 & s_{12} & 0 & 0 \\
+        s_{21} & 1 & s_{23} & s_{24} \\
+        0 & 0 & 1 & s_{34} \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}\]
+    可以看出其系统流图为：
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[auto, >=Stealth, node distance=2.2cm]
+            % 节点（2mm空心小圆）
+            \node[circle, draw, minimum size=2mm, inner sep=0pt, line width=0.6pt] (M1) {};
+            \node[circle, draw, minimum size=2mm, inner sep=0pt, line width=0.6pt, right=of M1] (M2) {};
+            \node[circle, draw, minimum size=2mm, inner sep=0pt, line width=0.6pt, right=of M2] (M3) {};
+            \node[circle, draw, minimum size=2mm, inner sep=0pt, line width=0.6pt, right=of M3] (M4) {};
+            % 节点标记，避免重叠
+            \node[font=\small, below=3pt of M1] {$M_1$};
+            \node[font=\small, below=3pt of M2] {$M_2$};
+            \node[font=\small, below=3pt of M3] {$M_3$};
+            \node[font=\small, below=3pt of M4] {$M_4$};
+            % 边
+            \draw[->] (M1) -- node[midway, above] {$a_{12}$} (M2);
+            \draw[->] (M2) -- node[midway, above] {$a_{23}$} (M3);
+            % a_{24}弯曲到M4
+            \draw[->] (M2) to[out=-30,in=210,looseness=1.2] node[below right=1pt and -2pt, font=\small] {$a_{24}$} (M4);
+            \draw[->] (M3) -- node[midway, above] {$a_{34}$} (M4);
+            % a_{21}反馈支路弯曲
+            \draw[->] (M2) to[out=150,in=30,looseness=1.3] node[above left=1pt and -2pt, font=\small] {$a_{21}$} (M1);
+        \end{tikzpicture}
+    \end{figure}
+    这个系统并没有$M_4\to M_1$的支路，但我们假想有支路$a_{41}=-s_{41}=0$，这样就产生了环路$M_1\to M_2\to M_3\to M_4\to M_1$和$M_1\to M_2\to M_4\to M_1$，前向通路增益分别为$g_1=a_{12}a_{23}a_{34}$和$g_2=a_{12}a_{24}$。
+
+    计算特征行列式：原图中有环路$M_1\to M_2\to M_1$，环路增益为$L_1=a_{12}a_{21}$，特征行列式为$\Delta=1-L_1=1-a_{12}a_{21}$；对于两条前向通路，去掉所涉及的节点后不再有回路，因此$\Delta_1=\Delta_2=1$。根据梅森增益公式，有
+    \[H=\frac{Y}{X}=\frac{g_1\Delta_1+g_2\Delta_2}{\Delta}=\frac{a_{12}a_{23}a_{34}+a_{12}a_{24}}{1-a_{12}a_{21}}\]
+\end{example}
+
+一般来说，我们直接用计算机分析信号流图表示的复杂系统，但在一些特定的信号流图中，使用几何意义更为方便。
+
+\begin{example}[单入单出信号流图]
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[auto, >=Stealth, node distance=1.8cm, every node/.style={font=\small}]
+            \tikzset{signode/.style={circle, draw, minimum size=2mm, inner sep=0pt, line width=0.6pt}, lab/.style={font=\small}}
+            % nodes
+            \node[signode] (X) {};
+            \node[signode, right=2.2cm of X] (m1) {};
+            \node[signode, below=1.2cm of m1,xshift=24mm] (m2) {};
+            \node[signode, right=2.4cm of m1, yshift=12mm] (m3) {};
+            \node[signode, right=2.2cm of m3] (Y) {}; 
+            % labels
+            \node[lab,left=1mm of X] {$X$};
+            \node[lab,right=1mm of Y] {$Y$};
+            \node[lab, above=0.5mm of m1] {$M_1$};
+            \node[lab, below=0.5mm of m2] {$M_2$};
+            \node[lab, above=0.5mm of m3] {$M_3$};
+            % input connects only to m1 with unit gain
+            \draw[->] (X) to node[midway, above, inner sep=1pt] {$1$} (m1);
+            % output is taken from m3 with unit gain
+            \draw[->] (m3) to node[midway, above, inner sep=1pt] {$1$} (Y);
+            % complete directed subgraph among m1..m3 (H_ij for forward, G_ij for feedback)
+            \draw[->] (m1) to[bend left=18] node[midway, above, inner sep=1pt] {$H_{12}$} (m2);
+            \draw[->] (m2) to[bend left=18] node[midway, below, inner sep=1pt] {$G_{21}$} (m1);
+            \draw[->] (m1) to[bend left=18] node[midway, above, inner sep=1pt,xshift=-6pt] {$H_{13}$} (m3);
+            \draw[->] (m3) to[bend left=18] node[midway, below, inner sep=1pt,xshift=6pt] {$G_{31}$} (m1);
+            \draw[->] (m2) to[bend left=18] node[midway, above, inner sep=1pt] {$H_{23}$} (m3);
+            \draw[->] (m3) to[bend left=18] node[midway, below, inner sep=1pt] {$G_{32}$} (m2);
+        \end{tikzpicture}
+    \end{figure}
+    系统矩阵为
+    \[\begin{bmatrix}
+        1 & -G_{21} & -G_{31} \\
+        -H_{12} & 1 & -G_{32} \\
+        -H_{13} & -H_{23} & 1
+    \end{bmatrix}\]
+    特征行列式为
+    $$\Delta=\begin{vmatrix}
+        1 & -G_{21} & -G_{31} \\
+        -H_{12} & 1 & -G_{32} \\
+        -H_{13} & -H_{23} & 1
+    \end{vmatrix}=1-G_{21}H_{12}-G_{31}H_{13}-G_{32}H_{23}-G_{21}G_{32}H_{13}-G_{31}H_{23}H_{12}$$
+    在$\Delta\neq 0$时，系统矩阵可逆，其逆矩阵为\begin{align*}
+        S^{-1}=\frac{1}{\Delta}\begin{bmatrix}
+            1-G_{32}H_{23} & G_{21}+G_{31}H_{23} & G_{31}+G_{21}G_{32} \\
+            H_{12}+H_{13}G_{32} & 1-G_{31}H_{13} & G_{32}+G_{31}H_{12} \\
+            H_{13}+H_{12}H_{23} & H_{23}+G_{21}H_{13} & 1-G_{21}H_{12}
+        \end{bmatrix}
+    \end{align*}
+    输出为$Y=M_3=\frac{1}{\Delta}(H_{13}+H_{12}H_{23})X$，因此系统增益为
+    \[H=\frac{Y}{X}=\frac{H_{13}+H_{12}H_{23}}{\Delta}=\frac{H_{13}+H_{12}H_{23}}{1-G_{21}H_{12}-G_{31}H_{13}-G_{32}H_{23}-G_{21}G_{32}H_{13}-G_{31}H_{23}H_{12}}\]
+
+    使用梅森增益公式的几何意义，图中共有五个环路，分别为\begin{align*}
+        L_1&:M_1\to M_2\to M_1,\text{增益}L_1=G_{21}H_{12}\\
+        L_2&:M_1\to M_3\to M_1,\text{增益}L_2=G_{31}H_{13}\\
+        L_3&:M_2\to M_3\to M_2,\text{增益}L_3=G_{32}H_{23}\\
+        L_4&:M_1\to M_2\to M_3\to M_1,\text{增益}L_4=G_{21}G_{32}H_{13}\\
+        L_5&:M_1\to M_3\to M_2\to M_1,\text{增益}L_5=G_{31}H_{23}H_{12}
+    \end{align*}
+    这五个环路两两相交，因此特征行列式为
+    \[\Delta=1-(L_1+L_2+L_3+L_4+L_5)=1-G_{21}H_{12}-G_{31}H_{13}-G_{32}H_{23}-G_{21}G_{32}H_{13}-G_{31}H_{23}H_{12}\]
+    前向通路共有两条，增益分别为$g_1=H_{13}$和$g_2=H_{12}H_{23}$，去掉前向通路中的节点后没有环路，因此$\Delta_1=\Delta_2=1$。根据梅森增益公式，有
+    \[H=\frac{g_1\Delta_1+g_2\Delta_2}{\Delta}=\frac{H_{13}+H_{12}H_{23}}{1-G_{21}H_{12}-G_{31}H_{13}-G_{32}H_{23}-G_{21}G_{32}H_{13}-G_{31}H_{23}H_{12}}\]
+\end{example}
 
 \chapter{离散时间变换与离散系统分析}
 
@@ -5058,6 +5338,8 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 
 \section{离散傅里叶变换}\label{sec:DFT}
 
+\section{离散余弦变换}\label{sec:DCT}
+
 \section{快速傅里叶变换}\label{sec:FFT}
 
 %\chapter{其他积分变换}
@@ -5121,7 +5403,7 @@ $\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄利克雷定理失效，�
 \end{example}
 
 \subsection{狄利克雷核}\label{sub:dirichlet_kernel}
-本小节来研究傅里叶级数的逐点收敛性。直接由狄利克雷条件证明收敛性是很困难的，并且需要更加专业的分析学工具，我们将给出更强的条件下的证明，并从这个更强的条件获得一些额外的性质。
+本小节引入狄利克雷核并介绍它的一些性质，并在下一小节用它来辅助我们对傅里叶级数收敛性的讨论。直接由狄利克雷条件证明收敛性是很困难的，并且需要更加专业的分析学工具，我们将给出更强的条件下的证明，并从这个更强的条件获得一些额外的性质。
 
 研究傅里叶级数的渐进特性时，一个非常好用的工具是\textbf{狄利克雷核} (Dirichlet kernel)：
 \begin{definition}[狄利克雷核]
@@ -5142,7 +5424,7 @@ $\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄利克雷定理失效，�
 这两种结果是相符的，读者可自行验证，并且可以从后一结果想象出狄利克雷核的函数图像，它被$\pm 1/\sin(\frac{\omega t}{2})$包络并高速振荡。函数图像如下。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{Figure_3}
+    \includegraphics[width=0.5\textwidth]{Figure_3}
     \caption{狄利克雷核$D_N(t)$的函数图像}
 \end{figure}
 
@@ -5164,7 +5446,7 @@ $\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄利克雷定理失效，�
 在讨论傅里叶级数的收敛性前，先给出两个引理。第一个引理表明狄利克雷核在半周期上
 积分值为$\frac{T}{2}$，在证明傅里叶级数的逐点收敛性时将用到它。
 \begin{lemma}
-    $\int_{-\frac{T}{2}}^{0}D_N(t)\,dt=\int_{0}^{\frac{T}{2}}D_N(t)\,dt=\frac{T}{2}$
+    $$\int_{-\frac{T}{2}}^{0}D_N(t)\,dt=\int_{0}^{\frac{T}{2}}D_N(t)\,dt=\frac{T}{2}$$
 \end{lemma}
 \begin{proof}
     \begin{align*}
@@ -5177,7 +5459,7 @@ $D_N(t)$是偶函数，得证。
 \end{proof}
 
 \begin{lemma}[贝塞尔不等式]
-设$ f\in L^2([0,T]),c_n=\frac{1}{T}\int_{T}f(t)e^{-ik\omega t}\,dt$，则
+设$ f\in L^2([0,T]),c_n=\dfrac{1}{T}\int_{T}f(t)e^{-ik\omega t}\,dt$，则
 \begin{align*}
     \sum_{-\infty}^{\infty}|c_n|^2\leq \frac{1}{T}\int_{T}|f(t)|^2\,dt=\frac{1}{T}\|f\|_2^2
 \end{align*}
@@ -5223,9 +5505,9 @@ $D_N(t)$是偶函数，得证。
 \end{align*}
 其中\begin{align*}
 g(t):=\begin{cases}
-                                                                             \frac{f(t_0+t)-f(t_0^-)}{e^{i\omega t}-1} & \text{if }-\frac{T}{2}<t_0<0 \\
-                                                                             \frac{f(t_0+t)-f(t_0^+)}{e^{i\omega t}-1} & \text{if }0<t_0<\frac{T}{2}
-                                                                         \end{cases}
+\dfrac{f(t_0+t)-f(t_0^-)}{e^{i\omega t}-1} & \text{if }-\frac{T}{2}<t_0<0 \\
+\dfrac{f(t_0+t)-f(t_0^+)}{e^{i\omega t}-1} & \text{if }0<t_0<\frac{T}{2}
+\end{cases}
 \end{align*}                        
 由洛必达法则，$t\to 0$时，\[\lim_{t\to 0^+}g(t)=\lim_{t\to 0^+}\frac{f(t_0+t)-f(t_0^+)}{e^{i\omega t}}=\lim_{t\to 0^+}\frac{f'(t_0+t)}{ie^{i\omega t}}=\lim_{t\to 0^+}\frac{f'(t_0^+)}{i}\]
 $t\to 0^-$时同理。故g分段连续，当然是平方可积的，由贝塞尔不等式，
