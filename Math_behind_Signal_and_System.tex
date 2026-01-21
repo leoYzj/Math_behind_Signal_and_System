@@ -5,6 +5,7 @@
 \documentclass{ctexbook}
 \input{note-setup.tex}
 %自行添加的包
+\usepackage{wrapfig}
 \usepackage{multicol}
 \usepackage{paracol}
 \usepackage{varwidth}
@@ -133,7 +134,7 @@
         \tl_put_left:Nn \l_tmpa_tl { \color{blue} }
         \tl_put_right:NV \l_lralign_final_body_tl \l_tmpa_tl
         
-        \tl_put_right:Nn \l_lralign_final_body_tl { & }
+        \tl_put_right:Nn \l_lralign_final_body_tl { & \qquad }
         
         % Process Right Cell
         \seq_pop_left:NN \l_lralign_right_rows_seq \l_tmpa_tl
@@ -255,10 +256,11 @@
 
 \subsection{典型的连续与离散信号}\label{sub:ordinary_signal}
 \begin{definition}[采样信号]
-    \[Sa(t)=\frac{\sin(t)}{t}\]
+    \[\text{Sa}(t)=\frac{\sin(t)}{t}\]
 \end{definition}
-它在0处连续延拓为1，在$\pi$的整数倍处为0，是偶函数，在正半轴上的积分值为$\pi /2$（这个结果称为狄利克雷积分）。国外教材中采样信号一般为一个类似的信号\[sinc(t)=\frac{\sin(\pi t)}{\pi t}=Sa(\pi t)\]
-它们的参数不同但性质类似、本质相同。需要注意的是，在绘图时python和MATLAB中只有sinc信号，而且实际上指的是Sa信号。
+它在0处连续延拓为1，在$\pi$的整数倍处为0，是偶函数，在正半轴上的积分值为$\pi /2$（这个结果称为狄利克雷积分）。国外教材中采样信号一般为一个类似的信号
+\[\text{sinc}(t)=\frac{\sin(\pi t)}{\pi t}=\text{Sa}(\pi t)\]
+它们的参数不同但性质类似、本质相同。需要注意的是，在绘图时python和MATLAB中只有\text{sinc}信号，而且实际上指的是\text{Sa}信号。
 \begin{definition}[钟形信号/高斯信号]
     \[f(t)=Ee^{-{\left(\frac{t}{\tau }\right)}^2}\]
     $\tau$为衰减速率或时间常数，$\tau$越大，函数值衰减越慢。
@@ -696,14 +698,14 @@ $\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
 \begin{example}[周期矩形脉冲信号的傅里叶级数展开和频谱图]
 脉冲宽度为$\tau$，脉冲幅度为E，周期为$T (\tau<T)$的周期矩形脉冲信号$f(t)=E\chi_{[-\tau/2,\tau/2]}$，基波角频率
 $\omega=\frac{2\pi}{T}$，傅里叶级数展开为
-\[f(t)=\sum_{k = 1}^{\infty}  \frac{E\tau}{T}Sa\left(\frac{k\omega \tau}{2}\right)e^{ik\omega t}\]
+\[f(t)=\sum_{k = 1}^{\infty}  \frac{E\tau}{T}\text{Sa}\left(\frac{k\omega \tau}{2}\right)e^{ik\omega t}\]
 \end{example}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Figure_2}
     \caption{周期矩形脉冲信号及其频谱}
 \end{figure}
-如图，可以看到，这个频谱与采样函数$Sa(\omega)$非常相似（为了体现这一点，绘制频谱时将基波角频率大幅减小，并不是第一张图直接做傅里叶级数展开的结果），原因将在\ref{sub:fourier_of_signal}中给出。
+如图，可以看到，这个频谱与采样函数$\text{Sa}(\omega)$非常相似（为了体现这一点，绘制频谱时将基波角频率大幅减小，并不是第一张图直接做傅里叶级数展开的结果），原因将在\ref{sub:fourier_of_signal}中给出。
 
 \textbf{带宽} (bandwidth)指最高频率与最低频率之差，表征信号频率的集中程度。对于实信号，有时仅考虑正频率\cite{signal_systems}，带宽减半。周期矩形脉冲信号的频谱是无限的，但能量基本集中在最靠近y轴的两个零点之间，此时可以将带宽定义为\textbf{第一过零点带宽}$B=\frac{2\pi}{\tau}$（仅考虑正频率）。
 
@@ -889,7 +891,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
         }{
             \mathcal{F} \mathcal{F} f=2\pi f^-
         }
-        进一步，如果$f$是实信号，则有\lr{
+        进一步，如果$f$是实函数，则有\lr{
             \mathcal{F} f^-=\overline{\mathcal{F} f}
         }{
             \mathcal{F} f^-=\overline{\mathcal{F} f}
@@ -962,7 +964,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
 }{
     \mathcal{F} \mathcal{F} f=2\pi f^-
 }
-f是实信号时，$f=\overline{f}$，因此
+如果$f$是实函数，则$f=\overline{f}$，因此
 \lr{
     &\mathcal{F} f^-(\xi)=\int_{-\infty}^{\infty}f(t)e^{2\pi i \xi t}\,dt\\
     &\ =\overline{\int_{-\infty}^{\infty}f(t)e^{-2\pi i \xi t}\,dt}=\overline{\mathcal{F} f(\xi)}
@@ -1046,21 +1048,21 @@ f是实信号时，$f=\overline{f}$，因此
 &=E\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-2\pi i\xi t}\,dt\\
 &=-\frac{E}{2\pi i\xi}\evalat{e^{-2\pi i\xi t}}{-\frac{T}{2}}{\frac{T}{2}}\\
 &=\frac{e^{\pi i\xi T}-e^{-\pi i\xi T}}{2i}\frac{E}{\pi\xi}\\
-&=\frac{E}{\pi\xi}\sin(\pi T\xi)=ETsinc(T\xi)
+&=\frac{E}{\pi\xi}\sin(\pi T\xi)=ET\text{sinc}(T\xi)
 \switch
 \mathcal{F} f(\omega)&=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt\\
 &=E\int_{-\infty}^{\infty}\chi_{[-T/2,T/2]}(t)e^{-i\omega t}\,dt\\
 &=E\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-i\omega t}\,dt\\
 &=-\frac{E}{i\omega}\evalat{e^{-i\omega t}}{-\frac{T}{2}}{\frac{T}{2}}\\
 &=\frac{e^{\frac{i\omega T}{2}}-e^{-\frac{i\omega T}{2}}}{2i}\frac{2E}{\pi\omega}\\
-&=\frac{2E}{\omega}\sin(\frac{T\omega}{2})=ETSa\left(\frac{T\omega}{2}\right)
+&=\frac{2E}{\omega}\sin(\frac{T\omega}{2})=ET\text{Sa}\left(\frac{T\omega}{2}\right)
 \end{lralign}
 因此\lr{
-    \mathcal{F} \chi_{[-T/2,T/2]}(\xi)&=Tsinc(T\xi)\\
-    \mathcal{F} \left[sinc(Tt)\right](\xi)&=\frac{1}{T}\chi_{[-T/2,T/2]}\left(\frac{\xi}{T}\right)
+    \mathcal{F} \chi_{[-T/2,T/2]}(\xi)&=T\text{sinc}(T\xi)\\
+    \mathcal{F} \left[\text{sinc}(Tt)\right](\xi)&=\frac{1}{T}\chi_{[-T/2,T/2]}\left(\frac{\xi}{T}\right)
 }{
-    \mathcal{F} \chi_{[-T/2,T/2]}(\omega)&=TSa\left(\frac{T\omega}{2}\right)\\
-    \mathcal{F}\left[Sa(Tt)\right](\omega)&=\frac{\pi}{T}\chi_{[-T,T]}(\omega)
+    \mathcal{F} \chi_{[-T/2,T/2]}(\omega)&=T\text{Sa}\left(\frac{T\omega}{2}\right)\\
+    \mathcal{F}\left[\text{Sa}(Tt)\right](\omega)&=\frac{\pi}{T}\chi_{[-T,T]}(\omega)
 }
 \end{example}
 \begin{example}[狄拉克函数]
@@ -2405,7 +2407,7 @@ $\shah$的形式，下面就来找出具体的公式：
 \[f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F\left(\frac{\xi}{a}\right),\sigma_a T\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}\sigma_{1/a}\mathcal{F} T\]
 它同样揭示了时域伸而频域缩，时域缩而频域伸的关系，而$\shah_T$为我们提供了一种新的视角。对多维的$\shah$分布的讨论，见\ref{sec:Multi_Fourier}。二维$\shah$分布在$\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$分布称为\textbf{钉床函数}(bed of nails)。
 
-\section{理想采样}\label{sec:Ideal_sample}
+\section{理想采样}\label{sec:Ideal_Sample}
 
 \subsection{带限函数}\label{sub:band_limit}
 
@@ -2419,7 +2421,7 @@ $\shah$的形式，下面就来找出具体的公式：
 \begin{theorem}[采样函数的“卷积幺元”作用]
     设带限函数$f(t)$满足$$\text{supp}\ \mathcal{F} f\subset [-T/2,T/2]$$
     则\begin{align*}
-    f(t)=Tsinc(Tt)*f(t)
+    f(t)=T\text{sinc}(Tt)*f(t)
 \end{align*}
 可见对于带限函数，采样信号能够起到类似$\delta$的卷积幺元的作用。
 \end{theorem}
@@ -2429,7 +2431,7 @@ $\shah$的形式，下面就来找出具体的公式：
         f(t)&=\mathcal{F} ^{-1}(\chi_{[-T/2,T/2]}\mathcal{F} f)(t)\\
                &=\left(\mathcal{F} ^{-1}\chi_{[-T/2,T/2]}\right)*\left(\mathcal{F} ^{-1}\mathcal{F} f\right)(t)\\
                &=\left(\mathcal{F} ^{-1}\chi_{[-T/2,T/2]}\right)*f(t)\\
-               &=Tsinc(Tt)*f(t)
+               &=T\text{sinc}(Tt)*f(t)
     \end{align*}
 \end{proof}
 
@@ -2439,24 +2441,24 @@ $\shah$的形式，下面就来找出具体的公式：
     如果已知信号的频谱支于$[-\nu_m,\nu_m]$，则采样频率必须大于$2\nu_m$，即奈奎斯特频率$f_N$，才能还原出原信号\cite{brad_osgood_ee261}。
 \end{theorem}
 有时也将奈奎斯特频率称为信号的\textbf{带宽}(bandwidth)，但在另一些文献中\cite{signal_systems}，实信号的带宽不考虑负频率，值为奈奎斯特频率的一半。
-另一方面，先周期化再乘以特征函数，所得的恒等式称为\textbf{采样定理}(the sampling thoerem)：
+另一方面，先周期化再乘以特征函数，所得的恒等式称为\textbf{采样定理}(the Sampling theorem)：
 \begin{theorem}[采样定理]
     \[\mathcal{F} f(x)=\chi_{[-T/2,T/2]}(\mathcal{F} f*\shah_T)(x)\]
     其中$T=1/2\nu_m$，对应频率$f_N=1/T$被称为\textbf{奈奎斯特频率}(Nyquist frequency)。
 \end{theorem}
 对其做傅里叶反变换，有\begin{align*}
     f(t)&=\mathcal{F} ^{-1} [\chi_{[-T/2,T/2]}(\mathcal{F} f*\shah_T)](t)\\
-    &=Tsinc(Tt)*\mathcal{F} ^{-1} \left(\mathcal{F} f*\shah_T\right)\\
-    &=sinc(Tt)*\left(\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\delta_{k/T}(t)\right)\\
-    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc\left(T\left(t-\frac{k}{T}\right)\right)\\
-    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
+    &=T\text{sinc}(Tt)*\mathcal{F} ^{-1} \left(\mathcal{F} f*\shah_T\right)\\
+    &=\text{sinc}(Tt)*\left(\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\delta_{k/T}(t)\right)\\
+    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\text{sinc}\left(T\left(t-\frac{k}{T}\right)\right)\\
+    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\text{sinc}(Tt-k)
 \end{align*}
 因此有\begin{theorem}
 \begin{align*}
-    f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
+    f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\text{sinc}(Tt-k)
 \end{align*}
 \end{theorem}
-这正是\textbf{理想采样}下，由采样函数恢复出原函数的方法也即\textbf{香农采样定理}(Shannon sampling theorem)中采样率取奈奎斯特频率时的极限情况。它与上一节中讨论的拉格朗日插值有一定的相似之处。$sinc$函数在非零整数点处的值为0，在0处的值为1，于是可以直接利用每个数据点处的值限定所还原出信号在这一点的值，换言之，在以下这种公式所代表的插值方式下，数据点处的值是不会产生偏移的，$Sa$函数同理。不同的是，拉格朗日插值法在数据点以外的位置往往会有误差，而以上插值方法在没有产生混叠现象时是精确的。
+这正是\textbf{理想采样}下，由采样函数恢复出原函数的方法也即\textbf{香农采样定理}(Shannon Sampling theorem)中采样率取奈奎斯特频率时的极限情况。它与上一节中讨论的拉格朗日插值有一定的相似之处。$\text{sinc}$函数在非零整数点处的值为0，在0处的值为1，于是可以直接利用每个数据点处的值限定所还原出信号在这一点的值，换言之，在以下这种公式所代表的插值方式下，数据点处的值是不会产生偏移的，$\text{Sa}$函数同理。不同的是，拉格朗日插值法在数据点以外的位置往往会有误差，而以上插值方法在没有产生混叠现象时是精确的。
 
 \subsection{混叠现象}\label{sub:alias}
 我们已经说明了采样率不低于奈奎斯特频率时的信号还原方法，下面来说明为什么奈奎斯特频率时极限情况。直观上，采样频率越高，所需要的成本就越高，提供的信息就越多，而如果采样频率低于$f_N$，将发生\textbf{混叠}(alias)现象，还原所得的信号将产生失真。下图展示了正弦波的混叠：
@@ -2482,7 +2484,7 @@ $\shah$的形式，下面就来找出具体的公式：
 $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 如果频谱在周期化时重叠，那么用先前得到的公式
 \begin{align*}
-    f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)sinc(Tt-k)
+    f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\text{sinc}(Tt-k)
 \end{align*}
 还原函数当然是有误差的，乘以$\chi_{[-\nu_m,\nu_m]}$，会丢掉一部分原有频谱，并叠加一部分平移后的频谱。
 
@@ -2493,35 +2495,36 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 \begin{lemma}
     设$f_s,T>0$，正整数$N$为严格小于$\dfrac{T f_s}{2}$的最大整数，则$\forall t\in\mathbb{R}$，有
     \begin{align*}
-        sinc\left(f_s t\right)*\shah_T=\frac{1}{T f_s}\frac{\sin\left((2N+1)\pi t/T\right)}{\sin\left(\pi t/T\right)}=\frac{2N+1}{T f_s}\frac{sinc\left((2N+1)t/T\right)}{sinc\left(t/T\right)}
+        \text{sinc}\left(f_s t\right)*\shah_T=\frac{1}{T f_s}\frac{\sin\left((2N+1)\pi t/T\right)}{\sin\left(\pi t/T\right)}=\frac{2N+1}{T f_s}\frac{\text{sinc}\left((2N+1)t/T\right)}{\text{sinc}\left(t/T\right)}
     \end{align*}
     特别地，$T f_s=2N+1$时，有
     \begin{align*}
-        sinc\left(f_s t\right)*\shah_T=\frac{sinc\left(f_s t\right)}{sinc\left(t/T\right)}
+        \text{sinc}\left(f_s t\right)*\shah_T=\frac{\text{sinc}\left(f_s t\right)}{\text{sinc}\left(t/T\right)}
     \end{align*}
 \end{lemma}
 \begin{remark}
-    取$f_s=T=1,N=0$，可得$sinc(t)*\shah=1$。这里给出前$N$项和的图像：
+    取$f_s=T=1,N=0$，可得$\text{sinc}(t)*\shah=1$。这里给出前$N$项和的图像：
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{sinc_shah.jpeg}
-        \caption{$sinc(t)*\shah$的前N项和}
+        \caption{$\text{sinc}(t)*\shah$的前N项和}
     \end{figure}
+    它与方波很接近，并且出现了吉布斯现象。将部分和$S_N(t)=\sum_{k=-N}^{N}\text{sinc}(t-k)$视为采样率为1的情况下，对时宽为$2N$的方波进行还原的结果，则随着$N$的增大，采样点增多，结果越来越接近$\mathds{1}$。方波不是带限信号，吉布斯现象可以视为混叠的结果，但由于频带能量集中于低频，所以在大部分区域上，这种还原结果仍然较好地逼近了方波。
 \end{remark}
 \begin{proof}
     取傅里叶变换：
 \begin{align*}
-    \mathcal{F} \left[sinc\left(f_s t\right)*\shah_T\right](\xi)&=\mathcal{F} \left[sinc\left(f_s t\right)\right](\xi)\cdot\mathcal{F} \shah_T(\xi)\\
+    \mathcal{F} \left[\text{sinc}\left(f_s t\right)*\shah_T\right](\xi)&=\mathcal{F} \left[\text{sinc}\left(f_s t\right)\right](\xi)\cdot\mathcal{F} \shah_T(\xi)\\
     &=\frac{1}{f_s}\chi_{[-f_s/2,f_s/2]}(\xi)\cdot\frac{1}{T}\shah_{1/T}(\xi)\\
     &=\frac{1}{T f_s}\sum_{k=-\infty}^{\infty}\chi_{[-f_s/2,f_s/2]}\left(\xi-\frac{k}{T}\right)\delta_{k/T}\\
     &=\frac{1}{T f_s}\sum_{k=-N}^{N}\delta_{k/T}(\xi)
 \end{align*}
 对上式取傅里叶逆变换，有
 \begin{align*}
-    sinc\left(f_s t\right)*\shah_T&=\mathcal{F} ^{-1}\left(\frac{1}{T f_s}\sum_{k=-N}^{N}\delta_{k/T}(\xi)\right)(t)\\
+    \text{sinc}\left(f_s t\right)*\shah_T&=\mathcal{F} ^{-1}\left(\frac{1}{T f_s}\sum_{k=-N}^{N}\delta_{k/T}(\xi)\right)(t)\\
     &=\frac{1}{T f_s}\sum_{k=-N}^{N}e^{2\pi ikt/T}\\
     &=\frac{1}{T f_s}\frac{\sin\left((2N+1)\pi t/T\right)}{\sin\left(\pi t/T\right)}\\
-    &=\frac{2N+1}{T f_s}\frac{sinc\left((2N+1)t/T\right)}{sinc\left(t/T\right)}
+    &=\frac{2N+1}{T f_s}\frac{\text{sinc}\left((2N+1)t/T\right)}{\text{sinc}\left(t/T\right)}
 \end{align*}
 第二行到第三行其实就是狄利克雷核的相关公式，见\ref{sub:dirichlet_kernel}，可以通过等比数列求和公式得到：\begin{align*}
     \sum_{k=-N}^{N}e^{2\pi ikt/T}&=e^{-2\pi iNt/T}\frac{1-e^{2\pi i(2N+1)t/T}}{1-e^{2\pi it/T}}\\
@@ -2534,12 +2537,12 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
     $$f_s=1/T_s=\frac{2N+1}{T}\geq 2\nu_m$$
     $2N+1$为采样点数（可由上面对$f_s$提出的要求算得$N\geq T\nu_m-\dfrac{1}{2}$），则$f(t)$可以用一个周期内的有限个采样点$t_k=kT_s,k\in\{0,1,\cdots,2N\}$还原：
     \begin{align*}
-        f(t)=\sum_{k=0}^{2N}f(t_k)\frac{sinc\left(f_s(t-t_k)\right)}{sinc\left(\frac{1}{T}(t-t_k)\right)}
+        f(t)=\sum_{k=0}^{2N}f(t_k)\frac{\text{sinc}\left(f_s(t-t_k)\right)}{\text{sinc}\left(\frac{1}{T}(t-t_k)\right)}
     \end{align*}
 \end{proposition}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{finite_sample.jpeg}
+    \includegraphics[width=0.6\textwidth]{finite_Sample.jpeg}
     \caption{有限采样公式示意图}
 \end{figure}
 \begin{proof}
@@ -2553,16 +2556,16 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 \end{align*}
 用$\shah_{T_s}$进行采样，在频域上相当于以$f_s$为周期进行周期化，由香农采样定理，有
 \begin{align*}
-    f(t)=\sum_{k=-\infty}^{\infty}f(t_k)sinc\left(f_s(t-t_k)\right)
+    f(t)=\sum_{k=-\infty}^{\infty}f(t_k)\text{sinc}\left(f_s(t-t_k)\right)
 \end{align*}
 其中采样点$t_k=kT_s$。由于$f(t)$周期为$T$，我们可以对上式进行分组求和：
 \begin{align*}
-    f(t)&=\sum_{m=-\infty}^{\infty}\sum_{k=0}^{2N}f\left(t_{k+m(2N+1)}\right)sinc\left(f_s(t-t_{k+m(2N+1)})\right)\\
-    &=f(t_0)\sum_{m=-\infty}^{\infty}sinc\left(f_s(t-mT)\right)+f(t_1)\sum_{m=-\infty}^{\infty}sinc\left(f_s(t-mT-T_s)\right)+\cdots\\
-    &\quad +f(t_{2N})\sum_{m=-\infty}^{\infty}sinc\left(f_s(t-mT-2N T_s)\right)\\
-    &=f(t_0)sinc\left(f_s t\right)*\shah_T+f(t_1)sinc\left(f_s (t-T_s)\right)*\shah_T+\cdots\\
-    &\quad +f(t_{2N})sinc\left(f_s (t-2N T_s)\right)*\shah_T\\
-    &=\sum_{m=0}^{2N}f(t_m)\left[sinc\left(f_s (t-m T_s)\right)*\shah_T\right]
+    f(t)&=\sum_{m=-\infty}^{\infty}\sum_{k=0}^{2N}f\left(t_{k+m(2N+1)}\right)\text{sinc}\left(f_s(t-t_{k+m(2N+1)})\right)\\
+    &=f(t_0)\sum_{m=-\infty}^{\infty}\text{sinc}\left(f_s(t-mT)\right)+f(t_1)\sum_{m=-\infty}^{\infty}\text{sinc}\left(f_s(t-mT-T_s)\right)+\cdots\\
+    &\quad +f(t_{2N})\sum_{m=-\infty}^{\infty}\text{sinc}\left(f_s(t-mT-2N T_s)\right)\\
+    &=f(t_0)\text{sinc}\left(f_s t\right)*\shah_T+f(t_1)\text{sinc}\left(f_s (t-T_s)\right)*\shah_T+\cdots\\
+    &\quad +f(t_{2N})\text{sinc}\left(f_s (t-2N T_s)\right)*\shah_T\\
+    &=\sum_{m=0}^{2N}f(t_m)\left[\text{sinc}\left(f_s (t-m T_s)\right)*\shah_T\right]
 \end{align*}
 \end{proof}
 
@@ -2573,9 +2576,305 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 %final2006.2，或许跟一阶采样保持相通？
 %零阶采样保持，一阶采样保持
 
-\section{多维傅里叶变换与汉克尔变换}\label{sec:Multi_Fourier}
+\section{多维傅里叶变换}\label{sec:Multi_Fourier}
+
+这一节中，我们将傅里叶变换推广到高维。由于时间总是一维的，高维傅里叶变换往往指空间域，因此我们将用$\mathbf{x}=(x_1,x_2,\cdots,x_n)$表示n维的空间变量，$\boldsymbol{\xi}=(\xi_1,\xi_2,\cdots,\xi_n)$表示n维的空间频率，$\mathbf{\omega}=(\omega_1,\omega_2,\cdots,\omega_n)$表示n维的空间角频率。多维傅里叶变换在图像处理、计算机视觉等领域有着重要的应用。
+
+\subsection{多维傅里叶变换的定义}\label{sub:multi_fourier}
+
+\begin{definition}[n维傅里叶变换]
+n维空间$\mathbb{R}^n$上的傅里叶变换定义为：
+\begin{lralign}
+    \mathcal{F} f(\boldsymbol{\xi})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}
+\switch
+    \mathcal{F} f(\mathbf{\omega})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i\mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}
+\end{lralign}
+其中\begin{lralign}
+\mathbf{x}\cdot\boldsymbol{\xi}=x_1\xi_1+x_2\xi_2+\cdots+x_n\xi_n\quad
+\switch
+\mathbf{x}\cdot\mathbf{\omega}=x_1\omega_1+x_2\omega_2+\cdots+x_n\omega_n\quad
+\end{lralign}
+为n维向量的点积；$\int_{\mathbb{R}^n}$表示在$\mathbb{R}^n$上的重积分。
+\end{definition}
+
+不难想到，傅里叶逆变换为：
+\begin{lralign}
+    \mathcal{F} ^{-1} F(\mathbf{x})&=\int_{\mathbb{R}^n}F(\boldsymbol{\xi})e^{2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}\,d\boldsymbol{\xi}
+\switch
+    \mathcal{F} ^{-1} F(\mathbf{x})&=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}F(\mathbf{\omega})e^{i\mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{\omega}
+\end{lralign}
+
+为了说明空间角频率形式的傅里叶逆变换的系数$\dfrac{1}{(2\pi)^n}$的由来，我们可以令$\mathbf{\omega}=2\pi\boldsymbol{\xi}$，则$d\mathbf{\omega}=(2\pi)^n d\boldsymbol{\xi}$，以上两种傅里叶逆变换的公式是等价的。
+
+下面给出几个例子来建立多维傅里叶变换的直观。
+\begin{definition}[可分函数]
+    $f(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$是一个可分函数，即如果存在$n$个一维函数$f_i(x_i):\mathbb{R}\to\mathbb{C},i=1,2,\cdots,n$，使得
+    \begin{align*}
+        f(\mathbf{x})=f_1(x_1)f_2(x_2)\cdots f_n(x_n)
+    \end{align*}
+\end{definition}
+$f(\mathbf{x})$的傅里叶变换为：
+
+{\color{blue}
+\begin{align*}
+\mathcal{F} f(\boldsymbol{\xi})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+&=\int_{-\infty}^{\infty}\cdots \int_{-\infty}^{\infty}f_1(x_1)f_2(x_2)\cdots f_n(x_n)e^{-2\pi i (x_1\xi_1+x_2\xi_2+\cdots +x_n\xi_n)}\,dx_1 dx_2\cdots dx_n\\
+&=\left(\int_{-\infty}^{\infty}f_1(x_1)e^{-2\pi i x_1\xi_1}\,dx_1\right)\left(\int_{-\infty}^{\infty}f_2(x_2)e^{-2\pi i x_2\xi_2}\,dx_2\right)\cdots \left(\int_{-\infty}^{\infty}f_n(x_n)e^{-2\pi i x_n\xi_n}\,dx_n\right)\\
+&=\mathcal{F} f_1(\xi_1)\mathcal{F} f_2(\xi_2)\cdots \mathcal{F} f_n(\xi_n)
+\end{align*}}
+{\color{red}
+\begin{align*}
+\mathcal{F} f(\mathbf{\omega})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i \mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}\\
+&=\int_{-\infty}^{\infty}\cdots \int_{-\infty}^{\infty}f_1(x_1)f_2(x_2)\cdots f_n(x_n)e^{-i (x_1\omega_1+x_2\omega_2+\cdots +x_n\omega_n)}\,dx_1 dx_2\cdots dx_n\\  
+&=\left(\int_{-\infty}^{\infty}f_1(x_1)e^{-i x_1\omega_1}\,dx_1\right)\left(\int_{-\infty}^{\infty}f_2(x_2)e^{-i x_2\omega_2}\,dx_2\right)\cdots \left(\int_{-\infty}^{\infty}f_n(x_n)e^{-i x_n\omega_n}\,dx_n\right)\\
+&=\mathcal{F} f_1(\omega_1)\mathcal{F} f_2(\omega_2)\cdots \mathcal{F} f_n(\omega_n)
+\end{align*}}
+也就是说，空间域上可分的函数，其傅里叶变换也是可分的，且每个分量的傅里叶变换正是对应一维函数的傅里叶变换。
+
+\begin{example}[高斯函数]
+    高斯函数是可分的：
+    \begin{align*}
+        f(\mathbf{x})=e^{-\pi(x_1^2+x_2^2+\cdots +x_n^2)}=e^{-\pi x_1^2}e^{-\pi x_2^2}\cdots e^{-\pi x_n^2}
+    \end{align*}
+    一维高斯函数的傅里叶变换为：
+    \begin{lralign}
+    \mathcal{F} \left(e^{-\pi x^2}\right)(\xi)&=e^{-\pi \xi^2}
+\switch
+    \mathcal{F} \left(e^{-\pi x^2}\right)(\omega)&=e^{-\frac{\omega^2}{4\pi}}
+    \end{lralign}
+    因此，n维高斯函数的傅里叶变换为：
+    \begin{lralign}
+    \mathcal{F} f(\boldsymbol{\xi})=e^{-\pi(\xi_1^2+\xi_2^2+\cdots +\xi_n^2)}=e^{-\pi |\boldsymbol{\xi}|^2}\quad
+\switch
+    \mathcal{F} f(\mathbf{\omega})=e^{-(\omega_1^2+\omega_2^2+\cdots +\omega_n^2)/4\pi}=e^{-|\mathbf{\omega}|^2/4\pi}\quad
+    \end{lralign}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{n_gauss.jpeg}
+        \caption{二维高斯函数的图像}
+    \end{figure}
+\end{example}
+
+\begin{example}[矩形函数]
+    n维空间中的矩形函数是n维“长方体”的特征函数。由于这种长方体是区间(Interval)的笛卡尔积，是n维空间中区间的推广，我们仍称之为区间并用$I$表示：
+    \begin{align*}
+        I=[a_1,b_1]\times[a_2,b_2]\times\cdots \times[a_n,b_n]
+    \end{align*}
+    n维矩形函数记为$\chi_I$。简洁起见，这里计算一个特殊的矩形函数$\chi_I$，其中$I=[-T/2,T/2]$：
+    \begin{lralign}
+    \mathcal{F} \left(\chi_{[-T/2,T/2]}\right)(\xi)&=T\text{sinc}(T\xi)
+\switch
+    \mathcal{F} \left(\chi_{[-T/2,T/2]}\right)(\omega)&=T\text{Sa}\left(\frac{T\omega}{2}\right)
+    \end{lralign}
+    因此，$I=[-T/2,T/2]^n$时，n维矩形函数的傅里叶变换为：
+    \begin{lralign}
+    \mathcal{F} \chi_I(\boldsymbol{\xi})&=T^n \text{sinc}^n(T\xi)
+\switch
+    \mathcal{F} \chi_I(\mathbf{\omega})&=T^n \text{Sa}^n\left(\frac{T\omega}{2}\right)
+    \end{lralign}
+\end{example}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \centering
+    \vspace{-20pt}
+    \includegraphics[width=0.48\textwidth]{zero_phase.jpeg}
+    \caption{二维空间中$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$的等相面示意图}
+    \vspace{4em}
+\end{wrapfigure}
+下面考察$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$和$e^{i \mathbf{x}\cdot\mathbf{\omega}}$的性质。以$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$为例，对于给定的$\mathbf{\xi}$，令$$\boldsymbol{x\cdot\xi}=k(k\in\mathbb{Z})$$
+则$$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}=1$$
+这时称$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$是\textbf{零相}(zero phase)的。
+这些点构成了过原点且法向量为$\boldsymbol{\xi_0}$的超平面族，相邻零相面之间的距离为$1/|\boldsymbol{\xi}|$。类似地，可以定义\textbf{等相面}(constant phase surface)为
+$$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x\cdot\xi}=k+\theta,k\in\mathbb{Z},\theta\in[0,1)\right\}$$
+的超平面族，法向量为$\boldsymbol{\xi_0}$，相邻等相面距离为$1/|\boldsymbol{\xi}|$。
+
+\subsection{多维傅里叶变换的运算性质}\label{sub:operation_of_multi_fourier}
+
+多维傅里叶变换的运算性质相较一维比较丰富，本小节中将分条列举这些性质。由于
+
+\begin{proposition}[对偶性]
+    设$f(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，则有：
+    \begin{lralign}
+    &\mathcal{F} f^-(\boldsymbol{\xi})=\mathcal{F} (f^-)(\mathbf{\xi})=\mathcal{F} ^{-1} f(\mathbf{x})\\
+    &\mathcal{F} \left(\mathcal{F} f\right)(\mathbf{x})=f(-\mathbf{x})
+\switch
+    &\mathcal{F} f^-(\mathbf{\omega})=(2\pi)^n \mathcal{F} ^{-1} f(\mathbf{\omega})\\
+    &\mathcal{F} \left(\mathcal{F} f\right)(\mathbf{x})=(2\pi)^n f(-\mathbf{x})
+    \end{lralign}
+    进一步，如果$f$是实函数，则有：
+    \begin{lralign}
+    \mathcal{F} f^-&=\overline{\mathcal{F} f}
+\switch
+    \mathcal{F} f^-&=(2\pi)^n \overline{\mathcal{F} f}
+    \end{lralign}
+\end{proposition}
+\begin{proof}
+    类似一维的情况（见\ref{sub:fourier_operation_properties}），带入定义可立即得到：
+    \begin{lralign}
+        \mathcal{F} f^-(\boldsymbol{\xi})=\mathcal{F} (f^-)(\mathbf{\xi})=\mathcal{F} ^{-1} f(\mathbf{x})
+    \switch
+        \mathcal{F} f^-(\mathbf{\omega})=(2\pi)^n \mathcal{F} ^{-1} f(\mathbf{\omega})
+    \end{lralign}
+    同时取傅里叶变换，即得：
+    \begin{lralign}
+        \mathcal{F} \left(\mathcal{F} f\right)(\mathbf{x})=f(-\mathbf{x})
+\switch
+        \mathcal{F} \left(\mathcal{F} f\right)(\mathbf{x})=(2\pi)^n f(-\mathbf{x})
+    \end{lralign}
+    如果$f$是实函数，则$f=\overline{f}$，因此：
+    \begin{lralign}
+    \mathcal{F} f^-&=\mathcal{F} (\overline{f})=\overline{\mathcal{F} f}
+\switch
+    \mathcal{F} f^-&=(2\pi)^n \mathcal{F} ^{-1} (\overline{f})=(2\pi)^n \overline{\mathcal{F} f}
+    \end{lralign}
+\end{proof}
+
+\begin{proposition}[对称性]
+    可仿照一维函数定义函数的奇偶性：如果$f(\mathbf{x})=f(-\mathbf{x})$，则称$f$为偶函数；如果$f(\mathbf{x})=-f(-\mathbf{x})$，则称$f$为奇函数。$\mathcal{F} f$与$f$具有相同的奇偶性；$f$是实函数时，如果$f$为偶函数，则$\mathcal{F} f$为实函数；如果$f$为奇函数，则$\mathcal{F} f$为纯虚函数。
+\end{proposition}
+
+\begin{proposition}[线性性]
+    设$f(\mathbf{x}),g(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，则有：
+    \begin{lralign}
+    \mathcal{F} [af(\mathbf{x})+bg(\mathbf{x})](\boldsymbol{\xi})&=a\mathcal{F} f(\boldsymbol{\xi})+b\mathcal{F} g(\boldsymbol{\xi})    
+\switch
+    \mathcal{F} [af(\mathbf{x})+bg(\mathbf{x})](\mathbf{\omega})&=a\mathcal{F} f(\mathbf{\omega})+b\mathcal{F} g(\mathbf{\omega})
+    \end{lralign}
+\end{proposition}
+这个性质是显然的，它直接得自积分的线性性。
+
+\begin{proposition}[平移定理]
+    设$f(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，时域上：
+    \begin{lralign}
+    \mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\boldsymbol{\xi})&=e^{-2\pi i \mathbf{a}\cdot\boldsymbol{\xi}}\mathcal{F} f(\boldsymbol{\xi})
+\switch
+    \mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\mathbf{\omega})&=e^{-i \mathbf{a}\cdot\mathbf{\omega}}\mathcal{F} f(\mathbf{\omega})
+    \end{lralign}
+    频域上：
+    \begin{lralign}
+    \mathcal{F} ^{-1} \left[F(\boldsymbol{\xi}-\boldsymbol{\beta})\right](\mathbf{x})&=e^{2\pi i \mathbf{x}\cdot\boldsymbol{\beta}}\mathcal{F} ^{-1} F(\mathbf{x})
+\switch
+    \mathcal{F} ^{-1} \left[F(\mathbf{\omega}-\mathbf{b})\right](\mathbf{x})&=e^{i \mathbf{x}\cdot\mathbf{b}}\mathcal{F} ^{-1} F(\mathbf{x})
+    \end{lralign}
+\end{proposition}
+\begin{proof}
+    \begin{lralign}
+    &\mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\boldsymbol{\xi})\\
+    &=\int_{\mathbb{R}^n}f(\mathbf{x}-\mathbf{a})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})e^{-2\pi i (\mathbf{y}+\mathbf{a})\cdot\boldsymbol{\xi}}\,d\mathbf{y}(\mathbf{y}=\mathbf{x}-\mathbf{a})\\
+    =&e^{-2\pi i \mathbf{a}\cdot\boldsymbol{\xi}}\int_{\mathbb{R}^n}f(\mathbf{y})e^{-2\pi i \mathbf{y}\cdot\boldsymbol{\xi}}\,d\mathbf{y}\\
+    =&e^{-2\pi i \mathbf{a}\cdot\boldsymbol{\xi}}\mathcal{F} f(\boldsymbol{\xi})
+\switch
+    &\mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\mathbf{\omega})\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x}-\mathbf{a})e^{-i \mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})e^{-i (\mathbf{y}+\mathbf{a})\cdot\mathbf{\omega}}\,d\mathbf{y}(\mathbf{y}=\mathbf{x}-\mathbf{a})\\
+    =&e^{-i \mathbf{a}\cdot\mathbf{\omega}}\int_{\mathbb{R}^n}f(\mathbf{y})e^{-i \mathbf{y}\cdot\mathbf{\omega}}\,d\mathbf{y}\\
+    =&e^{-i \mathbf{a}\cdot\mathbf{\omega}}\mathcal{F} f(\mathbf{\omega})
+    \end{lralign}
+\end{proof}
+
+\begin{proposition}[伸缩定理]
+    设$f(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，$A$为$n$阶可逆矩阵，则有：
+    \begin{lralign}
+    \mathcal{F} \left[f(A\mathbf{x})\right](\boldsymbol{\xi})&=\frac{1}{|\det A|}\mathcal{F} f\left(A^{-T}\boldsymbol{\xi}\right)
+    \switch
+    \mathcal{F} \left[f(A\mathbf{x})\right](\mathbf{\omega})&=\frac{1}{|\det A|}\mathcal{F} f\left(A^{-T}\mathbf{\omega}\right)
+    \end{lralign}
+    特别地，当$A$是对角阵时，设$A=\text{diag}(a_1,a_2,\cdots,a_n)$，则有：
+    \begin{lralign}
+    &\mathcal{F} \left[f(a_1 x_1,a_2 x_2,\cdots,a_n x_n)\right](\boldsymbol{\xi})\\
+    =&\frac{1}{|a_1 a_2\cdots a_n|}\mathcal{F} f\left(\frac{\xi_1}{a_1},\frac{\xi_2}{a_2},\cdots,\frac{\xi_n}{a_n}\right)
+\switch
+    &\mathcal{F} \left[f(a_1 x_1,a_2 x_2,\cdots,a_n x_n)\right](\mathbf{\omega})\\
+    =&\frac{1}{|a_1 a_2\cdots a_n|}\mathcal{F} f\left(\frac{\omega_1}{a_1},\frac{\omega_2}{a_2},\cdots,\frac{\omega_n}{a_n}\right)
+    \end{lralign}
+    对于旋转矩阵$R$（即满足$R^T R=I$的矩阵），有：
+    \begin{lralign}
+    \mathcal{F} \left[f(R\mathbf{x})\right](\boldsymbol{\xi})&=\mathcal{F} f\left(R\boldsymbol{\xi}\right)
+\switch
+    \mathcal{F} \left[f(R\mathbf{x})\right](\mathbf{\omega})&=\mathcal{F} f\left(R\mathbf{\omega}\right)
+    \end{lralign}
+    这表明时域旋转，频域也会做相应旋转。
+\end{proposition}
+
+\begin{proposition}[微分性质]
+    设$f(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$一阶连续可导，则有：
+    \begin{lralign}
+    \mathcal{F} \left(\frac{\partial f}{\partial x_j}\right)(\boldsymbol{\xi})&=2\pi i \xi_j \mathcal{F} f(\boldsymbol{\xi})
+\switch
+    \mathcal{F} \left(\frac{\partial f}{\partial x_j}\right)(\mathbf{\omega})&=i \omega_j \mathcal{F} f(\mathbf{\omega})
+    \end{lralign}
+    易见在高阶混合偏导数存在时，有：
+    \begin{lralign}
+    \mathcal{F} \left(\frac{\partial^{\alpha} f}{\partial x_1^{\alpha_1}\partial x_2^{\alpha_2}\cdots \partial x_n^{\alpha_n}}\right)(\boldsymbol{\xi})\\
+    =(2\pi i)^{\alpha} \xi_1^{\alpha_1}\xi_2^{\alpha_2}\cdots \xi_n^{\alpha_n} \mathcal{F} f(\boldsymbol{\xi})
+\switch
+    \mathcal{F} \left(\frac{\partial^{\alpha} f}{\partial x_1^{\alpha_1}\partial x_2^{\alpha_2}\cdots \partial x_n^{\alpha_n}}\right)(\mathbf{\omega})\\
+    =i^{\alpha} \omega_1^{\alpha_1}\omega_2^{\alpha_2}\cdots \omega_n^{\alpha_n} \mathcal{F} f(\mathbf{\omega})
+    \end{lralign}
+    其中$\alpha=\alpha_1+\alpha_2+\cdots +\alpha_n$。
+\end{proposition}
+
+\begin{corollary}[场论中的算子]
+    $\nabla$为哈密顿算子（或称nabla算子），$\Delta=\nabla\cdot \nabla$为拉普拉斯算子，
+    \begin{align*}
+        \nabla=\left(\frac{\partial }{\partial x_1},\frac{\partial }{\partial x_2},\cdots,\frac{\partial }{\partial x_n}\right),
+        \Delta=\frac{\partial^2 }{\partial x_1^2}+\frac{\partial^2 }{\partial x_2^2}+\cdots+\frac{\partial^2 }{\partial x_n^2}
+    \end{align*}
+    场论中，梯度、散度、旋度等运算都可以用$\nabla$表示。由微分性质可知，对于梯度$\nabla f=\text{grad}f$，有：
+    \begin{lralign}
+    \mathcal{F} \left(\nabla f\right)(\boldsymbol{\xi})&=2\pi i \boldsymbol{\xi} \mathcal{F} f(\boldsymbol{\xi})
+\switch
+    \mathcal{F} \left(\nabla f\right)(\mathbf{\omega})&=i \mathbf{\omega} \mathcal{F} f(\mathbf{\omega})
+    \end{lralign}
+    对于散度$\nabla\cdot \mathbf{F}=\text{div}\mathbf{F}$，其中$\mathbf{F}=(F_1,F_2,\cdots,F_n)$，有：
+    \begin{lralign}
+    \mathcal{F} \left(\nabla\cdot \mathbf{F}\right)(\boldsymbol{\xi})&=2\pi i \boldsymbol{\xi}\cdot \mathcal{F} \mathbf{F}(\boldsymbol{\xi})
+\switch
+    \mathcal{F} \left(\nabla\cdot \mathbf{F}\right)(\mathbf{\omega})&=i \mathbf{\omega}\cdot \mathcal{F} \mathbf{F}(\mathbf{\omega})
+    \end{lralign}
+    在$\mathbb{R}^3$中，对于旋度$\nabla\times \mathbf{F}=\text{curl}\mathbf{F}$，有：
+    \begin{lralign}
+    \mathcal{F} \left(\nabla\times \mathbf{F}\right)(\boldsymbol{\xi})&=2\pi i \boldsymbol{\xi}\times \mathcal{F} \mathbf{F}(\boldsymbol{\xi})
+\switch
+    \mathcal{F} \left(\nabla\times \mathbf{F}\right)(\mathbf{\omega})&=i \mathbf{\omega}\times \mathcal{F} \mathbf{F}(\mathbf{\omega})
+    \end{lralign}
+    对于拉普拉斯算子$\Delta f$，有：
+    \begin{lralign}
+    \mathcal{F} \left(\Delta f\right)(\boldsymbol{\xi})&=-(2\pi)^2 |\boldsymbol{\xi}|^2 \mathcal{F} f(\boldsymbol{\xi})
+\switch
+    \mathcal{F} \left(\Delta f\right)(\mathbf{\omega})&=-|\mathbf{\omega}|^2 \mathcal{F} f(\mathbf{\omega})
+    \end{lralign}
+\end{corollary}
+
+我们还可以定义n维空间$\mathbb{R}^n$上的\textbf{卷积}。与一维的情况类似，由于卷积的存在性可以由多种充分条件保证，我们直接从形式上给出卷积的定义，而不讨论$f,g$具体的范围。
+\begin{definition}[卷积]
+    设$f(\mathbf{x}),g(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，它们的卷积定义为：
+    \begin{align*}
+        (f*g)(\mathbf{x})=\int_{\mathbb{R}^n}f(\mathbf{y})g(\mathbf{x}-\mathbf{y})\,d\mathbf{y}
+    \end{align*}
+\end{definition}
+
+\begin{theorem}[卷积定理]
+    设$f(\mathbf{x}),g(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，则有：
+    \begin{lralign}
+    \mathcal{F} (f*g)(\boldsymbol{\xi})&=\mathcal{F} f(\boldsymbol{\xi})\cdot \mathcal{F} g(\boldsymbol{\xi})
+\switch
+    \mathcal{F} (f*g)(\mathbf{\omega})&=\mathcal{F} f(\mathbf{\omega})\cdot \mathcal{F} g(\mathbf{\omega})
+    \end{lralign}
+\end{theorem}
+
+\subsection{多维施瓦兹函数与多维分布}\label{sub:muti_schwartz}
+
+\subsection{格}\label{sub:lattice}
+
+\subsection{汉克尔变换}\label{sub:hankel}
 
 \section{希尔伯特变换}\label{sec:Hilbert}
+
+\subsection{希尔伯特变换}\label{sub:hilbert}
+
+\subsection{希尔伯特变换的应用}\label{sub:use_of_hilbert}
 
 \section{回到有限区间}\label{sec:Finite_Interval}
 
@@ -2930,7 +3229,7 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 系统还具有因果性。
 \end{example}
 \begin{definition}[因果信号]
-    以上例子中出现了满足$h(t)=y_h(t)u(t)$的信号，将这种信号称为\textbf{因果信号}(causal signal)；而如果信号满足$h(t)=y_h(t)u(-t)$，则称之为\textbf{反因果信号}(anti-causal signal)。
+    以上例子中出现了满足$h(t)=y_h(t)u(t)$的信号，将这种信号称为\textbf{因果信号}(cau\text{Sa}l signal)；而如果信号满足$h(t)=y_h(t)u(-t)$，则称之为\textbf{反因果信号}(anti-cau\text{Sa}l signal)。
 \end{definition}
 
 更一般地，由微分方程\[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m e^{(m)}(t)\]
@@ -3447,9 +3746,7 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 \end{remark}
 \begin{example}
 设$f(z)=1/z$，则$f$在$\mathbb{C}\backslash\{0\}$上全纯，但$\mathbb{C}\backslash\{0\}$不是单连通的，它在单位圆$\gamma(t)=e^{it},t\in[0,2\pi]$上积分为\begin{align*}
-    \oint_{\gamma}f(z)\,dz&=\int_0^{2\pi}f(\gamma(t))\gamma'(t)\,dt\\
-    &=\int_0^{2\pi}\frac{1}{e^{it}}ie^{it}\,dt\\
-    &=\int_0^{2\pi}i\,dt=2\pi i\neq 0
+    \oint_{\gamma}f(z)\,dz=\int_0^{2\pi}f(\gamma(t))\gamma'(t)\,dt=\int_0^{2\pi}\frac{1}{e^{it}}ie^{it}\,dt=\int_0^{2\pi}i\,dt=2\pi i\neq 0
 \end{align*}
 \end{example}
 
@@ -3539,10 +3836,10 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 
 我们使用留数定理来计算一个傅里叶变换作为例子。
 \begin{example}
-    计算$f(t)=\frac{1}{a^2+t^2}$的傅里叶变换$\mathcal{F} f(\omega)$。\\
-    解：根据定义，$\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\frac{1}{a^2+t^2}e^{-i\omega t}\,dt$。为了使用留数定理计算该积分，我们将其推广为复变量上的积分，注意在$\mathbb{R}$上$z=\text{Re}\,z=t$：
+    计算$f(t)=\dfrac{1}{a^2+t^2}$的傅里叶变换$\mathcal{F} f(\omega)$。\\
+    解：根据定义，$\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\dfrac{1}{a^2+t^2}e^{-i\omega t}\,dt$。为了使用留数定理计算该积分，我们将其推广为复变量上的积分，注意在$\mathbb{R}$上$z=\text{Re}\,z=t$：
     \[\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\frac{1}{a^2+z^2}e^{-i\omega z}\,dz\]
-    设$f(z)=\frac{e^{-i\omega z}}{a^2+z^2}$，围道为：\begin{align*}
+    设$f(z)=\dfrac{e^{-i\omega z}}{a^2+z^2}$，围道为：\begin{align*}
         &\gamma_1:t\mapsto t,t\in[-R,R]\\
         &\gamma_2:t\mapsto Re^{-it},t\in[0,\pi]
     \end{align*}
@@ -3582,7 +3879,7 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
         g(z)&=\sin(z+y)-\sin z\cos y-\cos z\sin y\\
         h(z)&=\cos(z+y)-\cos z\cos y+\sin z\sin y
     \end{align*}
-    则$f,g,h$均为复变量上的全纯函数，并且在实轴上恒为0，根据唯一延拓定理，$f(z)=g(z)=h(z)=0,\forall z\in\mathbb{C}$，即三角函数的这些性质可以推广到复变量上。
+    则$f,g,h$均为复变量上的全纯函数，并且在实轴上恒为0，根据唯一延拓定理，$f(z)=g(z)=h(z)=0,\forall z\in\mathbb{C}$，即三角函数的这些公式可以推广到复变量上。
 \end{example}
 \begin{example}[双曲函数]
     双曲正弦、双曲余弦、双曲正切函数分别定义为
@@ -3598,22 +3895,28 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
     同理有\begin{align*}
         \sin z=-i\sinh (iz),\cos z=\cosh (iz)
     \end{align*}
-    因此双曲函数和三角函数互为全纯延拓。由唯一延拓定理，双曲函数的性质可以由三角函数的性质推导而来，例如
+    因此双曲函数和三角函数互为全纯延拓。由唯一延拓定理，双曲函数的性质可以由三角函数的性质推导而来，例如恒等式
     \begin{align*}
-        \cosh^2 z-\sinh^2 z&=\cos^2 (iz)+\sin^2 (iz)=1\\
+        \cosh^2 z-\sinh^2 z=\cos^2 (iz)+\sin^2 (iz)=1
+    \end{align*}
+    以及和差公式：
+    \begin{align*}
         \sinh(z+w)&=-i\sin(iz+iw)=-i\sin(iz)\cos(iz)-i\cos(iz)\sin(iz)\\
         &=\sinh z\cosh w+\cosh z\sinh w\\
         \cosh(z+w)&=\cos(iz+iw)=\cos(iz)\cos(iz)-\sin(iz)\sin(iz)\\
         &=\cosh z\cosh w+\sinh z\sinh w
     \end{align*}
-    由此可得\begin{align*}
+    以上两式作比，得到双曲正切的和差公式：
+    \begin{align*}
         \tanh(z+w)=\frac{\tanh z+\tanh w}{1+\tanh z\cdot\tanh w}
     \end{align*}
 \end{example}
 
 \section{拉普拉斯变换}\label{sec:Laplace_Transform}
 
-十八世纪末，法国数学家皮埃尔-西蒙·拉普拉斯(Pierre-Simon Laplace,1749-1827)在研究天体力学问题时，提出了一种积分变换来处理微分方程，这种变换后来被称为\textbf{拉普拉斯变换}(Laplace transform)。拉普拉斯变换在工程学、物理学和控制理论等领域有着广泛的应用，特别是在信号处理和系统分析中。
+十八世纪，欧拉在研究微分方程时，首先使用了积分变换的方法，将微分方程转化为代数方程来求解，随后，拉格朗日和拉普拉斯也使用了类似的方法。其中，拉普拉斯所使用的积分变换为$y_s=\int e^{-sx}\phi(x)\,dx$，与现代的拉普拉斯变换最为相似，但当时并未以拉普拉斯变换命名。十九世纪，Petzval在其著作中首次系统地考察了这一方法，但他的学生Spitzer强烈主张将这一变换命名为拉普拉斯变换，这影响到几位很有影响力的数学家：Boole，Poincaré和Doetsch，他们在著作中均将这种方法称为“拉普拉斯变换”，使得这个名称被逐渐巩固。
+
+%二十世纪初，Heaviside在研究电磁学时提出了一种符号运算的方法，将微分方程中的微分算子$\dfrac{d}{dt}$替换为符号$p$（或$D$），从而将微分方程转化为代数方程来求解。这种方法直观、快捷但缺乏严格的数学基础，随着数学家对拉普拉斯变换的研究不断深入，到1950年，拉普拉斯变换已完全取代Heaviside演算。
 
 鉴于拉普拉斯变换的应用场景中使用角频率明显多于使用频率，我们在本书中采用角频率$\omega$作为拉普拉斯变换的变量；另外，本章默认$u(0)=1$。
 
@@ -4205,19 +4508,19 @@ $$\lim_{t\to\infty}\frac{ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
     另一方面，$\sigma_c\leq\sigma_s$。用反证法。假设$\sigma_c>\sigma_s$，取$b>\sigma_c$，由于$F(s)$在$\text{Re}\ s>\sigma_s$上全纯，可以将它展开为$b$处的泰勒级数：
     \[F(s)=\sum_{n=0}^{\infty}\frac{F^{(n)}(b)}{n!}(s-b)^n,\text{Re}\ s>\sigma_s\]
     并且该级数的收敛半径至少为$b-\sigma_s$，在$D(b,b-\sigma_s)=\{s\in\mathbb{C}||s-b|<b-\sigma_s\}$上，该级数绝对收敛、内闭一致收敛。
-
-    容易验证$f(t)(-t)^n e^{-b t}$在$[0,\infty)$上的积分一致收敛，根据含参变量反常积分积分的求导法则，有
-    \[F^{(n)}(b)=\int_{0}^{\infty}f(t)(-t)^n e^{-b t}\,dt\]
-
-    考虑截断积分
-    \begin{align*}
-        \int_{0}^{R}f(t)e^{-a t}\,dt&=\int_{0}^{R}f(t)e^{-b t}\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}t^n\,dt
-    \end{align*}
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{sigma_c}
         \caption{收敛域示意图}
     \end{figure}
+    容易验证$f(t)(-t)^n e^{-b t}$在$[0,\infty)$上的积分一致收敛，根据含参变量反常积分积分的求导法则，有
+    \[F^{(n)}(b)=\int_{0}^{\infty}f(t)(-t)^n e^{-b t}\,dt\]
+    
+    考虑截断积分
+    \begin{align*}
+        \int_{0}^{R}f(t)e^{-a t}\,dt&=\int_{0}^{R}f(t)e^{-b t}\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}t^n\,dt
+    \end{align*}
+    
     由$\sum_{n=0}^{\infty}\dfrac{(b-a)^n}{n!}t^n\,dt$在$[0,R]$上一致收敛，可交换求和与积分次序，得到
     \begin{align*}
         \int_{0}^{R}f(t)e^{-a t}\,dt&=\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}\int_{0}^{R}f(t)t^n e^{-b t}\,dt
@@ -4227,8 +4530,7 @@ $$\lim_{t\to\infty}\frac{ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
     \begin{align*}
         \lim_{R\to\infty}\int_{0}^{R}f(t)e^{-a t}\,dt&=\lim_{R\to\infty}\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}\int_{0}^{R}f(t)t^n e^{-b t}\,dt\\
         &=\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}\int_{0}^{\infty}f(t)t^n e^{-b t}\,dt\\
-        &=\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}F^{(n)}(b)\\
-        &=F(a)
+        &=\sum_{n=0}^{\infty}\frac{(b-a)^n}{n!}F^{(n)}(b)=F(a)
     \end{align*}
     即$\mathcal{L} f(a)=F(a)$收敛，从而在$\text{Re}\ s=a$上$\mathcal{L} f$也收敛：\begin{align*}
         |\mathcal{L} f(a+i\omega)|&=\left|\int_{0}^{\infty}f(t)e^{-(a+i\omega) t}\,dt\right|\\
@@ -4347,49 +4649,49 @@ $$\lim_{t\to\infty}\frac{ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
     于是$\lim_{t\to\infty}f(t)=a_{-1}=\lim_{s\to 0}sF(s)$。
 \end{proof}
 
-\subsection{在双边拉普拉斯变换中的应用}\label{sub:bilateral_laplace}
-本小节对\ref{sub:introduction_of_laplace}中提到的双边拉普拉斯变换的收敛域进行简单讨论，以便后面与z变换进行比较。双边拉普拉斯变换具有一些与单边拉普拉斯变换不同的性质（尤其是时域微分性质），但这不是本书的重点，读者可以仿照单边拉普拉斯变换自行推导它们。如有需要，读者可以暂时跳过本小节，在阅读\ref{sub:relation_z_laplace}时再回过头来阅读。
+%\subsection{在双边拉普拉斯变换中的应用}\label{sub:bilateral_laplace}
+%本小节对\ref{sub:introduction_of_laplace}中提到的双边拉普拉斯变换的收敛域进行简单讨论，以便后面与z变换进行比较。双边拉普拉斯变换具有一些与单边拉普拉斯变换不同的性质（尤其是时域微分性质），但这不是本书的重点，读者可以仿照单边拉普拉斯变换自行推导它们。如有需要，读者可以暂时跳过本小节，在阅读\ref{sub:relation_z_laplace}时再回过头来阅读。
 
-回忆双边拉普拉斯变换的定义：
-\begin{definition}[双边拉普拉斯变换]
-    设函数$f$局部可积，$\exists a,b\in\mathbb{R},a<b$（我们允许$a=-\infty$和$b=\infty$），使得$f(t)e^{-at}$和$f(t)e^{-bt}$均绝对可积，则对$\text{Re}\ s\in[a,b]$，$f$的双边拉普拉斯变换定义为
-    \[\mathcal{L}f(s)=\int_{-\infty}^{\infty}f(t)e^{-st}\,dt\]
-\end{definition}
+%回忆双边拉普拉斯变换的定义：
+%\begin{definition}[双边拉普拉斯变换]
+%    设函数$f$局部可积，$\exists a,b\in\mathbb{R},a<b$（我们允许$a=-\infty$和$b=\infty$），使得$f(t)e^{-at}$和$f(t)e^{-bt}$均绝对可积，则对$\text{Re}\ s\in[a,b]$，$f$的双边拉普拉斯变换定义为
+%    \[\mathcal{L}f(s)=\int_{-\infty}^{\infty}f(t)e^{-st}\,dt\]
+%\end{definition}
 
-为了确定$a,b$的取值范围，我们可以拆分双边拉普拉斯积分，并仿照单边拉普拉斯变换的收敛域分析方法，分别讨论$t\to\infty$和$t\to-\infty$时$f(t)$的增长速率：
-\[\mathcal{L}f(s)=\int_{-\infty}^{0}f(t)e^{-st}\,dt+\int_{0}^{\infty}f(t)e^{-st}\,dt\]
-\begin{definition}[收敛横坐标]
-    \quad\\
-    \textbf{收敛横坐标}为使得拉普拉斯积分$\mathcal{L}f(s)=\int_{-\infty}^{\infty}f(t)e^{-st}\,dt$最大收敛域的收敛轴实部（横坐标）$\sigma_{c}^-,\sigma_{c}^+$，使得$\mathcal{L}f(s)$恰好在$\text{Re}\ s\in(\sigma_{c}^-,\sigma_{c}^+)$上收敛，而在$\text{Re}\ s<\sigma_{c}^-$和$\text{Re}\ s>\sigma_{c}^+$上发散，即
-    \[\sigma_{c}^-=\sup\{a\in\mathbb{R}|\mathcal{L} _b f(s)\text{在}\text{Re}\ s\in(a,a+\epsilon)\text{上收敛}\}\]
-    \[\sigma_c^+=\inf\{b\in\mathbb{R}|\mathcal{L} _b f(s)\text{在}\text{Re}\ s\in(b-\epsilon,b)\text{上收敛}\}\]
-    这里要求$\text{Re}\ s\in(a,a+\epsilon)$和$\text{Re}\ s\in(b-\epsilon,b)$是为了处理收敛域为带状域的情况。
-\end{definition}
-要使$\int_{0}^{\infty}f(t)e^{-st}\,dt$收敛，自然要求
-\[\text{Re}\ s>\varlimsup_{t\to\infty}\frac{ln|f(t)|}{t}\]
-因此可以看出$\sigma_c^-=\varlimsup_{t\to\infty}\frac{ln|f(t)|}{t}$。对于$\int_{-\infty}^{0}f(t)e^{-st}\,dt$，记
-\[|f(t)|\sim C e^{b t}\iff \lim_{t\to -\infty}\frac{|f(t)|}{C e^{bt}}=1\]
-则有
-\[|f(t)|\sim C e^{b t}\iff ln|f(t)|\sim b t + ln C\iff \frac{|f(t)|}{t}\sim b+\frac{ln C}{t}=b\]
-这时有
-$$\text{Re}\ s=b-\epsilon,\int_{-\infty}^{0}f(t)e^{-st}\,dt\leq\int_{-\infty}^{0}C e^{\epsilon t}\,dt<\infty$$
-因此可以看出$\sigma_c^+=\varliminf_{t\to -\infty}\dfrac{ln|f(t)|}{t}$（可以带入$f(t)=e^{-t\sin t}$验证这里必须取下极限）。
+%为了确定$a,b$的取值范围，我们可以拆分双边拉普拉斯积分，并仿照单边拉普拉斯变换的收敛域分析方法，分别讨论$t\to\infty$和$t\to-\infty$时$f(t)$的增长速率：
+%\[\mathcal{L}f(s)=\int_{-\infty}^{0}f(t)e^{-st}\,dt+\int_{0}^{\infty}f(t)e^{-st}\,dt\]
+%\begin{definition}[收敛横坐标]
+%    \quad\\
+%    \textbf{收敛横坐标}为使得拉普拉斯积分$\mathcal{L}f(s)=\int_{-\infty}^{\infty}f(t)e^{-st}\,dt$最大收敛域的收敛轴实部（横坐标）$\sigma_{c}^-,\sigma_{c}^+$，使得$\mathcal{L}f(s)$恰好在$\text{Re}\ s\in(\sigma_{c}^-,\sigma_{c}^+)$上收敛，而在$\text{Re}\ s<\sigma_{c}^-$和$\text{Re}\ s>\sigma_{c}^+$上发散，即
+%    \[\sigma_{c}^-=\sup\{a\in\mathbb{R}|\mathcal{L} _b f(s)\text{在}\text{Re}\ s\in(a,a+\epsilon)\text{上收敛}\}\]
+%    \[\sigma_c^+=\inf\{b\in\mathbb{R}|\mathcal{L} _b f(s)\text{在}\text{Re}\ s\in(b-\epsilon,b)\text{上收敛}\}\]
+%   这里要求$\text{Re}\ s\in(a,a+\epsilon)$和$\text{Re}\ s\in(b-\epsilon,b)$是为了处理收敛域为带状域的情况。
+%\end{definition}
+%要使$\int_{0}^{\infty}f(t)e^{-st}\,dt$收敛，自然要求
+%\[\text{Re}\ s>\varlimsup_{t\to\infty}\frac{ln|f(t)|}{t}\]
+%因此可以看出$\sigma_c^-=\varlimsup_{t\to\infty}\frac{ln|f(t)|}{t}$。对于$\int_{-\infty}^{0}f(t)e^{-st}\,dt$，记
+%\[|f(t)|\sim C e^{b t}\iff \lim_{t\to -\infty}\frac{|f(t)|}{C e^{bt}}=1\]
+%则有
+%\[|f(t)|\sim C e^{b t}\iff ln|f(t)|\sim b t + ln C\iff \frac{|f(t)|}{t}\sim b+\frac{ln C}{t}=b\]
+%这时有
+%$$\text{Re}\ s=b-\epsilon,\int_{-\infty}^{0}f(t)e^{-st}\,dt\leq\int_{-\infty}^{0}C e^{\epsilon t}\,dt<\infty$$
+%因此可以看出$\sigma_c^+=\varliminf_{t\to -\infty}\dfrac{ln|f(t)|}{t}$（可以带入$f(t)=e^{-t\sin t}$验证这里必须取下极限）。
 
-综上所述，我们得到：\begin{theorem}
-    设函数$f$局部可积，则其双边拉普拉斯变换的收敛横坐标可由以下公式得到：
-    \[\sigma_{c}^-=\varlimsup_{t\to\infty}\frac{ln|f(t)|}{t},\sigma_{c}^+=\varliminf_{t\to -\infty}\frac{ln|f(t)|}{t}\]
-\end{theorem}
+%综上所述，我们得到：\begin{theorem}
+%    设函数$f$局部可积，则其双边拉普拉斯变换的收敛横坐标可由以下公式得到：
+%    \[\sigma_{c}^-=\varlimsup_{t\to\infty}\frac{ln|f(t)|}{t},\sigma_{c}^+=\varliminf_{t\to -\infty}\frac{ln|f(t)|}{t}\]
+%\end{theorem}
 
-与单边拉普拉斯变换一样，我们允许$\sigma_{c}^-,\sigma_{c}^+=\pm\infty$。如果$\sigma_{c}^-=-\infty,\sigma_c^+=\infty$，则$\mathcal{L} _b f(s)$为整函数；如果$\sigma_{c}^-\geq\sigma_c^+$，则$\mathcal{L} _b f(s)$无定义。
+%与单边拉普拉斯变换一样，我们允许$\sigma_{c}^-,\sigma_{c}^+=\pm\infty$。如果$\sigma_{c}^-=-\infty,\sigma_c^+=\infty$，则$\mathcal{L} _b f(s)$为整函数；如果$\sigma_{c}^-\geq\sigma_c^+$，则$\mathcal{L} _b f(s)$无定义。
 
-特别地，我们指出：\begin{itemize}
-    \item 如果$f(t)=0,t<0$，则$\sigma_{c}^-=-\infty$，双边拉普拉斯变换退化为单边拉普拉斯变换；
-    \item 如果$f(t)=0,t>0$，则$\sigma_{c}^+=\infty$；
-    \item 如果$f$紧支，则$\sigma_{c}^-=-\infty,\sigma_c^+=\infty$，双边拉普拉斯变换为整函数。
-    \item 如果$f(t)$在$t\to\pm\infty$时均与$e^{a t}$表现类似，其双边拉普拉斯变换的收敛域为空集。除了前面三条中讨论的情况，典型的具有非空收敛域的例子如$f(t)=e^{-|t|}$，其双边拉普拉斯变换的收敛域为$\text{Re}\ s\in(-1,1)$。
-\end{itemize}
+%特别地，我们指出：\begin{itemize}
+%    \item 如果$f(t)=0,t<0$，则$\sigma_{c}^-=-\infty$，双边拉普拉斯变换退化为单边拉普拉斯变换；
+%    \item 如果$f(t)=0,t>0$，则$\sigma_{c}^+=\infty$；
+%    \item 如果$f$紧支，则$\sigma_{c}^-=-\infty,\sigma_c^+=\infty$，双边拉普拉斯变换为整函数。
+%    \item 如果$f(t)$在$t\to\pm\infty$时均与$e^{a t}$表现类似，其双边拉普拉斯变换的收敛域为空集。除了前面三条中讨论的情况，典型的具有非空收敛域的例子如$f(t)=e^{-|t|}$，其双边拉普拉斯变换的收敛域为$\text{Re}\ s\in(-1,1)$。
+%\end{itemize}
 
-不难发现，双边拉普拉斯变换的收敛性分析与洛朗级数有着诸多相似之处，我们将在\ref{sub:relation_z_laplace}中讨论这一点。
+%不难发现，双边拉普拉斯变换的收敛性分析与洛朗级数有着诸多相似之处，我们将在\ref{sub:relation_z_laplace}中讨论这一点。
 
 \section{系统的复频域分析}\label{sec:Complex_Freq_Analysis}
 
@@ -4431,10 +4733,11 @@ $$\text{Re}\ s=b-\epsilon,\int_{-\infty}^{0}f(t)e^{-st}\,dt\leq\int_{-\infty}^{0
 这里，积分限中的“0-”的含义是：
 \[\mathcal{L} f(s)=\lim_{M\to 0-}\int_{M}^{\infty}f(t)e^{-st}\,dt=\int_{0-}^{\infty}f(t)e^{-st}\,dt\]
 
-在这种定义下，拉普拉斯变换的各种运算性质仍成立，但时域微分性质略有差别：
-\begin{proposition}[拉普拉斯变换的时域微分性质]
-    设$f\in C^1[0,\infty),f'$局部可积，则
+在这种定义下，拉普拉斯变换的各种运算性质仍成立，但两个性质略有差别：
+\begin{proposition}[改进的拉普拉斯变换的性质]
+    时域微分性质：设$f\in C^1[0,\infty),f'$局部可积，则
     \[\mathcal{L} [f'](s)=s\mathcal{L} f(s)-f(0-)\]
+    初值定理：$$f(0-)=\lim_{\text{Re}\ s\to\infty}sF(s)$$
 \end{proposition}
 \begin{proof}
     \begin{align*}
@@ -4442,12 +4745,11 @@ $$\text{Re}\ s=b-\epsilon,\int_{-\infty}^{0}f(t)e^{-st}\,dt\leq\int_{-\infty}^{0
         &=\evalat{f(t)e^{-st}}{0-}{\infty}+\int_{0-}^{\infty}f(t)se^{-st}\,dt\\
         &=s\mathcal{L} f(s)-f(0-)
     \end{align*}
+    对于初值定理，只要在\ref{sub:initial_and_final_value}给出的证明中使用新的时域微分性质即可。
 \end{proof}
 
-初值定理也将变为$f(0-)=\lim_{\text{Re}\ s\to\infty}sF(s)$。
-
 形式上，$u(0-)=\delta(0-)=0$，自然得到$$\mathcal{L} u(s)=\frac{1}{s}\implies\mathcal{L} \delta(s)=s\mathcal{L} u(s)-u(0-)=\mathds{1}$$
-$\delta$的各阶导数同理。这样，分布理论处理的问题仅仅在于$\delta_a(a<0)$，但我们很少用到它们。
+$\delta$的各阶导数同理。这样，分布理论处理的问题仅仅在于$\delta_a(a<0)$，但我们很少用到这个分布。
 
 可以看到，这样的定义方式帮助我们避开了$u(t)$跳变的问题和$\delta(0)=\infty$的问题，同时积分下限为“0-”排除了$f$在$(-\infty,0)$上的行为对拉普拉斯变换的影响，仅仅是拉普拉斯变换的改进，而没有对任何性质产生本质影响。另外，这样的定义方式有助于我们讨论微分方程描述的系统的起始状态，下一小节就来讨论这个问题。
 
@@ -4684,7 +4986,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
         0 & 0 & H_3 & 0 & 0 & 0 \\
         0 & 0 & 0 & H_4 & 0 & 0
     \end{bmatrix}\]
-    在信号流图的语境下，源点对应的列和阱点对应的行均为0。有冗余的行和列，不是我们希望看到的。
+    在信号流图的语境下，源点对应的行和阱点对应的列均为0。有冗余的行和列，不是我们希望看到的。
 
     事实上，我们仅仅需要中间节点对应的邻接矩阵。由于响应$Y_1,Y_2$直接取自中间节点，只需要求解$M_1,M_2$，就可获取系统的全部信息。将信号流图表示为一个线性方程组：
     \[\begin{bmatrix}
@@ -4705,7 +5007,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
     其中$$A=\begin{bmatrix}
         L_1 & G_5\\
         G_6 & 0
-    \end{bmatrix}\text{为邻接矩阵},\mathbf{M}=\begin{bmatrix}
+    \end{bmatrix}\text{为中间节点的邻接矩阵},\mathbf{M}=\begin{bmatrix}
         M_1 \\
         M_2
     \end{bmatrix},\mathbf{X}=\begin{bmatrix}
@@ -4726,7 +5028,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
         1 -L_1 & -G_5\\
         -G_6 & 1
     \end{bmatrix}\]
-    可逆，就可以求解出$M_1,M_2$，我们将这个矩阵称为\textbf{系统矩阵}(system matrix)，而将$A$称为\textbf{增益矩阵}，它是信号流图的\textbf{中间节点}对应的邻接矩阵。系统矩阵的行列式称为\textbf{特征行列式}，记为$\Delta$。在本例中，有\begin{align*}
+    可逆，就可以求解出$M_1,M_2$，我们将这个矩阵称为\textbf{系统矩阵}(system matrix)，而将$A$称为\textbf{增益矩阵}。系统矩阵的行列式称为\textbf{特征行列式}，记为$\Delta$。在本例中，有\begin{align*}
         \Delta&=\begin{vmatrix}
         1 -L_1 & -G_5 \\
         -G_6 & 1
@@ -4757,11 +5059,11 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 在系统矩阵$S=I-A$可逆时，有
 \[\mathbf{M}=(I-A)^{-1}\mathbf{X}=S^{-1}\mathbf{X}\]
 因此中间节点$M_i$可由以下公式计算：\[M_i=\frac{S^*_{1i}}{\Delta} X\]
-其中$\Delta=|S|$为特征行列式，$S^*_{1i}$为系统矩阵$S$的去掉第1行、第i列所得的余子式。输出节点的响应是中间节点线性组合，以$M_n$为输出为例，我们可以写出\textbf{梅森增益公式}(Mason gain formula)：
+其中$\Delta=|S|$为特征行列式，$S^*_{1i}$为系统矩阵$S$的去掉第1行、第i列所得的代数余子式。输出节点的响应是中间节点线性组合。以$M_n$为输出为例，我们可以写出\textbf{梅森增益公式}(Mason gain formula)：
 \begin{theorem}[梅森增益公式]
     设系统有$n$个中间节点$M_1,M_2,\cdots,M_n$，激励$X$接入节点$M_1$，响应$Y$取自节点$M_n$，则
     \[H=\frac{Y}{X}=(S^{-1})_{1n}=\frac{S^*_{n1}}{\Delta}\]
-    其中$\Delta=|S|$为特征行列式，$S^*_{n1}$为系统矩阵$S$的去掉第n行、第1列所得的代数余子式。
+    其中$(S^{-1})_{1n}$为系统矩阵$S$的逆矩阵的第1行第$n$列元素，$\Delta=|S|$为特征行列式，$S^*_{n1}$为系统矩阵$S$的去掉第$n$行、第1列所得的代数余子式。
 \end{theorem}
 
 根据行列式的图论展开的几何意义，梅森增益公式又可以写成如下形式：
@@ -4913,18 +5215,20 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
     \[H=\frac{g_1\Delta_1+g_2\Delta_2}{\Delta}=\frac{H_{13}+H_{12}H_{23}}{1-G_{21}H_{12}-G_{31}H_{13}-G_{32}H_{23}-G_{21}G_{32}H_{13}-G_{31}H_{23}H_{12}}\]
 \end{example}
 
-\chapter{离散时间变换与离散系统分析}
+\chapter{离散时间变换}
 
 \section{z变换}\label{sec:z_Transform}
 
 \subsection{z变换的引出}\label{sub:inteoduction_of_z}
-中学数学中处理递推数列的一种经典方法是使用生成函数，将数列转化为形式幂级数，从而利用级数的性质来分析数列。z变换可以看作生成函数的推广，它将数列推广为离散时间信号,将形式幂级数推广为洛朗级数，从而可以利用复变函数的理论来分析离散时间信号与离散系统。
+中学数学中处理递推数列的一种经典方法是使用生成函数，将数列转化为形式幂级数，从而利用级数的性质来分析数列。z变换可以看作生成函数的推广，它将数列推广为离散时间信号,将形式幂级数推广为洛朗级数（我们将在\ref{sub:meromorphic_function}中详细讨论这个洛朗级数的收敛域），从而可以利用复变函数的理论来分析离散时间信号与离散系统。
 \begin{definition}[z变换]
-    离散时间信号$x[n]$的z变换定义为
+    将离散时间信号$x[n]$的z变换记为$X(z)$或$\mathcal{Z} x(z)$，它的定义为
     \[X(z)=\mathcal{Z} x[n]=\sum_{n=-\infty}^{\infty}x[n]z^{-n},z\in\mathbb{C}\]
     我们记$x[n]\overset{\mathcal{Z} }{\longleftrightarrow}X(z)$。
 \end{definition}
+作为一个洛朗级数，z变换所得函数$X(z)$的收敛域应为一个圆环$\mathcal{A}_0(r,R)$，在圆环内级数是绝对收敛、内闭一致收敛的。根据圆环上全纯函数的洛朗级数的存在性和唯一性，洛朗级数与离散信号一一对应，因此可以使用上面的记号$x[n]\overset{\mathcal{Z} }{\longleftrightarrow}X(z)$。
 
+下面给出一些常用离散信号的z变换作为例子：
 \begin{example}[单位脉冲序列的z变换]
     设$x[n]=\delta[n-k],k\in\mathbb{Z}$，则
     \[X(z)=\sum_{n=-\infty}^{\infty}\delta[n-k]z^{-n}=z^{-k},z\in\mathbb{C}\backslash\{0\}\]
@@ -5083,8 +5387,6 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
     其z变换为$Y(z)=1$，收敛域为$\mathbb{C}$。
 \end{example}
 
-\subsection{z变换与拉普拉斯变换的联系}\label{sub:relation_z_laplace}
-
 \section{亚纯函数与逆z变换}\label{sec:Inverse_z_Transform}
 
 \subsection{亚纯函数}\label{sub:meromorphic_function}
@@ -5152,7 +5454,7 @@ $f(z)$在$\infty$处的性质是通过$f(1/z)$在$z=0$处的性质来研究的�
     \end{itemize}
 \end{definition}
 
-需要注意，无穷远点的留数并不是$c_{-1}$，留数定义的根据在于围道积分后非0。取充分大的\textbf{顺时针}圆周$C^-_R:t\mapsto Re^{-it},t\in[0,2\pi]$为围道，使得$C^-_R$外只有$\infty$一个极点（可行性由奇点孤立保证），则$\text{Ind}_{C^-_R}(\infty)=1$\footnote{学过球极投影的读者可以更好地理解这一点：在黎曼球面上，如果两点位于位于围道两侧（例如这里的无穷远点与有限极点），计算环绕数时，曲线的正向时相反的。}，根据留数定理，有
+需要注意，无穷远点的留数并不是$c_{-1}$，留数定义的根据在于围道积分后非0。取充分大的\textbf{顺时针}圆周$C^-_R:t\mapsto Re^{-it},t\in[0,2\pi]$为围道，使得$C^-_R$外只有$\infty$一个极点（可行性由奇点孤立保证），则$\text{Ind}_{C^-_R}(\infty)=1$\footnote{学过球极投影的读者可以更好地理解这一点：在黎曼球面上，如果两点位于位于围道两侧（例如这里的无穷远点与有限极点），计算环绕数时，曲线的正向是相反的。}，根据留数定理，有
 $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 尽管现在要把$f$展开为$\infty$处的洛朗级数，但在做积分时我们仅仅切换了围道的定向，保留下来的是$f$在$\infty$处的展开式中$1/z$的系数的相反数，即$-c_{1}$。
 
@@ -5293,54 +5595,58 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
     \[x[n]y[n]\xleftrightarrow{\mathcal{Z}} \frac{1}{2\pi i}\oint_{C}X(\nu)Y\left(\frac{z}{\nu}\right)\nu^{-1}\,d\nu\]
 \end{proof}
 
-\subsection{长除法}\label{sub:long_division}
-本小节来介绍另一种求逆z变换的方法——\textbf{长除法}。中学中我们仅使用它来做因式分解。它适用于$X(z)$为有理函数，且只需要求有限项的情况，我们通过一个例子来说明它的使用方法：
-\begin{example}
-    设右边信号$x[n]$的z变换为
-    \[X(z)=\frac{z}{z^2-2z+1},\text{ROC}:|z|>1\]
-    求$x[n]$的前五项$x[0],x[1], x[2], x[3], x[4]$。\\
-    解：将$X(z)$写成长除法的形式：
-    \[
-    \renewcommand\arraystretch{1.2}
-    \setlength{\arraycolsep}{1pt}
-    \begin{array}{rc rrrrrrrrr}
-    & & & & z^{-1} & +2z^{-2} & +3z^{-3} & +4z^{-4} & + \cdots \\
-    \cline{3-10}
-    z^2 - 2z + 1 & \big) & z & & & & & & & \\
-    & & z & -2 & +z^{-1} & & & & & \\
-    \cline{3-5}
-    & & & 2 & -z^{-1} & & & & & \\
-    & & & 2 & -4z^{-1} & +2z^{-2} & & & & \\
-    \cline{4-6}
-    & & & & 3z^{-1} & -2z^{-2} & & & & \\
-    & & & & 3z^{-1} & -6z^{-2} & +3z^{-3} & & & \\
-    \cline{5-7}
-    & & & & & 4z^{-2} & -3z^{-3} & & & \\
-    & & & & & 4z^{-2} & -8z^{-3} & +4z^{-4} & & \\
-    \cline{6-8}
-    & & & & & & 5z^{-3} & -4z^{-4}
-    \end{array}
-    \]
-    对照z变换的定义$X(z)=\sum_{n=-\infty}^{\infty}x[n]z^{-n}$，可得
-    \[x[0]=0,x[1]=1,x[2]=2,x[3]=3,x[4]=4,\cdots\]
-    可以猜想，$x[n]=n u[n]$。
-\end{example}
-%凯莱变换，z变换与拉普拉斯变换的关系（？）
-\section{离散系统的z域分析}\label{sec:Discrete_System_z_Analysis}
-
-%因果性：收敛域包含$\infty$；稳定性：收敛域包含单位圆；对稳定+因果，收敛域包含$|z|\geq 1$
+%\subsection{长除法}\label{sub:long_division}
+%本小节来介绍另一种求逆z变换的方法——\textbf{长除法}。中学中我们仅使用它来做因式分解。它适用于$X(z)$为有理函数，且只需要求有限项的情况，我们通过一个例子来说明它的使用方法：
+%\begin{example}
+%    设右边信号$x[n]$的z变换为
+%    \[X(z)=\frac{z}{z^2-2z+1},\text{ROC}:|z|>1\]
+%    求$x[n]$的前五项$x[0],x[1], x[2], x[3], x[4]$。\\
+%    解：将$X(z)$写成长除法的形式：
+%    \[
+%    \renewcommand\arraystretch{1.2}
+%    \setlength{\arraycolsep}{1pt}
+%    \begin{array}{rc rrrrrrrrr}
+%    & & & & z^{-1} & +2z^{-2} & +3z^{-3} & +4z^{-4} & + \cdots \\
+%    \cline{3-10}
+%    z^2 - 2z + 1 & \big) & z & & & & & & & \\
+%    & & z & -2 & +z^{-1} & & & & & \\
+%    \cline{3-5}
+%    & & & 2 & -z^{-1} & & & & & \\
+%    & & & 2 & -4z^{-1} & +2z^{-2} & & & & \\
+%    \cline{4-6}
+%    & & & & 3z^{-1} & -2z^{-2} & & & & \\
+%    & & & & 3z^{-1} & -6z^{-2} & +3z^{-3} & & & \\
+%    \cline{5-7}
+%    & & & & & 4z^{-2} & -3z^{-3} & & & \\
+%    & & & & & 4z^{-2} & -8z^{-3} & +4z^{-4} & & \\
+%    \cline{6-8}
+%    & & & & & & 5z^{-3} & -4z^{-4}
+%    \end{array}
+%    \]
+%    对照z变换的定义$X(z)=\sum_{n=-\infty}^{\infty}x[n]z^{-n}$，可得
+%    \[x[0]=0,x[1]=1,x[2]=2,x[3]=3,x[4]=4,\cdots\]
+%    可以猜想，$x[n]=n u[n]$。
+%\end{example}
 
 \section{离散时间傅里叶变换}\label{sec:DTFT}
 
-\section{离散系统的频率响应特性}\label{sec:Discrete_System_Freq_Response}
-
-\chapter{离散傅里叶变换}
-
 \section{离散傅里叶变换}\label{sec:DFT}
 
-\section{离散余弦变换}\label{sec:DCT}
+\chapter{离散系统的变换域分析}
 
-\section{快速傅里叶变换}\label{sec:FFT}
+\section{离散系统的频率响应特性}\label{sec:Discrete_System_Freq_Response}
+
+\section{离散系统的z域分析}\label{sec:Discrete_System_z_Analysis}
+
+%因果性：收敛域包含$\infty$；稳定性：收敛域包含单位圆；对稳定+因果，收敛域包含$|z|\geq 1$
+%差分方程
+
+%\chapter{离散时间变换的算法}
+%\section{离散余弦变换}\label{sec:DCT}
+
+%\section{快速傅里叶变换}\label{sec:FFT}
+
+%\section{压缩感知初步}\label{sec:Compress}
 
 %\chapter{其他积分变换}
 
@@ -5560,7 +5866,7 @@ $\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\i
 \subsection{分布的逼近}\label{sub:approach}
 在\ref{sub:shannon}中，我们对带限函数提出了公式：如果$\text{supp}\ \mathcal{F} f\subset[-\frac{T}{2},\frac{T}{2}]$，则有
 \begin{equation*}
-    f(t)=Tsinc(Tt)*f(t)
+    f(t)=T\text{sinc}(Tt)*f(t)
 \end{equation*}
 
 如果希望对更一般的函数$f(x)$，找到一个函数$g(x)$，使得$f(x)=g*f(x)$，自然会想到狄拉克$\delta$分布，然而它是一个奇异分布，我们只能从形式上定义一个$\delta$函数。事实上，不存在$g,f*g=f,\forall f$，但很容易构造一个函数列$g_n$，使得$f*g_n\to f$\cite{folland}。回忆我们在\ref{sub:intuition_of_convolution}中提到的“平均化”卷积，设$g_a(x)=\frac{1}{2a}\chi_{[-a,a]}$，则$g_a*f$是$f$在区间$[x-a,x+a]$上的平均值，即$\frac{1}{2a}f*g_a(t)=\int_{x-a}^{x+a}f(x)\,dx$，若$f\in C(\mathbb{R})$，则$g_a*f\to f,a\to 0$。
@@ -5778,7 +6084,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     =&\int_{-\infty}^{\infty}f(y)\frac{\sin(R (x-y))}{\pi (x-y)}\,dy\\
     =&f*\left(\frac{\sin(R x)}{\pi x}\right)
 \end{lralign}
-但是，由于$sinc\notin L^1(\mathbb{R})$，无法保证$\lim_{R\to \infty} f(x)*sinc(R x)=f(x)$，因此需要条件$f\in L^1(\mathbb{R})\cup PS(\mathbb{R})$，做更细致的估计：
+但是，由于$\text{sinc}\notin L^1(\mathbb{R})$，无法保证$\lim_{R\to \infty} f(x)*\text{sinc}(R x)=f(x)$，因此需要条件$f\in L^1(\mathbb{R})\cup PS(\mathbb{R})$，做更细致的估计：
 \lr{
     &\int_{-R}^{R}e^{2\pi i\xi x}\mathcal{F} f(\xi)\,d\xi-\frac{f(x+)+f(x-)}{2}\\
     =&\int_{-\infty}^{\infty}f(y)\frac{\sin(2\pi R (x-y))}{\pi (x-y)}\,dy-\frac{f(x+)+f(x-)}{2}\\
@@ -6128,11 +6434,11 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 \begin{itemize}
     \item 矩形函数及采样函数：
     \lr{
-        &\chi_{[-T/2,T/2]}(t)\overset{\mathcal{F} }{\longleftrightarrow}Tsinc(T\xi)\\
-        &sinc(Tt)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{T}\chi_{[-T/2,T/2]}(\xi)
+        &\chi_{[-T/2,T/2]}(t)\overset{\mathcal{F} }{\longleftrightarrow}T\text{sinc}(T\xi)\\
+        &\text{sinc}(Tt)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{T}\chi_{[-T/2,T/2]}(\xi)
     }{
-        &Sa(Tt)\overset{\mathcal{F} }{\longleftrightarrow} \frac{\pi}{T}\chi_{[-T,T]}(\omega)\\
-        &Sa(Tt)\overset{\mathcal{F} }{\longleftrightarrow} \frac{\pi}{T}\chi_{[-T,T]}(\omega)
+        &\text{Sa}(Tt)\overset{\mathcal{F} }{\longleftrightarrow} \frac{\pi}{T}\chi_{[-T,T]}(\omega)\\
+        &\text{Sa}(Tt)\overset{\mathcal{F} }{\longleftrightarrow} \frac{\pi}{T}\chi_{[-T,T]}(\omega)
     }
     \item 高斯函数 $G(t)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}$
     \lr{
