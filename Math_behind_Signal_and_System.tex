@@ -832,14 +832,52 @@ $3\implies 1$：$(f,\phi_n)=0\implies\|f\|_2=0\implies f\sim 0$.
 
 傅里叶变换没有最好的符号，在不引起歧义时采用最简洁和便于理解的即可。注意在傅里叶变换的理论中，要求$f\in L^1(\mathbb{R})$而不是$L^2(\mathbb{R})$，$\mathbb{R}$是无穷区间，$L^1(\mathbb{R})$与$L^2(\mathbb{R})$之间不存在包含关系。
 
-可以验证，$f\in L^1(\mathbb{R})$时，它的傅里叶变换存在并且是连续的：\begin{align*}
-    |\mathcal{F} f(\xi)|                      & =\left|\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt\right|                       \\
-                                              & \leq\int_{-\infty}^{\infty}|f(t)||e^{-2\pi i\xi t}|\,dt\\
-                                              &=\int_{-\infty}^{\infty}|f(t)|\,dt<\infty                      \\
-    |\mathcal{F} f(\xi+h)-\mathcal{F} f(\xi)| & =\left|\int_{-\infty}^{\infty}f(t)(e^{-2\pi i(\xi+h)t}-e^{-2\pi i\xi t})\,dt\right| \\
-                                              & \leq\int_{-\infty}^{\infty}|f(t)||e^{-2\pi iht}-1|\,dt\to 0(h\to 0)
-\end{align*}
-另外，$\mathcal{F} f(x)\to 0(x\to\infty)$，这个结果称为\textbf{黎曼-勒贝格引理} (Riemann-Lebesgue Lemma)，将在\ref{sub:riemman_lebesgue_lemma}给出证明。
+我们通过以下两个命题来说明$L^1(\mathbb{R})$的必要性。
+
+\begin{proposition}
+    $f\in L^1(\mathbb{R})$时，它的傅里叶变换是有界的、一致连续的。
+\end{proposition}
+\begin{proof}
+    有界性：由定义，有
+\begin{lralign}
+    |\mathcal{F} f(\xi)|&=\left|\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt\right|\\
+    &\leq\int_{-\infty}^{\infty}|f(t)||e^{-2\pi i\xi t}|\,dt\\
+    &=\int_{-\infty}^{\infty}|f(t)|\,dt=\|f\|_1<\infty
+    \switch
+    |\mathcal{F} f(\omega)|&=\left|\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt\right|\\
+    &\leq\int_{-\infty}^{\infty}|f(t)||e^{-i\omega t}|\,dt\\
+    &=\int_{-\infty}^{\infty}|f(t)|\,dt=\|f\|_1<\infty
+\end{lralign}
+一致连续性：设$\xi,\eta,\omega,\nu\in\mathbb{R}$，则
+\begin{lralign}
+    &|\mathcal{F} f(\xi)-\mathcal{F} f(\eta)|\\
+    =&\left|\int_{-\infty}^{\infty}f(t)(e^{-2\pi i\xi t}-e^{-2\pi i\eta t})\,dt\right|\\
+    \leq&\int_{-\infty}^{\infty}|f(t)||e^{-2\pi i\xi t}-e^{-2\pi i\eta t}|\,dt
+    \switch
+    &|\mathcal{F} f(\omega)-\mathcal{F} f(\nu)|\\
+    =&\left|\int_{-\infty}^{\infty}f(t)(e^{-i\omega t}-e^{-i\nu t})\,dt\right|\\
+    \leq&\int_{-\infty}^{\infty}|f(t)||e^{-i\omega t}-e^{-i\nu t}|\,dt
+\end{lralign}
+由于$e^{-2\pi i\xi t}$与$e^{-i\omega t}$在t上均为一致连续函数，$\forall\epsilon>0,\exists\delta>0$，使得
+\begin{lralign}
+    &|\xi-\eta|<\delta\\
+    \implies &|e^{-2\pi i\xi t}-e^{-2\pi i\eta t}|<\frac{\epsilon}{\|f\|_1},\forall t\in\mathbb{R}\\
+    \implies &|\mathcal{F} f(\xi)-\mathcal{F} f(\eta)|<\epsilon
+\switch
+    &|\omega-\nu|<\delta\\
+    \implies &|e^{-i\omega t}-e^{-i\nu t}|<\frac{\epsilon}{\|f\|_1},\forall t\in\mathbb{R}\\
+    \implies &|\mathcal{F} f(\omega)-\mathcal{F} f(\nu)|<\epsilon
+\end{lralign}
+\end{proof}
+\begin{claim}[黎曼-勒贝格引理]
+    若$f\in L^1(\mathbb{R})$，则其傅里叶变换满足
+    \lr{
+        \lim_{|\xi|\to\infty}\mathcal{F} f(\xi)=0
+    }{
+        \lim_{|\omega|\to\infty}\mathcal{F} f(\omega)=0
+    }
+\end{claim}
+它的证明比较复杂，将在\ref{sub:riemman_lebesgue_lemma}中给出。
 
 下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。我们来看上一节中\ref{sub:tri_exp_series}的例2.2.1，为了体现双边频谱与采样函数的相似性，我们取了一个较为特殊的周期矩形脉冲信号，它的基波角频率应为图中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作用是“除以$\frac{1}{T}$”，$\frac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\frac{n}{T}=n\xi$处的小矩形面积，$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频率$\omega$为横坐标，$c_n$是$\frac{2\pi n}{T}=n\omega$处的小矩形面积，$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为频谱密度函数。
 
@@ -874,7 +912,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
     \[f=\mathcal{F} \mathcal{F} ^{-1}f=\mathcal{F} ^{-1}\mathcal{F} f\]
 \end{claim}
 \begin{remark}
-    简洁起见，这里给出的是$f(t)$连续时的结果，更一般的结果将在\ref{sub:fourier_inversion}中给出，而不会导致循环论证。类似傅里叶级数，我们实际上也应该要求$f\in PC$，傅里叶逆变换收敛到左右极限的平均值，但更多时候我们不关心不连续点的值。
+    一般的傅里叶反演公式将在\ref{sub:fourier_inversion}中给出，而不会导致循环论证。类似傅里叶级数，我们实际上也应该要求$f\in PC$，傅里叶逆变换收敛到左右极限的平均值，但更多时候我们不关心不连续点的值。
 \end{remark}
 
 \subsection{傅里叶变换的运算性质}\label{sub:fourier_operation_properties}
@@ -974,20 +1012,25 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
 }
 \noindent 2.对称性：根据对偶性立即得到。\\
 3.线性性：得自积分的线性性。\\
-4.平移定理
+4.平移定理\\
+\ding{172}时移性质
 \begin{lralign}
 \mathcal{F} [f(t-b)](\xi)&=\int_{-\infty}^{\infty}f(t-b)e^{-2\pi i \xi t}\,dt\\
 &=\int_{-\infty}^{\infty}f(t)e^{-2\pi i \xi (t+b)}\,dt\\
 &=e^{-2\pi i \xi b}\int_{-\infty}^{\infty}f(t)e^{-2\pi i \xi t}\,dt\\
-&=e^{-2\pi i \xi b}\mathcal{F} f(\xi)\\
-\mathcal{F} f(\xi-b)&=\int_{-\infty}^{\infty}f(t)e^{-2\pi i(\xi-b)t}\,dt\\
-&=\int_{-\infty}^{\infty}\left(f(t)e^{2\pi ibt}\right)e^{-2\pi i\xi t}\,dt\\
-&=\mathcal{F} \left[f(t)e^{2\pi ibt}\right](\xi)
+&=e^{-2\pi i \xi b}\mathcal{F} f(\xi)
 \switch
 \mathcal{F} [f(t-b)](\omega)&=\int_{-\infty}^{\infty}f(t-b)e^{-i \omega t}\,dt\\
 &=\int_{-\infty}^{\infty}f(t)e^{-i \omega (t+b)}\,dt\\
 &=e^{-i \omega b}\int_{-\infty}^{\infty}f(t)e^{-i \omega t}\,dt\\
-&=e^{-i \omega b}\mathcal{F} f(\omega)\\
+&=e^{-i \omega b}\mathcal{F} f(\omega)
+\end{lralign}
+\ding{173}频移性质
+\begin{lralign}
+    \mathcal{F} f(\xi-b)&=\int_{-\infty}^{\infty}f(t)e^{-2\pi i(\xi-b)t}\,dt\\
+&=\int_{-\infty}^{\infty}\left(f(t)e^{2\pi ibt}\right)e^{-2\pi i\xi t}\,dt\\
+&=\mathcal{F} \left[f(t)e^{2\pi ibt}\right](\xi)
+\switch
 \mathcal{F} f(\omega-b)&=\int_{-\infty}^{\infty}f(t)e^{-i(\omega-b)t}\,dt\\
 &=\int_{-\infty}^{\infty}\left(f(t)e^{ibt}\right)e^{-i\omega t}\,dt\\
 &=\mathcal{F} \left[f(t)e^{ibt}\right](\omega)
@@ -1030,13 +1073,40 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
 \end{lralign}
 也可以由第一个微分性质取傅里叶逆变换，再令$f'=\mathcal{F} g$证明。
 \end{proof}
-%$\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty},\evalat{e^{-i\omega t}f(t)}{-\infty}{\infty}=0$
-%是因为$f\in L^1(\mathbb{R})$要求反常积分$\int_{\mathbb{R}}|f(t)|\,dt<\infty$,其必要条件为$f(t)\to 0,t\to\infty$，而复指数函数部分模值恒为1。对于后一等式中将求导与积分交换使用了\textbf{莱布尼兹积分法则}，也即含参变量积分的求导，通常需要条件（以角频率形式为例）\begin{circlist}
+$\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty},\evalat{e^{-i\omega t}f(t)}{-\infty}{\infty}=0$是因为$f\in L^1(\mathbb{R})$要求反常积分$\int_{\mathbb{R}}|f(t)|\,dt<\infty$，其必要条件为$f(t)\to 0,t\to\infty$，而复指数函数部分模值恒为1。%对于后一等式中将求导与积分交换使用了\textbf{莱布尼兹积分法则}，也即含参变量积分的求导，通常需要条件（以角频率形式为例）\begin{circlist}
 %    \item $\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt$对每个$\omega$可积
 %    \item $\partial f(t)e^{-i\omega t}/\partial \omega=-itf(t)e^{-i\omega t}$存在
 %    \item 存在可积函数$g(t)$使得$\left|-itf(t)e^{-i\omega t}\right|\leq g(t)$
 %\end{circlist}
 %最后一条成立是因为定理假设$f(t),tf(t)\in L^1(\mathbb(R)),g(t)=tf(t)$，否则无法做傅里叶变换。
+
+下面，我们给出\textbf{帕塞瓦尔恒等式}(Parseval's identity)/\textbf{普朗歇尔定理}(Plancherel theorem)。帕塞瓦尔在18世纪末提出了它的三角级数形式，但没有给出证明，如果将傅里叶变换视作傅里叶级数的推广，那么“能量守恒”也自然地推广到傅里叶变换。它于1910年普朗歇尔的博士论文中被严格证明，进一步，傅里叶变换是$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上的等距变换，保持$L^2$范数不变。
+\begin{theorem}[帕塞瓦尔恒等式/普朗歇尔定理]
+    设$f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则
+    \lr{
+    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
+}{
+    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
+}
+\end{theorem}
+\begin{proof}
+设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则\begin{lralign}
+&\quad\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}\,d\xi\\
+&=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
+&=\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)e^{-2\pi i\xi x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
+&=\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\xi)e^{-2\pi i\xi x}\,d\xi\\
+&=\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
+&=\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
+\switch
+&\quad\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\overline{\mathcal{F} g(\omega)}\,d\omega\\
+&=2\pi\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
+&=2\pi\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
+&=2\pi\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\omega)e^{-i\omega x}\,d\omega\\
+&=2\pi\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
+&=2\pi\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
+\end{lralign}
+取$g=f$即证。注意我们并不要求$g$是实信号，$\overline{\mathcal{F} g}\neq\mathcal{F} ^{-1}g$.
+\end{proof}
 
 \subsection{常用信号的傅里叶变换}\label{sub:fourier_of_signal}
 
@@ -1125,29 +1195,29 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
 \end{corollary}
 
 \begin{example}[高斯函数]
- $G(t)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}$，求它的傅里叶变换的方法较为特殊：
+我们来求$G(t)=e^{-\pi t^2}$的傅里叶变换，其他高斯函数的傅里叶变换可以用同样的方法求得，或者使用伸缩定理得到。
 \begin{lralign}
-\mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}e^{-2\pi i\xi t}\,dt\\
-\frac{d}{d\xi}\mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}(-2\pi it)e^{-2\pi i\xi t}\,dt\\
-&=2\pi i\sigma^2\int_{-\infty}^{\infty}e^{-2\pi i\xi t}\,d\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}\\
-&=-4\pi^2\sigma^2\xi\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}e^{-2\pi i\xi t}\,dt\\
-&=-4\pi^2\sigma^2\xi\mathcal{F} G
+\mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}e^{-\pi t^2}e^{-2\pi i\xi t}\,dt\\
+\frac{d}{d\xi}\mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}e^{-\pi t^2}(-2\pi it)e^{-2\pi i\xi t}\,dt\\
+&=i\int_{-\infty}^{\infty}e^{-2\pi i\xi t}\,de^{-\pi t^2}\\
+&=-i\int_{-\infty}^{\infty}e^{-\pi t^2}(-2\pi i\xi)e^{-2\pi i\xi t}\,dt\\
+&=-2\pi \xi\mathcal{F} G
 \switch
-\mathcal{F} G(\omega)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}e^{-i\omega t}\,dt\\
-\frac{d}{d\xi}\mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}(-it)e^{-i\omega t}\,dt\\
-&=i\sigma^2\int_{-\infty}^{\infty}e^{-i\omega t}\,d\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}\\
-&=-\sigma^2\omega\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}e^{-i\omega t}\,dt\\
-&=-\sigma^2\omega\mathcal{F} G
+\mathcal{F} G(\omega)&=\int_{-\infty}^{\infty}e^{-\pi t^2}e^{-i\omega t}\,dt\\
+\frac{d}{d\omega}\mathcal{F} G(\omega)&=\int_{-\infty}^{\infty}e^{-\pi t^2}(-it)e^{-i\omega t}\,dt\\
+&=\frac{i}{2\pi}\int_{-\infty}^{\infty}e^{-i\omega t}\,de^{-\pi t^2}\\
+&=-\frac{i}{2\pi}\int_{-\infty}^{\infty}e^{-\pi t^2}(-i\omega)e^{-i\omega t}\,dt\\
+&=-\frac{\omega}{2\pi}\mathcal{F} G
 \end{lralign}
 这是一个可分离变量的微分方程，
 \lr{
-\mathcal{F} G(\xi)&=\mathcal{F} G(0)e^{-2\pi^2\sigma^2\xi^2}\\
-\mathcal{F} G(0)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}\,dt=1\\
-\mathcal{F} G(\xi)&=e^{-2\pi^2\sigma^2\xi^2}
+\mathcal{F} G(\xi)&=\mathcal{F} G(0)e^{-\pi\xi^2}\\
+\mathcal{F} G(0)&=\int_{-\infty}^{\infty}e^{-\pi t^2}\,dt=1\\
+\mathcal{F} G(\xi)&=e^{-\pi\xi^2}
 }{
-\mathcal{F} G(\omega)&=\mathcal{F} G(0)e^{-\frac{\sigma^2\omega^2}{2}}\\
-\mathcal{F} G(0)&=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}\,dt=1\\
-\mathcal{F} G(\xi)&=e^{-\frac{\sigma^2\omega^2}{2}}
+\mathcal{F} G(\omega)&=\mathcal{F} G(0)e^{-\frac{\omega^2}{4\pi}}\\
+\mathcal{F} G(0)&=\int_{-\infty}^{\infty}e^{-\pi t^2}\,dt=1\\
+\mathcal{F} G(\omega)&=e^{-\frac{\omega^2}{4\pi}}
 }
 \end{example}
 \begin{figure}[htbp]
@@ -1180,35 +1250,6 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
 &=\frac{2a}{a^2 +\omega^2}
 }
 \end{example} 
-
-\subsection{普朗歇尔定理}\label{sub:plancherel}
-最后，我们给出\textbf{帕塞瓦尔恒等式}(Parseval's identity)/\textbf{普朗歇尔定理}(Plancherel theorem)。帕塞瓦尔在18世纪末提出了它的三角级数形式，但没有给出证明，如果将傅里叶变换视作傅里叶级数的推广，那么“能量守恒”也自然地推广到傅里叶变换。它于1910年普朗歇尔的博士论文中被严格证明，进一步，傅里叶变换是$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上的等距变换，保持$L^2$范数不变。
-\begin{theorem}[帕塞瓦尔恒等式/普朗歇尔定理]
-    设$f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则
-    \lr{
-    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
-}{
-    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
-}
-\end{theorem}
-\begin{proof}
-设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则\begin{lralign}
-&\quad\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}\,d\xi\\
-&=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
-&=\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)e^{-2\pi i\xi x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
-&=\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\xi)e^{-2\pi i\xi x}\,d\xi\\
-&=\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
-&=\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
-\switch
-&\quad\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\overline{\mathcal{F} g(\omega)}\,d\omega\\
-&=2\pi\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
-&=2\pi\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
-&=2\pi\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\omega)e^{-i\omega x}\,d\omega\\
-&=2\pi\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
-&=2\pi\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
-\end{lralign}
-取$g=f$即证。注意我们并不要求$g$是实信号，$\overline{\mathcal{F} g}\neq\mathcal{F} ^{-1}g$.
-\end{proof}
 
 \section{卷积}\label{sec:Convolution}
 
@@ -1246,8 +1287,7 @@ F(\omega)G(\omega)=&\iint\limits_{\mathbb{R}^2}f(x)g(z-x)e^{-i\omega z}\,dx\,dz\
 \end{definition}
 
 \subsection{卷积的性质}\label{sub:properties_of_convolution}
-根据前文中的结果，有$\mathcal{F} (f*g)=\mathcal{F} f\mathcal{F} g$，这是时域卷积的性质，由
-傅里叶反演公式，不难想到频域卷积也有类似的性质。对以上公式两边同时取傅里叶逆变换：
+根据前文中的结果，有$\mathcal{F} (f*g)=\mathcal{F} f\mathcal{F} g$，这是时域卷积的性质，由傅里叶反演公式，不难想到频域卷积也有类似的性质。对以上公式两边同时取傅里叶逆变换：
 \begin{lralign}
 f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 \switch
@@ -1868,7 +1908,7 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 }
 取$g=f$即证。
 \end{proof}
-看上去，这里只是将\ref{sub:plancherel}中的证明换了一种符号，并没有用到刚才建立的分布的傅里叶变换的对偶性，然而，现在我们可以得到正则分布的帕塞瓦尔恒等式。我们不仅扩大了证明适用的范围，还得到了比积分换序的方法简单得多的证明。
+看上去，这里只是将\ref{sub:fourier_operation_properties}中的证明换了一种符号，并没有用到刚才建立的分布的傅里叶变换的对偶性，然而，现在我们可以得到正则分布的帕塞瓦尔恒等式。我们不仅扩大了证明适用的范围，还得到了比积分换序的方法简单得多的证明。
 
 \begin{example}[$\delta$是偶分布]
     \begin{align*}
@@ -2578,33 +2618,92 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 
 \section{多维傅里叶变换}\label{sec:Multi_Fourier}
 
-这一节中，我们将傅里叶变换推广到高维。由于时间总是一维的，高维傅里叶变换往往指空间域，因此我们将用$\mathbf{x}=(x_1,x_2,\cdots,x_n)$表示n维的空间变量，$\boldsymbol{\xi}=(\xi_1,\xi_2,\cdots,\xi_n)$表示n维的空间频率，$\mathbf{\omega}=(\omega_1,\omega_2,\cdots,\omega_n)$表示n维的空间角频率。多维傅里叶变换在图像处理、计算机视觉等领域有着重要的应用。
+这一节中，我们将傅里叶变换推广到高维。由于时间总是一维的，高维傅里叶变换往往指空间域，因此我们将用$\mathbf{x}=(x_1,x_2,\cdots,x_n)$表示n维的空间变量，$\boldsymbol{\xi}=(\xi_1,\xi_2,\cdots,\xi_n)$表示n维的空间频率，$\boldsymbol{\omega}=(\omega_1,\omega_2,\cdots,\omega_n)$表示n维的空间角频率。多维傅里叶变换在图像处理、计算机视觉等领域有着重要的应用。
 
 \subsection{多维傅里叶变换的定义}\label{sub:multi_fourier}
 
 \begin{definition}[n维傅里叶变换]
-n维空间$\mathbb{R}^n$上的傅里叶变换定义为：
+设$f\in L^1(\mathbb{R}^n)$，则其n维傅里叶变换定义为：
 \begin{lralign}
     \mathcal{F} f(\boldsymbol{\xi})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}
 \switch
-    \mathcal{F} f(\mathbf{\omega})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i\mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}
+    \mathcal{F} f(\boldsymbol{\omega})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i\mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}
 \end{lralign}
-其中\begin{lralign}
-\mathbf{x}\cdot\boldsymbol{\xi}=x_1\xi_1+x_2\xi_2+\cdots+x_n\xi_n\quad
-\switch
-\mathbf{x}\cdot\mathbf{\omega}=x_1\omega_1+x_2\omega_2+\cdots+x_n\omega_n\quad
-\end{lralign}
-为n维向量的点积；$\int_{\mathbb{R}^n}$表示在$\mathbb{R}^n$上的重积分。
+我们仍记$f\overset{\mathcal{F} }{\longleftrightarrow}F$并称$f$与$F$构成\textbf{傅里叶变换对}。
 \end{definition}
 
-不难想到，傅里叶逆变换为：
+类似一维傅里叶变换，我们来验证$f\in L^1(\mathbb{R}^n)$时，其多维傅里叶变换是有界的、一致连续的。
+\begin{proposition}
+    设$f\in L^1(\mathbb{R}^n)$，则其n维傅里叶变换$\mathcal{F} f$是有界的、一致连续的。
+\end{proposition}
+\begin{proof}
+    有界性：由定义，有
 \begin{lralign}
+    |\mathcal{F} f(\boldsymbol{\xi})|&=\left|\int_{\mathbb{R}^n}f(\mathbf{x})e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\right|\\
+    &\leq \int_{\mathbb{R}^n}|f(\mathbf{x})||e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}|\,d\mathbf{x}\\
+    &= \int_{\mathbb{R}^n}|f(\mathbf{x})|\,d\mathbf{x}\\
+    &=\|f\|_1<\infty
+\switch
+    |\mathcal{F} f(\boldsymbol{\omega})|&=\left|\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i\mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\right|\\
+    &\leq \int_{\mathbb{R}^n}|f(\mathbf{x})||e^{-i\mathbf{x}\cdot\boldsymbol{\omega}}|\,d\mathbf{x}\\
+    &= \int_{\mathbb{R}^n}|f(\mathbf{x})|\,d\mathbf{x}\\
+    &=\|f\|_1<\infty
+\end{lralign}
+一致连续性：设$\boldsymbol{\xi},\boldsymbol{\eta}\in\mathbb{R}^n$，则
+\begin{lralign}
+    &|\mathcal{F} f(\boldsymbol{\xi})-\mathcal{F} f(\boldsymbol{\eta})|\\
+    =&\left|\int_{\mathbb{R}^n}f(\mathbf{x})\left(e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}-e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\eta}}\right)\,d\mathbf{x}\right|\\
+    \leq& \int_{\mathbb{R}^n}|f(\mathbf{x})|\left|e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}-e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\eta}}\right|\,d\mathbf{x}
+\switch
+    &|\mathcal{F} f(\boldsymbol{\omega})-\mathcal{F} f(\boldsymbol{\nu})|\\
+    =&\left|\int_{\mathbb{R}^n}f(\mathbf{x})\left(e^{-i\mathbf{x}\cdot\boldsymbol{\omega}}-e^{-i\mathbf{x}\cdot\boldsymbol{\nu}}\right)\,d\mathbf{x}\right|\\
+    \leq& \int_{\mathbb{R}^n}|f(\mathbf{x})|\left|e^{-i\mathbf{x}\cdot\boldsymbol{\omega}}-e^{-i\mathbf{x}\cdot\boldsymbol{\nu}}\right|\,d\mathbf{x}
+\end{lralign}
+由于$e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}$与$e^{-i\mathbf{x}\cdot\boldsymbol{\omega}}$均为一致连续函数，$\forall\epsilon>0,\exists\delta>0$，使得\begin{lralign}
+    &|\boldsymbol{\xi}-\boldsymbol{\eta}|<\delta\\
+    \implies &|e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}-e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\eta}}|<\frac{\epsilon}{\|f\|_1},\forall \mathbf{x}\in\mathbb{R}^n\\
+    \implies &|\mathcal{F} f(\boldsymbol{\xi})-\mathcal{F} f(\boldsymbol{\eta})|<\epsilon
+\switch
+    &|\boldsymbol{\omega}-\boldsymbol{\nu}|<\delta\\
+    \implies &|e^{-i\mathbf{x}\cdot\boldsymbol{\omega}}-e^{-i\mathbf{x}\cdot\boldsymbol{\nu}}|<\frac{\epsilon}{\|f\|_1},\forall \mathbf{x}\in\mathbb{R}^n\\
+    \implies &|\mathcal{F} f(\boldsymbol{\omega})-\mathcal{F} f(\boldsymbol{\nu})|<\epsilon
+\end{lralign}
+\end{proof}
+
+此外，黎曼-勒贝格引理仍然成立：
+\begin{claim}[n维黎曼-勒贝格引理]
+    设$f\in L^1(\mathbb{R}^n)$，则其n维傅里叶变换$\mathcal{F} f$满足
+    \begin{lralign}
+    \lim_{|\boldsymbol{\xi}|\to\infty}\mathcal{F} f(\boldsymbol{\xi})&=0
+\switch
+    \lim_{|\boldsymbol{\omega}|\to\infty}\mathcal{F} f(\boldsymbol{\omega})&=0
+\end{lralign}
+\end{claim}
+
+不难想到，傅里叶逆变换为：
+\begin{definition}[n维傅里叶逆变换]
+    设$F\in L^1(\mathbb{R}^n)$，则其n维傅里叶逆变换为：
+    \begin{lralign}
     \mathcal{F} ^{-1} F(\mathbf{x})&=\int_{\mathbb{R}^n}F(\boldsymbol{\xi})e^{2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}\,d\boldsymbol{\xi}
 \switch
-    \mathcal{F} ^{-1} F(\mathbf{x})&=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}F(\mathbf{\omega})e^{i\mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{\omega}
+    \mathcal{F} ^{-1} F(\mathbf{x})&=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}F(\boldsymbol{\omega})e^{i\mathbf{x}\cdot\boldsymbol{\omega}}\,d\boldsymbol{\omega}
 \end{lralign}
+\end{definition}
 
-为了说明空间角频率形式的傅里叶逆变换的系数$\dfrac{1}{(2\pi)^n}$的由来，我们可以令$\mathbf{\omega}=2\pi\boldsymbol{\xi}$，则$d\mathbf{\omega}=(2\pi)^n d\boldsymbol{\xi}$，以上两种傅里叶逆变换的公式是等价的。
+傅里叶反演公式仍然成立，因此n维傅里叶变换也是一一的，从而前文中傅里叶变换对的记号$f\overset{\mathcal{F} }{\longleftrightarrow}F$是合理的。
+\begin{claim}[n维傅里叶反演公式]
+    设$f\in L^1(\mathbb{R}^n)$且$\mathcal{F} f\in L^1(\mathbb{R}^n)$，则
+    \begin{lralign}
+    f(\mathbf{x})&=\int_{\mathbb{R}^n}\mathcal{F} f(\boldsymbol{\xi})e^{2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}\,d\boldsymbol{\xi}
+\switch
+    f(\mathbf{x})&=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}\mathcal{F} f(\boldsymbol{\omega})e^{i\mathbf{x}\cdot\boldsymbol{\omega}}\,d\boldsymbol{\omega}
+\end{lralign}
+\end{claim}
+\begin{remark}
+    多维情况下很难讲清楚什么是“左右极限平均值”，一种处理方式是通过球平均在半径趋于0时的极限来替代$\dfrac{f(t+)+f(t-)}{2}$，但这样比较复杂，因此我们不妨说$\mathcal{F} f$的傅里叶逆变换几乎处处收敛到$f$，或者要求$f\in C(\mathbb{R}^n)$。
+\end{remark}
+
+为了说明空间角频率形式的傅里叶逆变换的系数$\dfrac{1}{(2\pi)^n}$的由来，我们可以令$\boldsymbol{\omega}=2\pi\boldsymbol{\xi}$，则$d\boldsymbol{\omega}=(2\pi)^n d\boldsymbol{\xi}$，以上两种傅里叶逆变换的公式是等价的。
 
 下面给出几个例子来建立多维傅里叶变换的直观。
 \begin{definition}[可分函数]
@@ -2624,7 +2723,7 @@ $f(\mathbf{x})$的傅里叶变换为：
 \end{align*}}
 {\color{red}
 \begin{align*}
-\mathcal{F} f(\mathbf{\omega})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i \mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}\\
+\mathcal{F} f(\boldsymbol{\omega})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
 &=\int_{-\infty}^{\infty}\cdots \int_{-\infty}^{\infty}f_1(x_1)f_2(x_2)\cdots f_n(x_n)e^{-i (x_1\omega_1+x_2\omega_2+\cdots +x_n\omega_n)}\,dx_1 dx_2\cdots dx_n\\  
 &=\left(\int_{-\infty}^{\infty}f_1(x_1)e^{-i x_1\omega_1}\,dx_1\right)\left(\int_{-\infty}^{\infty}f_2(x_2)e^{-i x_2\omega_2}\,dx_2\right)\cdots \left(\int_{-\infty}^{\infty}f_n(x_n)e^{-i x_n\omega_n}\,dx_n\right)\\
 &=\mathcal{F} f_1(\omega_1)\mathcal{F} f_2(\omega_2)\cdots \mathcal{F} f_n(\omega_n)
@@ -2636,7 +2735,7 @@ $f(\mathbf{x})$的傅里叶变换为：
     \begin{align*}
         f(\mathbf{x})=e^{-\pi(x_1^2+x_2^2+\cdots +x_n^2)}=e^{-\pi x_1^2}e^{-\pi x_2^2}\cdots e^{-\pi x_n^2}
     \end{align*}
-    一维高斯函数的傅里叶变换为：
+    我们仍考虑这个特殊的高斯函数，并指出其他高斯函数可以通过下一小节中介绍的运算性质得到。一维高斯函数的傅里叶变换为：
     \begin{lralign}
     \mathcal{F} \left(e^{-\pi x^2}\right)(\xi)&=e^{-\pi \xi^2}
 \switch
@@ -2646,14 +2745,14 @@ $f(\mathbf{x})$的傅里叶变换为：
     \begin{lralign}
     \mathcal{F} f(\boldsymbol{\xi})=e^{-\pi(\xi_1^2+\xi_2^2+\cdots +\xi_n^2)}=e^{-\pi |\boldsymbol{\xi}|^2}\quad
 \switch
-    \mathcal{F} f(\mathbf{\omega})=e^{-(\omega_1^2+\omega_2^2+\cdots +\omega_n^2)/4\pi}=e^{-|\mathbf{\omega}|^2/4\pi}\quad
+    \mathcal{F} f(\boldsymbol{\omega})=e^{-(\omega_1^2+\omega_2^2+\cdots +\omega_n^2)/4\pi}=e^{-|\boldsymbol{\omega}|^2/4\pi}\quad
     \end{lralign}
+    \end{example}
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\textwidth]{n_gauss.jpeg}
         \caption{二维高斯函数的图像}
     \end{figure}
-\end{example}
 
 \begin{example}[矩形函数]
     n维空间中的矩形函数是n维“长方体”的特征函数。由于这种长方体是区间(Interval)的笛卡尔积，是n维空间中区间的推广，我们仍称之为区间并用$I$表示：
@@ -2668,9 +2767,9 @@ $f(\mathbf{x})$的傅里叶变换为：
     \end{lralign}
     因此，$I=[-T/2,T/2]^n$时，n维矩形函数的傅里叶变换为：
     \begin{lralign}
-    \mathcal{F} \chi_I(\boldsymbol{\xi})&=T^n \text{sinc}^n(T\xi)
+    \mathcal{F} \chi_I(\boldsymbol{\xi})&=T^n \prod_{j=1}^n \text{sinc}(T\xi_j)
 \switch
-    \mathcal{F} \chi_I(\mathbf{\omega})&=T^n \text{Sa}^n\left(\frac{T\omega}{2}\right)
+    \mathcal{F} \chi_I(\boldsymbol{\omega})&=T^n \prod_{j=1}^n \text{Sa}\left(\frac{T\omega_j}{2}\right)
     \end{lralign}
 \end{example}
 
@@ -2681,11 +2780,11 @@ $f(\mathbf{x})$的傅里叶变换为：
     \caption{二维空间中$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$的等相面示意图}
     \vspace{4em}
 \end{wrapfigure}
-下面考察$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$和$e^{i \mathbf{x}\cdot\mathbf{\omega}}$的性质。以$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$为例，对于给定的$\mathbf{\xi}$，令$$\boldsymbol{x\cdot\xi}=k(k\in\mathbb{Z})$$
+下面考察$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$和$e^{i \mathbf{x}\cdot\boldsymbol{\omega}}$的性质。以$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$为例，对于给定的$\mathbf{\xi}$，令$$\boldsymbol{x\cdot\xi}=k(k\in\mathbb{Z})$$
 则$$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}=1$$
 这时称$e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}$是\textbf{零相}(zero phase)的。
 这些点构成了过原点且法向量为$\boldsymbol{\xi_0}$的超平面族，相邻零相面之间的距离为$1/|\boldsymbol{\xi}|$。类似地，可以定义\textbf{等相面}(constant phase surface)为
-$$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x\cdot\xi}=k+\theta,k\in\mathbb{Z},\theta\in[0,1)\right\}$$
+$$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta,k\in\mathbb{Z},\theta\in[0,1)\right\}$$
 的超平面族，法向量为$\boldsymbol{\xi_0}$，相邻等相面距离为$1/|\boldsymbol{\xi}|$。
 
 \subsection{多维傅里叶变换的运算性质}\label{sub:operation_of_multi_fourier}
@@ -2695,11 +2794,11 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x\cdot\xi}=k+\theta,k\in\mathbb{
 \begin{proposition}[对偶性]
     设$f(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，则有：
     \begin{lralign}
-    &\mathcal{F} f^-(\boldsymbol{\xi})=\mathcal{F} (f^-)(\mathbf{\xi})=\mathcal{F} ^{-1} f(\mathbf{x})\\
-    &\mathcal{F} \left(\mathcal{F} f\right)(\mathbf{x})=f(-\mathbf{x})
+    &\mathcal{F} f^- =\mathcal{F} (f^-)=\mathcal{F} ^{-1} f\\
+    &\mathcal{F} \left(\mathcal{F} f\right)=f
 \switch
-    &\mathcal{F} f^-(\mathbf{\omega})=(2\pi)^n \mathcal{F} ^{-1} f(\mathbf{\omega})\\
-    &\mathcal{F} \left(\mathcal{F} f\right)(\mathbf{x})=(2\pi)^n f(-\mathbf{x})
+    &\mathcal{F} f^-=(2\pi)^n \mathcal{F} ^{-1} f\\
+    &\mathcal{F} \left(\mathcal{F} f\right)=(2\pi)^n f^-
     \end{lralign}
     进一步，如果$f$是实函数，则有：
     \begin{lralign}
@@ -2711,34 +2810,38 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x\cdot\xi}=k+\theta,k\in\mathbb{
 \begin{proof}
     类似一维的情况（见\ref{sub:fourier_operation_properties}），带入定义可立即得到：
     \begin{lralign}
-        \mathcal{F} f^-(\boldsymbol{\xi})=\mathcal{F} (f^-)(\mathbf{\xi})=\mathcal{F} ^{-1} f(\mathbf{x})
+        \mathcal{F} f^-=\mathcal{F} (f^-)=\mathcal{F} ^{-1} f
     \switch
-        \mathcal{F} f^-(\mathbf{\omega})=(2\pi)^n \mathcal{F} ^{-1} f(\mathbf{\omega})
+        \mathcal{F} f^-=(2\pi)^n \mathcal{F} ^{-1} f
     \end{lralign}
     同时取傅里叶变换，即得：
     \begin{lralign}
-        \mathcal{F} \left(\mathcal{F} f\right)(\mathbf{x})=f(-\mathbf{x})
+        \mathcal{F} \left(\mathcal{F} f\right)=f^-
 \switch
-        \mathcal{F} \left(\mathcal{F} f\right)(\mathbf{x})=(2\pi)^n f(-\mathbf{x})
+        \mathcal{F} \left(\mathcal{F} f\right)=(2\pi)^n f^-
     \end{lralign}
     如果$f$是实函数，则$f=\overline{f}$，因此：
     \begin{lralign}
-    \mathcal{F} f^-&=\mathcal{F} (\overline{f})=\overline{\mathcal{F} f}
+    \mathcal{F} f^-(\mathbf{\xi})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    &=\overline{\int_{\mathbb{R}^n}}f(\mathbf{x})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    &=\overline{\mathcal{F} f(\boldsymbol{\xi})}
 \switch
-    \mathcal{F} f^-&=(2\pi)^n \mathcal{F} ^{-1} (\overline{f})=(2\pi)^n \overline{\mathcal{F} f}
+    \mathcal{F} f^-(\mathbf{\omega})&=\int_{\mathbb{R}^n}f(-\mathbf{x})e^{-i \mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}\\
+    &=\overline{\int_{\mathbb{R}^n}}f(\mathbf{x})e^{i \mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}\\
+    &=(2\pi)^n \overline{\mathcal{F} f(\mathbf{\omega})}
     \end{lralign}
 \end{proof}
 
-\begin{proposition}[对称性]
+\begin{corollary}[对称性]
     可仿照一维函数定义函数的奇偶性：如果$f(\mathbf{x})=f(-\mathbf{x})$，则称$f$为偶函数；如果$f(\mathbf{x})=-f(-\mathbf{x})$，则称$f$为奇函数。$\mathcal{F} f$与$f$具有相同的奇偶性；$f$是实函数时，如果$f$为偶函数，则$\mathcal{F} f$为实函数；如果$f$为奇函数，则$\mathcal{F} f$为纯虚函数。
-\end{proposition}
+\end{corollary}
 
 \begin{proposition}[线性性]
     设$f(\mathbf{x}),g(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，则有：
     \begin{lralign}
     \mathcal{F} [af(\mathbf{x})+bg(\mathbf{x})](\boldsymbol{\xi})&=a\mathcal{F} f(\boldsymbol{\xi})+b\mathcal{F} g(\boldsymbol{\xi})    
 \switch
-    \mathcal{F} [af(\mathbf{x})+bg(\mathbf{x})](\mathbf{\omega})&=a\mathcal{F} f(\mathbf{\omega})+b\mathcal{F} g(\mathbf{\omega})
+    \mathcal{F} [af(\mathbf{x})+bg(\mathbf{x})](\boldsymbol{\omega})&=a\mathcal{F} f(\boldsymbol{\omega})+b\mathcal{F} g(\boldsymbol{\omega})
     \end{lralign}
 \end{proposition}
 这个性质是显然的，它直接得自积分的线性性。
@@ -2748,16 +2851,17 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x\cdot\xi}=k+\theta,k\in\mathbb{
     \begin{lralign}
     \mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\boldsymbol{\xi})&=e^{-2\pi i \mathbf{a}\cdot\boldsymbol{\xi}}\mathcal{F} f(\boldsymbol{\xi})
 \switch
-    \mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\mathbf{\omega})&=e^{-i \mathbf{a}\cdot\mathbf{\omega}}\mathcal{F} f(\mathbf{\omega})
+    \mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\boldsymbol{\omega})&=e^{-i \mathbf{a}\cdot\boldsymbol{\omega}}\mathcal{F} f(\boldsymbol{\omega})
     \end{lralign}
     频域上：
     \begin{lralign}
-    \mathcal{F} ^{-1} \left[F(\boldsymbol{\xi}-\boldsymbol{\beta})\right](\mathbf{x})&=e^{2\pi i \mathbf{x}\cdot\boldsymbol{\beta}}\mathcal{F} ^{-1} F(\mathbf{x})
+    \mathcal{F} \left[e^{2\pi i \mathbf{a}\cdot\boldsymbol{\xi}}f(\mathbf{x})\right](\boldsymbol{\xi})&=f(\boldsymbol{\xi}-\mathbf{a})
 \switch
-    \mathcal{F} ^{-1} \left[F(\mathbf{\omega}-\mathbf{b})\right](\mathbf{x})&=e^{i \mathbf{x}\cdot\mathbf{b}}\mathcal{F} ^{-1} F(\mathbf{x})
+    \mathcal{F} \left[e^{i \mathbf{a}\cdot\boldsymbol{\omega}}f(\mathbf{x})\right](\boldsymbol{\omega})&=f(\boldsymbol{\omega}-\mathbf{a})
     \end{lralign}
 \end{proposition}
 \begin{proof}
+    \ding{172}时移性质，
     \begin{lralign}
     &\mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\boldsymbol{\xi})\\
     &=\int_{\mathbb{R}^n}f(\mathbf{x}-\mathbf{a})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
@@ -2765,11 +2869,23 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x\cdot\xi}=k+\theta,k\in\mathbb{
     =&e^{-2\pi i \mathbf{a}\cdot\boldsymbol{\xi}}\int_{\mathbb{R}^n}f(\mathbf{y})e^{-2\pi i \mathbf{y}\cdot\boldsymbol{\xi}}\,d\mathbf{y}\\
     =&e^{-2\pi i \mathbf{a}\cdot\boldsymbol{\xi}}\mathcal{F} f(\boldsymbol{\xi})
 \switch
-    &\mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\mathbf{\omega})\\
-    =&\int_{\mathbb{R}^n}f(\mathbf{x}-\mathbf{a})e^{-i \mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}\\
-    =&\int_{\mathbb{R}^n}f(\mathbf{y})e^{-i (\mathbf{y}+\mathbf{a})\cdot\mathbf{\omega}}\,d\mathbf{y}(\mathbf{y}=\mathbf{x}-\mathbf{a})\\
-    =&e^{-i \mathbf{a}\cdot\mathbf{\omega}}\int_{\mathbb{R}^n}f(\mathbf{y})e^{-i \mathbf{y}\cdot\mathbf{\omega}}\,d\mathbf{y}\\
-    =&e^{-i \mathbf{a}\cdot\mathbf{\omega}}\mathcal{F} f(\mathbf{\omega})
+    &\mathcal{F} \left[f(\mathbf{x}-\mathbf{a})\right](\boldsymbol{\omega})\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x}-\mathbf{a})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})e^{-i (\mathbf{y}+\mathbf{a})\cdot\boldsymbol{\omega}}\,d\mathbf{y}(\mathbf{y}=\mathbf{x}-\mathbf{a})\\
+    =&e^{-i \mathbf{a}\cdot\boldsymbol{\omega}}\int_{\mathbb{R}^n}f(\mathbf{y})e^{-i \mathbf{y}\cdot\boldsymbol{\omega}}\,d\mathbf{y}\\
+    =&e^{-i \mathbf{a}\cdot\boldsymbol{\omega}}\mathcal{F} f(\boldsymbol{\omega})
+    \end{lralign}
+    \ding{173}频移性质，
+    \begin{lralign}
+    &\mathcal{F} \left[e^{2\pi i \mathbf{a}\cdot\boldsymbol{\xi}}f(\mathbf{x})\right](\boldsymbol{\xi})\\
+    =&\int_{\mathbb{R}^n}e^{2\pi i \mathbf{a}\cdot\boldsymbol{\xi}}f(\mathbf{x})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})e^{-2\pi i (\mathbf{x}-\mathbf{a})\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    =&f(\boldsymbol{\xi}-\mathbf{a})
+\switch
+    &\mathcal{F} \left[e^{i \mathbf{a}\cdot\boldsymbol{\omega}}f(\mathbf{x})\right](\boldsymbol{\omega})\\
+    =&\int_{\mathbb{R}^n}e^{i \mathbf{a}\cdot\boldsymbol{\omega}}f(\mathbf{x})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i (\mathbf{x}-\mathbf{a})\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    =&f(\boldsymbol{\omega}-\mathbf{a})
     \end{lralign}
 \end{proof}
 
@@ -2778,14 +2894,14 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x\cdot\xi}=k+\theta,k\in\mathbb{
     \begin{lralign}
     \mathcal{F} \left[f(A\mathbf{x})\right](\boldsymbol{\xi})&=\frac{1}{|\det A|}\mathcal{F} f\left(A^{-T}\boldsymbol{\xi}\right)
     \switch
-    \mathcal{F} \left[f(A\mathbf{x})\right](\mathbf{\omega})&=\frac{1}{|\det A|}\mathcal{F} f\left(A^{-T}\mathbf{\omega}\right)
+    \mathcal{F} \left[f(A\mathbf{x})\right](\boldsymbol{\omega})&=\frac{1}{|\det A|}\mathcal{F} f\left(A^{-T}\boldsymbol{\omega}\right)
     \end{lralign}
     特别地，当$A$是对角阵时，设$A=\text{diag}(a_1,a_2,\cdots,a_n)$，则有：
     \begin{lralign}
     &\mathcal{F} \left[f(a_1 x_1,a_2 x_2,\cdots,a_n x_n)\right](\boldsymbol{\xi})\\
     =&\frac{1}{|a_1 a_2\cdots a_n|}\mathcal{F} f\left(\frac{\xi_1}{a_1},\frac{\xi_2}{a_2},\cdots,\frac{\xi_n}{a_n}\right)
 \switch
-    &\mathcal{F} \left[f(a_1 x_1,a_2 x_2,\cdots,a_n x_n)\right](\mathbf{\omega})\\
+    &\mathcal{F} \left[f(a_1 x_1,a_2 x_2,\cdots,a_n x_n)\right](\boldsymbol{\omega})\\
     =&\frac{1}{|a_1 a_2\cdots a_n|}\mathcal{F} f\left(\frac{\omega_1}{a_1},\frac{\omega_2}{a_2},\cdots,\frac{\omega_n}{a_n}\right)
     \end{lralign}
     对于旋转矩阵$R$（即满足$R^T R=I$的矩阵），有：
@@ -2796,54 +2912,97 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x\cdot\xi}=k+\theta,k\in\mathbb{
     \end{lralign}
     这表明时域旋转，频域也会做相应旋转。
 \end{proposition}
+\begin{proof}
+    \begin{lralign}
+    &\mathcal{F} \left[f(A\mathbf{x})\right](\boldsymbol{\xi})\\
+    =&\int_{\mathbb{R}^n}f(A\mathbf{x})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})e^{-2\pi i A^{-1}\mathbf{y}\cdot\boldsymbol{\xi}}\,\frac{d\mathbf{y}}{|\det A|}(\mathbf{y}=A\mathbf{x})\\
+    =&\frac{1}{|\det A|}\int_{\mathbb{R}^n}f(\mathbf{y})e^{-2\pi i \mathbf{y}\cdot A^{-T}\boldsymbol{\xi}}\,d\mathbf{y}\\
+    =&\frac{1}{|\det A|}\mathcal{F} f\left(A^{-T}\boldsymbol{\xi}\right)
+\switch
+    &\mathcal{F} \left[f(A\mathbf{x})\right](\boldsymbol{\omega})\\
+    =&\int_{\mathbb{R}^n}f(A\mathbf{x})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})e^{-i A^{-1}\mathbf{y}\cdot\boldsymbol{\omega}}\,\frac{d\mathbf{y}}{|\det A|}(\mathbf{y}=A\mathbf{x})\\
+    =&\frac{1}{|\det A|}\int_{\mathbb{R}^n}f(\mathbf{y})e^{-i \mathbf{y}\cdot A^{-T}\boldsymbol{\omega}}\,d\mathbf{y}\\
+    =&\frac{1}{|\det A|}\mathcal{F} f\left(A^{-T}\boldsymbol{\omega}\right)
+    \end{lralign}
+    请读者自行验证$A$为对角矩阵和旋转矩阵情况下的公式。
+\end{proof}
 
 \begin{proposition}[微分性质]
     设$f(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$一阶连续可导，则有：
     \begin{lralign}
     \mathcal{F} \left(\frac{\partial f}{\partial x_j}\right)(\boldsymbol{\xi})&=2\pi i \xi_j \mathcal{F} f(\boldsymbol{\xi})
 \switch
-    \mathcal{F} \left(\frac{\partial f}{\partial x_j}\right)(\mathbf{\omega})&=i \omega_j \mathcal{F} f(\mathbf{\omega})
+    \mathcal{F} \left(\frac{\partial f}{\partial x_j}\right)(\boldsymbol{\omega})&=i \omega_j \mathcal{F} f(\boldsymbol{\omega})
     \end{lralign}
     易见在高阶混合偏导数存在时，有：
     \begin{lralign}
     \mathcal{F} \left(\frac{\partial^{\alpha} f}{\partial x_1^{\alpha_1}\partial x_2^{\alpha_2}\cdots \partial x_n^{\alpha_n}}\right)(\boldsymbol{\xi})\\
     =(2\pi i)^{\alpha} \xi_1^{\alpha_1}\xi_2^{\alpha_2}\cdots \xi_n^{\alpha_n} \mathcal{F} f(\boldsymbol{\xi})
 \switch
-    \mathcal{F} \left(\frac{\partial^{\alpha} f}{\partial x_1^{\alpha_1}\partial x_2^{\alpha_2}\cdots \partial x_n^{\alpha_n}}\right)(\mathbf{\omega})\\
-    =i^{\alpha} \omega_1^{\alpha_1}\omega_2^{\alpha_2}\cdots \omega_n^{\alpha_n} \mathcal{F} f(\mathbf{\omega})
+    \mathcal{F} \left(\frac{\partial^{\alpha} f}{\partial x_1^{\alpha_1}\partial x_2^{\alpha_2}\cdots \partial x_n^{\alpha_n}}\right)(\boldsymbol{\omega})\\
+    =i^{\alpha} \omega_1^{\alpha_1}\omega_2^{\alpha_2}\cdots \omega_n^{\alpha_n} \mathcal{F} f(\boldsymbol{\omega})
     \end{lralign}
     其中$\alpha=\alpha_1+\alpha_2+\cdots +\alpha_n$。
 \end{proposition}
+\begin{proof}
+    以$j=1$为例，其他分量类似。简洁起见，以下不区分重积分时$d\mathbf{x}$的含义。
+    {\color{blue}\begin{align*}
+    \mathcal{F} \left(\frac{\partial f}{\partial x_1}\right)(\boldsymbol{\xi})=&\int_{\mathbb{R}^n}\frac{\partial f}{\partial x_1}(\mathbf{x})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^{n-1}}e^{-2\pi i (x_2\xi_2+\cdots +x_n\xi_n)}\,d\mathbf{x}\int_{-\infty}^{\infty}\frac{\partial f}{\partial x_1}(\mathbf{x})e^{-2\pi i x_1 \xi_1}\,dx_1\\
+    =&\int_{\mathbb{R}^{n-1}}e^{-2\pi i (x_2\xi_2+\cdots +x_n\xi_n)}\left[f(\mathbf{x})e^{-2\pi i x_1 \xi_1}\Big|_{x_1=-\infty}^{x_1=\infty}+2\pi i \xi_1 \int_{-\infty}^{\infty}f(\mathbf{x})e^{-2\pi i x_1 \xi_1}\,dx_1\right]\,d\mathbf{x}\\
+    =&2\pi i \xi_1 \int_{\mathbb{R}^n}f(\mathbf{x})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    =&2\pi i \xi_1 \mathcal{F} f(\boldsymbol{\xi})
+    \end{align*}}
+    {\color{red}
+    \begin{align*}
+    \mathcal{F} \left(\frac{\partial f}{\partial x_1}\right)(\boldsymbol{\omega})=&\int_{\mathbb{R}^n}\frac{\partial f}{\partial x_1}(\mathbf{x})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^{n-1}}e^{-i (x_2\omega_2+\cdots +x_n\omega_n)}\,d\mathbf{x}\int_{-\infty}^{\infty}\frac{\partial f}{\partial x_1}(\mathbf{x})e^{-i x_1 \omega_1}\,dx_1\\
+    =&\int_{\mathbb{R}^{n-1}}e^{-i (x_2\omega_2+\cdots +x_n\omega_n)}\left[f(\mathbf{x})e^{-i x_1 \omega_1}\Big|_{x_1=-\infty}^{x_1=\infty}+i \omega_1 \int_{-\infty}^{\infty}f(\mathbf{x})e^{-i x_1 \omega_1}\,dx_1\right]\,d\mathbf{x}\\
+    =&i \omega_1 \int_{\mathbb{R}^n}f(\mathbf{x})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    =&i \omega_1 \mathcal{F} f(\boldsymbol{\omega})
+    \end{align*}}
+\end{proof}
 
-\begin{corollary}[场论中的算子]
+\begin{definition}[场论中的算子]
     $\nabla$为哈密顿算子（或称nabla算子），$\Delta=\nabla\cdot \nabla$为拉普拉斯算子，
     \begin{align*}
         \nabla=\left(\frac{\partial }{\partial x_1},\frac{\partial }{\partial x_2},\cdots,\frac{\partial }{\partial x_n}\right),
         \Delta=\frac{\partial^2 }{\partial x_1^2}+\frac{\partial^2 }{\partial x_2^2}+\cdots+\frac{\partial^2 }{\partial x_n^2}
     \end{align*}
-    场论中，梯度、散度、旋度等运算都可以用$\nabla$表示。由微分性质可知，对于梯度$\nabla f=\text{grad}f$，有：
+    场论中，梯度、散度、旋度等运算都可以用$\nabla$表示：
+    \begin{itemize}
+        \item 梯度：$\nabla f=\text{grad}f$
+        \item 散度：$\nabla\cdot \mathbf{F}=\text{div}\mathbf{F}$，其中$\mathbf{F}=(F_1,F_2,\cdots,F_n)$
+        \item 旋度（仅在$\mathbb{R}^3$中定义）：$\nabla\times \mathbf{F}=\text{curl}\mathbf{F}$（一些文献中也将旋度算子记为$\text{rot}$）
+    \end{itemize}
+\end{definition}
+
+\begin{corollary}[场论中的微分性质]
+    由微分性质，我们依次对比向量值函数的各个分量。对于梯度$\nabla f=\text{grad}f$，有：
     \begin{lralign}
     \mathcal{F} \left(\nabla f\right)(\boldsymbol{\xi})&=2\pi i \boldsymbol{\xi} \mathcal{F} f(\boldsymbol{\xi})
 \switch
-    \mathcal{F} \left(\nabla f\right)(\mathbf{\omega})&=i \mathbf{\omega} \mathcal{F} f(\mathbf{\omega})
+    \mathcal{F} \left(\nabla f\right)(\boldsymbol{\omega})&=i \boldsymbol{\omega} \mathcal{F} f(\boldsymbol{\omega})
     \end{lralign}
     对于散度$\nabla\cdot \mathbf{F}=\text{div}\mathbf{F}$，其中$\mathbf{F}=(F_1,F_2,\cdots,F_n)$，有：
     \begin{lralign}
     \mathcal{F} \left(\nabla\cdot \mathbf{F}\right)(\boldsymbol{\xi})&=2\pi i \boldsymbol{\xi}\cdot \mathcal{F} \mathbf{F}(\boldsymbol{\xi})
 \switch
-    \mathcal{F} \left(\nabla\cdot \mathbf{F}\right)(\mathbf{\omega})&=i \mathbf{\omega}\cdot \mathcal{F} \mathbf{F}(\mathbf{\omega})
+    \mathcal{F} \left(\nabla\cdot \mathbf{F}\right)(\boldsymbol{\omega})&=i \boldsymbol{\omega}\cdot \mathcal{F} \mathbf{F}(\boldsymbol{\omega})
     \end{lralign}
     在$\mathbb{R}^3$中，对于旋度$\nabla\times \mathbf{F}=\text{curl}\mathbf{F}$，有：
     \begin{lralign}
     \mathcal{F} \left(\nabla\times \mathbf{F}\right)(\boldsymbol{\xi})&=2\pi i \boldsymbol{\xi}\times \mathcal{F} \mathbf{F}(\boldsymbol{\xi})
 \switch
-    \mathcal{F} \left(\nabla\times \mathbf{F}\right)(\mathbf{\omega})&=i \mathbf{\omega}\times \mathcal{F} \mathbf{F}(\mathbf{\omega})
+    \mathcal{F} \left(\nabla\times \mathbf{F}\right)(\boldsymbol{\omega})&=i \boldsymbol{\omega}\times \mathcal{F} \mathbf{F}(\boldsymbol{\omega})
     \end{lralign}
     对于拉普拉斯算子$\Delta f$，有：
     \begin{lralign}
     \mathcal{F} \left(\Delta f\right)(\boldsymbol{\xi})&=-(2\pi)^2 |\boldsymbol{\xi}|^2 \mathcal{F} f(\boldsymbol{\xi})
 \switch
-    \mathcal{F} \left(\Delta f\right)(\mathbf{\omega})&=-|\mathbf{\omega}|^2 \mathcal{F} f(\mathbf{\omega})
+    \mathcal{F} \left(\Delta f\right)(\boldsymbol{\omega})&=-|\boldsymbol{\omega}|^2 \mathcal{F} f(\boldsymbol{\omega})
     \end{lralign}
 \end{corollary}
 
@@ -2858,13 +3017,56 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x\cdot\xi}=k+\theta,k\in\mathbb{
 \begin{theorem}[卷积定理]
     设$f(\mathbf{x}),g(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，则有：
     \begin{lralign}
-    \mathcal{F} (f*g)(\boldsymbol{\xi})&=\mathcal{F} f(\boldsymbol{\xi})\cdot \mathcal{F} g(\boldsymbol{\xi})
+    &\mathcal{F} (f*g)(\boldsymbol{\xi})=\mathcal{F} f(\boldsymbol{\xi})\cdot \mathcal{F} g(\boldsymbol{\xi})\\
+    &\mathcal{F} f(\boldsymbol{\xi})\mathcal{F} g(\boldsymbol{\xi})=\mathcal{F} (f*g)(\boldsymbol{\xi})
 \switch
-    \mathcal{F} (f*g)(\mathbf{\omega})&=\mathcal{F} f(\mathbf{\omega})\cdot \mathcal{F} g(\mathbf{\omega})
+    &\mathcal{F} (f*g)(\boldsymbol{\omega})=\mathcal{F} f(\boldsymbol{\omega})\cdot \mathcal{F} g(\boldsymbol{\omega})\\
+    &\mathcal{F} f(\boldsymbol{\omega})\mathcal{F} g(\boldsymbol{\omega})=\frac{1}{(2\pi)^n}\mathcal{F} (f*g)(\boldsymbol{\omega})
     \end{lralign}
 \end{theorem}
+\begin{proof}
+    \ding{172}时域卷积：
+\begin{lralign}
+    &\mathcal{F} (f*g)(\boldsymbol{\xi})\\
+    =&\int_{\mathbb{R}^n}(f*g)(\mathbf{x})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\int_{\mathbb{R}^n}f(\mathbf{y})g(\mathbf{x}-\mathbf{y})\,d\mathbf{y}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})\,d\mathbf{y}\int_{\mathbb{R}^n}g(\mathbf{x}-\mathbf{y})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})\,d\mathbf{y}\int_{\mathbb{R}^n}g(\mathbf{z})e^{-2\pi i (\mathbf{z}+\mathbf{y})\cdot\boldsymbol{\xi}}\,d\mathbf{z}\quad (\mathbf{z}=\mathbf{x}-\mathbf{y})\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})e^{-2\pi i \mathbf{y}\cdot\boldsymbol{\xi}}\,d\mathbf{y}\int_{\mathbb{R}^n}g(\mathbf{z})e^{-2\pi i \mathbf{z}\cdot\boldsymbol{\xi}}\,d\mathbf{z}\\
+    =&\mathcal{F} f(\boldsymbol{\xi})\cdot \mathcal{F} g(\boldsymbol{\xi})
+    \switch
+    &\mathcal{F} (f*g)(\boldsymbol{\omega})\\
+    =&\int_{\mathbb{R}^n}(f*g)(\mathbf{x})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})\,d\mathbf{y}\int_{\mathbb{R}^n}g(\mathbf{x}-\mathbf{y})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})\,d\mathbf{y}\int_{\mathbb{R}^n}g(\mathbf{x}-\mathbf{y})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})\,d\mathbf{y}\int_{\mathbb{R}^n}g(\mathbf{z})e^{-i (\mathbf{z}+\mathbf{y})\cdot\boldsymbol{\omega}}\,d\mathbf{z}\quad (\mathbf{z}=\mathbf{x}-\mathbf{y})\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{y})e^{-i \mathbf{y}\cdot\boldsymbol{\omega}}\,d\mathbf{y}\int_{\mathbb{R}^n}g(\mathbf{z})e^{-i \mathbf{z}\cdot\boldsymbol{\omega}}\,d\mathbf{z}\\
+    =&\mathcal{F} f(\boldsymbol{\omega})\cdot \mathcal{F} g(\boldsymbol{\omega})
+    \end{lralign}
+\ding{173}频域卷积：\\
+仿照\ref{sub:properties_of_convolution}中的证明。根据时域卷积定理$\mathcal{F} (f*g)=\mathcal{F} f\mathcal{F} g$，
+令$f=\mathcal{F} \mathfrak{f},g=\mathcal{F} \mathfrak{g}$，则
+\begin{lralign}
+    \mathcal{F} \mathfrak{f}*\mathcal{F} \mathfrak{g}&=\mathcal{F} ^{-1}\left[\mathcal{F}\mathcal{F} \mathfrak{f}\cdot\mathcal{F} \mathcal{F} \mathfrak{g}\right]\\
+    &=\mathcal{F} ^{-1}\left(\mathfrak{f}^- \mathfrak{g}^- \right)\\
+    &=\mathcal{F} (\mathfrak{fg})
+\switch
+    \mathcal{F} \mathfrak{f}*\mathcal{F} \mathfrak{g}&=\mathcal{F} ^{-1}\left[\mathcal{F}\mathcal{F} \mathfrak{f}\cdot\mathcal{F} \mathcal{F} \mathfrak{g}\right]\\
+    &=\mathcal{F} ^{-1}\left((2\pi)^{2n} \mathfrak{f}^- \mathfrak{g}^- \right)\\
+    &= (2\pi)^n\mathcal{F} (\mathfrak{fg})
+\end{lralign}
+\end{proof}
 
 \subsection{多维施瓦兹函数与多维分布}\label{sub:muti_schwartz}
+
+类似一维的情况，对于分布而言，平移与伸缩需要用算子来表示，只是这时平移算子$\tau_{\mathbf{a}}$（其中$\mathbf{a}$为向量）定义为：
+\begin{align*}
+    (\tau_{\mathbf{a}} f)(\mathbf{x})=f(\mathbf{x}-\mathbf{a})
+\end{align*}
+伸缩算子$\sigma_A$（其中$A$为矩阵）定义为：
+\begin{align*}
+    (\sigma_A f)(\mathbf{x})=f(A\mathbf{x})
+\end{align*}
 
 \subsection{格}\label{sub:lattice}
 
@@ -6228,7 +6430,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 \end{theorem}
 物理规律中许多现象都可以归结为这一数学事实，例如著名的\textbf{海森堡不确定性原理} (Heisenberg's uncertainty principle)\footnote{尽管广义的不确定性原理应该归结为算符或矩阵的不对易，但由于动量空间波函数是位置空间波函数的傅里叶变换，以上结果的确能够证明$\sigma_x \sigma_p\geq\frac{\hbar}{2}$}。读者可以自行验证，以上不等式取等于高斯函数。
 \begin{proof}
-    我们首先验证，$|f|^2$与$|F|^2$作为某个随机变量的概率密度函数是良定义的，从而其方差是良定义的。根据普朗歇尔定理（见\ref{sub:plancherel}），\lr{
+    我们首先验证，$|f|^2$与$|F|^2$作为某个随机变量的概率密度函数是良定义的，从而其方差是良定义的。根据普朗歇尔定理（见\ref{sub:fourier_operation_properties}），\lr{
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
 }{
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
@@ -6338,7 +6540,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 根据夹逼定理，$\|\mathcal{F} \varphi_k\|_{m,n}\to 0$，得证。傅里叶逆变换同理。
 \end{proof}
 
-其实，如果我们考虑$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中傅里叶变换的连续性，可以得到类似的结论，但证明要简单得多，因为$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中有普朗歇尔定理（见\ref{sub:plancherel}）。
+其实，如果我们考虑$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中傅里叶变换的连续性，可以得到类似的结论，但证明要简单得多，因为$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中有普朗歇尔定理（见\ref{sub:fourier_operation_properties}）。
 \begin{theorem}[$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上傅里叶变换的连续性]
     设$f_k$在$L^2$范数下收敛到$f$，则$\mathcal{F} f_k$在$L^2$范数下收敛到$\mathcal{F} f$。
 \end{theorem}
