@@ -3057,26 +3057,382 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
 \end{lralign}
 \end{proof}
 
+\begin{theorem}[普朗歇尔定理]
+    设$f(\mathbf{x}),\in L^1(\mathbb{R}^n)\cap L^2(\mathbb{R}^n)$，则有：
+    \begin{lralign}
+    \int_{\mathbb{R}^n}|f(\mathbf{x})|^2\,d\mathbf{x}&=\int_{\mathbb{R}^n}|\mathcal{F} f(\boldsymbol{\xi})|^2\,d\boldsymbol{\xi}
+\switch
+    \int_{\mathbb{R}^n}|f(\mathbf{x})|^2\,d\mathbf{x}&=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}|\mathcal{F} f(\boldsymbol{\omega})|^2\,d\boldsymbol{\omega}
+    \end{lralign}
+\end{theorem}
+\begin{proof}
+    \begin{lralign}
+    &\int_{\mathbb{R}^n}|f(\mathbf{x})|^2\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\overline{f(\mathbf{x})}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\cdot \mathcal{F} ^{-1}(\mathcal{F} \overline{f})(\mathbf{x})\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\,d\mathbf{x}\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\xi})e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\boldsymbol{\xi}\\
+    =&\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\xi})\,d\boldsymbol{\xi}\int_{\mathbb{R}^n}f(\mathbf{x})e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\xi})\cdot \overline{\mathcal{F} f(\boldsymbol{\xi})}\,d\boldsymbol{\xi}\\
+    =&\int_{\mathbb{R}^n}|\mathcal{F} f(\boldsymbol{\xi})|^2\,d\boldsymbol{\xi}
+\switch
+    &\int_{\mathbb{R}^n}|f(\mathbf{x})|^2\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\overline{f(\mathbf{x})}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\cdot \mathcal{F} ^{-1}(\mathcal{F} \overline{f})(\mathbf{x})\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\,d\mathbf{x}\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\omega})\frac{e^{i \mathbf{x}\cdot\boldsymbol{\omega}}}{(2\pi)^n}\,d\boldsymbol{\omega}\\
+    =&\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\omega})\,d\boldsymbol{\omega}\int_{\mathbb{R}^n}f(\mathbf{x})\frac{e^{i \mathbf{x}\cdot\boldsymbol{\omega}}}{(2\pi)^n}\,d\mathbf{x}\\
+    =&\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\omega})\cdot \overline{\mathcal{F} f(\boldsymbol{\omega})}\,d\boldsymbol{\omega}\\
+    =&\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}|\mathcal{F} f(\boldsymbol{\omega})|^2\,d\boldsymbol{\omega}
+    \end{lralign}
+\end{proof}
+
 \subsection{多维施瓦兹函数与多维分布}\label{sub:muti_schwartz}
 
-类似一维的情况，对于分布而言，平移与伸缩需要用算子来表示，只是这时平移算子$\tau_{\mathbf{a}}$（其中$\mathbf{a}$为向量）定义为：
+首先，我们将\textbf{施瓦兹函数}的定义推广到多维空间$\mathbb{R}^n$中。
+\begin{definition}[多维施瓦兹函数]
+    设$\varphi(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，如果\begin{itemize}
+        \item $\varphi(\mathbf{x})\in C^{\infty}(\mathbb{R}^n)$；
+        \item 对任意多重指标$\mathcal{J}=(j_1,j_2,\ldots,j_n)$，都有
+        \[\lim_{|\mathbf{x}|\to\infty}|\mathbf{x}^{\mathcal{J}} \partial_{\mathcal{J}} \varphi(\mathbf{x})|=0\]
+    \end{itemize}
+    其中$$\partial_{\mathcal{J}}=\frac{\partial^{j_1+j_2+\cdots +j_n}}{\partial x_1^{j_1}\partial x_2^{j_2}\cdots \partial x_n^{j_n}}$$
+    则称$\varphi(\mathbf{x})$为\textbf{多维施瓦兹函数}，所有多维施瓦兹函数构成的空间记为$\mathcal{S}(\mathbb{R}^n)$，在不引起歧义的前提下，也可直接记作$\mathcal{S}$。
+\end{definition}
+
+$\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{多维缓增分布空间}，$\mathcal{T} $中的元素称为\textbf{多维缓增分布}：
+\begin{definition}[多维缓增分布]
+    泛函$T:\mathcal{S} \to \mathbb{C}$为线性映射，将施瓦兹函数$\varphi\in \mathcal{S} $映射为复数$T(\varphi)\in \mathbb{C}$。对于正则分布$T_f$，有
+    $$T_f(\varphi)=\langle T_f,\varphi\rangle=\int_{\mathbb{R}^n}f(\mathbf{x})\varphi(\mathbf{x})\,d\mathbf{x}$$
+    将缓增分布组成的线性空间记作$\mathcal{T} (\mathbb{R}^n)$，在不引起歧义的前提下，也可直接记作$\mathcal{T} $。
+\end{definition}
+
+容易验证$\mathcal{S} $上的卷积总是有定义的；用类似于\ref{sub:fourier_close}中的方法，可以证明$\mathcal{S} $在傅里叶变换下是封闭的，我们仍然定义$\langle \mathcal{F} T,\varphi\rangle=\langle T,\mathcal{F} \varphi\rangle$从而$\mathcal{T} $在傅里叶变换下也是封闭的。典型的施瓦兹函数例如高斯函数$f(\mathbf{x})=e^{-\pi |\mathbf{x}|^2}$。
+
+我们不再一一讨论作用于分布的各算子，因为它们与一维的情况没有多少差异。对于分布而言，平移与伸缩需要用算子来表示，只是这时平移算子$\tau_{\mathbf{b}}$（其中$\mathbf{b}$为向量）定义为：
 \begin{align*}
-    (\tau_{\mathbf{a}} f)(\mathbf{x})=f(\mathbf{x}-\mathbf{a})
+    (\tau_{\mathbf{b}} f)(\mathbf{x})=f(\mathbf{x}-\mathbf{b})
 \end{align*}
 伸缩算子$\sigma_A$（其中$A$为矩阵）定义为：
 \begin{align*}
     (\sigma_A f)(\mathbf{x})=f(A\mathbf{x})
 \end{align*}
 
-\subsection{格}\label{sub:lattice}
+下面以这两个算子为例，给出它们作用于缓增分布$T\in\mathcal{T} $的定义，从而看出它们与一维情况下的相似性。
+\begin{example}[平移算子]
+    设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，自然可以定义$\tau_{\mathbf{b}} T_f=T_{\tau_{\mathbf{b}} f}$，
+    \begin{align*}
+        \langle \tau_{\mathbf{b}} T_f,\varphi\rangle=&\int_{\mathbb{R}^n}f(\mathbf{x}-\mathbf{b})\varphi(\mathbf{x})\,d\mathbf{x}\\
+        =&\int_{\mathbb{R}^n}f(\mathbf{y})\varphi(\mathbf{y}+\mathbf{b})\,d\mathbf{y}\quad (\mathbf{y}=\mathbf{x}-\mathbf{b})\\
+        =&\langle T_f,\tau_{-\mathbf{b}}\varphi\rangle
+    \end{align*}
+    因此我们定义：
+    \[\langle \tau_{\mathbf{b}} T,\varphi\rangle=\langle T,\tau_{-\mathbf{b}}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S} \]
+\end{example}
+
+\begin{example}[伸缩算子]
+    设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，自然可以定义$\sigma_A T_f=T_{\sigma_A f}$，
+    \begin{align*}
+        \langle \sigma_A T_f,\varphi\rangle=&\int_{\mathbb{R}^n}f(A\mathbf{x})\varphi(\mathbf{x})\,d\mathbf{x}\\
+        =&\int_{\mathbb{R}^n}f(\mathbf{y})\varphi(A^{-1}\mathbf{y})\,\frac{d\mathbf{y}}{|\det A|}\quad (\mathbf{y}=A\mathbf{x})\\
+        =&\frac{1}{|\det A|}\langle T_f,\sigma_{A^{-1}}\varphi\rangle
+    \end{align*}
+    因此我们定义：
+    \[\langle \sigma_A T,\varphi\rangle=\frac{1}{|\det A|}\langle T,\sigma_{A^{-1}}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S} \]
+\end{example}
+在一维情况下，我们有：
+
+\[\langle \tau_a T,\varphi\rangle=\langle T,\tau_{-a}\varphi\rangle,\langle\sigma_{a} T,\varphi\rangle=\frac{1}{|a|}\langle T,\sigma_{1/a}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S} \]
+可以看到，如果将标量$b$推广为向量$\mathbf{b}$，而将线性变换（的矩阵表示）由一维矩阵$a$推广为$n$维矩阵$A$，则一维情况下的平移和伸缩算子的定义就是多维空间中的特例。
+
+借助上一小节中对函数的傅里叶变换的讨论，读者可以自行构建出分布的傅里叶变换的各种性质。
+
+下面，我们来讨论一些典型的分布。首先是多维狄拉克分布：
+\begin{definition}[多维狄拉克分布]
+    设$\mathbf{x}_0\in\mathbb{R}^n$，则多维狄拉克分布$\delta_{\mathbf{x}_0}\in\mathcal{T} $定义为：
+    \[\langle \delta_{\mathbf{x}_0},\varphi\rangle=\varphi(\mathbf{x}_0),\forall \varphi\in\mathcal{S} \]
+    特别地，$\delta_{\mathbf{0}}$记为$\delta$，称为\textbf{多维狄拉克分布}。
+
+    形式上，可以将多维狄拉克分布表示为：
+    \[\delta_{\mathbf{x}_0}(\mathbf{x})=\begin{cases}
+    \infty,&\mathbf{x}=\mathbf{x}_0\\
+    0,&\mathbf{x}\neq \mathbf{x}_0
+    \end{cases},\int_{\mathbb{R}^n}\delta(\mathbf{x})\,d\mathbf{x}=1\]
+    即$\delta_{\mathbf{x}_0}(\mathbf{x})=\tau_{\mathbf{x}_0}\delta(\mathbf{x})$。
+\end{definition}
+\begin{proposition}[多维狄拉克分布的性质]
+    多维狄拉克分布具有以下性质：
+    \begin{itemize}
+        \item 多维狄拉克分布仍为卷积幺元，即$f*\delta=\delta*f=f$；
+        \item 多维狄拉克分布是可分的，即
+        \[\delta(\mathbf{x})=\delta(x_1,x_2,\ldots,x_n)=\delta(x_1)\delta(x_2)\cdots \delta(x_n)\]
+        \item 多维狄拉克分布的伸缩性质：
+        \[\sigma_A \delta=\frac{1}{|\det A|}\delta\]
+        特别地，\[\delta(a_1 x_1,a_2 x_2,\ldots,a_n x_n)=\frac{1}{|a_1 a_2 \cdots a_n|}\delta(x_1,x_2,\ldots,x_n)\]
+        并且$\delta$是偶分布，即$\delta^-=\delta$；
+        \item 多维狄拉克分布的傅里叶变换：
+        \begin{lralign}
+        \mathcal{F} \delta(\boldsymbol{\xi})&=\mathds{1}
+\switch
+        \mathcal{F} \delta(\boldsymbol{\omega})&=\mathds{1}
+        \end{lralign}
+    \end{itemize}
+\end{proposition}
+\begin{proof}
+    分布与函数的卷积定义为：
+    \[\langle f*T,\varphi\rangle=\langle T,(f^-)*\varphi\rangle,f,\varphi\in\mathcal{S} ,T\in\mathcal{T} \]
+    并且这种卷积总满足交换律，即$f*T=T*f$。因此有：
+    \begin{align*}
+        \langle f*\delta,\varphi\rangle=\langle \delta,(f^-)*\varphi\rangle=((f^-)*\varphi)(\mathbf{0})=\int_{\mathbb{R}^n}f(\mathbf{y})\varphi(\mathbf{y})\,d\mathbf{y}=\langle f,\varphi\rangle
+    \end{align*}
+    这就证明了$f*\delta=\delta*f=f$。
+
+    类似地，有：
+    \begin{align*}
+        \langle \delta(x_1)\delta(x_2)\cdots \delta(x_n),\varphi(\mathbf{x})\rangle&=\int_{\mathbb{R}^n}\delta(x_1)\delta(x_2)\cdots \delta(x_n)\varphi(\mathbf{x})\,d\mathbf{x}\\
+        &=\int_{\mathbb{R}^{n-1}}\delta(x_2)\cdots \delta(x_n)\,dx_2\cdots dx_n\int_{-\infty}^{\infty}\delta(x_1)\varphi(\mathbf{x})\,dx_1\\
+        &=\int_{\mathbb{R}^{n-1}}\delta(x_2)\cdots \delta(x_n)\varphi(0,x_2,\ldots,x_n)\,dx_2\cdots dx_n\\
+        &\vdots\\
+        &=\varphi(0,0,\ldots,0)\\
+        &=\langle \delta(\mathbf{x}),\varphi(\mathbf{x})\rangle
+    \end{align*}
+    即$\delta(\mathbf{x})=\delta(x_1)\delta(x_2)\cdots \delta(x_n)$。
+
+    对于伸缩性质，直接套用作用于分布的伸缩算子的定义：
+    \begin{align*}
+        \langle \sigma_A \delta,\varphi\rangle=&\frac{1}{|\det A|}\langle \delta,\sigma_{A^{-1}}\varphi\rangle\\
+        =&\frac{1}{|\det A|}(\sigma_{A^{-1}}\varphi)(\mathbf{0})\\
+        =&\frac{1}{|\det A|}\varphi(A^{-1}\mathbf{0})\\
+        =&\frac{1}{|\det A|}\varphi(\mathbf{0})\\
+        =&\left\langle \frac{1}{|\det A|}\delta,\varphi\right\rangle
+    \end{align*}
+
+    最后，求多维狄拉克分布的傅里叶变换：
+    \begin{lralign}
+    \langle \mathcal{F} \delta,\varphi\rangle&=\langle \delta,\mathcal{F} \varphi\rangle\\
+    &=(\mathcal{F} \varphi)(\mathbf{0})\\
+    &=\int_{\mathbb{R}^n}\varphi(\mathbf{x})\,d\mathbf{x}\\
+    &=\langle \mathds{1},\varphi\rangle
+\switch
+    \langle \mathcal{F} \delta,\varphi\rangle&=\langle \delta,\mathcal{F} \varphi\rangle\\
+    &=(\mathcal{F} \varphi)(\mathbf{0})\\
+    &=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}\varphi(\mathbf{x})\,d\mathbf{x}\\
+    &=\langle \mathds{1},\varphi\rangle
+    \end{lralign}
+因此多维狄拉克分布的傅里叶变换是常函数1。
+\end{proof}
+
+\begin{corollary}
+    利用傅里叶变换的对偶性，可以得到：
+    \begin{lralign}
+    \mathcal{F} \mathds{1}(\boldsymbol{\xi})&=\delta(\boldsymbol{\xi})
+\switch
+    \mathcal{F} \mathds{1}(\boldsymbol{\omega})&=(2\pi)^n \delta(\boldsymbol{\omega})
+    \end{lralign}
+
+    再利用傅里叶变换的频移性质，得到：
+    \begin{lralign}
+        \mathcal{F} [e^{2\pi i \mathbf{x}_0\cdot\mathbf{x}}](\boldsymbol{\xi})&=\delta_{\mathbf{x_0}}
+\switch
+        \mathcal{F} [e^{i \mathbf{x}_0\cdot\mathbf{x}}](\boldsymbol{\omega})&=(2\pi)^n \delta_{\mathbf{x_0}}
+    \end{lralign}
+    利用欧拉公式求得三角函数的傅里叶变换：
+    \begin{lralign}
+        \mathcal{F} [\cos(2\pi \mathbf{x}_0\cdot\mathbf{x})](\boldsymbol{\xi})&=\frac{1}{2}[\delta_{\mathbf{x_0}}+\delta_{-\mathbf{x_0}}]
+\switch
+        \mathcal{F} [\cos(\mathbf{x}_0\cdot\mathbf{x})](\boldsymbol{\omega})&=\frac{(2\pi)^n}{2}[\delta_{\mathbf{x_0}}+\delta_{-\mathbf{x_0}}]
+    \end{lralign}
+    以及
+    \begin{lralign}
+        \mathcal{F} [\sin(2\pi \mathbf{x}_0\cdot\mathbf{x})](\boldsymbol{\xi})&=\frac{1}{2i}[\delta_{\mathbf{x_0}}-\delta_{-\mathbf{x_0}}]
+\switch
+        \mathcal{F} [\sin(\mathbf{x}_0\cdot\mathbf{x})](\boldsymbol{\omega})&=\frac{(2\pi)^n}{2i}[\delta_{\mathbf{x_0}}-\delta_{-\mathbf{x_0}}]
+    \end{lralign}
+\end{corollary}
+
+\subsection{格与二维狄拉克梳状分布}\label{sub:lattice}
+
+为了直观性，我们再这一小节中将仅考虑$\mathbb{R}^2$中的情况。我们首先给出\textbf{格}的定义，讨论它的一些性质，再介绍它在信号与系统中的应用。
+\begin{definition}[格]
+    任取$\mathbb{R}^2$，的一组基$\{\mathbf{u}_1,\mathbf{u}_2\}$，称形如
+    \[\mathbf{p}=p_1\mathbf{u}_1+p_2\mathbf{u}_2,p_1,p_2\in\mathbb{Z}\]
+    的点为\textbf{格点}(lattice point)，所有格点组成的集合称为由基$\{\mathbf{u}_1,\mathbf{u}_2\}$生成的\textbf{格}(lattice)，记为$\mathcal{L}$，$\mathcal{L} $构成$\mathbb{Z}$模。
+
+    以$\mathbf{u}_1,\mathbf{u}_2$为邻边的平行四边形称为该格的\textbf{基本单元}或\textbf{基本平行四边形}(fundamental parallelogram)，基本单元的面积为$|\det(\mathbf{u}_1,\mathbf{u}_2)|$，定义为该格的\textbf{面积}（体积），记为$\mathrm{Area}(\mathcal{L} )$。
+
+    记$A=(\mathbf{u}_1,\mathbf{u}_2)$为由基向量组成的可逆矩阵，则
+    \[\mathbf{u}_1=A \mathbf{e}_1,\mathbf{u}_2=A \mathbf{e}_2\]
+    其中$\mathbf{e}_1,\mathbf{e}_2$为标准正交基。作为列向量，格点可以表示为
+    \[\mathbf{p}=A\mathbf{n},\mathbf{n}\in\mathbb{Z}^2\]
+    因此，我们也将格$\mathcal{L} $记为$\mathcal{L} =A(\mathbb{Z}^2)$，$\mathrm{Area}(\mathcal{L} )=|\det A|$。
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{n_comb}
+    \caption{二维的格和狄拉克梳状分布示意图}
+\end{figure}
+
+\begin{definition}[狄拉克梳状分布]
+    设$\mathcal{L}=A(\mathbb{Z}^2)$为$\mathbb{R}^2$中的格，则由该格生成的\textbf{二维狄拉克梳状分布}(Dirac comb distribution)定义为
+    \[\shah_{\mathcal{L} }=\sum_{\mathbf{p}\in\mathcal{L} }\delta_{\mathbf{p}}\]
+    特别地，当$\mathcal{L} =\mathbb{Z}^2$时，我们直接记为$\shah$。$\shah_{\mathcal{L} }=\dfrac{1}{|\det A|}\sigma_{A^{-1}}\shah$。
+
+    狄拉克梳状分布看起来像一个钉床，因此又称为\textbf{钉床分布}(bed of nails)。
+\end{definition}
+\begin{remark}
+    $\shah_{\mathcal{L} }=\dfrac{1}{|\det A|}\sigma_{A^{-1}}\shah$的证明如下：
+    \begin{align*}
+        \frac{1}{|\det A|}\langle \sigma_{A^{-1}}\shah,\varphi\rangle=\frac{1}{|\det A^{-1}|}\langle \shah,\sigma_A \varphi\rangle
+        =\sum_{\mathbf{n}\in\mathbb{Z}^2}(\sigma_A \varphi)(\mathbf{n})
+        =\sum_{\mathbf{n}\in\mathbb{Z}^2}\varphi(A\mathbf{n})
+        =\sum_{\mathbf{p}\in\mathcal{L} }\varphi(\mathbf{p})
+        =\langle \shah_{\mathcal{L} },\varphi\rangle
+    \end{align*}
+\end{remark}
+
+我们将再一次使用狄拉克梳状分布来分析采样信号，只不过这时信号是二维的（例如图像信号），而采样是在格点上进行的。在本小节中，我们仍然使用频率形式的傅里叶变换。
+
+首先，我们给出二维情况下的\textbf{傅里叶级数}以及\textbf{泊松求和公式}：
+\begin{definition}[二维傅里叶级数]
+    设$f(x_1,x_2)$为$\mathbb{R}^2$中周期为$(T_1,T_2)$的周期函数，即
+    \[f(x_1,x_2)=f(x_1+T_1,x_2)=f(x_1,x_2+T_2),\forall (x_1,x_2)\in\mathbb{R}^2\]
+    设$f\in L^2([0,T_1]\times[0,T_2])$，则$f$的\textbf{二维傅里叶级数}为
+    \[f(x_1,x_2)=\sum_{k_1,k_2=-\infty}^{\infty}c_{k_1,k_2}e^{2\pi i\left(\frac{1}{T_1}k_1 x_1+\frac{1}{T_2}k_2 x_2\right)}\]
+    其中
+    \[c_{k_1,k_2}=\frac{1}{T_1 T_2}\int_0^{T_1}\int_0^{T_2}f(x_1,x_2)e^{-2\pi i\left(\frac{1}{T_1}k_1 x_1+\frac{1}{T_2}k_2 x_2\right)}\,dx_1 dx_2\]
+    特别地，设$T_1=T_2=1$，则有
+    \[f(x_1,x_2)=\sum_{k_1,k_2=-\infty}^{\infty}c_{k_1,k_2}e^{2\pi i(k_1 x_1+k_2 x_2)}=\sum_{\mathbf{k}\in\mathbb{Z}^2}c_{\mathbf{k}}e^{2\pi i\mathbf{k\cdot x}}\]
+    其中
+    \[c_{k_1,k_2}=\int_{[0,1]^2}f(x_1,x_2)e^{-2\pi i(k_1 x_1+k_2 x_2)}\,dx_1 dx_2=\int_{[0,1]^2}f(\mathbf{x})e^{-2\pi i \mathbf{k}\cdot \mathbf{x}}\,d\mathbf{x}\]
+\end{definition}
+\begin{theorem}[二维泊松求和公式]
+    \[\sum_{\mathbf{k}\in\mathbb{Z}^2}\mathcal{F} \varphi(\mathbf{k})=\sum_{\mathbf{k}\in\mathbb{Z}^2}\varphi(\mathbf{k}),\varphi\in\mathcal{S} \]
+\end{theorem}
+\begin{proof}
+    仿照一维情况下的证明（见\ref{sub:possion_summation}），令$\Phi(\mathbf{x})=(\shah *\varphi)(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}\varphi(\mathbf{x}-\mathbf{k})$，则$\Phi$为周期为1的二维函数，可以展开为傅里叶级数：
+    \[\Phi(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}\hat{\Phi}(\mathbf{k})e^{2\pi i \mathbf{k}\cdot \mathbf{x}}\]
+    其中\begin{align*}
+        \hat{\Phi}(\mathbf{k})&=\int_{[0,1]^2}\Phi(\mathbf{x})e^{-2\pi i\mathbf{k}\cdot \mathbf{x}}\,d\mathbf{x}\\
+        &=\int_{[0,1]^2}\sum_{\mathbf{m}\in\mathbb{Z}^2}\varphi(\mathbf{x}-\mathbf{m})e^{-2\pi i\mathbf{k}\cdot \mathbf{x}}\,d\mathbf{x}\\
+        &=\int_{\mathbb{R}^2}\varphi(\mathbf{y})e^{-2\pi i\mathbf{k}\cdot \mathbf{y}}\,d\mathbf{y}\quad (\mathbf{y}=\mathbf{x}-\mathbf{m})\\
+        &=\mathcal{F} \varphi(\mathbf{k})
+    \end{align*}
+    因此，有
+    \[\Phi(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}\mathcal{F} \varphi(\mathbf{k})e^{2\pi i \mathbf{k}\cdot \mathbf{x}}\]
+    令$\mathbf{x}=\mathbf{0}$，即得所需结论。
+\end{proof}
+
+通过二维泊松求和公式，可以得到狄拉克梳状分布的傅里叶变换：
+\begin{proposition}[二维狄拉克梳状分布的傅里叶变换]
+    \[\mathcal{F} \shah=\shah\]
+\end{proposition}
+
+考虑使用傅里叶变换的伸缩性质，可以得到：
+\begin{proposition}
+    设$\mathcal{L} =A(\mathbb{Z}^2)$为$\mathbb{R}^2$中的格，则由该格生成的二维狄拉克梳状分布的傅里叶变换为
+    \[\mathcal{F} \shah_{\mathcal{L} }=\frac{1}{|\det A|}\shah_{A^{-T}(\mathbb{Z}^2)}\]
+\end{proposition}
+
+可以看到，空间域上，线性变换$A:\mathbb{R}^2\to\mathbb{R}^2$作用于格$\mathbb{Z}^2$，对应频域上，线性变换$A^{-T}:\mathbb{R}^2\to\mathbb{R}^2$作用于格$\mathbb{Z}^2$。这启发我们定义：
+\begin{definition}[对偶格]
+    设$\mathcal{L} =A(\mathbb{Z}^2)$为$\mathbb{R}^2$中的格，则由线性变换$A^{-T}$作用于$\mathbb{Z}^2$生成的格称为$\mathcal{L} $的\textbf{对偶格}(dual lattice)，记为$\mathcal{L} ^*$，即
+    \[\mathcal{L} ^*=A^{-T}(\mathbb{Z}^2)\]
+    在这种记号下，二维狄拉克梳状分布的傅里叶变换可以记为
+    \[\mathcal{F} \shah_{\mathcal{L} }=\frac{1}{\mathrm{Area}(\mathcal{L} )}\shah_{\mathcal{L} ^*}\]
+
+    对偶格的等价定义为：
+    \[\mathcal{L} ^*=\{\mathbf{y}\in\mathbb{R}^2\left|\mathbf{y}\cdot \mathbf{x}\in\mathbb{Z},\forall \mathbf{x}\in\mathcal{L}\right. \}\]
+\end{definition}
+\begin{definition}[对偶基与对偶线性泛函]
+    考虑对偶格的基向量。令
+    \[A=\begin{bmatrix}
+        \mathbf{u}_1&\mathbf{u}_2
+    \end{bmatrix},A^{-T}=\begin{bmatrix}
+        \mathbf{u}^*_1&\mathbf{u}^*_2
+    \end{bmatrix}\]
+    其中$\mathbf{u}^*_1,\mathbf{u}^*_2$为对偶格$\mathcal{L} ^*$的基向量，它们满足：
+    \[A^{-1}A=\begin{bmatrix}
+        \mathbf{u}^*_1&\mathbf{u}^*_2
+    \end{bmatrix}^T\begin{bmatrix}
+        \mathbf{u}_1&\mathbf{u}_2
+    \end{bmatrix}=I=\begin{bmatrix}
+        1&0\\
+        0&1
+    \end{bmatrix}\]
+    即\[\mathbf{u}^*_i\cdot \mathbf{u}_j=\begin{cases}
+    1,&i=j\\
+    0,&i\neq j
+    \end{cases}=\delta^i_{j}\]
+    $\delta^i_{j}$为克罗内克δ符号。我们将$\mathbf{u}^*_1,\mathbf{u}^*_2$称为$\mathbf{u}_1,\mathbf{u}_2$的\textbf{对偶基}。\textbf{对偶基生成了对偶格}。此外，与对偶基做内积，定义了内积空间上唯一一组满足正交归一化条件，即$f_i(\mathbf{u_j})=\delta^i_{j}$的线性泛函，这组线性泛函称为\textbf{对偶线性泛函}。
+\end{definition}
+
+$\shah_{\mathcal{L} }$的$\delta$分布位于格$\mathcal{L} $的格点上，而其傅里叶变换$\mathcal{F} \shah_{\mathcal{L} }$的$\delta$分布位于对偶格$\mathcal{L} ^*$的格点上。这为我们展示了一种理解空间域与频域关系的方式，并从更高的视角解释了我们在\ref{sub:fourier_of_dirac_comb}最后所发现的现象，即一维狄拉克梳状分布经过傅里叶变换，$\delta$的位置具有“倒数”关系。
+
+最后，我们来讨论二维信号的采样与重建问题。
+\begin{definition}[二维带限函数]
+    设$f\in L^1(\mathbb{R}^2)$，如果存在矩形区域$$B=\{( \xi_1,\xi_2)\left| |\xi_1|\leq \xi_{m1},|\xi_2|\leq \xi_{m2}\right.\}$$
+    使得$\text{supp} \mathcal{F}f \subset B$，就说$f$为二维\textbf{带限函数}(bandlimited function)，带宽为$(\xi_{m1},\xi_{m2})$。
+\end{definition}
+特别地，我们考虑
+$$\text{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfrac{1}{2},|\xi_2|\leq \dfrac{1}{2}\right.\right\}$$
+的情况。由恒等式
+\[\mathcal{F} f(\boldsymbol{\xi})=\chi_{[-1/2,1/2]^2}(\boldsymbol{\xi})(\mathcal{F} f(\boldsymbol{\xi})*\shah)\]
+取傅里叶逆变换，由\ref{sub:multi_fourier}中的结果可知$\mathcal{F} ^{-1}\chi_{[-1/2,1/2]}(\mathbf{x})=\text{sinc}(\mathbf{x})$，我们得到：\begin{align*}
+    f(\mathbf{x})&=\mathcal{F} ^{-1}[\chi_{[-1/2,1/2]^2}(\boldsymbol{\xi})(\mathcal{F} f(\boldsymbol{\xi})*\shah)](\mathbf{x})\\
+    &=\mathcal{F} ^{-1}\chi_{[-1/2,1/2]^2}(\mathbf{x})*(f(\mathbf{x})*\shah(\mathbf{x}))\\
+    &=\text{sinc}(\mathbf{x})*(f(\mathbf{x})*\shah(\mathbf{x}))\\
+    &=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(\mathbf{k})\text{sinc}(x_1-k_1)\text{sinc}(x_2-k_2)
+\end{align*}
+最后一行用到了卷积的结合律，见\ref{sub:properties_of_convolution}。综上得到以下引理：
+\begin{lemma}[方形采样公式]
+    设$$f\in L^1(\mathbb{R}^2),\text{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfrac{1}{2},|\xi_2|\leq \dfrac{1}{2}\right.\right\}$$
+    则有
+    \[f(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(\mathbf{k})\text{sinc}(x_1-k_1)\text{sinc}(x_2-k_2)\]
+\end{lemma}
+
+更一般地，我们考虑$\text{supp}\mathcal{F} f$属于格$\mathcal{L} =A(\mathbb{Z}^2),A=[\mathbf{u}_1,\mathbf{u}_2]$的某个基本平行四边形内。显而易见，带限等价于存在这样一个平行四边形，使得频域信号$\mathcal{F} f$支于它。由于我们通常考虑实信号，不妨设这个基本平行四边形是关于原点对称的。
+
+我们希望利用已经得到的方形采样公式来推导格采样公式。为此，考虑将频域信号$\mathcal{F} f$进行伸缩变换，这对应时域上“对偶”的伸缩变换：
+\[\mathcal{F} f(A\boldsymbol{\xi})=\frac{1}{|\det A|}\mathcal{F}[f(A^{-T}\mathbf{x})](\boldsymbol{\xi})\]
+
+令$g(\mathbf{x})=f(A^{-T}\mathbf{x})$，则$\text{supp}\mathcal{F} g\in[-1/2,1/2]^2$，因此可以应用方形采样公式：
+\[g(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}g(\mathbf{k})\text{sinc}(x_1-k_1)\text{sinc}(x_2-k_2)\]
+将$g$的定义代入上式，得到：
+\[f(A^{-T}\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(A^{-T}\mathbf{k})\text{sinc}(x_1-k_1)\text{sinc}(x_2-k_2)\]
+
+以上结果可以改写为\textbf{格采样公式}：
+\begin{theorem}[格采样公式]
+    设$$f\in L^1(\mathbb{R}^2),\text{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| \mathbf{\xi}=A\boldsymbol{\eta},\boldsymbol{\eta}\in[-1/2,1/2]^2\right.\right\}$$
+    则有
+    \[f(\mathbf{y})=\sum_{k_1,k_2\in\mathbb{Z}}f(k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2)\text{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\text{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)\]
+\end{theorem}
+\begin{proof}
+    令$\mathbf{y}=A^{-T}\mathbf{x}$，则$\mathbf{x}=A^T\mathbf{y}$，于是
+    \[x_1=\mathbf{u}_1\cdot \mathbf{y},x_2=\mathbf{u}_2\cdot \mathbf{y}\]
+    对$A^{-T}\mathbf{k}$，我们知道$A^{-T}$的行向量分别为$\mathbf{u}^*_1,\mathbf{u}^*_2$，因此$A^{-T}\mathbf{k}=k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2$。综上得到：
+    \begin{align*}
+        f(\mathbf{y})&=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(A^{-T}\mathbf{k})\text{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\text{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)\\
+        &=\sum_{k_1,k_2\in\mathbb{Z}}f(k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2)\text{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\text{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)
+    \end{align*}
+\end{proof}
+
+称之为格采样公式，是因为采样点位于对偶格$\mathcal{L} ^*=A^{-T}(\mathbb{Z}^2)$上。下面左图绘制了空间域上的采样点，而右图则绘制了频域上的带限区域。频域上的限制越强，频域上的格的基本平行四边形就越小，基向量越短，这样，空间域上的格就越大，基向量越长，节点也越稀疏，即重建信号所需的采样点就越少。这符合我们的直观认识。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{lattice_sample}
+    \caption{格采样示意图}
+\end{figure}
+
+\section{傅里叶变换衍生的其他变换}\label{sec:Other_Transforms}
+
+\subsection{梅林变换}\label{sub:mellin}
 
 \subsection{汉克尔变换}\label{sub:hankel}
 
-\section{希尔伯特变换}\label{sec:Hilbert}
-
 \subsection{希尔伯特变换}\label{sub:hilbert}
 
-\subsection{希尔伯特变换的应用}\label{sub:use_of_hilbert}
+\subsection{拉东变换}\label{sub:radon}
+
+
 
 \section{回到有限区间}\label{sec:Finite_Interval}
 
@@ -3199,7 +3555,7 @@ $r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准�
 \begin{example}[傅里叶变换]
 $r(t)=\mathcal{F} e(t)$.
 
-在一些光学仪器中可以实现空间上的傅里叶变换，这时变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作为径向对称函数的傅里叶变换的特例，零阶汉克尔变换可以用圆孔夫琅禾费衍射装置实现。对于这两个变换，见\ref{sec:Multi_Fourier}和\ref{sec:Hilbert}.
+在一些光学仪器中可以实现空间上的傅里叶变换，这时变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作为径向对称函数的傅里叶变换的特例，零阶汉克尔变换可以用圆孔夫琅禾费衍射装置实现。对于这两个变换，见\ref{sub:hankel}和\ref{sub:hilbert}.
 \end{example}
 
 \subsection{系统的级联}\label{sub:cascade}
